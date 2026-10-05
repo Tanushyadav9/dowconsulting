@@ -21,6 +21,16 @@ export function isOwnerEmail(email?: string | null): boolean {
  */
 export async function getAuthContext() {
   try {
+    const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+    if (!clerkKey || !clerkKey.startsWith("pk_") || clerkKey.includes("placeholder")) {
+      return {
+        isAuthenticated: false,
+        user: null,
+        isOwner: false,
+        permissions: null,
+      };
+    }
+
     const clerkUser = await currentUser();
     if (!clerkUser) {
       return {
