@@ -31,7 +31,7 @@ enum QuoteStatus {
   EXPIRED
 }
 
-enum OrderStatus {
+enum PaymentStatus {
   PENDING
   PAID
   FAILED
@@ -56,23 +56,33 @@ enum BookingStatus {
   CANCELLED
 }
 
+enum HandoffStatus {
+  PENDING
+  WHATSAPP_COORDINATED
+  MEET_LINK_SENT
+  COMPLETED
+}
+
+// 1. User: Clerk-synced via webhook
 model User {
-  id              String           @id @default(cuid())
-  clerkId         String           @unique
-  email           String           @unique
+  id              String            @id @default(cuid())
+  clerkId         String            @unique
+  email           String            @unique
   name            String?
   phone           String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  imageUrl        String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 
   staffPermission StaffPermission?
   submissions     IntakeSubmission[]
-  orders          Order[]
+  payments        Payment[]
 
   @@index([clerkId])
   @@index([email])
 }
 
+// 2. StaffPermission: Same model as the sister sites (Owner-only & section-level grants)
 model StaffPermission {
   id                    String   @id @default(cuid())
   userId                String   @unique
@@ -87,6 +97,23 @@ model StaffPermission {
   updatedAt             DateTime @updatedAt
 }
 
+// 3. Package: Starting packages with inclusions & transparent pricing
+model Package {
+  id           String    @id @default(cuid())
+  slug         String    @unique
+  name         String
+  subtitle     String?
+  priceINR     Int
+  priceUSD     Int
+  inclusions   String[]  // Array of deliverables/features
+  isPopular    Boolean   @default(false)
+  isActive     Boolean   @default(true)
+  payments     Payment[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+// 4. IntakeSubmission: Comprehensive business intake data
 model IntakeSubmission {
   id                String            @id @default(cuid())
   userId            String?
@@ -95,15 +122,15 @@ model IntakeSubmission {
   contactEmail      String
   contactPhone      String
   businessName      String
-  businessType      String
-  businessStage     String
+  businessType      String            // Retail, Manufacturing, Tech, Services, etc.
+  businessStage     String            // Idea, Early Traction, Scaling, Mature, Turnaround
   locationCity      String
   locationCountry   String            @default("India")
-  premisesStatus    String?
+  premisesStatus    String?           // Leased, Owned, Searching, Virtual
   floorAreaSqFt     String?
-  currentTimeline   String
-  primaryGoals      String
-  keyChallenges     String
+  currentTimeline   String            // Immediate, Next 30 days, Next quarter
+  primaryGoals      String            // Text goals
+  keyChallenges     String            // Text challenges/bottlenecks
   budgetRange       String?
   preferredChannel  MeetingChannel    @default(WHATSAPP_CALL)
   status            SubmissionStatus  @default(UNDER_REVIEW)
@@ -117,52 +144,55 @@ model IntakeSubmission {
   @@index([status])
 }
 
+// 5. Quote: Linked to a submission, custom price, sent/accepted status
 model Quote {
   id           String            @id @default(cuid())
   submissionId String
   submission   IntakeSubmission  @relation(fields: [submissionId], references: [id], onDelete: Cascade)
   title        String
   scopeSummary String
-  amount       Int
+  amount       Int               // Custom price
   currency     String            @default("INR")
   status       QuoteStatus       @default(DRAFT)
   validUntil   DateTime?
   pdfUrl       String?
-  orders       Order[]
+  payments     Payment[]
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
   @@index([submissionId])
 }
 
-model Order {
+// 6. Payment: Unified Razorpay/Stripe flat one-time payments
+model Payment {
   id                String           @id @default(cuid())
-  orderNumber       String           @unique
+  paymentNumber     String           @unique
   userId            String?
   user              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  packageId         String?
+  package           Package?         @relation(fields: [packageId], references: [id], onDelete: SetNull)
   quoteId           String?
   quote             Quote?           @relation(fields: [quoteId], references: [id], onDelete: SetNull)
-  packageId         String?
-  packageName       String?
+  provider          PaymentProvider
   amount            Int
   currency          String           @default("INR")
-  provider          PaymentProvider
+  status            PaymentStatus    @default(PENDING)
   providerOrderId   String?
   providerPaymentId String?
   providerSignature String?
-  status            OrderStatus      @default(PENDING)
   booking           Booking?
   createdAt         DateTime         @default(now())
   updatedAt         DateTime         @updatedAt
 
-  @@index([orderNumber])
+  @@index([paymentNumber])
   @@index([status])
 }
 
+// 7. Booking: Linked to submission & payment, scheduled time, WhatsApp/Meet handoff status
 model Booking {
   id             String            @id @default(cuid())
-  orderId        String?           @unique
-  order          Order?            @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  paymentId      String?           @unique
+  payment        Payment?          @relation(fields: [paymentId], references: [id], onDelete: SetNull)
   submissionId   String?
   submission     IntakeSubmission? @relation(fields: [submissionId], references: [id], onDelete: SetNull)
   clientName     String
@@ -171,9 +201,10 @@ model Booking {
   scheduledAt    DateTime?
   meetingChannel MeetingChannel    @default(WHATSAPP_CALL)
   meetingLink    String?
+  handoffStatus  HandoffStatus     @default(PENDING)
   status         BookingStatus     @default(PENDING_SCHEDULE)
   notes          String?
-  report         ConsultationReport?
+  report         Report?
   createdAt      DateTime          @default(now())
   updatedAt      DateTime          @updatedAt
 
@@ -181,14 +212,15 @@ model Booking {
   @@index([status])
 }
 
-model ConsultationReport {
+// 8. Report: Linked to booking, file reference, delivered timestamp
+model Report {
   id            String    @id @default(cuid())
   bookingId     String    @unique
   booking       Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
   title         String
   summary       String?
-  fileKey       String
-  fileUrl       String
+  fileReference String    // Cloudflare R2 object key
+  fileUrl       String    // R2 endpoint / presigned URL
   fileName      String
   fileSize      Int?
   deliveredAt   DateTime  @default(now())
@@ -197,6 +229,7 @@ model ConsultationReport {
   updatedAt     DateTime  @updatedAt
 }
 
+// SEO & Thought Leadership Content
 model BlogPost {
   id          String   @id @default(cuid())
   slug        String   @unique
