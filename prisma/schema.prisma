@@ -1,0 +1,215 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  STAFF
+}
+
+enum SubmissionStatus {
+  UNDER_REVIEW
+  QUOTE_SENT
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  RAZORPAY
+  STRIPE
+}
+
+enum MeetingChannel {
+  WHATSAPP_CALL
+  GOOGLE_MEET
+}
+
+enum BookingStatus {
+  PENDING_SCHEDULE
+  CONFIRMED
+  COMPLETED
+  RESCHEDULED
+  CANCELLED
+}
+
+model User {
+  id              String           @id @default(cuid())
+  clerkId         String           @unique
+  email           String           @unique
+  name            String?
+  phone           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  staffPermission StaffPermission?
+  submissions     IntakeSubmission[]
+  orders          Order[]
+
+  @@index([clerkId])
+  @@index([email])
+}
+
+model StaffPermission {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role                  Role     @default(STAFF)
+  canManageSubmissions  Boolean  @default(true)
+  canManageQuotes       Boolean  @default(true)
+  canManageBookings     Boolean  @default(true)
+  canManageReports      Boolean  @default(true)
+  canManageTeam         Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model IntakeSubmission {
+  id                String            @id @default(cuid())
+  userId            String?
+  user              User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  contactName       String
+  contactEmail      String
+  contactPhone      String
+  businessName      String
+  businessType      String
+  businessStage     String
+  locationCity      String
+  locationCountry   String            @default("India")
+  premisesStatus    String?
+  floorAreaSqFt     String?
+  currentTimeline   String
+  primaryGoals      String
+  keyChallenges     String
+  budgetRange       String?
+  preferredChannel  MeetingChannel    @default(WHATSAPP_CALL)
+  status            SubmissionStatus  @default(UNDER_REVIEW)
+
+  quotes            Quote[]
+  bookings          Booking[]
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([contactEmail])
+  @@index([status])
+}
+
+model Quote {
+  id           String            @id @default(cuid())
+  submissionId String
+  submission   IntakeSubmission  @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  title        String
+  scopeSummary String
+  amount       Int
+  currency     String            @default("INR")
+  status       QuoteStatus       @default(DRAFT)
+  validUntil   DateTime?
+  pdfUrl       String?
+  orders       Order[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([submissionId])
+}
+
+model Order {
+  id                String           @id @default(cuid())
+  orderNumber       String           @unique
+  userId            String?
+  user              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  quoteId           String?
+  quote             Quote?           @relation(fields: [quoteId], references: [id], onDelete: SetNull)
+  packageId         String?
+  packageName       String?
+  amount            Int
+  currency          String           @default("INR")
+  provider          PaymentProvider
+  providerOrderId   String?
+  providerPaymentId String?
+  providerSignature String?
+  status            OrderStatus      @default(PENDING)
+  booking           Booking?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  @@index([orderNumber])
+  @@index([status])
+}
+
+model Booking {
+  id             String            @id @default(cuid())
+  orderId        String?           @unique
+  order          Order?            @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  submissionId   String?
+  submission     IntakeSubmission? @relation(fields: [submissionId], references: [id], onDelete: SetNull)
+  clientName     String
+  clientEmail    String
+  clientPhone    String
+  scheduledAt    DateTime?
+  meetingChannel MeetingChannel    @default(WHATSAPP_CALL)
+  meetingLink    String?
+  status         BookingStatus     @default(PENDING_SCHEDULE)
+  notes          String?
+  report         ConsultationReport?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([clientEmail])
+  @@index([status])
+}
+
+model ConsultationReport {
+  id            String    @id @default(cuid())
+  bookingId     String    @unique
+  booking       Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  title         String
+  summary       String?
+  fileKey       String
+  fileUrl       String
+  fileName      String
+  fileSize      Int?
+  deliveredAt   DateTime  @default(now())
+  downloadCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  content     String
+  category    String
+  readTime    String
+  authorName  String   @default("Niraj Kumar")
+  isPublished Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+}

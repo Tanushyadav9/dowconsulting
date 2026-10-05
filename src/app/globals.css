@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1B2838;
+  --accent: #C9A24B;
+  --surface: #F7F6F3;
+  --text-slate: #5A6472;
+}
+
+body {
+  color: #1B2838;
+  background-color: #F7F6F3;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Executive Styling */
+.executive-border {
+  border: 1px solid #E2E8F0;
+}
+
+.executive-shadow {
+  box-shadow: 0 4px 20px -2px rgba(27, 40, 56, 0.05);
+}
+
+.executive-gradient {
+  background: linear-gradient(135deg, #1B2838 0%, #2A3D54 100%);
+}
+
+.gold-badge {
+  background-color: #F7EED9;
+  color: #8C6A1E;
+  border: 1px solid #E3D1A5;
+}
