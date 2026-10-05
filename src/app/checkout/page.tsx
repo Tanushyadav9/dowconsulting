@@ -85,7 +85,9 @@ function CheckoutContent() {
               });
               const verifyData = await verifyRes.json();
               if (verifyRes.ok) {
-                router.push(`/account?orderId=${data.orderId}&payment=success`);
+                router.push(
+                  `/booking-confirmation?orderNumber=${verifyData.orderNumber || data.orderId}&packageName=${encodeURIComponent(selectedPkg.name)}`
+                );
               } else {
                 setError(verifyData.message || "Payment verification failed.");
               }
@@ -95,7 +97,9 @@ function CheckoutContent() {
           rzp.open();
         } else {
           // Direct fallback / Test mode redirect for sandbox environments
-          router.push(`/account?orderId=${data.orderId}&payment=success`);
+          router.push(
+            `/booking-confirmation?orderNumber=${data.orderId}&packageName=${encodeURIComponent(selectedPkg.name)}`
+          );
         }
       } else {
         // Stripe Flow

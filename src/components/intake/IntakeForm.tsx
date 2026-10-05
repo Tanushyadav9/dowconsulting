@@ -235,6 +235,110 @@ export function IntakeForm() {
                   <option value="100+">100+ personnel (Enterprise / Multi-Facility)</option>
                 </select>
               </div>
+
+              {/* DYNAMIC BRANCH: RETAIL & QSR SPECIFIC */}
+              {formData.businessType === "RETAIL" && (
+                <div className="p-4 rounded border border-[#C9A24B]/40 bg-[#F7EED9]/30 space-y-3 mt-3">
+                  <div className="flex items-center gap-1.5 text-[#8C6A1E] font-bold text-xs uppercase tracking-wide">
+                    <span>Retail &amp; Storefront Specific Diagnostics</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-semibold text-[#1B2838] block mb-1">Store Format</label>
+                      <select className="w-full px-3 py-2 rounded border border-[#E2E8F0] bg-white text-xs">
+                        <option>High-Street Commercial Market Showroom</option>
+                        <option>Enclosed Premium Mall Store</option>
+                        <option>Standalone Flagship Commercial Property</option>
+                        <option>QSR Cloud Kitchen / Delivery Hub</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-semibold text-[#1B2838] block mb-1">Billing Counter / POS Location</label>
+                      <select className="w-full px-3 py-2 rounded border border-[#E2E8F0] bg-white text-xs">
+                        <option>Near Main Entrance (Left)</option>
+                        <option>Near Main Entrance (Right)</option>
+                        <option>Central Island Counter</option>
+                        <option>Deep In Store / Back Quadrant</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* DYNAMIC BRANCH: MANUFACTURING & INDUSTRIAL MSME */}
+              {formData.businessType === "MANUFACTURING" && (
+                <div className="p-4 rounded border border-[#1B2838]/30 bg-[#F7F6F3] space-y-3 mt-3">
+                  <div className="flex items-center gap-1.5 text-[#1B2838] font-bold text-xs uppercase tracking-wide">
+                    <span>Industrial Plant &amp; MSME Diagnostics</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-semibold text-[#1B2838] block mb-1">Heavy Machinery &amp; Generator Zone</label>
+                      <select className="w-full px-3 py-2 rounded border border-[#E2E8F0] bg-white text-xs">
+                        <option>South / South-West Heavy Load Zone</option>
+                        <option>North / North-East Light Quadrant</option>
+                        <option>Distributed across entire floor</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-semibold text-[#1B2838] block mb-1">MD / Administrative Seating</label>
+                      <select className="w-full px-3 py-2 rounded border border-[#E2E8F0] bg-white text-xs">
+                        <option>Mezzanine overlooking shop floor</option>
+                        <option>Separate front commercial block</option>
+                        <option>Adjacent to dispatch dock</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* DYNAMIC BRANCH: TECH & SAAS VENTURES */}
+              {formData.businessType === "TECH_SAAS" && (
+                <div className="p-4 rounded border border-blue-200 bg-blue-50/40 space-y-3 mt-3">
+                  <div className="flex items-center gap-1.5 text-blue-900 font-bold text-xs uppercase tracking-wide">
+                    <span>Tech Startup &amp; Capital Inflection Diagnostics</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-semibold text-[#1B2838] block mb-1">Target Inflection Milestone</label>
+                      <select className="w-full px-3 py-2 rounded border border-[#E2E8F0] bg-white text-xs">
+                        <option>Institutional Series A/B Term Sheet Closure</option>
+                        <option>Major Product Version Launch / Scale</option>
+                        <option>Enterprise B2B Pilot Conversion</option>
+                        <option>Co-Founder Equity &amp; Alignment Restructuring</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-semibold text-[#1B2838] block mb-1">Lead Strategist Seating Orientation</label>
+                      <select className="w-full px-3 py-2 rounded border border-[#E2E8F0] bg-white text-xs">
+                        <option>Facing North (Wealth &amp; Opportunity)</option>
+                        <option>Facing East (Clarity &amp; Execution)</option>
+                        <option>Facing West or South</option>
+                        <option>Open Desk / Hot-desking</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* DYNAMIC STAGE-SPECIFIC BRANCH */}
+              {formData.businessStage === "IDEA_STAGE" && (
+                <div className="p-3 bg-amber-50 border border-amber-200 rounded text-amber-900 mt-2">
+                  <strong className="block text-[11px] uppercase tracking-wide">Pre-Lease Site Comparison:</strong>
+                  <p className="text-[11px] mt-0.5">
+                    Niraj Kumar can compare 2 to 3 candidate properties before you sign a binding 3-to-5 year commercial lease to prevent structural lock-in mistakes.
+                  </p>
+                </div>
+              )}
+
+              {formData.businessStage === "TURNAROUND" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded text-red-900 mt-2">
+                  <strong className="block text-[11px] uppercase tracking-wide">Stagnation / Remedial Audit:</strong>
+                  <p className="text-[11px] mt-0.5">
+                    We focus on non-demolition commercial remedies that unblock cash collection delays and restore executive stability immediately.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}

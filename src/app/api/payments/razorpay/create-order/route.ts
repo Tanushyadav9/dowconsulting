@@ -1,7 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createConsultingOrder } from "@/lib/payments";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
+  // Rate limiting: max 10 payment orders per IP per 10 minutes
+  const ip = getClientIp(req);
+  const rateLimit = checkRateLimit(`payment_rzp:${ip}`, 10, 10 * 60 * 1000);
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "Too many payment requests. Please wait a moment." },
+      {
+        status: 429,
+        headers: { "Retry-After": rateLimit.retryAfterSeconds.toString() },
+      }
+    );
+  }
+
   try {
     const body = await req.json();
     const { packageId, packageName, amount, customer, submissionId } = body;

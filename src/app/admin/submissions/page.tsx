@@ -179,7 +179,36 @@ export default function AdminSubmissionsPage() {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2">
+                  <div className="flex items-center gap-1.5 text-xs">
+                    <span className="text-[#8C96A5] text-[11px] font-semibold">Change Pipeline State:</span>
+                    <select
+                      value={selectedSub.status}
+                      onChange={async (e) => {
+                        const newStatus = e.target.value as any;
+                        setSubmissions((prev) =>
+                          prev.map((s) => (s.id === selectedSub.id ? { ...s, status: newStatus } : s))
+                        );
+                        setSelectedSub({ ...selectedSub, status: newStatus });
+                        try {
+                          await fetch("/api/admin/submissions/status", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ submissionId: selectedSub.id, status: newStatus }),
+                          });
+                        } catch (err) {
+                          console.error("Failed to update status", err);
+                        }
+                      }}
+                      className="px-2.5 py-1.5 rounded border border-[#E2E8F0] bg-white font-bold text-xs text-[#1B2838]"
+                    >
+                      <option value="UNDER_REVIEW">Under Review</option>
+                      <option value="QUOTE_SENT">Quote Sent</option>
+                      <option value="SCHEDULED">Scheduled</option>
+                      <option value="COMPLETED">Completed</option>
+                    </select>
+                  </div>
+
                   <Link
                     href={`/admin/quotes?submissionId=${selectedSub.id}&name=${encodeURIComponent(selectedSub.contactName)}&business=${encodeURIComponent(selectedSub.businessName)}&email=${encodeURIComponent(selectedSub.contactEmail)}`}
                     className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded bg-[#C9A24B] text-[#1B2838] font-bold text-xs uppercase hover:bg-[#B8913B] transition-colors"

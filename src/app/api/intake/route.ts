@@ -1,8 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendIntakeConfirmationEmail } from "@/lib/email/resend";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
+  // Rate limiting: max 5 intakes per IP per 10 minutes
+  const ip = getClientIp(req);
+  const rateLimit = checkRateLimit(`intake:${ip}`, 5, 10 * 60 * 1000);
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "Too many intake submissions. Please try again later." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": rateLimit.retryAfterSeconds.toString(),
+        },
+      }
+    );
+  }
+
   try {
     const body = await req.json();
 
