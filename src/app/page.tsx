@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { CONSULTING_PACKAGES } from "@/lib/constants/packages";
+import { EcosystemCrossPromotion } from "@/components/home/EcosystemCrossPromotion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -366,44 +367,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Sister Ecosystem Bridge */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#1B2838] text-[#F7F6F3] p-10 sm:p-12 rounded-lg border border-[#2A3D54] flex flex-col lg:flex-row justify-between items-center gap-8">
-          <div className="space-y-3 max-w-xl">
-            <span className="text-xs font-bold text-[#C9A24B] uppercase tracking-widest">
-              Integrated Advisory Ecosystem
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold">
-              Looking for Personal Astrology or Residential Vastu?
-            </h3>
-            <p className="text-xs text-[#8C96A5] leading-relaxed">
-              DOW Consulting is strictly dedicated to corporate strategy, commercial enterprises, and founder timing. For personal Vedic astrological consultations or residential architectural harmony, explore our sister platforms:
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <a
-              href="https://aapkaastro.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#111B27] hover:bg-[#2A3D54] border border-[#2A3D54] px-5 py-3 rounded text-xs font-bold text-[#F7F6F3] transition-colors"
-            >
-              <span>Visit Aapka Astro</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#C9A24B]" />
-            </a>
-
-            <a
-              href="https://viar.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#111B27] hover:bg-[#2A3D54] border border-[#2A3D54] px-5 py-3 rounded text-xs font-bold text-[#F7F6F3] transition-colors"
-            >
-              <span>Visit Viar.in</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#C9A24B]" />
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* 6. Sister Ecosystem Cross-Promotion */}
+      <EcosystemCrossPromotion />
 
       {/* 7. Office Address & Final CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">

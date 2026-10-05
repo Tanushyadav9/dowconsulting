@@ -61,3 +61,17 @@ The following items are functional and structured, but explicitly tagged as plac
 - **Positioning**: *"Strategic Business Timing & Commercial Vastu"*
 - **Office Location**: Unit No. A-1212 D, Tower A, Spectrum@Metro Phase 1, Sector 75, Noida, G.B. Nagar - U.P. 201301
 - **Direct WhatsApp**: +91 93112 15564
+
+---
+
+## 🌐 Sister Repositories Follow-Up Tasks (Post-Launch)
+
+The cross-promotion section linking to **Aapka Astro** (`https://aapkaastro.com`) and **Viar.in** (`https://viar.in`) is live on DOW Consulting (homepage and footer).
+
+### Required Follow-Up Actions for Sister Repositories:
+1. **Aapka Astro Repository (`aapkaastro`)**:
+   - Update its cross-promotion / footer section to include **DOW Consulting** (`https://dowconsulting.in` or Vercel production URL).
+   - Display positioning: *"Strategic Business Timing & Commercial Vastu"* led by Niraj Kumar for entrepreneurs, retail chains, and corporate decision-makers.
+2. **Viar.in Repository (`viar`)**:
+   - Update its cross-promotion banner to establish the distinction between residential architectural Vastu (handled by Viar.in) and commercial enterprise & executive timing advisory (handled by DOW Consulting).
+   - Add direct outbound link to DOW Consulting.
