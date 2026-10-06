@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireEnv } from "@/lib/env";
 import { uploadReportToR2 } from "@/lib/storage/r2";
 import { sendReportDeliveredEmail } from "@/lib/email/resend";
 
@@ -26,10 +27,11 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const portalUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/account?tab=deliverables`;
+    const appUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Base application URL for report portal link");
+    const portalUrl = `${appUrl}/account?tab=deliverables`;
 
     // Trigger Lifecycle Email 5: Written Report Delivered Notification via Resend
-    try {
+    if (process.env.RESEND_API_KEY) {
       await sendReportDeliveredEmail({
         to: clientEmail,
         name: clientName || "Valued Client",
@@ -37,8 +39,6 @@ export async function POST(req: NextRequest) {
         reportTitle,
         portalUrl,
       });
-    } catch (emailErr) {
-      console.warn("Resend email dispatch error:", emailErr);
     }
 
     return NextResponse.json({

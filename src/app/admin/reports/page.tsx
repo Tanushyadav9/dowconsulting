@@ -51,32 +51,55 @@ export default function AdminReportsPage() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     setUploading(true);
     setSuccessMsg(null);
+    setErrorMsg(null);
 
-    // Simulate Cloudflare R2 presigned upload & Resend notification
-    setTimeout(() => {
+    try {
+      const formData = new FormData();
+      formData.append("clientName", form.clientName);
+      formData.append("businessName", form.businessName);
+      formData.append("clientEmail", form.clientEmail);
+      formData.append("reportTitle", form.reportTitle);
+      if (file) {
+        formData.append("file", file);
+      }
+
+      const res = await fetch("/api/admin/reports/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to upload report to Cloudflare R2");
+      }
+
       setReports((prev) => [
         {
-          id: `REP-${Date.now().toString().slice(-3)}`,
+          id: data.fileKey ? data.fileKey.replace("reports/", "REP-") : `REP-${Date.now().toString().slice(-3)}`,
           clientName: form.clientName,
           businessName: form.businessName,
           clientEmail: form.clientEmail,
           reportTitle: form.reportTitle,
-          fileName: file?.name || "Singhania_Executive_Report.pdf",
-          fileSize: file ? `${(file.size / (1024 * 1024)).toFixed(1)} MB` : "4.8 MB",
-          deliveredAt: "Today, Just now",
+          fileName: file?.name || "Report.pdf",
+          fileSize: file ? `${(file.size / (1024 * 1024)).toFixed(1)} MB` : "Ready",
+          deliveredAt: "Just now",
           downloadCount: 0,
         },
         ...prev,
       ]);
-      setSuccessMsg(`Report securely dispatched to Cloudflare R2 & client notified via Resend email.`);
-      setUploading(false);
+      setSuccessMsg(data.message || "Report securely dispatched to Cloudflare R2.");
       setFile(null);
-    }, 1000);
+    } catch (err: any) {
+      setErrorMsg(err.message || "Upload failed");
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -104,6 +127,13 @@ export default function AdminReportsPage() {
             <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{successMsg}</span>
+            </div>
+          )}
+
+          {errorMsg && (
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+              <span>{errorMsg}</span>
             </div>
           )}
 

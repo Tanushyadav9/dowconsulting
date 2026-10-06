@@ -35,12 +35,8 @@ export async function GET(
       console.warn("DB lookup error for report:", dbErr);
     }
 
-    // If database record is not found, check mock/simulated report ID
     if (!report) {
-      // In production, strictly reject
-      if (process.env.NODE_ENV === "production") {
-        return NextResponse.json({ error: "Report not found" }, { status: 404 });
-      }
+      return NextResponse.json({ error: "Report not found" }, { status: 404 });
     }
 
     // Authorization Verification (Server-Side)

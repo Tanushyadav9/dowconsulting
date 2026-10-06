@@ -52,7 +52,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                  <span>Flat One-Time Engagements (No Meters)</span>
+                  <span>Fixed Advisory Engagements</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0" />
@@ -97,14 +97,10 @@ export default function HomePage() {
 
                 <div className="space-y-4 text-xs text-[#8C96A5]">
                   <div>
-                    <p className="text-[#E2E8F0] font-semibold text-sm mb-1">Corporate Operating Roles:</p>
-                    <ul className="space-y-1 pl-4 list-disc marker:text-[#C9A24B]">
-                      {BRAND.founder.corporateRoles.map((r) => (
-                        <li key={r.company}>
-                          <span className="text-[#F7F6F3] font-medium">{r.role}</span> — {r.company}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="text-[#E2E8F0] font-semibold text-sm mb-1">Corporate Operating Experience:</p>
+                    <p className="text-[#F7F6F3] leading-relaxed">
+                      {BRAND.founder.corporateExperience}
+                    </p>
                   </div>
 
                   <div>
@@ -301,69 +297,6 @@ export default function HomePage() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* 5. Case Scenarios (Generic & Honest Placeholders) */}
-      <section className="bg-[#FFFFFF] py-20 border-y border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
-            <p className="text-xs font-bold text-[#C9A24B] tracking-widest uppercase">
-              {/* PLACEHOLDER: replace with client-approved content */}
-              Advisory Scenarios
-            </p>
-            <h2 className="text-3xl font-bold text-[#1B2838]">Recent Advisory Engagement Contexts</h2>
-            <p className="text-xs text-[#5A6472]">
-              Real-world operational challenges resolved through structured spatial &amp; timing diagnostics.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-[#F7F6F3] rounded border border-[#E2E8F0] space-y-4">
-              <span className="text-[11px] font-bold text-[#C9A24B] uppercase tracking-wider">
-                Retail &amp; QSR Chain
-              </span>
-              <h4 className="text-base font-bold text-[#1B2838]">
-                New Store Location &amp; Lease Finalization Timing
-              </h4>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Assessed commercial high-street retail space in Delhi NCR. Evaluated cash register placement, back-store logistics alignment, and founder signature timing prior to long-term lease execution.
-              </p>
-              <div className="pt-2 border-t border-[#E2E8F0] text-[11px] text-[#8C96A5]">
-                Outcome: Non-demolition floor zoning + favorable signing window
-              </div>
-            </div>
-
-            <div className="p-6 bg-[#F7F6F3] rounded border border-[#E2E8F0] space-y-4">
-              <span className="text-[11px] font-bold text-[#C9A24B] uppercase tracking-wider">
-                Manufacturing MSME
-              </span>
-              <h4 className="text-base font-bold text-[#1B2838]">
-                Plant Floor Expansion &amp; Dispatch Friction
-              </h4>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Industrial fabrication unit in Greater Noida experiencing recurring billing friction and delayed dispatches. Reoriented administrative accounts desks and dispatch dock energy flow.
-              </p>
-              <div className="pt-2 border-t border-[#E2E8F0] text-[11px] text-[#8C96A5]">
-                Outcome: Realigned administrative workflow &amp; 30-day monitoring
-              </div>
-            </div>
-
-            <div className="p-6 bg-[#F7F6F3] rounded border border-[#E2E8F0] space-y-4">
-              <span className="text-[11px] font-bold text-[#C9A24B] uppercase tracking-wider">
-                Fintech &amp; SaaS Startup
-              </span>
-              <h4 className="text-base font-bold text-[#1B2838]">
-                Institutional Funding &amp; Founder Cabin Spatial Audit
-              </h4>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Reviewed co-founders&apos; executive seating orientation and pitch timing calendar ahead of Series A term-sheet negotiations.
-              </p>
-              <div className="pt-2 border-t border-[#E2E8F0] text-[11px] text-[#8C96A5]">
-                Outcome: Leadership spatial stability &amp; term sheet closure
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

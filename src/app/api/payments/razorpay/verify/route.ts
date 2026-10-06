@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { requireEnv } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 import { sendPaymentReceiptEmail, sendBookingConfirmationEmail } from "@/lib/email/resend";
 
@@ -16,18 +17,22 @@ export async function POST(req: NextRequest) {
       amount,
     } = body;
 
-    const secret = process.env.RAZORPAY_KEY_SECRET;
+    const secret = requireEnv("RAZORPAY_KEY_SECRET", "Razorpay Key Secret for verifying payment signatures");
 
-    // Verify cryptographic signature if secret is configured
-    if (secret && razorpay_order_id && razorpay_payment_id && razorpay_signature) {
-      const generated_signature = crypto
-        .createHmac("sha256", secret)
-        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-        .digest("hex");
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return NextResponse.json(
+        { error: "Missing required Razorpay payment verification parameters" },
+        { status: 400 }
+      );
+    }
 
-      if (generated_signature !== razorpay_signature) {
-        return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 });
-      }
+    const generated_signature = crypto
+      .createHmac("sha256", secret)
+      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+      .digest("hex");
+
+    if (generated_signature !== razorpay_signature) {
+      return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 });
     }
 
     const orderNumber = `ORD-${Date.now().toString().slice(-6)}`;

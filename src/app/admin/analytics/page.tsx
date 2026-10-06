@@ -20,7 +20,7 @@ export default function AdminAnalyticsPage() {
   ];
 
   const breakdownBySector = [
-    { sector: "Retail & QSR Chains", percent: "38%", revenue: "₹5,64,000" },
+    { sector: "Commercial Retail Chains", percent: "38%", revenue: "₹5,64,000" },
     { sector: "Manufacturing & Industrial MSME", percent: "29%", revenue: "₹4,30,000" },
     { sector: "Tech, SaaS & High-Growth Startups", percent: "21%", revenue: "₹3,12,000" },
     { sector: "Corporate Services & Real Estate", percent: "12%", revenue: "₹1,79,000" },

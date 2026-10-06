@@ -1,9 +1,21 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { FOOTER_LEGAL_LINKS } from "@/lib/constants/navigation";
-import { MapPin, Phone, MessageSquare, ExternalLink, ShieldCheck } from "lucide-react";
+import { getActiveSocialLinks } from "@/lib/constants/ecosystem";
+import {
+  MapPin,
+  MessageSquare,
+  ExternalLink,
+  ShieldCheck,
+  Linkedin,
+  Youtube,
+  Facebook,
+  Instagram,
+} from "lucide-react";
 
 export function Footer() {
+  const activeSocialLinks = getActiveSocialLinks();
+
   return (
     <footer className="bg-[#111B27] text-[#8C96A5] border-t border-[#2A3D54]">
       {/* Upper Footer: Brand, Credentials, Ecosystem */}
@@ -35,12 +47,8 @@ export function Footer() {
             </h4>
             <ul className="text-xs space-y-2 text-[#8C96A5]">
               <li>
-                <strong className="text-[#E2E8F0]">Vice President & Business Head</strong>
-                <br />Reliance Retail
-              </li>
-              <li>
-                <strong className="text-[#E2E8F0]">Senior Business Head</strong>
-                <br />Metro Cash & Carry, NIF Food
+                <strong className="text-[#E2E8F0]">Corporate Operating Experience</strong>
+                <br />Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food
               </li>
               <li>
                 <strong className="text-[#E2E8F0]">Academic Foundations</strong>
@@ -48,7 +56,7 @@ export function Footer() {
               </li>
               <li>
                 <strong className="text-[#E2E8F0]">Executive Education</strong>
-                <br />XLRI Jamshedpur (Leadership & Change Mgmt)
+                <br />XLRI (Leadership & Change Mgmt)
               </li>
             </ul>
           </div>
@@ -82,7 +90,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Col 4: Verified Contact Coordinates */}
+          {/* Col 4: Verified Contact Coordinates & Active Socials */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
               Official Practice Address
@@ -105,15 +113,33 @@ export function Footer() {
                   WhatsApp: {BRAND.contact.whatsapp.display}
                 </a>
               </div>
-              <div className="pt-2">
-                <Link
-                  href="/admin"
-                  className="text-[11px] text-[#5A6472] hover:text-[#8C96A5] underline"
-                >
-                  Advisor & Staff Portal
-                </Link>
-              </div>
             </div>
+
+            {/* Social Links: Centralized in ecosystem.ts; rendered ONLY when URL is set and valid */}
+            {activeSocialLinks.length > 0 && (
+              <div className="pt-2 border-t border-[#2A3D54] space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C96A5]">
+                  Official Channels
+                </span>
+                <div className="flex items-center gap-3">
+                  {activeSocialLinks.map((social) => (
+                    <a
+                      key={social.platform}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded bg-[#1B2838] hover:bg-[#2A3D54] text-[#C9A24B] transition-colors"
+                      aria-label={social.label}
+                    >
+                      {social.platform === "linkedin" && <Linkedin className="w-3.5 h-3.5" />}
+                      {social.platform === "youtube" && <Youtube className="w-3.5 h-3.5" />}
+                      {social.platform === "facebook" && <Facebook className="w-3.5 h-3.5" />}
+                      {social.platform === "instagram" && <Instagram className="w-3.5 h-3.5" />}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

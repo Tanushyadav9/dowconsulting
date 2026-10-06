@@ -1,3 +1,6 @@
+import { requireEnv } from "@/lib/env";
+import { SISTER_SITES } from "@/lib/constants/ecosystem";
+
 export const BRAND = {
   name: "DOW Consulting", // Flagged in AUDIT_REPORT.md for client confirmation
   tagline: "Strategic Business Timing & Commercial Vastu",
@@ -7,16 +10,16 @@ export const BRAND = {
     name: "Niraj Kumar",
     title: "Principal Strategist & Corporate Advisor",
     sisterBrands: "Founder of Aapka Astro and Viar.in",
+    corporateExperience:
+      "Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food",
     corporateRoles: [
-      { role: "Vice President & Business Head", company: "Reliance Retail" },
-      { role: "Senior Corporate Leadership", company: "Metro Cash & Carry" },
-      { role: "Business Head", company: "NIF Food" },
+      { role: "Vice President & Business Head", company: "Organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food" },
     ],
     totalExperience: "20+ Years Senior Corporate Leadership",
     credentials: [
       "B.Sc. (Hons.) in Physics",
       "PGDBM in International Business & Marketing",
-      "Leadership Development & Change Management Certification, XLRI Jamshedpur",
+      "Leadership Development & Change Management Certification, XLRI",
     ],
   },
   contact: {
@@ -35,7 +38,9 @@ export const BRAND = {
       link: "https://wa.me/919311215564",
       display: "+91 93112 15564",
     },
-    email: "advisory@dowconsulting.com",
+    get email(): string {
+      return requireEnv("NEXT_PUBLIC_CONTACT_EMAIL", "Official client advisory contact email");
+    },
   },
   consultationDelivery: {
     modalities: [
@@ -46,14 +51,14 @@ export const BRAND = {
   },
   ecosystem: [
     {
-      name: "Aapka Astro",
-      url: "https://aapkaastro.com",
-      description: "Vedic Astrology & Astrological Guidance",
+      name: SISTER_SITES.aapkaAstro.name,
+      url: SISTER_SITES.aapkaAstro.url,
+      description: SISTER_SITES.aapkaAstro.description,
     },
     {
-      name: "Viar.in",
-      url: "https://viar.in",
-      description: "Authentic Vastu & Spatial Harmony Solutions",
+      name: SISTER_SITES.viar.name,
+      url: SISTER_SITES.viar.url,
+      description: SISTER_SITES.viar.description,
     },
   ],
 };

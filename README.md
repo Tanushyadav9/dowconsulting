@@ -36,8 +36,8 @@
 
 - **Framework**: Next.js 15+ (App Router, React, TypeScript)
 - **Styling**: Tailwind CSS
-- **Database / ORM**: SQLite / Prisma
-- **Payments**: Razorpay Integration (One-time flat fees)
+- **Database / ORM**: PostgreSQL (Neon Serverless) / Prisma
+- **Payments**: Razorpay (Domestic INR) & Stripe (International USD)
 - **Deployment**: Production Ready
 
 ---

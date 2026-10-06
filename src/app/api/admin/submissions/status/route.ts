@@ -33,15 +33,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    let updated: any = null;
-    try {
-      updated = await prisma.intakeSubmission.update({
-        where: { id: submissionId },
-        data: { status: status as any },
-      });
-    } catch (dbErr) {
-      console.warn("DB update error:", dbErr);
-    }
+    const updated = await prisma.intakeSubmission.update({
+      where: { id: submissionId },
+      data: { status: status as any },
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,18 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
+import { requireEnv } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
-  const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
-
-  if (!webhookSecret) {
-    console.error("[CRITICAL SECURITY ERROR] CLERK_WEBHOOK_SECRET is missing. Rejecting webhook in fail-closed mode.");
-    return NextResponse.json(
-      { error: "Server misconfiguration: CLERK_WEBHOOK_SECRET is required" },
-      { status: 500 }
-    );
-  }
+  const webhookSecret = requireEnv("CLERK_WEBHOOK_SECRET", "Svix cryptographic webhook secret");
 
   // Get Svix headers for signature verification
   const headerPayload = headers();
@@ -27,9 +20,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Get raw body for cryptographic verification
-  const payload = await req.json();
-  const body = JSON.stringify(payload);
+  // Get raw body for cryptographic HMAC verification
+  const body = await req.text();
 
   const wh = new Webhook(webhookSecret);
   let evt: any;

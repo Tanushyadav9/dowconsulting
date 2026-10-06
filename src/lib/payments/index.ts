@@ -1,5 +1,6 @@
 import Razorpay from "razorpay";
 import Stripe from "stripe";
+import { requireEnv } from "@/lib/env";
 
 export interface CreateOrderParams {
   amount: number; // in lowest currency unit (paise for INR, cents for USD)
@@ -23,13 +24,8 @@ export interface PaymentProviderResult {
 
 // Lazy initialization of Razorpay
 export function getRazorpayClient() {
-  const key_id = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-  const key_secret = process.env.RAZORPAY_KEY_SECRET;
-
-  if (!key_id || !key_secret) {
-    console.warn("Razorpay credentials missing from environment.");
-    return null;
-  }
+  const key_id = requireEnv("NEXT_PUBLIC_RAZORPAY_KEY_ID", "Razorpay client Key ID");
+  const key_secret = requireEnv("RAZORPAY_KEY_SECRET", "Razorpay backend Key Secret");
 
   return new Razorpay({
     key_id,
@@ -39,11 +35,7 @@ export function getRazorpayClient() {
 
 // Lazy initialization of Stripe
 export function getStripeClient() {
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-  if (!secretKey) {
-    console.warn("Stripe credentials missing from environment.");
-    return null;
-  }
+  const secretKey = requireEnv("STRIPE_SECRET_KEY", "Stripe backend Secret Key");
 
   return new Stripe(secretKey, {
     apiVersion: "2024-11-20.acacia" as any,
@@ -76,7 +68,7 @@ export async function createConsultingOrder(
       amount: typeof order.amount === "number" ? order.amount : params.amount,
       currency: "INR",
       checkoutData: {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: requireEnv("NEXT_PUBLIC_RAZORPAY_KEY_ID", "Razorpay client Key ID"),
         orderId: order.id,
         amount: order.amount,
         name: "DOW Consulting",
@@ -94,9 +86,7 @@ export async function createConsultingOrder(
   } else {
     // Stripe Flow
     const stripe = getStripeClient();
-    if (!stripe) {
-      throw new Error("Stripe is not configured on this server.");
-    }
+    const appUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Base application URL for Stripe checkout redirects");
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -119,8 +109,8 @@ export async function createConsultingOrder(
         receipt: params.receipt,
         ...params.notes,
       },
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/account?session_id={CHECKOUT_SESSION_ID}&payment=success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/checkout?payment=cancelled`,
+      success_url: `${appUrl}/account?session_id={CHECKOUT_SESSION_ID}&payment=success`,
+      cancel_url: `${appUrl}/checkout?payment=cancelled`,
     });
 
     return {

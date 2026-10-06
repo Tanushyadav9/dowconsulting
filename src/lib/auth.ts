@@ -1,19 +1,19 @@
 import { currentUser } from "@clerk/nextjs/server";
+import { requireEnv } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 
 /**
  * Checks if the given email corresponds to the Owner.
- * STRICT ENFORCEMENT: process.env.OWNER_EMAIL is read directly with ZERO hardcoded fallback emails.
+ * STRICT ENFORCEMENT: process.env.OWNER_EMAIL is read ONLY from the environment.
+ * Zero fallback strings and zero default lists; unset means no one is Owner.
  */
 export function isOwnerEmail(email?: string | null): boolean {
   if (!email) return false;
-  const ownerEmail = process.env.OWNER_EMAIL?.trim().toLowerCase();
-  if (!ownerEmail) {
-    // If OWNER_EMAIL is not set in environment, fail securely - NEVER fall back to a hardcoded string
-    console.warn("SECURITY WARNING: OWNER_EMAIL environment variable is not configured.");
+  const ownerEnv = process.env.OWNER_EMAIL?.trim();
+  if (!ownerEnv || ownerEnv === "" || ownerEnv.toLowerCase().includes("placeholder") || ownerEnv.toLowerCase().includes("example.com")) {
     return false;
   }
-  return email.trim().toLowerCase() === ownerEmail;
+  return email.trim().toLowerCase() === ownerEnv.toLowerCase();
 }
 
 /**

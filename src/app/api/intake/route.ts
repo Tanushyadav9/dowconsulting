@@ -49,50 +49,48 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    let submissionId = `SUB-${Date.now().toString().slice(-4)}`;
-
-    // Persist to Prisma database if available
-    try {
-      const submission = await prisma.intakeSubmission.create({
-        data: {
-          contactName,
-          contactEmail: contactEmail.toLowerCase(),
-          contactPhone,
-          businessName,
-          businessType: businessType || "RETAIL",
-          businessStage: businessStage || "EARLY_TRACTION",
-          locationCity: locationCity || "Noida",
-          locationCountry: locationCountry || "India",
-          premisesStatus: premisesStatus || null,
-          floorAreaSqFt: floorAreaSqFt || null,
-          currentTimeline: currentTimeline || "NEXT_30_DAYS",
-          primaryGoals: primaryGoals || "",
-          keyChallenges: keyChallenges || "",
-          budgetRange: budgetRange || null,
-          preferredChannel: preferredChannel === "GOOGLE_MEET" ? "GOOGLE_MEET" : "WHATSAPP_CALL",
-          status: "UNDER_REVIEW",
-        },
-      });
-      submissionId = submission.id;
-    } catch (dbErr) {
-      console.warn("Database save skipped or pending:", dbErr);
+    if (body.consentConfidentiality !== true) {
+      return NextResponse.json(
+        { error: "Non-disclosure and confidentiality consent is required to submit an advisory assessment." },
+        { status: 400 }
+      );
     }
 
+    // Persist to Prisma database - fail loudly if database is unavailable
+    const submission = await prisma.intakeSubmission.create({
+      data: {
+        contactName,
+        contactEmail: contactEmail.toLowerCase(),
+        contactPhone,
+        businessName,
+        businessType: businessType || "RETAIL",
+        businessStage: businessStage || "EARLY_TRACTION",
+        locationCity: locationCity || "Noida",
+        locationCountry: locationCountry || "India",
+        premisesStatus: premisesStatus || null,
+        floorAreaSqFt: floorAreaSqFt || null,
+        currentTimeline: currentTimeline || "NEXT_30_DAYS",
+        primaryGoals: primaryGoals || "",
+        keyChallenges: keyChallenges || "",
+        budgetRange: budgetRange || null,
+        preferredChannel: preferredChannel === "GOOGLE_MEET" ? "GOOGLE_MEET" : "WHATSAPP_CALL",
+        status: "UNDER_REVIEW",
+      },
+    });
+
     // Trigger Lifecycle Email 1: Intake Submission Confirmation via Resend
-    try {
+    if (process.env.RESEND_API_KEY) {
       await sendIntakeConfirmationEmail({
         to: contactEmail,
         name: contactName,
         businessName,
-        submissionId,
+        submissionId: submission.id,
       });
-    } catch (emailErr) {
-      console.warn("Resend email dispatch error:", emailErr);
     }
 
     return NextResponse.json({
       success: true,
-      id: submissionId,
+      id: submission.id,
       message: "Intake successfully received and under review.",
     });
   } catch (error: any) {

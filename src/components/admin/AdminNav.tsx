@@ -10,11 +10,13 @@ import {
   FileText,
   BarChart3,
   ShieldAlert,
+  Package,
 } from "lucide-react";
 
 const ADMIN_LINKS = [
   { label: "Overview", href: "/admin", icon: BarChart3 },
   { label: "Submissions", href: "/admin/submissions", icon: Inbox },
+  { label: "Packages & Pricing", href: "/admin/packages", icon: Package },
   { label: "Custom Quotes", href: "/admin/quotes", icon: FileCheck },
   { label: "Bookings & Sessions", href: "/admin/bookings", icon: Calendar },
   { label: "Written Reports", href: "/admin/reports", icon: FileText },

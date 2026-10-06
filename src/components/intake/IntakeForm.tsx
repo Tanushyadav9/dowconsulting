@@ -53,8 +53,9 @@ export function IntakeForm() {
     budgetRange: "₹25,000 - ₹50,000",
 
     // Step 5: Session Logistics & Packaging
-    selectedPackage: preselectedPackage || "commercial-vastu-growth",
+    selectedPackage: preselectedPackage || "bespoke-proposal",
     preferredChannel: "WHATSAPP_CALL", // WHATSAPP_CALL, GOOGLE_MEET
+    consentConfidentiality: false, // Mandatory NDA consent checkbox
   });
 
   const nextStep = () => setStep((s) => Math.min(s + 1, 5));
@@ -64,6 +65,12 @@ export function IntakeForm() {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
+
+    if (!formData.consentConfidentiality) {
+      setError("Please confirm your consent to the Non-Disclosure & Confidentiality terms to submit this assessment.");
+      setSubmitting(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/intake", {
@@ -77,12 +84,7 @@ export function IntakeForm() {
         throw new Error(data.message || "Failed to submit intake");
       }
 
-      // If user selected a direct package and not in pure custom quote mode, proceed to checkout
-      if (formData.selectedPackage && !isCustomQuoteMode) {
-        router.push(`/checkout?submissionId=${data.id}&package=${formData.selectedPackage}`);
-      } else {
-        router.push(`/account?submissionId=${data.id}&status=submitted`);
-      }
+      router.push(`/account?submissionId=${data.id}&status=submitted`);
     } catch (err: any) {
       console.error(err);
       setError(err.message || "An error occurred while submitting your intake. Please try again.");
@@ -478,43 +480,92 @@ export function IntakeForm() {
 
         {/* STEP 5: PACKAGE & SESSION LOGISTICS */}
         {step === 5 && (
-          <div className="space-y-5">
-            <h3 className="text-xl font-bold text-[#1B2838]">Advisory Format &amp; Package Selection</h3>
-            <p className="text-xs text-[#5A6472]">
-              Select a starting package for self-serve confirmation, or submit for custom quote review.
-            </p>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-bold text-[#1B2838]">Advisory Scope &amp; Session Coordination</h3>
+              <p className="text-xs text-[#5A6472]">
+                Specify your primary advisory focus and coordination preferences. Niraj Kumar formulates structured engagements tailored to your operating scale.
+              </p>
+            </div>
 
-            {/* Package selector */}
+            {/* Scope Focus Selector */}
             <div className="space-y-3">
-              <label className="font-semibold text-xs text-[#1B2838]">Select Desired Advisory Tier:</label>
+              <label className="font-semibold text-xs text-[#1B2838]">Primary Advisory Focus:</label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {CONSULTING_PACKAGES.map((pkg) => (
-                  <label
-                    key={pkg.id}
-                    className={`p-4 rounded border cursor-pointer flex flex-col justify-between transition-all ${
-                      formData.selectedPackage === pkg.id
-                        ? "border-[#1B2838] bg-[#F7F6F3] shadow-sm"
-                        : "border-[#E2E8F0] hover:border-[#1B2838]/50"
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          name="selectedPackage"
-                          value={pkg.id}
-                          checked={formData.selectedPackage === pkg.id}
-                          onChange={() => setFormData({ ...formData, selectedPackage: pkg.id })}
-                        />
-                        <span className="font-bold text-xs text-[#1B2838]">{pkg.name}</span>
-                      </div>
-                      <p className="text-[11px] text-[#5A6472] mt-1 line-clamp-2">{pkg.subtitle}</p>
+                <label
+                  className={`p-4 rounded border cursor-pointer flex flex-col justify-between transition-all ${
+                    formData.selectedPackage === "bespoke-proposal"
+                      ? "border-[#1B2838] bg-[#F7F6F3] shadow-sm"
+                      : "border-[#E2E8F0] hover:border-[#1B2838]/50"
+                  }`}
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="selectedPackage"
+                        value="bespoke-proposal"
+                        checked={formData.selectedPackage === "bespoke-proposal"}
+                        onChange={() => setFormData({ ...formData, selectedPackage: "bespoke-proposal" })}
+                      />
+                      <span className="font-bold text-xs text-[#1B2838]">Custom Proposal</span>
                     </div>
-                    <div className="pt-2 mt-2 border-t border-[#E2E8F0] font-bold text-xs text-[#1B2838]">
-                      ₹{pkg.priceINR.toLocaleString("en-IN")}
+                    <p className="text-[11px] text-[#5A6472] leading-relaxed">
+                      Comprehensive evaluation of commercial scale, multi-facility layout, and timing roadmap.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#C9A24B] uppercase mt-2">Recommended</span>
+                </label>
+
+                <label
+                  className={`p-4 rounded border cursor-pointer flex flex-col justify-between transition-all ${
+                    formData.selectedPackage === "commercial-vastu"
+                      ? "border-[#1B2838] bg-[#F7F6F3] shadow-sm"
+                      : "border-[#E2E8F0] hover:border-[#1B2838]/50"
+                  }`}
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="selectedPackage"
+                        value="commercial-vastu"
+                        checked={formData.selectedPackage === "commercial-vastu"}
+                        onChange={() => setFormData({ ...formData, selectedPackage: "commercial-vastu" })}
+                      />
+                      <span className="font-bold text-xs text-[#1B2838]">Commercial Vastu</span>
                     </div>
-                  </label>
-                ))}
+                    <p className="text-[11px] text-[#5A6472] leading-relaxed">
+                      Directional site grid, non-demolition layout balancing, accounts and executive zone orientation.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#5A6472] uppercase mt-2">Spatial Focus</span>
+                </label>
+
+                <label
+                  className={`p-4 rounded border cursor-pointer flex flex-col justify-between transition-all ${
+                    formData.selectedPackage === "milestone-timing"
+                      ? "border-[#1B2838] bg-[#F7F6F3] shadow-sm"
+                      : "border-[#E2E8F0] hover:border-[#1B2838]/50"
+                  }`}
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="selectedPackage"
+                        value="milestone-timing"
+                        checked={formData.selectedPackage === "milestone-timing"}
+                        onChange={() => setFormData({ ...formData, selectedPackage: "milestone-timing" })}
+                      />
+                      <span className="font-bold text-xs text-[#1B2838]">Milestone Timing</span>
+                    </div>
+                    <p className="text-[11px] text-[#5A6472] leading-relaxed">
+                      Corporate milestone timing, lease signing calendar, launch dates, and founder transit cycles.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#5A6472] uppercase mt-2">Timing Focus</span>
+                </label>
               </div>
             </div>
 
@@ -553,8 +604,31 @@ export function IntakeForm() {
                 </label>
               </div>
               <p className="text-[10px] text-[#8C96A5]">
-                Note: In-app calling tools are not used. Consultations are delivered via Google Meet or WhatsApp call to guarantee reliable quality.
+                Note: All consultations are conducted via Google Meet or WhatsApp call to guarantee reliable quality and screen sharing.
               </p>
+            </div>
+
+            {/* Mandatory Confidentiality & Non-Disclosure Consent */}
+            <div className="p-4 rounded-lg bg-[#F7F6F3] border border-[#E2E8F0] space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#1B2838]">
+                <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
+                <span>Executive Non-Disclosure &amp; Confidentiality Guarantee</span>
+              </div>
+              <p className="text-[11px] text-[#5A6472] leading-relaxed">
+                DOW Consulting treats all corporate disclosures, commercial floor plans, financial estimates, and expansion timelines under strict professional non-disclosure. No client information is ever disclosed to third parties.
+              </p>
+              <label className="flex items-start gap-2.5 cursor-pointer pt-1">
+                <input
+                  type="checkbox"
+                  required
+                  checked={formData.consentConfidentiality}
+                  onChange={(e) => setFormData({ ...formData, consentConfidentiality: e.target.checked })}
+                  className="mt-0.5 rounded text-[#1B2838] focus:ring-[#1B2838]"
+                />
+                <span className="text-xs font-semibold text-[#1B2838]">
+                  I consent to sharing commercial and spatial data under DOW Consulting&apos;s strict non-disclosure advisory terms. *
+                </span>
+              </label>
             </div>
           </div>
         )}
@@ -589,7 +663,7 @@ export function IntakeForm() {
               className="inline-flex items-center gap-2 px-8 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#1B2838] bg-[#C9A24B] hover:bg-[#B8913B] transition-colors shadow-md"
             >
               <Send className="w-4 h-4" />
-              <span>{submitting ? "Submitting..." : isCustomQuoteMode ? "Submit for Custom Quote" : "Confirm & Proceed to Checkout"}</span>
+              <span>{submitting ? "Submitting Assessment..." : "Submit Strategic Assessment for Review"}</span>
             </button>
           )}
         </div>

@@ -5,31 +5,15 @@
 
 export function requireEnv(name: string, description?: string): string {
   const value = process.env[name];
-  if (!value || value.trim() === "" || value.includes("placeholder") || value.includes("example")) {
+  if (!value || value.trim() === "" || value.includes("placeholder") || value.includes("example") || value.endsWith("...")) {
     const msg = `[CRITICAL CONFIG ERROR] Required environment variable "${name}" is missing or unconfigured.${
       description ? ` Purpose: ${description}` : ""
     } System operates in fail-closed mode: zero fallback values are permitted.`;
-    
-    // In production, always throw hard
-    if (process.env.NODE_ENV === "production") {
-      throw new Error(msg);
-    }
-    console.error(msg);
-    return "";
+    throw new Error(msg);
   }
   return value.trim();
 }
 
-/**
- * Returns true only if explicitly in local development with DEV_MOCKS enabled.
- * This environment flag NEVER exists in the production Vercel environment.
- */
-export function isDevMockAllowed(): boolean {
-  return (
-    process.env.NODE_ENV !== "production" &&
-    process.env.ENABLE_DEV_MOCKS === "true"
-  );
-}
 
 /**
  * Validates critical environment invariants at startup

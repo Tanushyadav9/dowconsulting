@@ -1,10 +1,12 @@
 import { Resend } from "resend";
+import { requireEnv } from "@/lib/env";
 import { BRAND } from "@/lib/constants/brand";
 
-const resendApiKey = process.env.RESEND_API_KEY;
-export const resend = resendApiKey ? new Resend(resendApiKey) : null;
-
-const DEFAULT_FROM = process.env.RESEND_FROM_EMAIL || "DOW Consulting <advisory@dowconsulting.com>";
+export function getResendClient(): { client: Resend; from: string } {
+  const apiKey = requireEnv("RESEND_API_KEY", "Resend transactional email delivery API key");
+  const from = requireEnv("RESEND_FROM_EMAIL", "Verified transactional sender address");
+  return { client: new Resend(apiKey), from };
+}
 
 /**
  * 1. Intake Submission Confirmation Email
@@ -15,10 +17,7 @@ export async function sendIntakeConfirmationEmail(params: {
   businessName: string;
   submissionId: string;
 }) {
-  if (!resend) {
-    console.warn("Resend API key not set; skipping intake confirmation email.");
-    return { success: false, simulated: true };
-  }
+  const { client, from } = getResendClient();
 
   const subject = `Intake Received: Strategic Consultation for ${params.businessName}`;
   const html = `
@@ -52,8 +51,8 @@ export async function sendIntakeConfirmationEmail(params: {
     </div>
   `;
 
-  return resend.emails.send({
-    from: DEFAULT_FROM,
+  return client.emails.send({
+    from,
     to: params.to,
     subject,
     html,
@@ -73,10 +72,7 @@ export async function sendQuoteDeliveryEmail(params: {
   quoteId: string;
   checkoutUrl: string;
 }) {
-  if (!resend) {
-    console.warn("Resend API key not set; skipping quote delivery email.");
-    return { success: false, simulated: true };
-  }
+  const { client, from } = getResendClient();
 
   const formattedAmount =
     params.currency === "INR"
@@ -111,8 +107,8 @@ export async function sendQuoteDeliveryEmail(params: {
     </div>
   `;
 
-  return resend.emails.send({
-    from: DEFAULT_FROM,
+  return client.emails.send({
+    from,
     to: params.to,
     subject,
     html,
@@ -131,10 +127,7 @@ export async function sendPaymentReceiptEmail(params: {
   currency: string;
   provider: string;
 }) {
-  if (!resend) {
-    console.warn("Resend API key not set; skipping payment receipt email.");
-    return { success: false, simulated: true };
-  }
+  const { client, from } = getResendClient();
 
   const formattedAmount =
     params.currency === "INR"
@@ -176,8 +169,8 @@ export async function sendPaymentReceiptEmail(params: {
     </div>
   `;
 
-  return resend.emails.send({
-    from: DEFAULT_FROM,
+  return client.emails.send({
+    from,
     to: params.to,
     subject,
     html,
@@ -195,10 +188,7 @@ export async function sendBookingConfirmationEmail(params: {
   meetingChannel: "WHATSAPP_CALL" | "GOOGLE_MEET";
   meetingLink?: string;
 }) {
-  if (!resend) {
-    console.warn("Resend API key not set; skipping booking confirmation email.");
-    return { success: false, simulated: true };
-  }
+  const { client, from } = getResendClient();
 
   const channelText =
     params.meetingChannel === "WHATSAPP_CALL"
@@ -235,8 +225,8 @@ export async function sendBookingConfirmationEmail(params: {
     </div>
   `;
 
-  return resend.emails.send({
-    from: DEFAULT_FROM,
+  return client.emails.send({
+    from,
     to: params.to,
     subject,
     html,
@@ -253,10 +243,7 @@ export async function sendReportDeliveredEmail(params: {
   reportTitle: string;
   portalUrl: string;
 }) {
-  if (!resend) {
-    console.warn("Resend API key not set; skipping report delivered email.");
-    return { success: false, simulated: true };
-  }
+  const { client, from } = getResendClient();
 
   const subject = `Strategic Report Ready: ${params.reportTitle} for ${params.businessName}`;
   const html = `
@@ -283,8 +270,8 @@ export async function sendReportDeliveredEmail(params: {
     </div>
   `;
 
-  return resend.emails.send({
-    from: DEFAULT_FROM,
+  return client.emails.send({
+    from,
     to: params.to,
     subject,
     html,

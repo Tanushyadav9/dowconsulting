@@ -107,7 +107,7 @@ model Package {
   priceUSD     Int
   inclusions   String[]  // Array of deliverables/features
   isPopular    Boolean   @default(false)
-  isActive     Boolean   @default(true)
+  isActive     Boolean   @default(false) // Unpublished draft by default
   payments     Payment[]
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt

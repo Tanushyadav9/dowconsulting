@@ -23,7 +23,7 @@ export default function PricingPolicyPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">1. Transparent, Flat-Fee Philosophy</h2>
         <p>
-          At {BRAND.name}, we maintain complete transparency in our advisory pricing. Unlike conventional hourly billing practices with open-ended meters or subscription lock-ins, every package on our platform is quoted as a flat, one-time fee. Clients know their exact investment upfront before engagement commences.
+          At {BRAND.name}, we maintain complete transparency in our advisory pricing. Unlike conventional hourly billing practices with open-ended billing or retainer lock-ins, every package on our platform is quoted with clear upfront pricing. Clients know their exact investment upfront before engagement commences.
         </p>
       </section>
 

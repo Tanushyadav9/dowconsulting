@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { BRAND } from "@/lib/constants/brand";
+import { SISTER_SITES } from "@/lib/constants/ecosystem";
 import { MapPin, Phone, MessageSquare, Mail, Send, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
 
 export default function ContactPage() {
@@ -108,14 +109,15 @@ export default function ContactPage() {
             <div className="p-6 bg-[#FFFFFF] rounded border border-[#E2E8F0] space-y-2 text-xs">
               <strong className="text-[#1B2838]">Part of the Niraj Kumar Advisory Ecosystem:</strong>
               <p className="text-[#5A6472]">
-                Clients with concurrent personal Vedic astrological inquiries may also connect with our sister practice at{" "}
-                <a href="https://aapkaastro.com" target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
-                  Aapka Astro
+                Clients with personal Vedic astrological inquiries or Vastu consultation may connect with our sister practice at{" "}
+                <a href={SISTER_SITES.aapkaAstro.url} target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
+                  {SISTER_SITES.aapkaAstro.name}
                 </a>{" "}
-                or residential Vastu at{" "}
-                <a href="https://viar.in" target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
-                  Viar.in
-                </a>.
+                (Vedic astrology consultations, residential and commercial Vastu), or explore self-paced astrology courses at{" "}
+                <a href={SISTER_SITES.viar.url} target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
+                  {SISTER_SITES.viar.name}
+                </a>{" "}
+                (Vihangam Institute of Astrology and Research).
               </p>
             </div>
           </div>

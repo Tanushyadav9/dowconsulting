@@ -1,7 +1,9 @@
-import { BRAND } from "@/lib/constants/brand";
-import { ExternalLink, Compass, Sparkles, Building2, ArrowRight } from "lucide-react";
+import { SISTER_SITES } from "@/lib/constants/ecosystem";
+import { ExternalLink, GraduationCap, Sparkles } from "lucide-react";
 
 export function EcosystemCrossPromotion() {
+  const { aapkaAstro, viar } = SISTER_SITES;
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="bg-[#111B27] rounded-xl border border-[#2A3D54] p-8 sm:p-12 text-[#F7F6F3] space-y-8 shadow-xl">
@@ -15,7 +17,7 @@ export function EcosystemCrossPromotion() {
               Specialized Guidance Across Enterprise, Space &amp; Astrology
             </h2>
             <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
-              <strong>DOW Consulting</strong> is strictly focused on commercial enterprises, retail networks, and corporate milestone timing. For individual Vedic astrology consultations or residential Vastu harmony, explore our sister platforms led by Niraj Kumar:
+              <strong>DOW Consulting</strong> is strictly focused on commercial enterprises, retail networks, and corporate milestone timing. For individual Vedic astrology consultations, residential or commercial Vastu consultation, or self-paced astrology education, explore our sister platforms led by Niraj Kumar:
             </p>
           </div>
         </div>
@@ -30,43 +32,41 @@ export function EcosystemCrossPromotion() {
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#111B27] text-[#C9A24B] border border-[#2A3D54]">
-                  Vedic Astrology
+                  {aapkaAstro.badge}
                 </span>
               </div>
 
               <div>
                 <h3 className="text-xl font-bold text-[#F7F6F3] group-hover:text-[#C9A24B] transition-colors">
-                  Aapka Astro
+                  {aapkaAstro.name}
                 </h3>
                 <p className="text-xs text-[#C9A24B] font-semibold mt-0.5">
-                  Personal Vedic Astrological Guidance &amp; Horoscopes
+                  {aapkaAstro.tagline}
                 </p>
               </div>
 
               <p className="text-xs text-[#8C96A5] leading-relaxed">
-                Dedicated to individual birth charts, personal life decisions, career pivots, matchmaking, and planetary transit guidance. Grounded in authentic Vedic astrology principles.
+                {aapkaAstro.description}
               </p>
 
               <div className="pt-2 text-xs text-[#E2E8F0] space-y-1.5">
-                <div className="flex items-center gap-2 text-[11px] text-[#8C96A5]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24B]"></span>
-                  <span>Personal Kundli &amp; Birth Chart Reading</span>
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-[#8C96A5]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24B]"></span>
-                  <span>Career &amp; Relationship Transit Timing</span>
-                </div>
+                {aapkaAstro.offerings.map((offering, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-[11px] text-[#8C96A5]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24B]"></span>
+                    <span>{offering}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="pt-4 border-t border-[#2A3D54]">
               <a
-                href="https://aapkaastro.com"
+                href={aapkaAstro.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-between w-full p-3 rounded bg-[#111B27] hover:bg-[#2A3D54] text-xs font-bold text-[#F7F6F3] transition-colors group/btn"
               >
-                <span>Visit Aapka Astro</span>
+                <span>Visit {aapkaAstro.name}</span>
                 <ExternalLink className="w-4 h-4 text-[#C9A24B] group-hover/btn:translate-x-0.5 transition-transform" />
               </a>
             </div>
@@ -77,46 +77,44 @@ export function EcosystemCrossPromotion() {
             <div className="space-y-4">
               <div className="flex justify-between items-start">
                 <div className="w-12 h-12 rounded-lg bg-[#111B27] border border-[#2A3D54] flex items-center justify-center text-[#C9A24B]">
-                  <Compass className="w-6 h-6" />
+                  <GraduationCap className="w-6 h-6" />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#111B27] text-[#C9A24B] border border-[#2A3D54]">
-                  Residential Vastu
+                  {viar.badge}
                 </span>
               </div>
 
               <div>
                 <h3 className="text-xl font-bold text-[#F7F6F3] group-hover:text-[#C9A24B] transition-colors">
-                  Viar.in
+                  {viar.name}
                 </h3>
                 <p className="text-xs text-[#C9A24B] font-semibold mt-0.5">
-                  Authentic Vastu &amp; Residential Spatial Harmony
+                  {viar.tagline}
                 </p>
               </div>
 
               <p className="text-xs text-[#8C96A5] leading-relaxed">
-                Specialized in home architecture, residential floor plans, plot selections, and non-demolition domestic energy balancing to promote family harmony, health, and peaceful living.
+                {viar.description}
               </p>
 
               <div className="pt-2 text-xs text-[#E2E8F0] space-y-1.5">
-                <div className="flex items-center gap-2 text-[11px] text-[#8C96A5]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24B]"></span>
-                  <span>Residential Floor Plan &amp; Plot Layouts</span>
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-[#8C96A5]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24B]"></span>
-                  <span>Non-Demolition Domestic Energy Harmonization</span>
-                </div>
+                {viar.offerings.map((offering, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-[11px] text-[#8C96A5]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24B]"></span>
+                    <span>{offering}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="pt-4 border-t border-[#2A3D54]">
               <a
-                href="https://viar.in"
+                href={viar.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-between w-full p-3 rounded bg-[#111B27] hover:bg-[#2A3D54] text-xs font-bold text-[#F7F6F3] transition-colors group/btn"
               >
-                <span>Visit Viar.in</span>
+                <span>Visit {viar.name}</span>
                 <ExternalLink className="w-4 h-4 text-[#C9A24B] group-hover/btn:translate-x-0.5 transition-transform" />
               </a>
             </div>

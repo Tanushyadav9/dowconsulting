@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
+import { requireEnv } from "@/lib/env";
 import { BLOG_POSTS } from "@/lib/constants/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://dowconsulting.in";
+  const baseUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Canonical site base URL for sitemap.xml");
 
   const staticPages = [
     "",

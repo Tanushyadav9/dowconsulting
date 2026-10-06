@@ -92,7 +92,7 @@ export default function AdminOverviewPage() {
             <div className="p-3.5 rounded border border-[#E2E8F0] flex justify-between items-center hover:bg-[#F7F6F3]">
               <div>
                 <span className="font-bold text-[#1B2838]">Apex Industrial Components</span>
-                <p className="text-[11px] text-[#5A6472]">Manufacturing MSME • Greater Noida • Machine Shop Expansion</p>
+                <p className="text-[11px] text-[#5A6472]">Industrial Engineering • Greater Noida • Machine Shop Expansion</p>
               </div>
               <div className="text-right">
                 <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[10px] font-bold">

@@ -1,18 +1,14 @@
 import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { requireEnv } from "@/lib/env";
 
-const accountId = process.env.R2_ACCOUNT_ID;
-const accessKeyId = process.env.R2_ACCESS_KEY_ID;
-const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
-const bucketName = process.env.R2_BUCKET_NAME || "dow-consulting-reports";
+export function getR2Client(): { client: S3Client; bucketName: string } {
+  const accountId = requireEnv("R2_ACCOUNT_ID", "Cloudflare R2 Account ID");
+  const accessKeyId = requireEnv("R2_ACCESS_KEY_ID", "Cloudflare R2 Access Key ID");
+  const secretAccessKey = requireEnv("R2_SECRET_ACCESS_KEY", "Cloudflare R2 Secret Access Key");
+  const bucketName = requireEnv("R2_BUCKET_NAME", "Cloudflare R2 Bucket Name");
 
-export function getR2Client(): S3Client | null {
-  if (!accountId || !accessKeyId || !secretAccessKey) {
-    console.warn("Cloudflare R2 credentials missing; file storage client disabled.");
-    return null;
-  }
-
-  return new S3Client({
+  const client = new S3Client({
     region: "auto",
     endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
     credentials: {
@@ -20,6 +16,8 @@ export function getR2Client(): S3Client | null {
       secretAccessKey,
     },
   });
+
+  return { client, bucketName };
 }
 
 /**
@@ -30,17 +28,9 @@ export async function uploadReportToR2(params: {
   key: string;
   contentType: string;
 }): Promise<{ success: boolean; key: string; publicUrl?: string }> {
-  const r2 = getR2Client();
-  if (!r2) {
-    console.warn("Simulating R2 upload (missing credentials)");
-    return {
-      success: true,
-      key: params.key,
-      publicUrl: `/simulated-storage/${params.key}`,
-    };
-  }
+  const { client, bucketName } = getR2Client();
 
-  await r2.send(
+  await client.send(
     new PutObjectCommand({
       Bucket: bucketName,
       Key: params.key,
@@ -60,15 +50,12 @@ export async function uploadReportToR2(params: {
  * Generate a secure, expiring presigned download URL for a client report
  */
 export async function getPresignedDownloadUrl(key: string, expiresInSeconds = 3600): Promise<string> {
-  const r2 = getR2Client();
-  if (!r2) {
-    return `/api/reports/download?key=${encodeURIComponent(key)}`;
-  }
+  const { client, bucketName } = getR2Client();
 
   const command = new GetObjectCommand({
     Bucket: bucketName,
     Key: key,
   });
 
-  return getSignedUrl(r2, command, { expiresIn: expiresInSeconds });
+  return getSignedUrl(client, command, { expiresIn: expiresInSeconds });
 }

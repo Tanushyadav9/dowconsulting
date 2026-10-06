@@ -51,37 +51,11 @@ export default function AboutPage() {
               Real Corporate Leadership Experience
             </h3>
             <p>
-              Unlike conventional Vastu practitioners who have never run a P&amp;L or managed a corporate workforce, Niraj Kumar brings direct experience from India’s leading corporate enterprises:
+              Unlike conventional Vastu practitioners who have never run a P&amp;L or managed a corporate workforce, Niraj Kumar brings direct experience from India’s leading corporate enterprises, having served as <strong>Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food</strong>.
             </p>
-            <ul className="space-y-3 pl-2">
-              <li className="flex items-start gap-3">
-                <Briefcase className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-[#1B2838]">Vice President &amp; Business Head — Reliance Retail:</strong>
-                  <p className="text-xs text-[#5A6472] mt-0.5">
-                    Orchestrated large-scale retail operations, network expansion, supply chain logistics, and business turnaround strategies.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Briefcase className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-[#1B2838]">Senior Corporate Head — Metro Cash &amp; Carry:</strong>
-                  <p className="text-xs text-[#5A6472] mt-0.5">
-                    Led strategic B2B wholesale distribution, inventory turnover, and institutional client engagement across regional clusters.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Briefcase className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-[#1B2838]">Business Head — NIF Food:</strong>
-                  <p className="text-xs text-[#5A6472] mt-0.5">
-                    Oversaw production facility layout, supply chain governance, and commercial sales expansion.
-                  </p>
-                </div>
-              </li>
-            </ul>
+            <p className="text-xs text-[#5A6472] leading-relaxed">
+              This background anchors every advisory recommendation in corporate operating reality—understanding lease dynamics, capex cycles, supply chains, administrative workflows, and board-level governance.
+            </p>
           </div>
 
           {/* Right Column: Credentials Card */}
@@ -114,7 +88,7 @@ export default function AboutPage() {
                 <div className="flex items-start gap-3">
                   <Award className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-sm text-[#F7F6F3]">XLRI Jamshedpur</strong>
+                    <strong className="text-sm text-[#F7F6F3]">XLRI</strong>
                     <p className="text-[#8C96A5]">Executive Certification in Leadership Development &amp; Change Management.</p>
                   </div>
                 </div>

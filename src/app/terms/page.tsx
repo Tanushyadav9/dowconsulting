@@ -40,7 +40,7 @@ export default function TermsPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">3. Flat Fee Engagements &amp; Billing</h2>
         <p>
-          Engagements are billed as flat, one-time professional fees prior to the commencement of the diagnostic review. There are no subscriptions, recurring retainers without separate mutual agreement, or per-minute billing structures. Payment may be remitted via Razorpay (INR) or Stripe (USD).
+          Engagements are billed as fixed professional fees prior to the commencement of the diagnostic review. There are no unapproved subscriptions or hidden recurring retainers without separate mutual agreement. Payment may be remitted via Razorpay (INR) or Stripe (USD).
         </p>
       </section>
 
