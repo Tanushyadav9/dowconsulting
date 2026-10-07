@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendIntakeConfirmationEmail } from "@/lib/email/resend";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { createCaseFromSubmission } from "@/lib/cases";
 
 export async function POST(req: NextRequest) {
   // Rate limiting: max 5 intakes per IP per 10 minutes
@@ -30,16 +31,21 @@ export async function POST(req: NextRequest) {
       businessName,
       businessType,
       businessStage,
+      teamSize,
       locationCity,
+      locationState,
       locationCountry,
+      serviceRequested,
+      serviceDetails,
       premisesStatus,
       floorAreaSqFt,
       currentTimeline,
+      urgency,
       primaryGoals,
       keyChallenges,
       budgetRange,
       preferredChannel,
-      selectedPackage,
+      consentConfidentiality,
     } = body;
 
     if (!contactName || !contactEmail || !businessName) {
@@ -49,27 +55,32 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (body.consentConfidentiality !== true) {
+    if (consentConfidentiality !== true) {
       return NextResponse.json(
         { error: "Non-disclosure and confidentiality consent is required to submit an advisory assessment." },
         { status: 400 }
       );
     }
 
-    // Persist to Prisma database - fail loudly if database is unavailable
+    // Persist to Prisma database - structured data
     const submission = await prisma.intakeSubmission.create({
       data: {
-        contactName,
-        contactEmail: contactEmail.toLowerCase(),
-        contactPhone,
-        businessName,
-        businessType: businessType || "RETAIL",
-        businessStage: businessStage || "EARLY_TRACTION",
+        contactName: contactName.trim(),
+        contactEmail: contactEmail.toLowerCase().trim(),
+        contactPhone: contactPhone.trim(),
+        businessName: businessName.trim(),
+        businessType: businessType || "Retail & Consumer Goods",
+        businessStage: businessStage || "early",
+        teamSize: teamSize || "1",
         locationCity: locationCity || "Noida",
+        locationState: locationState || "",
         locationCountry: locationCountry || "India",
+        serviceRequested: serviceRequested || "GTM_STRATEGY",
+        serviceDetails: serviceDetails || {}, // Structured branch answers
         premisesStatus: premisesStatus || null,
         floorAreaSqFt: floorAreaSqFt || null,
-        currentTimeline: currentTimeline || "NEXT_30_DAYS",
+        currentTimeline: currentTimeline || "Next 30 days",
+        urgency: urgency || currentTimeline || null,
         primaryGoals: primaryGoals || "",
         keyChallenges: keyChallenges || "",
         budgetRange: budgetRange || null,
@@ -78,20 +89,33 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Automatically initialize consulting Case with the 6 workflow stages
+    let caseRecord = null;
+    try {
+      caseRecord = await createCaseFromSubmission(submission.id);
+    } catch (caseErr) {
+      console.error("Failed to initialize Case from submission:", caseErr);
+    }
+
     // Trigger Lifecycle Email 1: Intake Submission Confirmation via Resend
     if (process.env.RESEND_API_KEY) {
-      await sendIntakeConfirmationEmail({
-        to: contactEmail,
-        name: contactName,
-        businessName,
-        submissionId: submission.id,
-      });
+      try {
+        await sendIntakeConfirmationEmail({
+          to: contactEmail,
+          name: contactName,
+          businessName,
+          submissionId: caseRecord?.caseNumber || submission.id,
+        });
+      } catch (emailErr) {
+        console.warn("Intake confirmation email dispatch error:", emailErr);
+      }
     }
 
     return NextResponse.json({
       success: true,
       id: submission.id,
-      message: "Intake successfully received and under review.",
+      caseNumber: caseRecord?.caseNumber || null,
+      message: "Intake successfully received and consulting case initialized.",
     });
   } catch (error: any) {
     console.error("Intake submission error:", error);

@@ -14,10 +14,10 @@ export function EcosystemCrossPromotion() {
               <span>The Niraj Kumar Advisory Ecosystem</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#F7F6F3]">
-              Specialized Guidance Across Enterprise, Space &amp; Astrology
+              The Niraj Kumar Advisory &amp; Educational Ecosystem
             </h2>
             <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
-              <strong>DOW Consulting</strong> is strictly focused on commercial enterprises, retail networks, and corporate milestone timing. For individual Vedic astrology consultations, residential or commercial Vastu consultation, or self-paced astrology education, explore our sister platforms led by Niraj Kumar:
+              <strong>DOW Consulting</strong> is dedicated to general business consulting—specializing in GTM strategy, market research, business expansion strategy, and new business starts for startups, small companies, and MSMEs. For individual Vedic astrology consultations, personal charts, or self-paced astrology education, explore our sister platforms founded and guided by Niraj Kumar:
             </p>
           </div>
         </div>

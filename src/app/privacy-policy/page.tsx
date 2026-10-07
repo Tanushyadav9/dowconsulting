@@ -26,8 +26,8 @@ export default function PrivacyPolicyPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1">
           <li>Corporate entity name, registration jurisdiction, and industry classification</li>
-          <li>Commercial premises address, floor plans, facility layouts, and orientation drawings</li>
-          <li>Operating timelines, founder transit data for milestone timing calculations, and strategic expansion objectives</li>
+          <li>Commercial premises address, facility layouts, or operational site details (if applicable)</li>
+          <li>Operating timelines, business models, strategic growth objectives, and target expansion milestones</li>
           <li>Executive contact coordinates (email, telephone, WhatsApp) and billing records</li>
         </ul>
       </section>
@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">2. Commercial Non-Disclosure &amp; Usage</h2>
         <p>
-          We treat all client business data as strictly confidential. Client floor plans, revenue figures, and organizational challenges are utilized solely for diagnostic analysis and preparation of your custom written report. We do not sell, rent, or monetize client data to any third-party advertisers or brokers.
+          We treat all client business data as strictly confidential. Client business documentation, operational records, and organizational challenges are utilized solely for diagnostic analysis and preparation of your custom written report. We do not sell, rent, or monetize client data to any third-party advertisers or brokers.
         </p>
       </section>
 

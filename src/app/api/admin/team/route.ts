@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+const DEFAULT_ROLES = [
+  { name: "Information Coordinator", description: "Collects client briefs, intake data, and initial documentation" },
+  { name: "Research Analyst", description: "Performs market intelligence, competitor benchmarking, and data audits" },
+  { name: "Consultant", description: "Leads client consultation sessions and drafts strategic recommendations" },
+];
+
 export async function GET() {
   try {
     const authContext = await getAuthContext();
@@ -11,6 +17,24 @@ export async function GET() {
         { status: 403 }
       );
     }
+
+    // Ensure default configurable roles exist in DB
+    const existingRolesCount = await prisma.teamRole.count();
+    if (existingRolesCount === 0) {
+      for (const r of DEFAULT_ROLES) {
+        await prisma.teamRole.create({
+          data: {
+            name: r.name,
+            description: r.description,
+            isDefault: true,
+          },
+        });
+      }
+    }
+
+    const availableRoles = await prisma.teamRole.findMany({
+      orderBy: { createdAt: "asc" },
+    });
 
     const staffMembers = await prisma.user.findMany({
       where: {
@@ -28,11 +52,13 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
+      roles: availableRoles,
       staff: staffMembers.map((s) => ({
         id: s.id,
         name: s.name || s.email,
         email: s.email,
         role: s.staffPermission?.role || "STAFF",
+        roleTitle: s.staffPermission?.roleTitle || "Consultant",
         canManageSubmissions: s.staffPermission?.canManageSubmissions ?? false,
         canManageQuotes: s.staffPermission?.canManageQuotes ?? false,
         canManageBookings: s.staffPermission?.canManageBookings ?? false,
@@ -59,13 +85,13 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { targetEmail, targetName, permissions } = body;
+    const { targetEmail, targetName, roleTitle, permissions } = body;
 
     if (!targetEmail) {
       return NextResponse.json({ error: "Target staff email is required" }, { status: 400 });
     }
 
-    // Persist to database
+    // Persist user to database
     const user = await prisma.user.upsert({
       where: { email: targetEmail.toLowerCase() },
       update: { name: targetName },
@@ -76,9 +102,12 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const configuredRoleTitle = roleTitle || "Consultant";
+
     await prisma.staffPermission.upsert({
       where: { userId: user.id },
       update: {
+        roleTitle: configuredRoleTitle,
         canManageSubmissions: permissions?.canManageSubmissions ?? true,
         canManageQuotes: permissions?.canManageQuotes ?? false,
         canManageBookings: permissions?.canManageBookings ?? true,
@@ -88,6 +117,7 @@ export async function POST(req: NextRequest) {
       create: {
         userId: user.id,
         role: "STAFF",
+        roleTitle: configuredRoleTitle,
         canManageSubmissions: permissions?.canManageSubmissions ?? true,
         canManageQuotes: permissions?.canManageQuotes ?? false,
         canManageBookings: permissions?.canManageBookings ?? true,
@@ -98,7 +128,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Staff permissions updated for ${targetEmail}`,
+      message: `Staff member ${targetEmail} configured as '${configuredRoleTitle}'.`,
     });
   } catch (error: any) {
     console.error("Team grant error:", error);

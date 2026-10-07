@@ -22,14 +22,14 @@ export default function DisclaimerPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">1. Nature of Advisory Services</h2>
         <p>
-          Consultations provided by {BRAND.name} and Niraj Kumar synthesize corporate management operating principles, structured commercial spatial optimization (Commercial Vastu), and milestone timing analytics. These services constitute strategic advisory opinions and are intended to assist business owners and corporate leadership in decision-making.
+          Consultations provided by {BRAND.name} and Lead Strategic Advisor Niraj Kumar provide general business consulting across GTM (go-to-market) strategy, market research, business expansion strategy, and new business start consultation. These services constitute strategic advisory opinions and general frameworks intended to assist business owners, founders, and managerial leadership in commercial decision-making.
         </p>
       </section>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">2. No Guarantee of Specific Financial Outcomes</h2>
         <p>
-          Business success depends upon diverse market factors, execution capabilities, competitive landscapes, macroeconomic cycles, and regulatory conditions. While spatial and timing optimization aim to reduce friction and improve environmental alignment, {BRAND.name} makes no explicit warranty or legal guarantee of specific revenue increases, profit margins, capital raise successes, or investment returns.
+          Commercial success depends upon diverse market factors, execution capabilities, competitive landscapes, macroeconomic cycles, and regulatory conditions. While our consulting team provides structured research, roadmaps, and strategic insights, {BRAND.name} makes no explicit warranty or legal guarantee of specific revenue increases, profit margins, capital raise successes, customer conversions, or investment returns.
         </p>
       </section>
 

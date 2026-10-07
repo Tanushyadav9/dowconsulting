@@ -45,8 +45,8 @@ function AdminQuotesContent() {
     clientName: defaultClientName,
     businessName: defaultBusiness,
     clientEmail: defaultEmail,
-    quoteTitle: "Commercial Spatial Diagnostic & Milestone Timing Advisory",
-    scopeSummary: "Comprehensive directional site analysis, non-demolition layout reorientation, executive seating matrix, and strategic lease / milestone timing with Niraj Kumar.",
+    quoteTitle: "GTM Strategy & Business Expansion Advisory Proposal",
+    scopeSummary: "Comprehensive target customer profiling, competitive benchmarking, operational workflow assessment, and expansion roadmap formulated by DOW Consulting team and Niraj Kumar.",
     amount: 55000,
     currency: "INR",
   });

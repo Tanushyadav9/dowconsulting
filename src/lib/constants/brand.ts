@@ -2,20 +2,36 @@ import { requireEnv } from "@/lib/env";
 import { SISTER_SITES } from "@/lib/constants/ecosystem";
 
 export const BRAND = {
-  name: "DOW Consulting", // Flagged in AUDIT_REPORT.md for client confirmation
-  tagline: "Strategic Business Timing & Commercial Vastu",
+  name: "DOW Consulting", // [Pending client confirmation on exact brand name and what DOW stands for]
+  tagline: "Business Consulting for Startups, Small Companies and MSMEs", // [Draft pending client confirmation]
   subheading:
-    "Executive business advisory bridging two decades of senior corporate operating leadership with structured spatial and timing intelligence.",
+    "A specialized business consulting team providing go-to-market (GTM) strategy, market research, business expansion strategy, and new business start consultation for startups, small companies, and MSMEs.", // [Draft pending client confirmation]
+  targetAudience: "Startups, Small Companies, and MSMEs",
+  teamModel: {
+    heading: "Consulting Team Model",
+    description:
+      "DOW Consulting operates as a collaborative advisory team, not a single consultant. Different specialists handle distinct operational tasks—for example, one team member conducts research, another consults with clients, and another collects business information.",
+    roles: [
+      { title: "Market Research", detail: "Conducts data gathering, industry benchmarking, and competitive landscape analysis." },
+      { title: "Strategic Consultation", detail: "Structures advisory roadmaps, GTM execution, and expansion strategy." },
+      { title: "Information Collection", detail: "Gathers business profiles, operational parameters, and founder requirements." },
+    ],
+  },
+  services: [
+    { id: "gtm-strategy", name: "GTM Strategy", title: "Go-to-Market (GTM) Strategy", href: "/services/gtm-strategy" },
+    { id: "market-research", name: "Market Research", title: "Market Research", href: "/services/market-research" },
+    { id: "business-expansion-strategy", name: "Business Expansion Strategy", title: "Business Expansion Strategy", href: "/services/business-expansion-strategy" },
+    { id: "new-business-start-consultation", name: "New Business Start Consultation", title: "New Business Start Consultation", href: "/services/new-business-start-consultation" },
+  ],
   founder: {
     name: "Niraj Kumar",
-    title: "Principal Strategist & Corporate Advisor",
+    title: "Lead Strategic Advisor",
     sisterBrands: "Founder of Aapka Astro and Viar.in",
     corporateExperience:
       "Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food",
     corporateRoles: [
-      { role: "Vice President & Business Head", company: "Organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food" },
+      { role: "Vice President and Business Head", company: "Organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food" },
     ],
-    totalExperience: "20+ Years Senior Corporate Leadership",
     credentials: [
       "B.Sc. (Hons.) in Physics",
       "PGDBM in International Business & Marketing",
@@ -43,11 +59,7 @@ export const BRAND = {
     },
   },
   consultationDelivery: {
-    modalities: [
-      "Live Strategy Call (via WhatsApp Call or Google Meet)",
-      "Comprehensive Written Strategic Report (Secure PDF Delivery)",
-    ],
-    note: "All consultations include both a direct live call and an executive written report.",
+    note: "Engagement formats, duration, and delivery details are pending final client confirmation.",
   },
   ecosystem: [
     {

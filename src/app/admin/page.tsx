@@ -105,7 +105,7 @@ export default function AdminOverviewPage() {
             <div className="p-3.5 rounded border border-[#E2E8F0] flex justify-between items-center hover:bg-[#F7F6F3]">
               <div>
                 <span className="font-bold text-[#1B2838]">Vanguard Cloud Technologies</span>
-                <p className="text-[11px] text-[#5A6472]">Tech SaaS • Bengaluru • Series A Milestone Timing</p>
+                <p className="text-[11px] text-[#5A6472]">Tech SaaS • Bengaluru • GTM Strategy &amp; Expansion Roadmap</p>
               </div>
               <div className="text-right">
                 <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">

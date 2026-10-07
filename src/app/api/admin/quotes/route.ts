@@ -32,8 +32,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const auth = await getAuthContext();
-    if (!auth.isAuthenticated || (!auth.isOwner && !auth.permissions?.canManageQuotes)) {
-      return NextResponse.json({ error: "Unauthorized access to quote builder" }, { status: 403 });
+    if (!auth.isAuthenticated || !auth.isOwner) {
+      return NextResponse.json(
+        { error: "Unauthorized: Building and dispatching custom quotes is strictly restricted to the Owner (Niraj Kumar)." },
+        { status: 403 }
+      );
     }
 
     const body = await req.json();

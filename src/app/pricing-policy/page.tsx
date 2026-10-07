@@ -3,7 +3,7 @@ import { CONSULTING_PACKAGES } from "@/lib/constants/packages";
 
 export const metadata = {
   title: `Pricing Policy | ${BRAND.name}`,
-  description: `Transparent pricing and deliverables policy for ${BRAND.name}.`,
+  description: `Transparent pricing and proposal policy for ${BRAND.name}. [Draft copy]`,
 };
 
 export default function PricingPolicyPage() {
@@ -11,44 +11,45 @@ export default function PricingPolicyPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 text-sm text-[#5A6472]">
       <div className="border-b border-[#E2E8F0] pb-6 space-y-2">
         <span className="text-[11px] font-bold text-[#C9A24B] uppercase tracking-wider">
-          Fee Structure &amp; Deliverables Integrity
+          Fee Structure &amp; Deliverables Policy [Draft]
         </span>
         <h1 className="text-3xl font-bold text-[#1B2838]">Pricing Policy</h1>
         <p className="text-xs text-[#8C96A5]">
-          {/* PLACEHOLDER: replace with client-approved content */}
-          Last updated: October 2026 • Governing fee transparency and engagement tiers
+          Last updated: October 2026 • Governing fee transparency and proposal tiers [Draft copy]
         </p>
+      </div>
+
+      <div className="p-4 bg-[#F7EED9] border border-[#E3D1A5] rounded text-xs text-[#8C6A1E]">
+        <strong>Pending Client Confirmation:</strong> Standard package names, pricing tiers, call durations, report turnarounds, and GST status are currently pending client confirmation. Engagements are arranged on a custom scope proposal basis.
       </div>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">1. Transparent, Flat-Fee Philosophy</h2>
         <p>
-          At {BRAND.name}, we maintain complete transparency in our advisory pricing. Unlike conventional hourly billing practices with open-ended billing or retainer lock-ins, every package on our platform is quoted with clear upfront pricing. Clients know their exact investment upfront before engagement commences.
+          At {BRAND.name}, we maintain complete transparency in our advisory pricing. Rather than unexpected open-ended hourly fees, consulting engagements are formulated with clear upfront scope agreements before work commences.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">2. Starting Package Tiers</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">2. Draft Practice Tiers (Pending Client Confirmation)</h2>
         <p>
-          We provide visible starting packages for self-serve online reservation, alongside bespoke custom proposals for multi-facility operations:
+          The table below indicates draft advisory practice tiers. Final package names and commercial pricing remain subject to client confirmation:
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-xs border border-[#E2E8F0] mt-2">
             <thead className="bg-[#1B2838] text-[#F7F6F3]">
               <tr>
-                <th className="p-3 text-left">Engagement Tier</th>
-                <th className="p-3 text-left">Fee (INR)</th>
-                <th className="p-3 text-left">Fee (USD)</th>
-                <th className="p-3 text-left">Core Deliverable</th>
+                <th className="p-3 text-left">Practice Tier [Draft]</th>
+                <th className="p-3 text-left">Status</th>
+                <th className="p-3 text-left">Core Scope Focus</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#E2E8F0] bg-[#FFFFFF]">
               {CONSULTING_PACKAGES.map((pkg) => (
                 <tr key={pkg.id}>
                   <td className="p-3 font-semibold text-[#1B2838]">{pkg.name}</td>
-                  <td className="p-3">₹{pkg.priceINR.toLocaleString("en-IN")}</td>
-                  <td className="p-3">${pkg.priceUSD}</td>
-                  <td className="p-3 text-[#5A6472]">{pkg.deliverables.liveSession} + Written PDF Report</td>
+                  <td className="p-3 text-[#C9A24B] font-medium">Pending Client Confirmation</td>
+                  <td className="p-3 text-[#5A6472]">{pkg.deliverables.scope}</td>
                 </tr>
               ))}
             </tbody>
@@ -57,27 +58,27 @@ export default function PricingPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Custom Quotes for Enterprise Engagements</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">3. Custom Proposals for Enterprise &amp; MSME Engagements</h2>
         <p>
-          For multi-unit retail networks, complex manufacturing plants, or assignments requiring physical on-site visits across India, our advisory desk prepares custom written quotes. Custom quotes clearly specify the scope, timing, payment milestones, and travel disbursements (if applicable).
+          For multi-branch retail networks, growing MSMEs, or assignments requiring multi-phased research and strategy, our team prepares custom written proposals specifying deliverables, team allocation, and milestones.
         </p>
       </section>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">4. Payment Methods &amp; Currency</h2>
         <p>
-          Payments originate through secure PCI-DSS compliant payment gateways:
+          Upon proposal acceptance, payments are processed securely:
         </p>
         <ul className="list-disc pl-5 space-y-1">
-          <li><strong>Indian Clients (INR):</strong> Razorpay supporting UPI, NetBanking, and all major Debit/Credit Cards.</li>
-          <li><strong>International Clients (USD):</strong> Stripe supporting major global credit cards.</li>
+          <li><strong>Indian Clients (INR):</strong> Razorpay supporting UPI, NetBanking, and major Debit/Credit Cards.</li>
+          <li><strong>International Clients (USD):</strong> Stripe supporting major global cards.</li>
         </ul>
       </section>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">5. Inquiries &amp; Corporate Invoicing</h2>
         <p>
-          GST-compliant tax invoices are issued for all corporate engagements upon provision of legal company details and GSTIN. Direct inquiries may be routed to {BRAND.contact.email} or via WhatsApp at {BRAND.contact.whatsapp.display}.
+          Official commercial receipts and invoices are issued for all corporate engagements upon provision of corporate details. Statutory GST status and registration specifics are pending client confirmation. Direct inquiries may be routed to {BRAND.contact.email} or via WhatsApp at {BRAND.contact.whatsapp.display}.
         </p>
       </section>
     </div>

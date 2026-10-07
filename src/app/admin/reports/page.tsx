@@ -22,8 +22,8 @@ export default function AdminReportsPage() {
       clientName: "Ananya Roy",
       businessName: "Vanguard Cloud Technologies",
       clientEmail: "ananya@vanguardcloud.io",
-      reportTitle: "Enterprise Series A Milestone Timing & Executive Layout Blueprint",
-      fileName: "Vanguard_Strategic_Timing_Dossier.pdf",
+      reportTitle: "GTM Strategy & Enterprise B2B Launch Blueprint",
+      fileName: "Vanguard_GTM_Strategy_Dossier.pdf",
       fileSize: "5.2 MB",
       deliveredAt: "Oct 04, 2026",
       downloadCount: 3,
@@ -33,8 +33,8 @@ export default function AdminReportsPage() {
       clientName: "Kavita Rao",
       businessName: "Nectar Organic Foods",
       clientEmail: "kavita@nectarorganic.com",
-      reportTitle: "Retail Storefront Commercial Vastu & Launch Schedule",
-      fileName: "Nectar_Commercial_Vastu_Report.pdf",
+      reportTitle: "Retail Expansion Strategy & Channel Logistics Roadmap",
+      fileName: "Nectar_Expansion_Strategy_Report.pdf",
       fileSize: "4.1 MB",
       deliveredAt: "Oct 02, 2026",
       downloadCount: 5,
@@ -45,7 +45,7 @@ export default function AdminReportsPage() {
     clientName: "Vikram Singhania",
     businessName: "Singhania Logistics & Retail LLP",
     clientEmail: "vikram@singhanialogistics.in",
-    reportTitle: "Commercial Spatial Diagnostics & Strategic Lease Timing Roadmap",
+    reportTitle: "Market Research & Regional Expansion Strategic Roadmap",
   });
 
   const [file, setFile] = useState<File | null>(null);

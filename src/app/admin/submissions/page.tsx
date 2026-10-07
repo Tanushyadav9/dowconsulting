@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   Clock,
   Building,
+  ArrowRight,
 } from "lucide-react";
 
 interface SubmissionItem {
@@ -45,7 +46,7 @@ export default function AdminSubmissionsPage() {
       locationCity: "Delhi NCR",
       currentTimeline: "IMMEDIATE",
       primaryGoals: "Evaluate 3,500 sq.ft. commercial retail flagship space prior to lease execution.",
-      keyChallenges: "Previous two tenants in the exact unit closed down within a year. Need spatial and timing audit.",
+      keyChallenges: "Evaluating unit economics, footfall viability, and expansion risk before signing lease.",
       preferredChannel: "WHATSAPP_CALL",
       status: "UNDER_REVIEW",
       createdAt: "Today, 11:30 AM",
@@ -60,8 +61,8 @@ export default function AdminSubmissionsPage() {
       businessStage: "MATURE_ENTERPRISE",
       locationCity: "Greater Noida",
       currentTimeline: "NEXT_30_DAYS",
-      primaryGoals: "Industrial plant shed expansion and reorienting administrative cabins.",
-      keyChallenges: "Working capital delays and recurring dispatch choke points since shed expansion.",
+      primaryGoals: "Industrial plant capacity expansion and supply chain vendor diversification.",
+      keyChallenges: "Working capital delays and recurring dispatch choke points since facility expansion.",
       preferredChannel: "GOOGLE_MEET",
       status: "QUOTE_SENT",
       createdAt: "Yesterday, 4:10 PM",
@@ -76,8 +77,8 @@ export default function AdminSubmissionsPage() {
       businessStage: "EARLY_TRACTION",
       locationCity: "Bengaluru",
       currentTimeline: "NEXT_QUARTER",
-      primaryGoals: "Calculate Series A investor term-sheet closing timing windows and founder cabin layout.",
-      keyChallenges: "Term-sheet negotiations stalled despite term interest; seeking favorable milestone window.",
+      primaryGoals: "Structure enterprise GTM sales channel and refine product positioning for B2B expansion.",
+      keyChallenges: "Customer acquisition costs rising across paid channels; seeking structured B2B distribution.",
       preferredChannel: "GOOGLE_MEET",
       status: "SCHEDULED",
       createdAt: "Oct 02, 2026",
@@ -96,14 +97,24 @@ export default function AdminSubmissionsPage() {
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <span className="text-[10px] font-bold text-[#C9A24B] uppercase tracking-wider">
-            Intake Review Inbox
-          </span>
-          <h1 className="text-2xl font-bold text-[#1B2838]">Client Business Submissions</h1>
-          <p className="text-xs text-[#5A6472]">
-            Review structured business profiles, premises layouts, and operational timelines for diagnostic formulation.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-4">
+          <div>
+            <span className="text-[10px] font-bold text-[#C9A24B] uppercase tracking-wider">
+              Intake Review Inbox
+            </span>
+            <h1 className="text-2xl font-bold text-[#1B2838]">Client Business Submissions</h1>
+            <p className="text-xs text-[#5A6472]">
+              Review structured business profiles and manage workflow progression.
+            </p>
+          </div>
+
+          <Link
+            href="/admin/cases"
+            className="inline-flex items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-colors shadow-sm shrink-0"
+          >
+            <span>Cases &amp; Workflow Pipeline</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#C9A24B]" />
+          </Link>
         </div>
 
         {/* Filter buttons */}

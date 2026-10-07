@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   TrendingUp,
   DollarSign,
@@ -9,9 +10,51 @@ import {
   CheckCircle2,
   PieChart,
   BarChart,
+  Lock,
 } from "lucide-react";
 
 export default function AdminAnalyticsPage() {
+  const [isOwner, setIsOwner] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function checkOwner() {
+      try {
+        const res = await fetch("/api/admin/team");
+        if (res.status === 403) {
+          setIsOwner(false);
+        }
+      } catch (e) {
+        // ignore
+      } finally {
+        setLoading(false);
+      }
+    }
+    checkOwner();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto py-20 text-center text-xs text-[#8C96A5]">
+        Verifying analytics permissions...
+      </div>
+    );
+  }
+
+  if (!isOwner) {
+    return (
+      <div className="max-w-2xl mx-auto py-16 text-center space-y-4">
+        <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto text-[#C9A24B]">
+          <Lock className="w-6 h-6" />
+        </div>
+        <h2 className="text-xl font-bold text-[#1B2838]">Owner Authorization Required</h2>
+        <p className="text-xs text-[#5A6472] max-w-md mx-auto">
+          Financial revenue, quote conversion ratios, and practice pricing analytics are restricted to the designated Owner (Niraj Kumar) under least privilege rules.
+        </p>
+      </div>
+    );
+  }
+
   const metrics = [
     { label: "Total Completed Consultations", value: "32", period: "All Time" },
     { label: "Total Gross Consulting Revenue", value: "₹14,85,000", period: "All Time (INR)" },
@@ -59,16 +102,19 @@ export default function AdminAnalyticsPage() {
           <h3 className="font-bold text-sm text-[#1B2838]">Revenue by Commercial Industry Sector</h3>
 
           <div className="space-y-4">
-            {breakdownBySector.map((item) => (
-              <div key={item.sector} className="space-y-1.5 text-xs">
-                <div className="flex justify-between font-semibold text-[#1B2838]">
-                  <span>{item.sector}</span>
-                  <span>{item.revenue} ({item.percent})</span>
+            {breakdownBySector.map((b) => (
+              <div key={b.sector} className="space-y-1.5 text-xs">
+                <div className="flex justify-between items-center text-[#1B2838]">
+                  <span className="font-semibold">{b.sector}</span>
+                  <div className="flex gap-3">
+                    <span className="font-bold text-[#C9A24B]">{b.revenue}</span>
+                    <span className="text-[#8C96A5]">({b.percent})</span>
+                  </div>
                 </div>
-                <div className="w-full bg-[#E2E8F0] h-2 rounded-full overflow-hidden">
+                <div className="w-full bg-[#F7F6F3] h-2 rounded-full overflow-hidden border border-[#E2E8F0]">
                   <div
-                    className="bg-[#1B2838] h-full"
-                    style={{ width: item.percent }}
+                    className="bg-[#1B2838] h-full rounded-full"
+                    style={{ width: b.percent }}
                   />
                 </div>
               </div>
@@ -76,30 +122,25 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
 
-        {/* Operational Highlights */}
-        <div className="lg:col-span-5 bg-[#FFFFFF] p-6 sm:p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4">
-          <h3 className="font-bold text-sm text-[#1B2838]">Operational Delivery Highlights</h3>
+        {/* Advisory Session Deliveries */}
+        <div className="lg:col-span-5 bg-[#FFFFFF] p-6 sm:p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-6">
+          <h3 className="font-bold text-sm text-[#1B2838]">Session Delivery Channels</h3>
 
-          <div className="space-y-3 text-xs text-[#5A6472]">
-            <div className="p-3 bg-[#F7F6F3] rounded border border-[#E2E8F0]">
-              <strong className="text-[#1B2838] block">Dual Delivery Integrity:</strong>
-              <p className="mt-0.5">
-                100% of completed sessions included both the direct live consultation call with Niraj Kumar and a customized written diagnostic report.
-              </p>
+          <div className="space-y-4 text-xs">
+            <div className="p-4 rounded border border-[#E2E8F0] bg-[#F7F6F3] flex justify-between items-center">
+              <div>
+                <strong className="text-[#1B2838] block">WhatsApp Audio / Video Call</strong>
+                <span className="text-[11px] text-[#5A6472]">Direct advisory phone channel</span>
+              </div>
+              <span className="text-sm font-bold text-[#1B2838]">72%</span>
             </div>
 
-            <div className="p-3 bg-[#F7F6F3] rounded border border-[#E2E8F0]">
-              <strong className="text-[#1B2838] block">Session Channel Distribution:</strong>
-              <p className="mt-0.5">
-                62% WhatsApp Direct Call • 38% Google Meet Video Call. Zero reliance on in-app calling tools.
-              </p>
-            </div>
-
-            <div className="p-3 bg-[#F7F6F3] rounded border border-[#E2E8F0]">
-              <strong className="text-[#1B2838] block">Payment Gateway Reliability:</strong>
-              <p className="mt-0.5">
-                84% Razorpay (INR - UPI &amp; Cards) • 16% Stripe (USD - International Cards). All flat one-time fees.
-              </p>
+            <div className="p-4 rounded border border-[#E2E8F0] bg-[#F7F6F3] flex justify-between items-center">
+              <div>
+                <strong className="text-[#1B2838] block">Google Meet Video Call</strong>
+                <span className="text-[11px] text-[#5A6472]">Interactive screen-share consultation</span>
+              </div>
+              <span className="text-sm font-bold text-[#1B2838]">28%</span>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BRAND } from "@/lib/constants/brand";
 import { BLOG_POSTS } from "@/lib/constants/blog";
-import { ArrowLeft, Clock, Calendar, User, Share2, MessageSquare } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, User, MessageSquare } from "lucide-react";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({
@@ -72,47 +72,48 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </p>
 
         <h2 className="text-xl font-bold text-[#1B2838] pt-4">
-          The Operational Reality Beyond Conventional Spreadsheets
+          Operational Realities in Emerging and Growing Enterprises
         </h2>
         <p>
-          Throughout two decades overseeing retail distribution, large format retail stores, and commercial logistics units at Reliance Retail, Metro Cash &amp; Carry, and NIF Food, one lesson emerged consistently: capital efficiency is severely throttled when physical operational space is out of alignment with functional requirements.
+          Throughout executive leadership roles as &ldquo;Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food&rdquo;, one operational truth becomes evident: commercial viability depends upon rigorous alignment between market need, distribution channel capacity, and business model fundamentals.
         </p>
         <p>
-          Corporate boards invest millions of rupees in digital marketing, team recruitment, and enterprise software, yet frequently sign commercial leases or arrange management teams in environments that create subconscious fatigue, frequent team conflict, and stalled deal velocity.
+          Early-stage startups and expanding MSMEs often risk misallocating capital when they move into execution without structured validation of their go-to-market assumptions, channel unit economics, or local market competitive dynamics.
         </p>
 
         <h2 className="text-xl font-bold text-[#1B2838] pt-4">
-          Spatial Zoning: Commercial Vastu in Modern Corporate Architecture
+          Core Pillars of Strategic Advisory
         </h2>
         <p>
-          Unlike residential Vastu, which prioritizes domestic tranquility, <strong>Commercial Vastu</strong> is strictly focused on:
+          In corporate and small business advisory, structured analysis focuses on:
         </p>
         <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Revenue Convergence:</strong> Ensuring billing, accounts receivable, and cash desks are seated in high-stability, forward-momentum zones.</li>
-          <li><strong>Executive Governance:</strong> Anchoring the founder, managing director, and primary decision-makers in the South-West quadrant to prevent hesitation and turnover.</li>
-          <li><strong>Sales Velocity:</strong> Positioning outbound business development and client-facing teams in kinetic, high-energy sectors.</li>
+          <li><strong>Target Audience Alignment:</strong> Accurately identifying customer personas, purchasing motivations, and willingness to pay.</li>
+          <li><strong>Competitive Differentiation:</strong> Benchmarking direct and indirect alternatives to build clear, defensible value positioning.</li>
+          <li><strong>Channel Architecture:</strong> Prioritizing route-to-market strategies—whether retail storefronts, distributor networks, or direct-to-business pipelines.</li>
+          <li><strong>Operational Capacity:</strong> Ensuring team bandwidth, vendor reliability, and workflow processes can sustain scale.</li>
         </ul>
 
         <div className="bg-[#FFFFFF] border-l-4 border-[#1B2838] p-6 rounded my-6 space-y-2">
           <h4 className="font-bold text-[#1B2838]">Key Advisory Principle:</h4>
           <p className="text-xs text-[#5A6472]">
-            Modern corporate leases do not allow for breaking load-bearing walls or rebuilding elevator shafts. Professional commercial advisory must deliver non-demolition solutions — focusing on elemental balances, desk reorientation, light spectrums, and functional zone shifts.
+            Strategic business consulting for startups and MSMEs must be pragmatic, realistic, and actionable. Theoretical frameworks without operating context provide little value to business owners navigating immediate commercial challenges.
           </p>
         </div>
 
         <h2 className="text-xl font-bold text-[#1B2838] pt-4">
-          Strategic Timing &amp; Capital Commitment
+          Team-Based Execution &amp; Discovery
         </h2>
         <p>
-          When you execute a lease or announce an acquisition is just as critical as where you place your office. In corporate advisory, we analyze both the operational milestone and executive timing windows. Aligning your major commercial contracts with these favorable windows dramatically reduces friction during execution.
+          DOW Consulting operates as a collaborative team. Rather than relying on a single generalist perspective, research specialists gather sector benchmarks and market intelligence, information coordinators map organizational specifics, and Lead Strategic Advisor Niraj Kumar and consulting staff structure practical roadmaps for client execution.
         </p>
       </article>
 
       {/* Footer Advisory Box */}
       <div className="bg-[#1B2838] text-[#F7F6F3] p-8 rounded-lg border border-[#2A3D54] flex flex-col sm:flex-row justify-between items-center gap-6">
         <div className="space-y-1">
-          <h3 className="font-bold text-base text-[#F7F6F3]">Consult Directly with Niraj Kumar</h3>
-          <p className="text-xs text-[#8C96A5]">Get a bespoke spatial and timing audit for your enterprise.</p>
+          <h3 className="font-bold text-base text-[#F7F6F3]">Consult with DOW Consulting</h3>
+          <p className="text-xs text-[#8C96A5]">Discuss your GTM, market research, or expansion requirements.</p>
         </div>
         <div className="flex gap-3">
           <Link

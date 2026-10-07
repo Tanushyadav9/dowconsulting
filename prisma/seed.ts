@@ -4,50 +4,67 @@ const prisma = new PrismaClient();
 
 const PLACEHOLDER_PACKAGES = [
   {
-    slug: "foundation-advisory",
-    name: "Strategic Foundation & Timing Audit",
-    subtitle: "Draft blueprint for early-stage ventures and executive timing reviews.",
+    slug: "gtm-market-research-advisory",
+    name: "GTM Strategy & Market Research Advisory [Draft]",
+    subtitle: "Draft blueprint for early-stage startups and MSMEs evaluating market entry.",
     priceINR: 15000,
     priceUSD: 249,
     inclusions: [
-      "60-Minute Focused Advisory Call (Google Meet or WhatsApp Call)",
-      "Strategic Timing & Architectural Assessment PDF",
-      "Milestone timing matrix for launch or major contracts",
-      "Commercial Vastu preliminary layout evaluation",
+      "Consulting team collaboration (research, info gathering, advisory)",
+      "Target customer profiling and value positioning review",
+      "Competitor benchmark overview and sector observations",
+      "Written diagnostic roadmap deliverable",
     ],
     isPopular: false,
     isActive: false, // UNPUBLISHED DRAFT
   },
   {
-    slug: "commercial-vastu-growth",
-    name: "Commercial Vastu & Strategic Growth Advisory",
-    subtitle: "Draft blueprint for spatial optimization & strategic business trajectory.",
+    slug: "business-expansion-advisory",
+    name: "Business Expansion & Scaling Advisory [Draft]",
+    subtitle: "Draft blueprint for growing companies scaling operations or geographic reach.",
     priceINR: 35000,
     priceUSD: 499,
     inclusions: [
-      "90-Minute In-Depth Diagnostic & Strategy Session",
-      "Full Commercial Vastu & Strategic Expansion Roadmap PDF",
-      "12-Month Strategic Window Calendar for scaling",
-      "Commercial site grid analysis (entrance, cabins, cash flow zones)",
-      "Direct follow-up window with Niraj Kumar",
+      "Led by Niraj Kumar (Former VP & Business Head at Reliance Retail, Metro, NIF Food)",
+      "Team-based research into target regional markets and competitors",
+      "Operational workflow and resource requirement assessment",
+      "Structured expansion roadmap with phased milestone gates",
     ],
     isPopular: true,
     isActive: false, // UNPUBLISHED DRAFT
   },
   {
-    slug: "executive-retainer-expansion",
-    name: "Enterprise Multi-Facility & Board-Level Strategy",
-    subtitle: "Draft blueprint for multi-location rollouts and enterprise advisory.",
+    slug: "new-business-start-consultation",
+    name: "New Business Start & Venture Advisory [Draft]",
+    subtitle: "Draft blueprint for founders launching new commercial entities.",
     priceINR: 75000,
     priceUSD: 999,
     inclusions: [
-      "Two 90-Minute Strategic Board & Operational Sessions",
-      "Enterprise Dossier: Spatial Diagnostics & Multi-Year Strategic Trajectory",
-      "Multi-year corporate inflection and partnership timing roadmap",
-      "Multi-facility / warehouse / corporate HQ spatial alignment",
+      "Comprehensive evaluation tailored to new entity formation",
+      "Multi-disciplinary support across research, consulting, and discovery",
+      "Concept feasibility review and operational risk identification",
+      "Custom proposal mode available for tailored requirements",
     ],
     isPopular: false,
     isActive: false, // UNPUBLISHED DRAFT
+  },
+];
+
+const DEFAULT_TEAM_ROLES = [
+  {
+    name: "Information Coordinator",
+    description: "Handles initial client onboarding, document intake, and proprietary briefing collection.",
+    isDefault: true,
+  },
+  {
+    name: "Research Analyst",
+    description: "Conducts competitive benchmarking, secondary data analysis, and market landscape discovery.",
+    isDefault: true,
+  },
+  {
+    name: "Consultant",
+    description: "Delivers live strategic sessions, analyzes operational bottlenecks, and drafts advisory deliverables.",
+    isDefault: true,
   },
 ];
 
@@ -64,7 +81,7 @@ export async function seedPackages() {
         priceUSD: pkg.priceUSD,
         inclusions: pkg.inclusions,
         isPopular: pkg.isPopular,
-        isActive: false, // Strict: seed as unpublished drafts
+        isActive: false,
       },
       create: {
         slug: pkg.slug,
@@ -74,12 +91,28 @@ export async function seedPackages() {
         priceUSD: pkg.priceUSD,
         inclusions: pkg.inclusions,
         isPopular: pkg.isPopular,
-        isActive: false, // Strict: seed as unpublished drafts
+        isActive: false,
       },
     });
   }
 
-  console.log("Seeded all 3 packages as unpublished drafts (isActive: false).");
+  console.log("Seeding configurable generic default team roles...");
+  for (const role of DEFAULT_TEAM_ROLES) {
+    await prisma.teamRole.upsert({
+      where: { name: role.name },
+      update: {
+        description: role.description,
+        isDefault: role.isDefault,
+      },
+      create: {
+        name: role.name,
+        description: role.description,
+        isDefault: role.isDefault,
+      },
+    });
+  }
+
+  console.log("Seeded all packages and team roles.");
 }
 
 if (require.main === module) {

@@ -2,7 +2,7 @@
  * Centralized Ecosystem and Cross-Promotion Configuration
  * 
  * SISTER PLATFORMS:
- * - Aapka Astro: Vedic astrology consultations, Vastu consultation (residential & commercial), Kundli and Panchang tools.
+ * - Aapka Astro: Personal Vedic astrology consultations, Kundli and Panchang tools.
  * - Viar.in: Astrology education institute (Vihangam Institute of Astrology and Research) selling self-paced astrology courses.
  * 
  * SOCIAL LINKS:
@@ -26,14 +26,14 @@ export const SISTER_SITES: Record<"aapkaAstro" | "viar", SisterSite> = {
     id: "aapka-astro",
     name: "Aapka Astro",
     fullName: "Aapka Astro",
-    badge: "Vedic Astrology & Vastu",
-    tagline: "Vedic Astrology Consultations & Vastu Solutions",
+    badge: "Vedic Astrology Practice",
+    tagline: "Vedic Astrology Consultations & Analytical Tools",
     description:
-      "Offers Vedic astrology consultations, residential and commercial Vastu consultation, Kundli and Panchang tools.",
+      "Offers personal Vedic astrology consultations, Kundli charts, and Panchang planning tools.",
     offerings: [
-      "Vedic Astrology Consultations & Horoscopes",
-      "Residential & Commercial Vastu Consultation",
-      "Kundli & Panchang Planning Tools",
+      "Personal Vedic Astrology Consultations & Horoscopes",
+      "Comprehensive Kundli & Chart Analysis",
+      "Panchang Calendar & Planning Tools",
     ],
     url: process.env.NEXT_PUBLIC_AAPKAASTRO_URL?.trim() || "https://aapkaastro.com",
   },

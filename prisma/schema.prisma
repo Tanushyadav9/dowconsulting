@@ -14,6 +14,22 @@ enum Role {
   STAFF
 }
 
+enum CaseStageName {
+  INFORMATION_COLLECTION
+  RESEARCH
+  CONSULTATION
+  REPORT_PREPARATION
+  OWNER_REVIEW
+  DELIVERED
+}
+
+enum StageStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  SKIPPED
+}
+
 enum SubmissionStatus {
   UNDER_REVIEW
   QUOTE_SENT
@@ -77,24 +93,37 @@ model User {
   staffPermission StaffPermission?
   submissions     IntakeSubmission[]
   payments        Payment[]
+  assignedStages  CaseStage[]       @relation("StageAssignee")
+  clientCases     Case[]            @relation("ClientCases")
 
   @@index([clerkId])
   @@index([email])
 }
 
-// 2. StaffPermission: Same model as the sister sites (Owner-only & section-level grants)
+// 2. StaffPermission: Section-level grants + configurable role title
 model StaffPermission {
   id                    String   @id @default(cuid())
   userId                String   @unique
   user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   role                  Role     @default(STAFF)
+  roleTitle             String   @default("Consultant") // Generic default that can be renamed (e.g. Information Coordinator, Research Analyst, Consultant)
   canManageSubmissions  Boolean  @default(true)
-  canManageQuotes       Boolean  @default(true)
+  canManageQuotes       Boolean  @default(false)
   canManageBookings     Boolean  @default(true)
-  canManageReports      Boolean  @default(true)
+  canManageReports      Boolean  @default(false)
   canManageTeam         Boolean  @default(false)
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
+}
+
+// Configurable Team Roles that Owner can customize/rename
+model TeamRole {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g. "Information Coordinator", "Research Analyst", "Consultant"
+  description String?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // 3. Package: Starting packages with inclusions & transparent pricing
@@ -113,7 +142,7 @@ model Package {
   updatedAt    DateTime  @updatedAt
 }
 
-// 4. IntakeSubmission: Comprehensive business intake data
+// 4. IntakeSubmission: Comprehensive business intake data with service-branching responses
 model IntakeSubmission {
   id                String            @id @default(cuid())
   userId            String?
@@ -122,21 +151,27 @@ model IntakeSubmission {
   contactEmail      String
   contactPhone      String
   businessName      String
-  businessType      String            // Retail, Manufacturing, Tech, Services, etc.
-  businessStage     String            // Idea, Early Traction, Scaling, Mature, Turnaround
+  businessType      String            // Industry classification
+  businessStage     String            // idea, early, operating
+  teamSize          String?
   locationCity      String
+  locationState     String?
   locationCountry   String            @default("India")
-  premisesStatus    String?           // Leased, Owned, Searching, Virtual
+  serviceRequested  String?           // GTM_STRATEGY, MARKET_RESEARCH, BUSINESS_EXPANSION, NEW_BUSINESS_START
+  serviceDetails    Json?             // Structured responses to service-specific branching questions
+  premisesStatus    String?           // Commercial premises status (if applicable)
   floorAreaSqFt     String?
-  currentTimeline   String            // Immediate, Next 30 days, Next quarter
-  primaryGoals      String            // Text goals
-  keyChallenges     String            // Text challenges/bottlenecks
+  currentTimeline   String            // Timeline / urgency
+  urgency           String?
+  primaryGoals      String            // Strategic goals
+  keyChallenges     String            // Main challenges/bottlenecks
   budgetRange       String?
   preferredChannel  MeetingChannel    @default(WHATSAPP_CALL)
   status            SubmissionStatus  @default(UNDER_REVIEW)
 
   quotes            Quote[]
   bookings          Booking[]
+  case              Case?
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 
@@ -144,7 +179,76 @@ model IntakeSubmission {
   @@index([status])
 }
 
-// 5. Quote: Linked to a submission, custom price, sent/accepted status
+// 5. Case: High-level consulting engagement lifecycle
+model Case {
+  id                     String            @id @default(cuid())
+  caseNumber             String            @unique // e.g. CASE-2026-001
+  submissionId           String?           @unique
+  submission             IntakeSubmission? @relation(fields: [submissionId], references: [id], onDelete: SetNull)
+  userId                 String?
+  user                   User?             @relation("ClientCases", fields: [userId], references: [id], onDelete: SetNull)
+  title                  String
+  clientName             String
+  clientEmail            String
+  clientPhone            String?
+  serviceRequested       String            // GTM Strategy, Market Research, Expansion, New Business
+  currentStage           CaseStageName     @default(INFORMATION_COLLECTION)
+  isArchived             Boolean           @default(false)
+  showStaffNamesToClient Boolean           @default(false) // Owner switch: show staff names on client portal
+  finalReportUrl         String?
+  finalReportTitle       String?
+  finalReportApproved    Boolean           @default(false)
+  finalReportApprovedAt  DateTime?
+  approvedByOwnerId      String?
+  deliveredAt            DateTime?
+
+  stages                 CaseStage[]
+  auditLogs              CaseAuditLog[]
+  testimonials           Testimonial[]
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+
+  @@index([currentStage])
+  @@index([clientEmail])
+}
+
+// 6. CaseStage: The 6 operational consulting stages
+model CaseStage {
+  id            String        @id @default(cuid())
+  caseId        String
+  case          Case          @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  stageName     CaseStageName
+  order         Int           // 1 to 6
+  status        StageStatus   @default(PENDING)
+  assignedToId  String?
+  assignedTo    User?         @relation("StageAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  internalNotes String?       // NEVER shown to client! Private to staff & owner
+  attachments   Json?         // Array of { name, url, uploadedAt, uploadedBy }
+  startedAt     DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@unique([caseId, stageName])
+  @@index([assignedToId])
+}
+
+// 7. CaseAuditLog: Forensic log recording who changed what and when
+model CaseAuditLog {
+  id        String   @id @default(cuid())
+  caseId    String
+  case      Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  actorId   String
+  actorName String
+  actorRole String
+  action    String
+  details   Json?
+  createdAt DateTime @default(now())
+
+  @@index([caseId])
+}
+
+// 8. Quote: Linked to a submission, custom price, sent/accepted status
 model Quote {
   id           String            @id @default(cuid())
   submissionId String
@@ -163,7 +267,7 @@ model Quote {
   @@index([submissionId])
 }
 
-// 6. Payment: Unified Razorpay/Stripe flat one-time payments
+// 9. Payment: Unified Razorpay/Stripe flat one-time payments
 model Payment {
   id                String           @id @default(cuid())
   paymentNumber     String           @unique
@@ -188,7 +292,7 @@ model Payment {
   @@index([status])
 }
 
-// 7. Booking: Linked to submission & payment, scheduled time, WhatsApp/Meet handoff status
+// 10. Booking: Linked to submission & payment, scheduled time, WhatsApp/Meet handoff status
 model Booking {
   id             String            @id @default(cuid())
   paymentId      String?           @unique
@@ -212,7 +316,7 @@ model Booking {
   @@index([status])
 }
 
-// 8. Report: Linked to booking, file reference, delivered timestamp
+// 11. Report: Linked to booking, file reference, delivered timestamp
 model Report {
   id            String    @id @default(cuid())
   bookingId     String    @unique
@@ -229,7 +333,7 @@ model Report {
   updatedAt     DateTime  @updatedAt
 }
 
-// SEO & Thought Leadership Content
+// 12. SEO & Thought Leadership Content
 model BlogPost {
   id          String   @id @default(cuid())
   slug        String   @unique
@@ -246,3 +350,48 @@ model BlogPost {
 
   @@index([slug])
 }
+
+// 13. Public Team Profiles: Managed by Owner in admin area; real people only, 0 seeded
+model PublicTeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  roleTitle   String
+  photoUrl    String?
+  bio         String
+  order       Int      @default(0)
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isPublished])
+}
+
+// 14. Testimonials: Consent-based feedback system; 0 seeded
+enum TestimonialStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Testimonial {
+  id               String            @id @default(cuid())
+  caseId           String?
+  case             Case?             @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  clientName       String            // Full name or initials as consented
+  company          String?           // Client company / organization
+  role             String?           // Client role / designation
+  quote            String            // The testimonial text
+  serviceUsed      String            // e.g. GTM Strategy, Market Research, etc.
+  date             DateTime          @default(now()) // Feedback / testimonial date
+  consentConfirmed Boolean           @default(false) // Required consent confirmation
+  consentNote      String?           // Note recording how consent was given (e.g. WhatsApp confirmation on 12/04/2026, Post-delivery feedback form)
+  isPublished      Boolean           @default(false) // Owner publish toggle
+  status           TestimonialStatus @default(PENDING)
+  feedbackToken    String?           @unique // Unique token for post-delivery feedback link
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@index([isPublished, consentConfirmed])
+  @@index([status])
+}
+

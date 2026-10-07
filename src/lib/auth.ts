@@ -16,10 +16,27 @@ export function isOwnerEmail(email?: string | null): boolean {
   return email.trim().toLowerCase() === ownerEnv.toLowerCase();
 }
 
+export interface AuthContext {
+  isAuthenticated: boolean;
+  user: any | null;
+  dbUserId?: string;
+  email?: string;
+  isOwner: boolean;
+  permissions: {
+    canManageSubmissions: boolean;
+    canManageQuotes: boolean;
+    canManageBookings: boolean;
+    canManageReports: boolean;
+    canManageTeam: boolean;
+    role: "OWNER" | "ADMIN" | "STAFF";
+    roleTitle?: string;
+  } | null;
+}
+
 /**
- * Retrieves the current authenticated user's email, owner status, and staff permissions.
+ * Retrieves the current authenticated user's email, owner status, database user ID, and staff permissions.
  */
-export async function getAuthContext() {
+export async function getAuthContext(): Promise<AuthContext> {
   try {
     const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
     if (!clerkKey || !clerkKey.startsWith("pk_") || clerkKey.includes("placeholder")) {
@@ -47,11 +64,35 @@ export async function getAuthContext() {
 
     const isOwner = isOwnerEmail(primaryEmail);
 
+    let dbUser: any = null;
+    if (primaryEmail) {
+      try {
+        dbUser = await prisma.user.findUnique({
+          where: { email: primaryEmail.toLowerCase() },
+          include: { staffPermission: true },
+        });
+
+        if (!dbUser && isOwner) {
+          dbUser = await prisma.user.create({
+            data: {
+              clerkId: clerkUser.id,
+              email: primaryEmail.toLowerCase(),
+              name: `${clerkUser.firstName || ""} ${clerkUser.lastName || ""}`.trim() || "Niraj Kumar",
+            },
+            include: { staffPermission: true },
+          });
+        }
+      } catch (dbErr) {
+        console.warn("DB user lookup in getAuthContext:", dbErr);
+      }
+    }
+
     // If owner, grant all permissions inherently
     if (isOwner) {
       return {
         isAuthenticated: true,
         user: clerkUser,
+        dbUserId: dbUser?.id,
         email: primaryEmail,
         isOwner: true,
         permissions: {
@@ -61,35 +102,27 @@ export async function getAuthContext() {
           canManageReports: true,
           canManageTeam: true,
           role: "OWNER",
+          roleTitle: "Lead Strategic Advisor / Owner",
         },
       };
     }
 
     // Otherwise check StaffPermission table in database
-    if (primaryEmail) {
-      try {
-        const staff = await prisma.user.findUnique({
-          where: { email: primaryEmail.toLowerCase() },
-          include: { staffPermission: true },
-        });
-
-        if (staff?.staffPermission) {
-          return {
-            isAuthenticated: true,
-            user: clerkUser,
-            email: primaryEmail,
-            isOwner: false,
-            permissions: staff.staffPermission,
-          };
-        }
-      } catch (err) {
-        console.error("Error looking up staff permissions:", err);
-      }
+    if (dbUser?.staffPermission) {
+      return {
+        isAuthenticated: true,
+        user: clerkUser,
+        dbUserId: dbUser.id,
+        email: primaryEmail,
+        isOwner: false,
+        permissions: dbUser.staffPermission,
+      };
     }
 
     return {
       isAuthenticated: true,
       user: clerkUser,
+      dbUserId: dbUser?.id,
       email: primaryEmail,
       isOwner: false,
       permissions: null,

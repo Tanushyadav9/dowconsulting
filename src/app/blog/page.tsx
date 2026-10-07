@@ -6,7 +6,7 @@ import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 export const metadata = {
   title: `Insights & Strategic Perspectives | ${BRAND.name}`,
   description:
-    "Executive insights on commercial Vastu, strategic business timing, retail spatial dynamics, and corporate leadership by Niraj Kumar.",
+    "Business consulting insights on GTM strategy, market research, business expansion, and retail operating stewardship by Niraj Kumar and DOW Consulting.",
 };
 
 export default function BlogIndexPage() {
@@ -15,13 +15,13 @@ export default function BlogIndexPage() {
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
-          Executive Thought Leadership
+          <span>Advisory Perspectives &amp; Insights</span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
           Strategic Insights &amp; Perspectives
         </h1>
         <p className="text-sm sm:text-base text-[#5A6472] max-w-2xl mx-auto leading-relaxed">
-          Operational essays on commercial spatial dynamics, executive timing, and institutional enterprise leadership authored by Niraj Kumar.
+          Operational perspectives on go-to-market execution, market research methodologies, and commercial expansion strategy.
         </p>
       </section>
 

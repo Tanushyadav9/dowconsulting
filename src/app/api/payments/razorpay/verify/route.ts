@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
           to: customer.email,
           name: customer.name || "Client",
           orderNumber,
-          packageName: packageName || "Strategic Business Timing Advisory",
+          packageName: packageName || "Business Consulting Advisory Engagement",
           amount: amount ? amount / 100 : 35000,
           currency: "INR",
           provider: "Razorpay (UPI / NetBanking / Cards)",
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         await sendBookingConfirmationEmail({
           to: customer.email,
           name: customer.name || "Client",
-          packageName: packageName || "Strategic Business Timing Advisory",
+          packageName: packageName || "Business Consulting Advisory Engagement",
           scheduledAt: "Scheduled upon calendar coordination",
           meetingChannel: "WHATSAPP_CALL",
         });

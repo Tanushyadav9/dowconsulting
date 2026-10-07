@@ -343,7 +343,7 @@ export default function AdminPackagesPage() {
                   type="text"
                   value={editingPkg.subtitle || ""}
                   onChange={(e) => setEditingPkg({ ...editingPkg, subtitle: e.target.value })}
-                  placeholder="e.g. Comprehensive spatial optimization & strategic timing"
+                  placeholder="e.g. Go-to-market strategy & expansion roadmap for startups"
                   className="w-full px-3 py-2 rounded border border-[#E2E8F0]"
                 />
               </div>

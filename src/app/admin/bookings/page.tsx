@@ -38,7 +38,7 @@ function AdminBookingsContent() {
       scheduledAt: "Oct 08, 2026 at 3:30 PM IST",
       channel: "WHATSAPP_CALL",
       status: "CONFIRMED",
-      tier: "Commercial Vastu & Strategic Growth",
+      tier: "Business Expansion Strategy Advisory",
     },
     {
       id: "BK-902",
@@ -50,7 +50,7 @@ function AdminBookingsContent() {
       channel: "GOOGLE_MEET",
       meetingLink: "https://meet.google.com/dow-nkj-strat",
       status: "CONFIRMED",
-      tier: "Enterprise Strategic Retainer",
+      tier: "GTM Strategy & Market Research",
     },
     {
       id: "BK-903",
@@ -61,7 +61,7 @@ function AdminBookingsContent() {
       scheduledAt: "Oct 11, 2026 at 4:00 PM IST",
       channel: "WHATSAPP_CALL",
       status: "PENDING_SCHEDULE",
-      tier: "Commercial Vastu & Strategic Growth",
+      tier: "New Business Start Consultation",
     },
   ]);
 

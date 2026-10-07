@@ -109,11 +109,11 @@ export default function ContactPage() {
             <div className="p-6 bg-[#FFFFFF] rounded border border-[#E2E8F0] space-y-2 text-xs">
               <strong className="text-[#1B2838]">Part of the Niraj Kumar Advisory Ecosystem:</strong>
               <p className="text-[#5A6472]">
-                Clients with personal Vedic astrological inquiries or Vastu consultation may connect with our sister practice at{" "}
+                Clients with personal astrological inquiries may connect with our sister practice at{" "}
                 <a href={SISTER_SITES.aapkaAstro.url} target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
                   {SISTER_SITES.aapkaAstro.name}
                 </a>{" "}
-                (Vedic astrology consultations, residential and commercial Vastu), or explore self-paced astrology courses at{" "}
+                (personal Vedic advisory consultations), or explore self-paced education courses at{" "}
                 <a href={SISTER_SITES.viar.url} target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
                   {SISTER_SITES.viar.name}
                 </a>{" "}

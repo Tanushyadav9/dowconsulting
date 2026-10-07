@@ -28,8 +28,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const auth = await getAuthContext();
-    if (!auth.isAuthenticated || (!auth.isOwner && !auth.permissions?.canManageQuotes)) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    if (!auth.isAuthenticated || !auth.isOwner) {
+      return NextResponse.json(
+        { error: "Unauthorized: Setting packages and pricing is strictly restricted to the Owner." },
+        { status: 403 }
+      );
     }
 
     const body = await req.json();
@@ -72,8 +75,11 @@ export async function POST(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     const auth = await getAuthContext();
-    if (!auth.isAuthenticated || (!auth.isOwner && !auth.permissions?.canManageQuotes)) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    if (!auth.isAuthenticated || !auth.isOwner) {
+      return NextResponse.json(
+        { error: "Unauthorized: Modifying packages and pricing is strictly restricted to the Owner." },
+        { status: 403 }
+      );
     }
 
     const body = await req.json();

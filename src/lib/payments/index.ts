@@ -96,7 +96,7 @@ export async function createConsultingOrder(
             currency: "usd",
             product_data: {
               name: params.notes?.packageName || "DOW Consulting Strategic Engagement",
-              description: "Strategic Business Timing & Commercial Vastu Consultation with Niraj Kumar",
+              description: "Business Consulting Engagement with Niraj Kumar & Advisory Team",
             },
             unit_amount: params.amount, // in cents
           },

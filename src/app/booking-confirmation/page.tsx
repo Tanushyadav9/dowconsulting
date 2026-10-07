@@ -19,7 +19,7 @@ import {
 function ConfirmationContent() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get("orderNumber") || "ORD-CONFIRMED";
-  const packageName = searchParams.get("packageName") || "Commercial Vastu & Strategic Growth Advisory";
+  const packageName = searchParams.get("packageName") || "Business Consulting Advisory Engagement";
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
@@ -52,7 +52,7 @@ function ConfirmationContent() {
                 Direct Principal WhatsApp Handoff
               </h3>
               <p className="text-xs text-[#5A6472] mt-0.5">
-                Niraj Kumar and our advisory desk coordinate session timing and documents directly on WhatsApp:
+                Niraj Kumar and our advisory desk coordinate session scheduling and briefing materials directly on WhatsApp:
               </p>
               <p className="text-sm font-bold text-[#1B2838] mt-1">
                 {BRAND.contact.whatsapp.display}
@@ -110,19 +110,19 @@ function ConfirmationContent() {
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
               <span>
-                <strong>Floor Plan / Site Sketch:</strong> Send your CAD layout, architectural PDF, or hand-drawn sketch to our WhatsApp ahead of time.
+                <strong>Business Overview / Pitch Deck:</strong> Share your pitch deck, executive summary, or notes regarding your target market ahead of time.
               </span>
             </li>
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
               <span>
-                <strong>Key Commercial Milestones:</strong> Lease signing dates, planned capex, launch windows, or partnership inflection points.
+                <strong>Key Commercial Objectives:</strong> Target launch dates, expansion milestones, planned capex/budget, or distribution goals.
               </span>
             </li>
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
               <span>
-                <strong>Leadership Seating:</strong> Current seating orientation of founders, managing director, and accounts/billing desks.
+                <strong>Core Discussion Points:</strong> Specific bottlenecks or strategic priorities you want the consulting team to focus on.
               </span>
             </li>
           </ul>

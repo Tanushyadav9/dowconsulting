@@ -20,7 +20,7 @@ export default function CaseStudiesPage() {
           Client Advisory Engagements
         </h1>
         <p className="text-sm text-[#5A6472] max-w-xl mx-auto leading-relaxed">
-          All strategic timing audits and commercial Vastu engagements conducted by Niraj Kumar are held under strict non-disclosure.
+          All strategic consulting engagements across GTM strategy, market research, and business expansion conducted by DOW Consulting are held under strict non-disclosure.
         </p>
       </div>
 
@@ -59,14 +59,14 @@ export default function CaseStudiesPage() {
           <ShieldCheck className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
           <div>
             <strong className="text-[#1B2838]">Strict NDA Protection</strong>
-            <p className="mt-0.5">Corporate lease details, financial desk placements, and executive timing schedules remain private.</p>
+            <p className="mt-0.5">Corporate business plans, financial estimates, and strategic roadmaps remain private.</p>
           </div>
         </div>
         <div className="p-4 rounded bg-[#FFFFFF] border border-[#E2E8F0] flex items-start gap-3">
-          <ShieldCheck className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
+          <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
           <div>
-            <strong className="text-[#1B2838]">Direct Founder Engagement</strong>
-            <p className="mt-0.5">Every review is conducted personally by Niraj Kumar with dual delivery (Live Call + PDF Report).</p>
+            <strong className="text-[#1B2838]">Dedicated Team Model</strong>
+            <p className="mt-0.5">Engagements supported by specialized research, consulting, and information collection roles.</p>
           </div>
         </div>
       </div>

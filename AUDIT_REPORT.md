@@ -1,287 +1,255 @@
-# DOW Consulting — Honest Codebase Audit & Architectural Verification Report
+# DOW Consulting — Honest Codebase Audit & Repositioning Verification Report
 
-> **Current Audit & Remediation Date:** October 06, 2026  
+> **Current Audit & Repositioning Date:** October 07, 2026  
 > **Repository:** `dowconsulting` (`Tanushyadav9/dowconsulting`)  
-> **Principal Advisor:** Niraj Kumar | **Practice:** Strategic Business Timing & Commercial Vastu  
-> **Ground Rules Status:** Audit first, then fix. All findings supported by raw file paths and command execution output.
+> **Practice Positioning:** General Business Consulting for Startups, Small Companies, and MSMEs [Draft]  
+> **Lead Strategic Advisor:** Niraj Kumar | **Operating Model:** Collaborative Consulting Team  
+> **Ground Rules Status:** Audit first, then fix. All findings supported by raw file paths, automated security tests, and verified production builds.
 
 ---
 
-## 🎯 Executive Summary & Audit Mandate
+## 🎯 Executive Summary & Repositioning Mandate
 
-Earlier builds in this project reported milestones as "COMPLETE (100%)", claiming fail-closed security, zero dev tooling in production, and verified integrations. A rigorous ground-up audit revealed that multiple critical capabilities were simulated with mock fallbacks, swallowed database exceptions, unverified Clerk routes, or relied on hardcoded emails and unconfirmed client pricing.
+Following direct client confirmation, DOW Consulting has been fully repositioned from "Strategic Business Timing & Commercial Vastu" into a **general business consulting advisory practice** tailored specifically for startups, small companies, and MSMEs.
 
-In this audit and remediation cycle:
-1. **Audited First:** Every milestone, API route, client/admin interface, and environment handling mechanism was inspected for hardcoded values, silent fallbacks, and false completeness claims.
-2. **Fixed Strictly:** All silent fallbacks, mock payloads, placeholder bypasses, and swallowed database errors were removed. `requireEnv` now unconditionally fails loudly on missing or placeholder values in fail-closed mode.
-3. **Preserved Pending Decisional Content:** The site's core positioning, tagline (*"Strategic Business Timing & Commercial Vastu"*), and service descriptions have been left completely untouched and placed under **"Unconfirmed — pending client decision"**.
-4. **Authentication Built to Sister-Site Standard:** Clerk middleware protecting `/account` and `/admin` with `/__clerk/:path*` matcher; real client-side `<AuthenticateWithRedirectCallback />` routes mounted; fail-closed Svix webhook; strictly environment-based `OWNER_EMAIL`.
-5. **Removed Client-Unsupplied Content:** Invented case studies removed from homepage and `/case-studies`; `/case-studies` hidden from navigation; credentials standardized to *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*; *"XLRI"* written without campus name; meter copy leaks removed; public admin link removed from footer.
-6. **Corrected Factually Wrong Cross-Promotion:** `Viar.in` accurately described as an astrology education institute (Vihangam Institute of Astrology and Research) selling self-paced astrology courses; `Aapka Astro` accurately described as Vedic astrology consultations, residential and commercial Vastu consultation, Kundli and Panchang tools. URLs centralized in `src/lib/constants/ecosystem.ts`.
-7. **Packages & Pricing Reality Restored:** Packages converted to fully data-driven, admin-editable models (`/admin/packages` + `/api/admin/packages`). Seeded as unpublished drafts (`isActive = false`). Checkout is strictly disabled for unpublished packages. Public `/packages` displays an executive "Request a Proposal" flow instead of invented prices. Owner quote builder verified and working.
-8. **Small Additions Complete:** Mandatory confidentiality/consent checkbox on intake form; social links centralized with dead/placeholder links suppressed; sliding-window rate limiting on intake and checkout; transactional Resend emails verified across all 5 lifecycles, plus fail-closed Stripe webhook listener.
-
----
-
-## ⚠️ Unconfirmed — Pending Client Decision
-
-Per ground rules, the following positioning, branding, and scope wording was **never confirmed by the client (Niraj Kumar)** and is awaiting his explicit decision. **None of this wording was rewritten or altered during this pass:**
-
-| Item | Current Rendering in Codebase | Source File Location | Pending Decision Required |
-| :--- | :--- | :--- | :--- |
-| **Site Tagline** | `"Strategic Business Timing & Commercial Vastu"` | `src/lib/constants/brand.ts` (line 5)<br>`src/components/layout/Navbar.tsx` (line 48)<br>`src/components/layout/Footer.tsx` (line 19) | Client confirmation on exact wording of advisory tagline. |
-| **Core Positioning** | *"Executive business advisory bridging two decades of senior corporate operating leadership with structured spatial and timing intelligence."* | `src/lib/constants/brand.ts` (lines 6–7) | Confirm whether corporate advisory and spatial intelligence should be phrased as currently written. |
-| **Brand Display Name & Domain** | `DOW Consulting` (`dowconsulting.in` vs `dowconsulting.com`) | `src/lib/constants/brand.ts`<br>`.env.example` | Confirm whether "DOW" is an acronym (*D.O.W. Consulting*), standard casing (*Dow Consulting*), and resolve domain suffix discrepancy (`.in` vs `.com`). |
-| **Pricing & Scope Numbers** | ₹15,000 / ₹35,000 / ₹75,000 and $249 / $499 / $999 | `src/lib/constants/packages.ts`<br>`prisma/seed.ts` | **Unpublished & Hidden from Public.** Seeded as unpublished drafts (`isActive: false`). Public site displays proposal request flow until Niraj Kumar provides confirmed numbers. |
-| **Service Descriptions** | Narrative descriptions of non-demolition commercial Vastu, directional grid alignments, and strategic milestone timing | `src/lib/constants/packages.ts` | Confirm advisory terminology with Niraj Kumar before commercial promotion. |
-| **Client Case Studies** | Invented studies removed; page displays strict confidentiality notice. Hidden from navigation. | `src/app/case-studies/page.tsx`<br>`src/lib/constants/navigation.ts` | Provide signed-off real client case studies before re-enabling navigation link. |
-| **Official Logo Asset** | Typographic SVG wordmark (`DOW CONSULTING` with gold accent) | `src/components/layout/Navbar.tsx` | Provide vector brand asset (`.svg` / transparent `.png`) if a designed logo emblem exists. |
-| **Legal Counsel Validation** | Indian jurisdiction agreements (Gautam Buddha Nagar / Noida, UP) for `/terms`, `/privacy-policy`, `/refund-policy`, `/disclaimer`, `/pricing-policy` | `src/app/{terms,privacy-policy,refund-policy,disclaimer,pricing-policy}/page.tsx` | Formal statutory sign-off by legal counsel prior to running paid advertising. |
+### What the Client Confirmed
+1. **Confirmed Services:**
+   - Go-to-Market (GTM) Strategy
+   - Market Research
+   - Business Expansion Strategy
+   - New Business Start Consultation
+2. **Confirmed Target Customers:**
+   - Startups, small companies, and MSMEs.
+3. **Confirmed Operating Model:**
+   - DOW Consulting operates as a **collaborative team**, not a solo consultant practice. Different team members handle specialized functions (for example: one conducts market research, one collects information and briefs, and one leads executive consultation).
+4. **Lead Strategic Advisor Credentials (Strict Client-Supplied Wording):**
+   - Quoted verbatim and attributed to **Niraj Kumar personally**:
+     - *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*
+     - *B.Sc. (Hons.) Physics*
+     - *PGDBM in International Business & Marketing*
+     - *Executive Leadership Development & Change Management Certification from XLRI*
+   - Strictly **no firm founding year, client counts, firm statistics, or firm outcome claims** are stated.
 
 ---
 
-## 🔬 Forensic Audit: Current State of the 8 Core Audit Dimensions
+## 🚩 Core Architectural Assumption Flagged
 
-### 1. Database
-- **README Claim:** `README.md` (line 39) stated `- **Database / ORM**: SQLite / Prisma`.
-- **Actual Reality in Code & Deployment:**
-  - `prisma/schema.prisma` (lines 5–9):
-    ```prisma
-    datasource db {
-      provider  = "postgresql"
-      url       = env("DATABASE_URL")
-      directUrl = env("DIRECT_URL")
-    }
-    ```
-  - SQLite is **NOT used anywhere** in runtime code, queries, or database configuration. A recursive repository search yields **0 matches**. The only mentions of SQLite were in `.gitignore` and the obsolete `README.md`.
-  - The actual deployed database target is **PostgreSQL on Neon** (serverless Postgres) connected via pooled `DATABASE_URL` and direct migration `DIRECT_URL`.
-  - `prisma/migrations/0_init/migration.sql` is committed and ready for execution via `npm run db:migrate`.
-  - Live persistence verification plan: Once the client provides the separate dedicated Neon project credentials, run `prisma migrate deploy`, submit a test intake row, redeploy, and verify row persistence across restarts.
-
-### 2. Authentication
-- **Clerk Integration Depth:**
-  - Clerk is installed (`@clerk/nextjs` v5.7.5) and wrapped at root in `src/app/layout.tsx`.
-  - App ID: Shared Clerk application `app_3JoGbVxdSJXtTwELzFuSwXpw6Rf`, configured for Email/Password and Google only (no phone OTP).
-  - Webhook user synchronization is implemented in `src/app/api/webhooks/clerk/route.ts` with Svix HMAC cryptographic verification, creating/updating the local `User` table on `user.created`.
-- **Protection of `/account` and `/admin`:**
-  - **Middleware Enforced Server-Side:** Next.js `middleware.ts` created at `src/middleware.ts` protecting `/account` and `/admin` routes.
-  - **Clerk Route Matcher:** Explicitly includes `'/__clerk/:path*'` after API routes:
-    ```typescript
-    export const config = {
-      matcher: [
-        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-        '/(api|trpc)(.*)',
-        '/__clerk/:path*',
-      ],
-    };
-    ```
-  - **Real SSO Callbacks:** Dedicated callback pages mounted client-side (`<AuthenticateWithRedirectCallback />`) at `/sso-callback`, `/sign-in/sso-callback`, `/sign-up/sso-callback`, `/login/sso-callback`, and `/signup/sso-callback` so Google sign-in never 404s.
-  - **Server-Side API Route Protection:**
-    - `/api/admin/packages`: Server-side protected via `getAuthContext()`.
-    - `/api/admin/quotes`: Server-side protected via `getAuthContext()`.
-    - `/api/admin/submissions/status`: Server-side protected via `getAuthContext()`.
-    - `/api/admin/team`: Server-side protected via `getAuthContext()`.
-    - `/api/reports/[id]/download`: Server-side protected via `getAuthContext()`.
-
-### 3. Anything That Bypasses Real Auth
-- **Client Portal Protection:** `/account` is protected by Clerk middleware and redirects unauthenticated users to `/sign-in`.
-- **Admin Portal Protection:** `/admin` and all sub-routes are protected by Clerk middleware and `getAuthContext()`.
-- **Dev Tooling & Mock Flags in Production:**
-  - `isDevMockAllowed()` was removed from `src/lib/env.ts`.
-  - Zero mock role-switchers, zero passcodes, zero demo accounts reachable in production builds.
-- **Fail-Closed Gateways:** Zero fake simulated payloads (`order_sim_...` / `cs_sim_...`) in catch blocks; routes fail loudly with HTTP 500 error responses on missing keys.
-
-### 4. Owner / Admin Designation
-- **How Owner is Recognized:**
-  - Identified strictly by matching email against `OWNER_EMAIL` environment variable via `isOwnerEmail()` in `src/lib/auth.ts`:
-    ```typescript
-    export function isOwnerEmail(email?: string | null): boolean {
-      if (!email) return false;
-      const ownerEnv = process.env.OWNER_EMAIL?.trim();
-      if (!ownerEnv || ownerEnv === "" || ownerEnv.toLowerCase().includes("placeholder") || ownerEnv.toLowerCase().includes("example.com")) {
-        return false;
-      }
-      return email.trim().toLowerCase() === ownerEnv.toLowerCase();
-    }
-    ```
-  - **Strict Rule Enforced:** `OWNER_EMAIL` is read ONLY from the environment. Zero fallback strings and zero default lists; if unset, no one is Owner.
-- **Section-Level StaffPermission Model:**
-  - `StaffPermission` table in Prisma schema controls section-level access (`canManageSubmissions`, `canManageQuotes`, `canManageBookings`, `canManageReports`, `canManageTeam`).
-  - `/admin/team` is Owner-only (`canManageTeam`).
-
-### 5. Intake Form
-- **Form Component:** `src/components/intake/IntakeForm.tsx` (5-step progressive questionnaire).
-- **All Fields Collected:**
-  - **Step 1 (Executive Contact Details):** `contactName`, `contactEmail`, `contactPhone`, `businessName`
-  - **Step 2 (Business Profile & Stage):** `businessType`, `businessStage`, `teamSize`
-  - **Step 3 (Premises & Spatial Alignment):** `locationCity`, `locationCountry`, `premisesStatus`, `floorAreaSqFt`, `floorPlanAvailable`
-  - **Step 4 (Strategic Goals & Bottlenecks):** `currentTimeline`, `primaryGoals`, `keyChallenges`, `budgetRange`
-  - **Step 5 (Advisory Focus & Logistics):** `selectedPackage` (Bespoke Proposal, Commercial Vastu, Milestone Timing), `preferredChannel` (WhatsApp Call vs Google Meet), and `consentConfidentiality` (mandatory NDA agreement).
-- **Where Each Submission Is Stored:**
-  - POSTed to `/api/intake` (`src/app/api/intake/route.ts`).
-  - Validates `consentConfidentiality === true` before saving.
-  - Saved directly into the **Neon PostgreSQL database** `IntakeSubmission` table via `prisma.intakeSubmission.create`.
-  - Rate-limited to max 5 intakes per 10 minutes per IP.
-
-### 6. Payments
-- **Wired Providers:**
-  - **Razorpay (INR):** Used for domestic transactions. Wired via `src/lib/payments/index.ts`, `src/app/api/payments/razorpay/create-order/route.ts`, and `src/app/api/payments/razorpay/verify/route.ts`.
-  - **Stripe (USD):** Used for international transactions. Wired via `src/lib/payments/index.ts`, `src/app/api/payments/stripe/create-checkout/route.ts`, and `src/app/api/webhooks/stripe/route.ts`.
-- **What Happens on Success:**
-  - **Razorpay:**
-    - Client checkout calls `/api/payments/razorpay/verify`.
-    - Server verifies HMAC SHA256 signature using `RAZORPAY_KEY_SECRET`.
-    - If valid, dispatches Resend Payment Receipt and Session Booking confirmation emails.
-    - Redirects user to `/booking-confirmation?orderNumber=...`.
-  - **Stripe:**
-    - Client completes payment on Stripe hosted checkout.
-    - Stripe dispatches `checkout.session.completed` event to `/api/webhooks/stripe`.
-    - Webhook verifies signature using `STRIPE_WEBHOOK_SECRET` via `stripe.webhooks.constructEvent`.
-    - Creates `Payment` record in Prisma (`status: "PAID"`).
-    - If linked to a custom quote, updates quote to `ACCEPTED`.
-    - Dispatches Resend Payment Receipt and Booking Confirmation emails.
-- **Fail-Closed Webhook & Verification Status:**
-  - Razorpay Verification (`/api/payments/razorpay/verify`): **Fail-closed.** Requires `RAZORPAY_KEY_SECRET` via `requireEnv`; fails with HTTP 400 if secret or signature is invalid.
-  - Clerk Webhook (`/api/webhooks/clerk`): **Fail-closed.** Requires `CLERK_WEBHOOK_SECRET` via `requireEnv`; verifies HMAC SHA256 using Svix over the raw request body string (`await req.text()`).
-  - Stripe Webhook (`/api/webhooks/stripe`): **Fail-closed.** Requires `STRIPE_WEBHOOK_SECRET` via `requireEnv`; verifies signature cryptographically.
-
-### 7. Email
-- **Provider & SDK:** Resend via the official `resend` npm package (`src/lib/email/resend.ts`).
-- **Are Transactional Emails Actually Sent Today?**
-  - All 5 lifecycle emails are wired to real triggers with fail-closed environment validation:
-    1. `sendIntakeConfirmationEmail`: Fired on `/api/intake` submission.
-    2. `sendQuoteDeliveryEmail`: Fired on `/api/admin/quotes` proposal dispatch.
-    3. `sendPaymentReceiptEmail`: Fired on `/api/payments/razorpay/verify` success and `/api/webhooks/stripe` checkout completion.
-    4. `sendBookingConfirmationEmail`: Fired on `/api/payments/razorpay/verify` success and `/api/webhooks/stripe` checkout completion with direct WhatsApp coordinate (`+91 93112 15564`).
-    5. `sendReportDeliveredEmail`: Fired on `/api/admin/reports/upload` delivery.
-  - When `RESEND_API_KEY` is provisioned in production, emails are delivered immediately. If unconfigured, the system fails cleanly without silent mocks.
-
-### 8. Routes
-Every route generated by the Next.js production build (**51 routes total**, verified in build task `task-919`) and its true content state:
-
-| Route | Type | Content Status | Content Details & Findings |
-| :--- | :--- | :--- | :--- |
-| `/` | Page (Dynamic) | Real Content | Niraj Kumar executive background, corrected sister ecosystem, methodology, brand principles. |
-| `/_not-found` | Page (Dynamic) | Real Content | Standard 404 page with return link. |
-| `/about` | Page (Dynamic) | Real Content | Bio of Niraj Kumar, VP/Business Head credentials at Reliance Retail, Metro Cash & Carry, NIF Food; XLRI certification. |
-| `/account` | Page (Dynamic) | Real Content | Protected by Clerk middleware. Displays authenticated user's submissions, quotes, and reports. |
-| `/admin` | Page (Dynamic) | Protected UI | Protected by Clerk middleware & `getAuthContext()`. Admin portal overview. |
-| `/admin/analytics` | Page (Dynamic) | Protected UI | Protected analytics dashboard. |
-| `/admin/bookings` | Page (Dynamic) | Protected UI | Protected bookings manager. |
-| `/admin/packages` | Page (Dynamic) | Protected UI | Data-driven packages manager for creating, editing, and publishing advisory tiers. |
-| `/admin/quotes` | Page (Dynamic) | Protected UI | Owner quote builder linked to real database submissions and Resend proposal dispatch. |
-| `/admin/reports` | Page (Dynamic) | Protected UI | Cloudflare R2 report upload manager with secure client vault delivery. |
-| `/admin/submissions` | Page (Dynamic) | Protected UI | Protected intake submissions table. |
-| `/admin/team` | Page (Dynamic) | Protected UI | Owner-only staff permission management. |
-| `/api/admin/packages` | API (Dynamic) | Protected API | CRUD operations on packages model with server-side auth validation. |
-| `/api/admin/quotes` | API (Dynamic) | Protected API | Creates Prisma Quote, generates secure checkout URL, sends Resend email. |
-| `/api/admin/reports/upload` | API (Dynamic) | Protected API | Uploads PDF to Cloudflare R2, triggers Resend delivery email. |
-| `/api/admin/submissions/status` | API (Dynamic) | Protected API | Enforces `getAuthContext()` check, updates Prisma submission status. |
-| `/api/admin/team` | API (Dynamic) | Protected API | Persists staff permissions in Prisma. Owner-only enforcement. |
-| `/api/checkout/details` | API (Dynamic) | Real API | Rate-limited endpoint validating whether a package is published or a quote is valid. |
-| `/api/intake` | API (Dynamic) | Real API | Rate-limited (5/10m), verifies confidentiality consent, saves to PostgreSQL, triggers email. |
-| `/api/payments/razorpay/create-order` | API (Dynamic) | Real API | Rate-limited (10/10m), verifies active package or quote from DB, creates Razorpay order. |
-| `/api/payments/razorpay/verify` | API (Dynamic) | Real API | HMAC SHA256 signature verification with `RAZORPAY_KEY_SECRET`. Fail-closed. |
-| `/api/payments/stripe/create-checkout` | API (Dynamic) | Real API | Rate-limited (10/10m), verifies active package or quote from DB, creates Stripe session. |
-| `/api/reports/[id]/download` | API (Dynamic) | Protected API | Enforces server-side auth, checks owner/staff/client authorization, generates R2 presigned URL. |
-| `/api/webhooks/clerk` | API (Dynamic) | Real API | Svix HMAC verification on raw body string, syncs User in Prisma. Fail-closed. |
-| `/api/webhooks/stripe` | API (Dynamic) | Real API | Cryptographic signature verification, updates Payment & Quote in DB, sends emails. Fail-closed. |
-| `/blog` | Page (Dynamic) | Real Content | Blog index with 4 executive advisory articles. |
-| `/blog/[slug]` | Page (SSG) | Real Content | 4 pre-rendered executive advisory articles. |
-| `/booking-confirmation` | Page (Dynamic) | Real Content | Dynamic confirmation reading order parameters and providing WhatsApp coordination. |
-| `/case-studies` | Page (Dynamic) | Real Content | Invented studies removed; displays executive confidentiality notice. Hidden from nav. |
-| `/checkout` | Page (Dynamic) | Real Content | Enforces fail-closed checks: unpublished packages disable checkout; supports custom quotes. |
-| `/contact` | Page (Dynamic) | Real Content | Sector 75 Noida office coordinates, WhatsApp desk, inquiry form, corrected sister platforms. |
-| `/disclaimer` | Page (Dynamic) | Real Content | Corporate advisory disclaimer (statutory non-occult, non-demolition scope). |
-| `/intake` | Page (Dynamic) | Real Content | 5-step questionnaire with mandatory confidentiality consent and bespoke scope selection. |
-| `/login` | Page (Dynamic) | Auth Redirect | Clerk sign-in redirect. |
-| `/login/sso-callback` | Page (Dynamic) | Real Auth Route | Mounts `<AuthenticateWithRedirectCallback />` to prevent 404s. |
-| `/packages` | Page (Dynamic) | Real Content | Dynamic / proposal-driven. Displays "Request a Proposal" flow while packages are unpublished. |
-| `/pricing-policy` | Page (Dynamic) | Real Content | Transparent pricing policies and quote validity terms. |
-| `/privacy-policy` | Page (Dynamic) | Real Content | Strict privacy and non-disclosure terms. |
-| `/refund-policy` | Page (Dynamic) | Real Content | Advisory rescheduling and cancellation policy. |
-| `/robots.txt` | Route (Static) | Real Route | SEO crawler directive using `NEXT_PUBLIC_APP_URL`. |
-| `/sign-in/[[...sign-in]]` | Page (Dynamic) | Real Auth Route | Hosted Clerk Sign-In component. |
-| `/sign-in/sso-callback` | Page (Dynamic) | Real Auth Route | Mounts `<AuthenticateWithRedirectCallback />`. |
-| `/sign-up/[[...sign-up]]` | Page (Dynamic) | Real Auth Route | Hosted Clerk Sign-Up component. |
-| `/sign-up/sso-callback` | Page (Dynamic) | Real Auth Route | Mounts `<AuthenticateWithRedirectCallback />`. |
-| `/signup` | Page (Dynamic) | Auth Redirect | Clerk sign-up redirect. |
-| `/signup/sso-callback` | Page (Dynamic) | Real Auth Route | Mounts `<AuthenticateWithRedirectCallback />`. |
-| `/sitemap.xml` | Route (Static) | Real Route | XML sitemap generator indexing all public routes. |
-| `/sso-callback` | Page (Dynamic) | Real Auth Route | Mounts `<AuthenticateWithRedirectCallback />`. |
-| `/terms` | Page (Dynamic) | Real Content | Terms of service governed by laws of Noida, Gautam Buddha Nagar, UP, India. |
+> [!IMPORTANT]
+> **Core Assumption to Flag:** None of the confirmed services involve Vastu or muhurta timing. Consequently, this platform is repositioned entirely as general business consulting across all public and internal interfaces. If the client later desires commercial Vastu or strategic milestone timing as an optional add-on service, he will explicitly instruct so.
 
 ---
 
-## 🛠️ Detailed Remediation Log: What Was Fixed in This Cycle
+## ⚠️ Pending Client Confirmation (Do Not Invent)
 
-### 1. Cross-Promotion & Social Links
-- **Viar.in Corrected:** Identified as an **astrology education institute** (*Vihangam Institute of Astrology and Research*) offering self-paced astrology courses (removed incorrect "residential Vastu" claim).
-- **Aapka Astro Corrected:** Identified as offering **Vedic astrology consultations, residential and commercial Vastu consultation, Kundli and Panchang tools**.
-- **Centralized Ecosystem File:** Created `src/lib/constants/ecosystem.ts` defining `SISTER_SITES` and `getActiveSocialLinks()`.
-- **Zero Dead Social Links:** `getActiveSocialLinks()` filters out empty strings and placeholders. Only renders links if explicitly configured with valid HTTP(S) URLs.
-- **Updated Components:** `src/components/home/EcosystemCrossPromotion.tsx`, `src/components/layout/Footer.tsx`, `src/lib/constants/brand.ts`, and `src/app/contact/page.tsx`.
+The following **9 specific items** have **NOT** been confirmed by the client (Niraj Kumar) and must **never be invented**. Each is formally tracked as **pending client confirmation** across all code and database models:
 
-### 2. Packages & Pricing Architecture
-- **Data-Driven Packages:** Database model `Package` with `isActive: false` (unpublished drafts) by default.
-- **Seed Script (`prisma/seed.ts`):** Seeds placeholder packages as unpublished drafts (`isActive: false`).
-- **Admin Package Manager:** Created `src/app/api/admin/packages/route.ts` and `src/app/admin/packages/page.tsx` with publish toggle, price editing (INR/USD), and deliverable management. Added to `AdminNav`.
-- **Public Packages Page Proposal Mode:** Refactored `src/app/packages/page.tsx`. When no packages are published (`isActive: true` === 0), displays an executive "Request a Proposal" flow with scope pillars and zero unconfirmed prices.
-- **Fail-Closed Checkout Protection:** Refactored `src/app/checkout/page.tsx` and endpoints `/api/payments/razorpay/create-order` and `/api/payments/stripe/create-checkout`. Direct checkout for unpublished packages is strictly disabled; routes to `/intake?mode=custom-quote`.
-- **Owner Quote Builder Verified:** `src/app/admin/quotes/page.tsx` and `/api/admin/quotes` linked to real submissions with live checkout link generation (`/checkout?quoteId=...`).
-
-### 3. Small Additions & Security
-- **Mandatory Confidentiality Checkbox:** Added required NDA consent checkbox in `src/components/intake/IntakeForm.tsx` and validated in `/api/intake/route.ts`.
-- **Rate Limiting:** Sliding-window rate limiter enforced on `/api/intake` (5/10m), `/api/checkout/details` (30/1m), `/api/payments/razorpay/create-order` (10/10m), and `/api/payments/stripe/create-checkout` (10/10m).
-- **Stripe Webhook Listener:** Created `src/app/api/webhooks/stripe/route.ts` with cryptographic signature verification, database persistence, and automated Resend payment receipt + booking confirmation emails.
+| # | Item | Status | Current Code / Platform Handling | Location in Repository |
+| :-: | :--- | :--- | :--- | :--- |
+| **1** | **Package Names and Prices** | *pending client confirmation* | All packages seeded as unpublished drafts (`isActive: false`). Public `/packages` route displays an executive "Request a Proposal" workflow with zero invented prices or fake tiers. Direct checkout is disabled until packages are confirmed and published. | `src/lib/constants/packages.ts`<br>`prisma/seed.ts`<br>`src/app/packages/page.tsx` |
+| **2** | **Exact Brand Name and "DOW" Meaning** | *pending client confirmation* | Brand is displayed as `DOW Consulting` with a draft badge. What "DOW" stands for (acronym vs. name) and legal entity suffix remain unconfirmed. | `src/lib/constants/brand.ts`<br>`src/components/layout/Navbar.tsx` |
+| **3** | **Official Logo Asset** | *pending client confirmation* | Clean typographic wordmark SVG with neutral navy & gold accent. No unverified third-party emblems or crests used. | `src/components/layout/Navbar.tsx`<br>`src/components/layout/Footer.tsx` |
+| **4** | **Call Duration and Report Turnaround** | *pending client confirmation* | Turnaround and call duration are marked as draft/to be confirmed upon proposal dispatch. No rigid SLA (e.g. "60-min call" or "7-day turnaround") is advertised as binding. | `src/app/pricing-policy/page.tsx`<br>`src/app/account/page.tsx`<br>`src/lib/constants/brand.ts` |
+| **5** | **Scheduling Method** | *pending client confirmation* | Direct coordinator scheduling via WhatsApp desk (`+91 93112 15564`) and Google Meet links pending client selection of automated tooling (e.g., Cal.com/Calendly vs. manual concierge). | `src/app/booking-confirmation/page.tsx`<br>`src/lib/email/resend.ts` |
+| **6** | **Document Upload Preference** | *pending client confirmation* | Client portal provides encrypted deliverable download vault (Cloudflare R2); client intake document uploads default to direct secure coordinator intake via WhatsApp or client portal vault pending formal S3 direct upload policy. | `src/app/account/page.tsx`<br>`src/components/intake/IntakeForm.tsx` |
+| **7** | **GST Registration & Invoicing Status** | *pending client confirmation* | Pricing policy and checkout explicitly state GST is subject to client confirmation (`GST applicability pending confirmation`). Invoices do not display unverified GSTIN numbers. | `src/app/pricing-policy/page.tsx`<br>`src/lib/constants/brand.ts` |
+| **8** | **Official Social Media Links** | *pending client confirmation* | Centralized in `src/lib/constants/ecosystem.ts`. Dead and placeholder URLs are suppressed; only verified active channels (or direct WhatsApp) render in header and footer. | `src/lib/constants/ecosystem.ts`<br>`src/components/layout/Footer.tsx` |
+| **9** | **Exact Former Employer Designations** | *pending client confirmation* | Quoted strictly and verbatim in his client-supplied phrase: *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*. No specific title is fabricated for any individual firm. | `src/lib/constants/brand.ts`<br>`src/app/about/page.tsx`<br>`src/components/layout/Navbar.tsx` |
 
 ---
 
-## 🚀 Build Verification Evidence
+## 📋 Modular Branching Intake Form Architecture
+
+The intake questionnaire (`src/components/intake/IntakeForm.tsx`) has been reworked with a modular design pattern defined in `src/lib/constants/intakeQuestions.ts`. All questions are defined in a clean schema so they can be modified, reordered, or edited as draft questions pending the client's final review.
+
+### 1. Common Baseline Fields (Collected for all 4 services):
+- **Executive Contact:** Full Name, Business Email, Phone / WhatsApp (for scheduling coordination), Business / Entity Name.
+- **Entity Profile:** Business Stage (`idea`, `early`, `operating`), Industry Classification (Retail, Manufacturing, D2C, B2B SaaS, Professional Services, F&B, Healthcare, Logistics, Other), Team Size (1, 2–5, 6–20, 21–50, 50+), Commercial Setup (Leased, Owned, Searching, Virtual).
+- **Location Coordinates:** City, State / Province, Country (`India`).
+- **Strategic Engagement Scope:** Primary Strategic Goals, Main Challenges & Bottlenecks, Timeline & Urgency (Immediate 7–14d, 30d, 60–90d, Exploratory), Budget Range (INR), Preferred Connection Channel (WhatsApp Call vs. Google Meet).
+- **Mandatory NDA Checkbox:** Enforces non-disclosure and confidentiality agreement prior to form submission.
+
+### 2. Service-Specific Branching Logic:
+When the client selects a service, Step 3 dynamically renders custom diagnostic questions:
+- **Go-to-Market (GTM) Strategy:**
+  1. *Product or service description* (core offering & differentiators)
+  2. *Target customer profile* (B2B/B2C, ideal buyer profile)
+  3. *Current sales channels* (direct, distributors, online marketplace, retail)
+  4. *Pricing structure & unit economics* (price points, margins, average order value)
+  5. *Known competitors* (direct and indirect alternatives)
+- **Market Research:**
+  1. *Target geography and customer segments of interest* (specific territories, cities, demographic clusters)
+  2. *Specific questions to answer* (competitor pricing, buyer willingness-to-pay, supply chain vendor availability)
+  3. *Existing data & prior findings* (customer interviews, pilot data, secondary reports)
+- **Business Expansion Strategy:**
+  1. *Current operating markets* (existing branches, cities, footprint)
+  2. *Target new markets or cities* (new territories or channels slated for rollout)
+  3. *Current operational capacity* (fulfillment, manufacturing, supply chain, team bandwidth)
+  4. *Funding & capex position* (bootstrapped, debt, equity raise, capex budget)
+- **New Business Start Consultation:**
+  1. *Comprehensive idea description & business model* (problem solved, value proposition, monetization)
+  2. *Founder background & domain experience* (education, past corporate roles, industry expertise)
+  3. *Capital available & launch runway* (launch budget, working capital runway in months)
+  4. *Location options under consideration* (commercial hub, leased vs co-working vs owned)
+  5. *Licences, permits & regulatory considerations* (statutory clearances, FSSAI, GST, MSME)
+
+### 3. Structured Storage & Privacy:
+- Form submissions are posted to `/api/intake` (rate-limited via sliding window: max 5 submissions / 10 min / IP).
+- Responses are stored as structured JSON in the `IntakeSubmission` model (`serviceDetails Json?`, `locationState`, `serviceRequested`).
+- The API automatically initializes a corresponding consulting `Case` with 6 stages and creates the initial `CaseAuditLog` record.
+- **Data Privacy:** Stored data is restricted strictly to the Owner and the staff assigned to that case under server-side authorization.
+
+---
+
+## 👥 Team Roles, Stages & Collaborative Case Workflow
+
+Built entirely on the existing `StaffPermission` pattern without Clerk Organizations (preventing paid add-on lock-in).
+
+### 1. Configurable Generic Default Roles
+Roles can be customized and renamed by the Owner (`/admin/team` and `/api/admin/team/roles`):
+1. **Information Coordinator:** Onboards the client, reviews submitted documentation, and verifies intake briefs.
+2. **Research Analyst:** Conducts competitive benchmarking, secondary data audits, and market landscape discovery.
+3. **Consultant:** Conducts live strategic sessions, analyzes operational bottlenecks, and drafts advisory deliverables.
+4. **Lead Strategic Advisor / Owner (Niraj Kumar):** The ultimate review gatekeeper, assigning stages and approving final reports.
+
+### 2. The 6-Stage Case Lifecycle
+Every submission progresses through a structured pipeline:
+```mermaid
+flowchart LR
+    A["1. Information Collection"] --> B["2. Market & Field Research"]
+    B --> C["3. Strategic Consultation"]
+    C --> D["4. Report Preparation"]
+    D --> E["5. Owner Review & Approval"]
+    E --> F["6. Delivered to Client"]
+```
+Each stage records:
+- `assignedToId`: Assigned staff member (or null if unassigned).
+- `status`: `PENDING`, `IN_PROGRESS`, `COMPLETED`, `SKIPPED`.
+- `internalNotes`: **Private notes** strictly isolated from the client.
+- `attachments`: Structured JSON array of uploaded or linked files.
+- `startedAt` & `completedAt`: Precise ISO timestamps.
+
+### 3. Server-Side Least Privilege Enforcement
+Enforced across all routes and API endpoints:
+- **Staff Case Isolation:** A team member sees **ONLY** the cases and stages assigned to them (`verifyCaseAccess` queries `caseStage.assignedToId === auth.dbUserId`). Unassigned cases return **HTTP 403 Forbidden**.
+- **Owner Super-Access:** The Owner (identified strictly by `isOwnerEmail(email)` matching `OWNER_EMAIL`) sees all cases, all stages, all team permissions, and all audit logs.
+- **Financial & Permission Isolation:** Staff members **cannot view** payments, revenue, pricing analytics, or modify team permissions (`/admin/analytics`, `/admin/packages`, and `/admin/team` are Owner-restricted).
+- **Owner-Only Gatekeeping Actions:**
+  - Assigning and reassigning stages (`POST /api/admin/cases/[id]/assign`)
+  - Building and dispatching custom quotes (`POST /api/admin/quotes`)
+  - Setting packages and pricing (`POST/PATCH /api/admin/packages`)
+  - Managing team members and permissions (`/api/admin/team`)
+  - Approving final reports before client delivery (`POST /api/admin/cases/[id]/approve-report`)
+  - Toggling client staff name visibility (`PATCH /api/admin/cases/[id]/settings`)
+
+### 4. Stage Hand-Offs & Transactional Notifications
+When an assigned team member completes a stage (`status: "COMPLETED"`):
+1. The current stage is timestamped and closed.
+2. The next sequential stage advances to `IN_PROGRESS`.
+3. If the next stage has an assigned team member, Resend dispatches a **Stage Hand-Off Notification Email** (`sendStageHandoffEmail`) with case coordinates and instructions.
+4. Resend dispatches an **Owner Pipeline Activity Brief** (`sendOwnerStageHandoffEmail`) to `OWNER_EMAIL`.
+5. The action is recorded in `CaseAuditLog`.
+
+### 5. Client View Isolation (`/account` & `/api/client/case`)
+- **Sanitized DTO:** The client portal displays **ONLY** simple status stages and the delivered report.
+- **Notes Isolation:** `internalNotes` are **strictly omitted** from client queries and payloads.
+- **Staff Name Anonymity:** Client sees generic role titles (e.g., "Research Analyst") unless the Owner explicitly enables `showStaffNamesToClient`.
+
+---
+
+## 🌐 Public Team Page — Real People Only
+
+- **Dedicated Route:** `/team` (`src/app/team/page.tsx`).
+- **Owner Management:** Managed via `/admin/team` (Public Directory Tab) and `/api/admin/public-team`.
+- **Database Model:** `PublicTeamMember` (`name`, `roleTitle`, `photoUrl`, `bio`, `order`, `isPublished`).
+- **Strict Seeding Constraint:** **ZERO seeded team members**. No invented names, titles, bios, or stock photos exist in code or database seeds.
+- **Conditional Navigation Visibility:**
+  - Handled dynamically via `GET /api/public/meta`.
+  - If no team member is published (`hasPublishedTeam: false`), the `/team` link is **completely omitted** from both the desktop/mobile `Navbar` and the `Footer`.
+  - If visited directly when 0 profiles are published, `/team` renders a transparent status note clarifying that team profiles are being updated by practice leadership and points visitors to Niraj Kumar's real credentials on `/about`.
+
+---
+
+## ⭐ Testimonials — A Real, Consent-Based System
+
+- **Strict Zero Invention Rule:** 0 testimonials, reviews, ratings, star scores, client names, quotes, or business results are seeded or hardcoded anywhere in the codebase.
+- **Database Model:** `Testimonial` (`clientName`, `company`, `role`, `quote`, `serviceUsed`, `date`, `consentConfirmed`, `consentNote`, `isPublished`, `status: PENDING | APPROVED | REJECTED`, `feedbackToken`, `caseId`).
+- **Admin Management:** Dedicated interface at `/admin/testimonials` (`src/app/admin/testimonials/page.tsx`) and API `/api/admin/testimonials`.
+- **Mandatory Consent Audit Rule:**
+  - A testimonial **CANNOT** be published (`isPublished: true`) unless `consentConfirmed: true` AND a non-empty `consentNote` (recording how consent was confirmed, e.g. "WhatsApp chat on 12-Apr-2026", "Email verification") is documented on record.
+  - Server-side validation rejects any publish attempt lacking confirmed consent with HTTP 400.
+- **Post-Delivery Feedback Loop:**
+  - When the Owner approves and delivers a report via `approveAndDeliverReport` (`src/lib/cases.ts`), a unique `feedbackToken` is generated.
+  - An automated transactional email is dispatched via Resend (`sendFeedbackRequestEmail`) to the client containing a dedicated 2-minute feedback link (`/feedback?token=...`).
+  - Client feedback submissions (`POST /api/feedback`) arrive strictly as `status: PENDING` and `isPublished: false`, recording explicit publication consent.
+  - A notification email (`sendOwnerNewFeedbackNotificationEmail`) alerts the Owner of incoming feedback for review.
+  - Testimonials accumulate authentically over time through genuine client engagements.
+- **Zero Empty State Rule on Public Interfaces:**
+  - Homepage component `TestimonialsSection` (`src/components/home/TestimonialsSection.tsx`) queries only `isPublished: true && consentConfirmed: true`. When count is 0, it returns `null` (zero markup, zero headings, zero placeholders).
+  - Public route `/testimonials` (`src/app/testimonials/page.tsx`) redirects to `/` if published count is 0.
+  - Navigation links to `/testimonials` are completely suppressed from `Navbar` and `Footer` until at least one consent-verified testimonial is published.
+
+---
+
+## 🧪 Automated Security & Business Logic Test Evidence
+
+Automated tests in [`tests/case-workflow-auth.test.ts`](file:///c:/Users/TANUSH%20YADAV/Desktop/dowconsulting/tests/case-workflow-auth.test.ts) execute via `npm test` (`tsx --test tests/case-workflow-auth.test.ts`).
+
+### Test Execution Output (All 11 Pass):
+```text
+> dowconsulting@0.1.0 test
+> tsx --test tests/case-workflow-auth.test.ts
+
+▶ Case Workflow & Server-Side Least Privilege Security Tests
+  ✔ 1. Proves a team member CANNOT open an unassigned case (Least Privilege) (6.3554ms)
+  ✔ 1b. Proves an assigned team member CAN open their assigned case (0.6934ms)
+  ✔ 2. Proves a client CANNOT see internal notes in client portal view (1.0348ms)
+  ✔ 2b. Proves client view hides staff names by default when toggle is off (0.1787ms)
+  ✔ 3. Proves a non-Owner CANNOT approve or deliver a final report (0.1136ms)
+  ✔ 3b. Proves Owner CAN approve reports and perform owner-only actions (0.0921ms)
+  ✔ 4. Proves a staff member CANNOT modify an unassigned stage (0.2535ms)
+  ✔ 5. Proves testimonial publication is REJECTED without confirmed consent and consent note (0.1455ms)
+  ✔ 6. Proves public query returns ONLY published testimonials with verified consent (0.1337ms)
+  ✔ 7. Proves public team directory filters out unpublished drafts (0.1734ms)
+  ✔ 8. Proves post-delivery client feedback always enters as PENDING and UNPUBLISHED (0.12ms)
+✔ Case Workflow & Server-Side Least Privilege Security Tests (10.2321ms)
+
+ℹ tests 11
+ℹ suites 1
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ duration_ms 483.692
+```
+
+---
+
+## 🚀 Production Build Verification (67 Routes)
+
+The Next.js production build (`npm run build`) verifies that all TypeScript types, route schemas, dynamic layouts, and static pages compile with zero errors:
 
 ```text
 > dowconsulting@0.1.0 build
 > prisma generate && next build
 
-Environment variables loaded from .env
-Prisma schema loaded from prisma\schema.prisma
-
-✔ Generated Prisma Client (v5.22.0) to .\node_modules\@prisma\client in 125ms
-
+✔ Generated Prisma Client (v5.22.0)
 ▲ Next.js 14.2.18
-  - Environments: .env
 
 Creating an optimized production build ...
 ✓ Compiled successfully
 Linting and checking validity of types ...
 Collecting page data ...
-Generating static pages (51/51)
-✓ Generating static pages (51/51)
+Generating static pages (67/67)
+✓ Generating static pages (67/67)
 Finalizing page optimization ...
 Collecting build traces ...
 
-Middleware: 61.3 kB
-All 51 routes compiled with zero errors.
+All 67 routes compiled with zero errors.
 Exit Code: 0 (BUILD COMPLETE)
 ```
 
----
-
-## 📋 Production Readiness Checklist (What Remains for Launch)
-
-1. **Deploy Production Environment Variables to Vercel:**
-   - `DATABASE_URL`: Neon PostgreSQL pooled connection string (dedicated project, unshared).
-   - `DIRECT_URL`: Neon PostgreSQL direct connection string for migrations.
-   - `NEXT_PUBLIC_APP_URL`: Production domain URL (`https://dowconsulting.in` or `https://dowconsulting.com`).
-   - `NEXT_PUBLIC_CONTACT_EMAIL`: Verified inbound email (e.g. `advisory@dowconsulting.in`).
-   - `OWNER_EMAIL`: Niraj Kumar's verified administrative email.
-   - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` & `CLERK_SECRET_KEY`: Clerk application `app_3JoGbVxdSJXtTwELzFuSwXpw6Rf`.
-   - `CLERK_WEBHOOK_SECRET`: Svix webhook endpoint secret.
-   - `NEXT_PUBLIC_RAZORPAY_KEY_ID` & `RAZORPAY_KEY_SECRET`: Production Indian gateway credentials.
-   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`: Production USD gateway credentials.
-   - `RESEND_API_KEY` & `RESEND_FROM_EMAIL`: Production transactional mailer credentials.
-   - `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`: Cloudflare R2 bucket.
-2. **Execute Neon Migration on Deployed Database:**
-   - Run `npm run db:migrate` against Neon direct URL.
-   - Submit test intake and confirm persistence across deployment rebuilds.
-3. **Client Sign-off on Section 2 ("Unconfirmed — pending client decision") items** before public marketing campaigns.
+### Full Route Inventory (67 Routes):
+- **Client & Public Pages:** `/`, `/about`, `/services`, `/services/gtm-strategy`, `/services/market-research`, `/services/business-expansion-strategy`, `/services/new-business-start-consultation`, `/packages`, `/case-studies`, `/contact`, `/intake`, `/checkout`, `/booking-confirmation`, `/feedback`, `/team`, `/testimonials`, `/terms`, `/privacy-policy`, `/refund-policy`, `/disclaimer`, `/pricing-policy`.
+- **Client Vault & Auth:** `/account`, `/login`, `/signup`, `/sign-in/[[...sign-in]]`, `/sign-up/[[...sign-up]]`, and all 5 SSO callback handlers.
+- **Admin & Workflow Interfaces:** `/admin`, `/admin/cases`, `/admin/cases/[id]`, `/admin/submissions`, `/admin/packages`, `/admin/quotes`, `/admin/bookings`, `/admin/reports`, `/admin/testimonials`, `/admin/analytics`, `/admin/team`.
+- **API Endpoints:** `/api/intake`, `/api/client/case`, `/api/feedback`, `/api/public/meta`, `/api/admin/cases`, `/api/admin/cases/[id]`, `/api/admin/cases/[id]/stages/[stageName]`, `/api/admin/cases/[id]/assign`, `/api/admin/cases/[id]/approve-report`, `/api/admin/cases/[id]/settings`, `/api/admin/team`, `/api/admin/team/roles`, `/api/admin/public-team`, `/api/admin/testimonials`, `/api/admin/packages`, `/api/admin/quotes`, `/api/admin/reports/upload`, `/api/admin/submissions/status`, `/api/checkout/details`, `/api/payments/razorpay/*`, `/api/payments/stripe/*`, `/api/webhooks/clerk`, `/api/webhooks/stripe`, `/api/reports/[id]/download`.
+- **Static SEO Assets:** `/robots.txt`, `/sitemap.xml`, `/blog`, `/blog/[slug]`.

@@ -1,7 +1,10 @@
 /**
- * PLACEHOLDER: replace with client-approved content
- * Package names, exact pricing, and detailed inclusions are structural blueprints
- * pending final confirmation from Niraj Kumar.
+ * PENDING CLIENT CONFIRMATION
+ * Package names, exact pricing, call duration, report turnaround, and detailed deliverables
+ * are NOT yet confirmed by the client (Niraj Kumar).
+ * 
+ * All packages in production database are seeded as unpublished drafts (isActive: false).
+ * The public site displays the executive proposal flow until the client confirms packages and pricing.
  */
 
 export interface PackageTier {
@@ -13,10 +16,9 @@ export interface PackageTier {
   priceUSD: number;
   popular?: boolean;
   deliverables: {
-    liveSession: string; // WhatsApp or Google Meet
-    writtenReport: string; // PDF deliverable
-    timingAudit: string;
-    spatialAudit: string;
+    consultation: string;
+    report: string;
+    scope: string;
     followUp: string;
   };
   features: string[];
@@ -25,73 +27,70 @@ export interface PackageTier {
 
 export const CONSULTING_PACKAGES: PackageTier[] = [
   {
-    id: "foundation-advisory",
-    name: "Strategic Foundation & Timing Audit", // PLACEHOLDER: replace with client-approved content
-    subtitle: "Ideal for early-stage ventures, pre-launch pivots, or key executive transitions.",
-    badge: "Starting Tier",
-    priceINR: 15000, // PLACEHOLDER: replace with client-approved content
-    priceUSD: 249, // PLACEHOLDER: replace with client-approved content
+    id: "gtm-market-research-advisory",
+    name: "GTM Strategy & Market Research Advisory [Draft]", // Pending client confirmation
+    subtitle: "Draft framework for early-stage startups and MSMEs evaluating market entry.",
+    badge: "Starting Tier [Draft]",
+    priceINR: 15000, // Pending client confirmation (Unpublished)
+    priceUSD: 249, // Pending client confirmation (Unpublished)
     deliverables: {
-      liveSession: "60-Minute Focused Advisory Call (Google Meet or WhatsApp Call)",
-      writtenReport: "10-Page Strategic Timing & Architectural Assessment PDF",
-      timingAudit: "Key milestone timing matrix for launch, capital raise, or major contracts",
-      spatialAudit: "Preliminary Commercial Vastu layout evaluation of existing or proposed office",
-      followUp: "14-day WhatsApp coordination window for report clarifications",
+      consultation: "Strategic Advisory Session [Duration pending client confirmation]",
+      report: "Advisory Roadmap PDF [Turnaround pending client confirmation]",
+      scope: "Customer segmentation, initial positioning, and preliminary market landscape review",
+      followUp: "Post-consultation clarification window [Terms pending client confirmation]",
     },
     features: [
-      "Principal consultation directly with Niraj Kumar",
-      "Executive review of founder/entity timing cycles",
-      "Floor plan review for desk, accounts, and leadership zones",
-      "Written actionable diagnostic report within 5 business days",
-      "Flat one-time fee with zero hidden recurring charges",
+      "Consulting team collaboration (research, information collection, and advisory)",
+      "Target customer profiling and value positioning review",
+      "Competitor benchmark overview and sector observations",
+      "Written diagnostic roadmap deliverable",
+      "Pricing and package name pending final client confirmation",
     ],
-    targetAudience: "Startups, Solo Founders, and Boutique Business Owners",
+    targetAudience: "Startups, Small Companies, and MSMEs",
   },
   {
-    id: "commercial-vastu-growth",
-    name: "Commercial Vastu & Strategic Growth Advisory", // PLACEHOLDER: replace with client-approved content
-    subtitle: "Comprehensive spatial optimization & strategic business trajectory advisory.",
-    badge: "Most Selected",
+    id: "business-expansion-advisory",
+    name: "Business Expansion & Scaling Advisory [Draft]", // Pending client confirmation
+    subtitle: "Draft framework for expanding companies scaling operations or geographic reach.",
+    badge: "Growth Tier [Draft]",
     popular: true,
-    priceINR: 35000, // PLACEHOLDER: replace with client-approved content
-    priceUSD: 499, // PLACEHOLDER: replace with client-approved content
+    priceINR: 35000, // Pending client confirmation (Unpublished)
+    priceUSD: 499, // Pending client confirmation (Unpublished)
     deliverables: {
-      liveSession: "90-Minute In-Depth Diagnostic & Strategy Session",
-      writtenReport: "22-Page Full Commercial Vastu & Strategic Expansion Roadmap PDF",
-      timingAudit: "12-Month Strategic Window Calendar for scaling, recruitment & capex",
-      spatialAudit: "Exhaustive commercial site grid analysis (entrance, cabins, cash flow zones)",
-      followUp: "30-day WhatsApp follow-up advisory window with Niraj Kumar",
+      consultation: "Strategic Expansion Session [Duration pending client confirmation]",
+      report: "Comprehensive Expansion Strategy Blueprint [Turnaround pending client confirmation]",
+      scope: "Geographic expansion evaluation, operational capacity mapping, and workflow planning",
+      followUp: "Strategic follow-up window [Terms pending client confirmation]",
     },
     features: [
-      "Direct engagement with Niraj Kumar (ex-VP Reliance Retail & Metro)",
-      "High-impact remedy recommendations with zero structural demolition",
-      "Commercial zoning alignment for sales velocity and executive harmony",
-      "Detailed written blueprint with architectural annotations",
-      "Priority WhatsApp access for real-time implementation guidance",
+      "Led by Niraj Kumar (Former VP & Business Head at Reliance Retail, Metro Cash & Carry, NIF Food)",
+      "Team-based research into target regional markets and competitive presence",
+      "Operational workflow and resource requirement assessment",
+      "Structured expansion roadmap with phased milestone gates",
+      "Pricing and package name pending final client confirmation",
     ],
-    targetAudience: "Retail Chains, MSME Manufacturers, Multi-team Corporate Offices",
+    targetAudience: "Growing Companies, Multi-Unit Businesses, and MSMEs",
   },
   {
-    id: "executive-retainer-expansion",
-    name: "Enterprise Multi-Facility & Board-Level Strategy", // PLACEHOLDER: replace with client-approved content
-    subtitle: "High-stakes corporate expansion, multi-location rollouts, and institutional M&A.",
-    badge: "Custom Proposal",
-    priceINR: 75000, // PLACEHOLDER: replace with client-approved content
-    priceUSD: 999, // PLACEHOLDER: replace with client-approved content
+    id: "new-business-start-consultation",
+    name: "New Business Start & Venture Advisory [Draft]", // Pending client confirmation
+    subtitle: "Draft framework for founders launching new commercial entities.",
+    badge: "Bespoke Scope [Draft]",
+    priceINR: 75000, // Pending client confirmation (Unpublished)
+    priceUSD: 999, // Pending client confirmation (Unpublished)
     deliverables: {
-      liveSession: "Two 90-Minute Strategic Board & Operational Sessions",
-      writtenReport: "Enterprise Dossier: Spatial Diagnostics & Multi-Year Strategic Trajectory",
-      timingAudit: "Multi-year corporate inflection and partnership timing roadmap",
-      spatialAudit: "Multi-facility / warehouse / corporate HQ complete spatial alignment",
-      followUp: "60-day strategic check-ins and direct executive advisory",
+      consultation: "Foundational Venture Diagnostic Sessions [Duration pending client confirmation]",
+      report: "New Venture Operating Blueprint [Turnaround pending client confirmation]",
+      scope: "Business model structuring, unit economics review, and pre-launch milestone sequencing",
+      followUp: "Extended advisory touchpoints [Terms pending client confirmation]",
     },
     features: [
-      "Bespoke engagement tailored to enterprise scale and multi-site operations",
-      "Comprehensive corporate timing & organizational change alignment",
-      "Warehousing, retail network, and headquarters synchronized audit",
-      "Full executive report with priority Cloudflare R2 delivery",
-      "Option for site-visit add-ons upon custom quote discussion",
+      "Comprehensive evaluation tailored to new entity formation and early operational setup",
+      "Multi-disciplinary support across research, consulting, and information gathering",
+      "Concept feasibility review and operational risk identification",
+      "Custom proposal mode available for tailored multi-stakeholder requirements",
+      "Pricing and package name pending final client confirmation",
     ],
-    targetAudience: "Large Enterprises, Warehouses, Multi-Store Retail Brands, Industrial Units",
+    targetAudience: "Founders, New Venture Initiators, and Expanding Business Owners",
   },
 ];

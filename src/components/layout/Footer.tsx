@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { FOOTER_LEGAL_LINKS } from "@/lib/constants/navigation";
 import { getActiveSocialLinks } from "@/lib/constants/ecosystem";
+import { prisma } from "@/lib/prisma";
 import {
   MapPin,
   MessageSquare,
@@ -13,14 +14,28 @@ import {
   Instagram,
 } from "lucide-react";
 
-export function Footer() {
+export async function Footer() {
   const activeSocialLinks = getActiveSocialLinks();
+
+  let hasPublishedTeam = false;
+  let hasPublishedTestimonials = false;
+
+  try {
+    const [teamCount, testCount] = await Promise.all([
+      prisma.publicTeamMember.count({ where: { isPublished: true } }),
+      prisma.testimonial.count({ where: { isPublished: true, consentConfirmed: true } }),
+    ]);
+    hasPublishedTeam = teamCount > 0;
+    hasPublishedTestimonials = testCount > 0;
+  } catch (err) {
+    // Safe fallback if database is pending
+  }
 
   return (
     <footer className="bg-[#111B27] text-[#8C96A5] border-t border-[#2A3D54]">
       {/* Upper Footer: Brand, Credentials, Ecosystem */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Col 1: Brand & Positioning */}
           <div className="space-y-4">
             <div>
@@ -32,31 +47,83 @@ export function Footer() {
               </p>
             </div>
             <p className="text-xs leading-relaxed text-[#8C96A5]">
-              Executive advisory practice led by <strong>{BRAND.founder.name}</strong>, synthesizing two decades of high-level corporate retail & business operations with structured spatial and timing intelligence.
+              Business consulting for startups, small companies, and MSMEs. DOW Consulting operates as a collaborative team where different specialists handle research, client consultation, and information collection.
             </p>
-            <div className="pt-2 flex items-center gap-2 text-xs text-[#F7F6F3]">
-              <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
-              <span>Dual Delivery: Live Call + Written PDF Report</span>
+            <div className="pt-1 text-[11px] text-[#C9A24B]">
+              <span>[Draft Copy — Pending Client Confirmation]</span>
             </div>
           </div>
 
-          {/* Col 2: Real Corporate Credentials */}
+          {/* Col 2: Confirmed Services */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
-              Corporate Leadership & Background
+              Consulting Services [Draft]
             </h4>
             <ul className="text-xs space-y-2 text-[#8C96A5]">
               <li>
-                <strong className="text-[#E2E8F0]">Corporate Operating Experience</strong>
+                <Link href="/services/gtm-strategy" className="hover:text-[#C9A24B] transition-colors">
+                  GTM Strategy
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/market-research" className="hover:text-[#C9A24B] transition-colors">
+                  Market Research
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/business-expansion-strategy" className="hover:text-[#C9A24B] transition-colors">
+                  Business Expansion Strategy
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/new-business-start-consultation" className="hover:text-[#C9A24B] transition-colors">
+                  New Business Start Consultation
+                </Link>
+              </li>
+            </ul>
+
+            {(hasPublishedTeam || hasPublishedTestimonials) && (
+              <div className="pt-2 border-t border-[#2A3D54] space-y-1.5 text-xs">
+                {hasPublishedTeam && (
+                  <div>
+                    <Link href="/team" className="hover:text-[#C9A24B] transition-colors">
+                      Advisory Team
+                    </Link>
+                  </div>
+                )}
+                {hasPublishedTestimonials && (
+                  <div>
+                    <Link href="/testimonials" className="hover:text-[#C9A24B] transition-colors">
+                      Client Testimonials
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="pt-2 border-t border-[#2A3D54] text-[11px] text-[#8C96A5]">
+              Designed for startups, small businesses &amp; MSMEs.
+            </div>
+          </div>
+
+          {/* Col 3: Real Corporate Credentials */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
+              Lead Strategic Advisor
+            </h4>
+            <p className="text-xs text-[#F7F6F3] font-semibold">{BRAND.founder.name}</p>
+            <ul className="text-xs space-y-2 text-[#8C96A5]">
+              <li>
+                <strong className="text-[#E2E8F0]">Corporate Background</strong>
                 <br />Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food
               </li>
               <li>
-                <strong className="text-[#E2E8F0]">Academic Foundations</strong>
-                <br />B.Sc. (Hons.) Physics • PGDBM Int. Business
+                <strong className="text-[#E2E8F0]">Academic Credentials</strong>
+                <br />B.Sc. (Hons.) Physics • PGDBM in International Business & Marketing
               </li>
               <li>
                 <strong className="text-[#E2E8F0]">Executive Education</strong>
-                <br />XLRI (Leadership & Change Mgmt)
+                <br />XLRI (Leadership Development and Change Management Certification)
               </li>
             </ul>
           </div>

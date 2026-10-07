@@ -2,9 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireEnv } from "@/lib/env";
 import { uploadReportToR2 } from "@/lib/storage/r2";
 import { sendReportDeliveredEmail } from "@/lib/email/resend";
+import { getAuthContext } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   try {
+    const auth = await getAuthContext();
+    if (!auth.isAuthenticated || !auth.isOwner) {
+      return NextResponse.json(
+        { error: "Unauthorized: Authorizing and delivering final reports is strictly restricted to the Owner." },
+        { status: 403 }
+      );
+    }
     const formData = await req.formData();
     const clientName = formData.get("clientName") as string;
     const businessName = formData.get("businessName") as string;

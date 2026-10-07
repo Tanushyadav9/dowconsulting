@@ -24,12 +24,12 @@ export async function sendIntakeConfirmationEmail(params: {
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1B2838; line-height: 1.6;">
       <div style="background-color: #1B2838; padding: 24px; text-align: center;">
         <h1 style="color: #F7F6F3; margin: 0; font-size: 20px; letter-spacing: 0.5px;">DOW CONSULTING</h1>
-        <p style="color: #C9A24B; margin: 6px 0 0; font-size: 13px; font-weight: bold;">Strategic Business Timing & Commercial Vastu</p>
+        <p style="color: #C9A24B; margin: 6px 0 0; font-size: 13px; font-weight: bold;">Business Consulting for Startups, Small Companies &amp; MSMEs</p>
       </div>
       <div style="padding: 30px; background-color: #FFFFFF; border: 1px solid #E2E8F0;">
         <p>Dear ${params.name},</p>
         <p>Thank you for submitting your detailed business profile for <strong>${params.businessName}</strong>.</p>
-        <p>Niraj Kumar and our advisory desk are reviewing your strategic goals, current timeline, and spatial context. We evaluate every inquiry with direct corporate operating rigor and commercial timing methodologies.</p>
+        <p>Our consulting team and Lead Strategic Advisor Niraj Kumar are reviewing your strategic goals and operational requirements. We evaluate every inquiry with structured commercial operating analysis and research methodologies.</p>
         
         <div style="background-color: #F7F6F3; border-left: 4px solid #C9A24B; padding: 16px; margin: 20px 0;">
           <p style="margin: 0; font-size: 14px; font-weight: bold;">Submission Reference ID: ${params.submissionId}</p>
@@ -204,23 +204,23 @@ export async function sendBookingConfirmationEmail(params: {
       </div>
       <div style="padding: 30px; background-color: #FFFFFF; border: 1px solid #E2E8F0;">
         <p>Dear ${params.name},</p>
-        <p>Your live strategic consultation session with <strong>Niraj Kumar</strong> has been confirmed.</p>
+        <p>Your live strategic consultation session with the <strong>DOW Consulting</strong> team has been confirmed.</p>
         
         <div style="background-color: #F7F6F3; border-left: 4px solid #1B2838; padding: 18px; margin: 20px 0;">
           <p style="margin: 0; font-size: 14px;"><strong>Engagement:</strong> ${params.packageName}</p>
           <p style="margin: 8px 0 0; font-size: 14px;"><strong>Scheduled Time:</strong> ${params.scheduledAt}</p>
           <p style="margin: 8px 0 0; font-size: 14px;"><strong>Delivery Channel:</strong> ${channelText}</p>
-          <p style="margin: 8px 0 0; font-size: 13px; color: #5A6472;">Direct Advisor WhatsApp: <a href="${BRAND.contact.whatsapp.link}" style="color: #1B2838; font-weight: bold;">${BRAND.contact.whatsapp.display}</a></p>
+          <p style="margin: 8px 0 0; font-size: 13px; color: #5A6472;">Advisory Desk WhatsApp: <a href="${BRAND.contact.whatsapp.link}" style="color: #1B2838; font-weight: bold;">${BRAND.contact.whatsapp.display}</a></p>
         </div>
 
         <p><strong>What to Prepare for the Call:</strong></p>
         <ul>
-          <li>Any premises floor plans, layout sketches, or commercial site photos.</li>
-          <li>Key target milestones (e.g. lease signing, brand launch, investor presentations).</li>
-          <li>Specific business bottlenecks or key team dynamic questions.</li>
+          <li>Business background, pitch deck, or notes regarding your target market.</li>
+          <li>Key target milestones (e.g. product launch, expansion plans, market entry).</li>
+          <li>Specific business bottlenecks or strategic priorities you want addressed.</li>
         </ul>
 
-        <p>Following this live session, your comprehensive written strategic report will be prepared and delivered to your portal vault.</p>
+        <p>Following this live session, your comprehensive written strategic report will be prepared by our team and delivered to your portal vault.</p>
       </div>
     </div>
   `;
@@ -264,7 +264,7 @@ export async function sendReportDeliveredEmail(params: {
           </a>
         </div>
 
-        <p>Your report includes the detailed timing breakdown, commercial spatial recommendations, and operational priorities discussed during your session.</p>
+        <p>Your report includes the detailed strategic insights, research findings, and operational priorities formulated for your enterprise.</p>
         <p style="font-size: 13px; color: #5A6472;">For follow-up questions during your active review window, reach out directly via WhatsApp at ${BRAND.contact.whatsapp.display}.</p>
       </div>
     </div>
@@ -277,3 +277,192 @@ export async function sendReportDeliveredEmail(params: {
     html,
   });
 }
+
+/**
+ * 6. Case Stage Hand-Off Notification Email to Next Staff Assignee
+ */
+export async function sendStageHandoffEmail(params: {
+  to: string;
+  name: string;
+  caseNumber: string;
+  businessName: string;
+  stageName: string;
+  previousStage: string;
+  serviceRequested: string;
+}) {
+  const { client, from } = getResendClient();
+
+  const subject = `[Case Action Required] ${params.caseNumber}: ${params.stageName} for ${params.businessName}`;
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1B2838; line-height: 1.6;">
+      <div style="background-color: #1B2838; padding: 24px; text-align: center;">
+        <h1 style="color: #F7F6F3; margin: 0; font-size: 20px;">DOW CONSULTING</h1>
+        <p style="color: #C9A24B; margin: 6px 0 0; font-size: 13px; font-weight: bold;">Internal Workflow Hand-Off Notification</p>
+      </div>
+      <div style="padding: 30px; background-color: #FFFFFF; border: 1px solid #E2E8F0;">
+        <p>Dear ${params.name},</p>
+        <p>A case stage has completed and been handed off to you for active execution:</p>
+        
+        <div style="background-color: #F7F6F3; border-left: 4px solid #C9A24B; padding: 18px; margin: 20px 0;">
+          <p style="margin: 0; font-size: 14px;"><strong>Case Number:</strong> ${params.caseNumber}</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Business:</strong> ${params.businessName}</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Service:</strong> ${params.serviceRequested}</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Completed Stage:</strong> ${params.previousStage}</p>
+          <p style="margin: 6px 0 0; font-size: 14px; color: #1B2838;"><strong>Your Assigned Stage:</strong> <span style="color: #C9A24B; font-weight: bold;">${params.stageName}</span></p>
+        </div>
+
+        <p>Please log in to your DOW Consulting workspace to review the intake brief, previous stage findings, and internal notes.</p>
+      </div>
+    </div>
+  `;
+
+  return client.emails.send({
+    from,
+    to: params.to,
+    subject,
+    html,
+  });
+}
+
+/**
+ * 7. Case Stage Hand-Off Notification to Owner
+ */
+export async function sendOwnerStageHandoffEmail(params: {
+  ownerEmail: string;
+  caseNumber: string;
+  businessName: string;
+  completedStage: string;
+  completedByName: string;
+  nextStage: string;
+  nextAssigneeName: string;
+}) {
+  const { client, from } = getResendClient();
+
+  const subject = `[Owner Update] ${params.caseNumber}: Stage '${params.completedStage}' Completed`;
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1B2838; line-height: 1.6;">
+      <div style="background-color: #1B2838; padding: 24px; text-align: center;">
+        <h1 style="color: #F7F6F3; margin: 0; font-size: 20px;">DOW CONSULTING</h1>
+        <p style="color: #C9A24B; margin: 6px 0 0; font-size: 13px; font-weight: bold;">Owner Pipeline Activity Brief</p>
+      </div>
+      <div style="padding: 30px; background-color: #FFFFFF; border: 1px solid #E2E8F0;">
+        <p>Hello Niraj,</p>
+        <p>A workflow hand-off has occurred on active engagement <strong>${params.caseNumber}</strong>:</p>
+        
+        <div style="background-color: #F7F6F3; border-left: 4px solid #1B2838; padding: 18px; margin: 20px 0;">
+          <p style="margin: 0; font-size: 14px;"><strong>Case Number:</strong> ${params.caseNumber}</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Client Entity:</strong> ${params.businessName}</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Completed Stage:</strong> ${params.completedStage} (by ${params.completedByName})</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Next Stage:</strong> ${params.nextStage}</p>
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Next Assignee:</strong> ${params.nextAssigneeName}</p>
+        </div>
+
+        <p>You can review all internal stage notes, reassign stages, or review deliverables directly on your Owner dashboard.</p>
+      </div>
+    </div>
+  `;
+
+  return client.emails.send({
+    from,
+    to: params.ownerEmail,
+    subject,
+    html,
+  });
+}
+
+/**
+ * 8. Post-Delivery Client Feedback Request Email
+ */
+export async function sendFeedbackRequestEmail(params: {
+  to: string;
+  name: string;
+  businessName: string;
+  caseNumber: string;
+  feedbackUrl: string;
+}) {
+  const { client, from } = getResendClient();
+
+  const subject = `Your Advisory Experience with DOW Consulting [Engagement ${params.caseNumber}]`;
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1B2838; line-height: 1.6;">
+      <div style="background-color: #1B2838; padding: 24px; text-align: center;">
+        <h1 style="color: #F7F6F3; margin: 0; font-size: 20px;">DOW CONSULTING</h1>
+        <p style="color: #C9A24B; margin: 6px 0 0; font-size: 13px; font-weight: bold;">Post-Engagement Feedback &amp; Review</p>
+      </div>
+      <div style="padding: 30px; background-color: #FFFFFF; border: 1px solid #E2E8F0;">
+        <p>Dear ${params.name},</p>
+        <p>Following the delivery of your strategic advisory deliverables for <strong>${params.businessName}</strong>, our advisory team and Lead Strategic Advisor Niraj Kumar would appreciate your feedback on the consultation.</p>
+        
+        <p>At DOW Consulting, we rely exclusively on genuine, verified client feedback with explicit consent. Your insights help us maintain the quality of our strategic advisory practice.</p>
+
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${params.feedbackUrl}" style="background-color: #C9A24B; color: #1B2838; text-decoration: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; display: inline-block;">
+            Share Feedback (2-Minute Form)
+          </a>
+        </div>
+
+        <p style="font-size: 13px; color: #5A6472;">
+          You retain full control over whether your comments are published, how your name is displayed (full name or initials), and your organization details.
+        </p>
+
+        <p style="margin-top: 24px; font-size: 12px; color: #8C96A5;">
+          Direct Link: <a href="${params.feedbackUrl}" style="color: #1B2838;">${params.feedbackUrl}</a>
+        </p>
+      </div>
+    </div>
+  `;
+
+  return client.emails.send({
+    from,
+    to: params.to,
+    subject,
+    html,
+  });
+}
+
+/**
+ * 9. Notification to Owner when a client submits feedback
+ */
+export async function sendOwnerNewFeedbackNotificationEmail(params: {
+  ownerEmail: string;
+  clientName: string;
+  company?: string;
+  caseNumber?: string;
+  quote: string;
+  consentConfirmed: boolean;
+}) {
+  const { client, from } = getResendClient();
+
+  const subject = `[Client Feedback] New Feedback Submitted by ${params.clientName}`;
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1B2838; line-height: 1.6;">
+      <div style="background-color: #1B2838; padding: 24px; text-align: center;">
+        <h1 style="color: #F7F6F3; margin: 0; font-size: 20px;">DOW CONSULTING</h1>
+        <p style="color: #C9A24B; margin: 6px 0 0; font-size: 13px; font-weight: bold;">New Client Feedback Pending Owner Approval</p>
+      </div>
+      <div style="padding: 30px; background-color: #FFFFFF; border: 1px solid #E2E8F0;">
+        <p>Hello Niraj,</p>
+        <p>A client has submitted post-delivery feedback for your review:</p>
+        
+        <div style="background-color: #F7F6F3; border-left: 4px solid #C9A24B; padding: 18px; margin: 20px 0;">
+          <p style="margin: 0; font-size: 14px;"><strong>Client:</strong> ${params.clientName} ${params.company ? `(${params.company})` : ""}</p>
+          ${params.caseNumber ? `<p style="margin: 6px 0 0; font-size: 14px;"><strong>Case:</strong> ${params.caseNumber}</p>` : ""}
+          <p style="margin: 6px 0 0; font-size: 14px;"><strong>Consent Confirmed:</strong> ${params.consentConfirmed ? "Yes" : "No"}</p>
+          <div style="margin-top: 12px; font-style: italic; color: #1B2838; font-size: 14px;">
+            &ldquo;${params.quote}&rdquo;
+          </div>
+        </div>
+
+        <p>This feedback has arrived as <strong>PENDING</strong> and will NOT be visible publicly until you explicitly approve and publish it in the Admin Testimonials section.</p>
+      </div>
+    </div>
+  `;
+
+  return client.emails.send({
+    from,
+    to: params.ownerEmail,
+    subject,
+    html,
+  });
+}
+

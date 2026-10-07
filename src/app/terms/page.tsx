@@ -26,14 +26,14 @@ export default function TermsPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">1. Engagement Overview</h2>
         <p>
-          {BRAND.name} provides high-level executive strategic business advisory, commercial spatial audits (Commercial Vastu), and corporate milestone timing diagnostics. Engagements are led by Principal Advisor Niraj Kumar and are delivered via two mandatory components: (a) a direct live session conducted via Google Meet or WhatsApp Call, and (b) an executive written diagnostic report delivered via the client portal.
+          {BRAND.name} provides business consulting services across GTM strategy, market research, business expansion strategy, and new business start consultation for startups, small companies, and MSMEs. Engagements are supported by an advisory team and led by Lead Strategic Advisor Niraj Kumar. Consultation formats, scheduling methods, and report turnaround timelines are agreed upon on a per-engagement basis pending client confirmation.
         </p>
       </section>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">2. Scope of Advisory &amp; Client Responsibility</h2>
         <p>
-          All guidance, spatial recommendations, and milestone timing analyses represent professional advisory opinions formulated from corporate operating experience and classical spatial diagnostics. The client retains sole executive discretion regarding corporate implementation, financial investments, lease executions, capital commitments, and personnel changes.
+          All guidance, research deliverables, and strategic roadmaps represent professional advisory opinions formulated from commercial operating analysis and research methodologies. The client retains sole executive discretion regarding corporate implementation, financial investments, hiring decisions, capital commitments, and operational changes.
         </p>
       </section>
 

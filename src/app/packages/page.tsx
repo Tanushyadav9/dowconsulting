@@ -1,14 +1,26 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { BRAND } from "@/lib/constants/brand";
-import { CheckCircle2, ArrowRight, MessageSquare, ShieldCheck, HelpCircle, FileText, Calendar, Building2 } from "lucide-react";
+import {
+  CheckCircle2,
+  ArrowRight,
+  MessageSquare,
+  ShieldCheck,
+  HelpCircle,
+  FileText,
+  Rocket,
+  Search,
+  TrendingUp,
+  Building,
+  Users,
+} from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: `Advisory Engagements & Proposals | ${BRAND.name}`,
   description:
-    "Tailored executive advisory bridging senior corporate retail leadership with strategic commercial Vastu and milestone timing.",
+    "Tailored business consulting proposals across GTM strategy, market research, business expansion, and new business start consultation for startups, small companies, and MSMEs. [Draft copy]",
 };
 
 export default async function PackagesPage() {
@@ -30,29 +42,18 @@ export default async function PackagesPage() {
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
-          Executive Advisory Architecture
+          <span>Advisory Proposals [Draft Copy]</span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
-          Strategic Engagements &amp; Proposals
+          Advisory Engagements &amp; Proposals
         </h1>
         <p className="text-sm sm:text-base text-[#5A6472] max-w-2xl mx-auto leading-relaxed">
-          Direct advisory led by <strong>{BRAND.founder.name}</strong>. Engagements are formulated around your commercial footprint, operational complexity, and critical expansion milestones.
+          Business consulting for <strong>startups, small companies, and MSMEs</strong> led by Lead Strategic Advisor <strong>{BRAND.founder.name}</strong> and our multidisciplinary consulting team.
         </p>
 
-        {/* Dual Delivery Guarantee Pill */}
-        <div className="pt-2 flex flex-wrap justify-center gap-4 text-xs text-[#5A6472]">
-          <span className="flex items-center gap-1.5 bg-[#FFFFFF] px-3 py-1.5 rounded border border-[#E2E8F0]">
-            <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
-            Live Strategy Call (WhatsApp Call or Google Meet)
-          </span>
-          <span className="flex items-center gap-1.5 bg-[#FFFFFF] px-3 py-1.5 rounded border border-[#E2E8F0]">
-            <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
-            Comprehensive Written Strategic PDF Report
-          </span>
-          <span className="flex items-center gap-1.5 bg-[#FFFFFF] px-3 py-1.5 rounded border border-[#E2E8F0]">
-            <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
-            Direct Clarification Window with Niraj Kumar
-          </span>
+        {/* Pending Client Confirmation Notice */}
+        <div className="p-3 bg-[#F7EED9] border border-[#E3D1A5] rounded text-xs text-[#8C6A1E] max-w-xl mx-auto">
+          <strong>Notice:</strong> Package names, pricing, call durations, and turnaround times are pending client confirmation. Engagements are currently initiated via custom scope proposals.
         </div>
       </section>
 
@@ -76,7 +77,7 @@ export default async function PackagesPage() {
                     </div>
                     {pkg.isPopular && (
                       <span className="bg-[#1B2838] text-[#F7F6F3] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
-                        Most Selected
+                        Featured
                       </span>
                     )}
                   </div>
@@ -137,45 +138,45 @@ export default async function PackagesPage() {
           <div className="bg-[#111B27] rounded-xl border border-[#2A3D54] p-8 sm:p-12 text-[#F7F6F3] shadow-xl space-y-8">
             <div className="space-y-3 max-w-3xl">
               <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#1B2838] text-[#C9A24B] border border-[#2A3D54]">
-                Tailored Executive Advisory
+                Tailored Consulting Scope
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#F7F6F3]">
-                Request a Bespoke Advisory Proposal
+                Request a Tailored Consulting Proposal
               </h2>
               <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
-                Rather than generic predetermined price tiers, Niraj Kumar formulates structured proposals calibrated to your enterprise scale, facility floor plans, and critical decision calendars.
+                While standardized packages and pricing remain pending client confirmation, DOW Consulting structures custom proposals formulated around your business stage, target audience, and operating objectives.
               </p>
             </div>
 
-            {/* Structured Scope Architecture Pillars */}
+            {/* Scope Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-[#2A3D54]">
               <div className="space-y-2.5 bg-[#1B2838] p-5 rounded-lg border border-[#2A3D54]">
                 <div className="w-10 h-10 rounded bg-[#111B27] border border-[#2A3D54] flex items-center justify-center text-[#C9A24B]">
-                  <Calendar className="w-5 h-5" />
+                  <Rocket className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-sm text-[#F7F6F3]">Strategic Milestone Timing</h3>
+                <h3 className="font-bold text-sm text-[#F7F6F3]">GTM &amp; Market Research</h3>
                 <p className="text-xs text-[#8C96A5] leading-relaxed">
-                  Founder cycle audits, lease signing timing, brand launches, leadership transitions, and capital deployment windows.
+                  Target customer profiling, competitor benchmarking, positioning review, and launch sequencing.
                 </p>
               </div>
 
               <div className="space-y-2.5 bg-[#1B2838] p-5 rounded-lg border border-[#2A3D54]">
                 <div className="w-10 h-10 rounded bg-[#111B27] border border-[#2A3D54] flex items-center justify-center text-[#C9A24B]">
-                  <Building2 className="w-5 h-5" />
+                  <TrendingUp className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-sm text-[#F7F6F3]">Commercial Vastu Alignment</h3>
+                <h3 className="font-bold text-sm text-[#F7F6F3]">Expansion &amp; Scaling</h3>
                 <p className="text-xs text-[#8C96A5] leading-relaxed">
-                  Retail outlets, corporate HQs, industrial manufacturing sheds, and warehouse spatial zoning with zero structural demolition.
+                  Geographic rollout evaluation, product line extension, and operational capability assessment.
                 </p>
               </div>
 
               <div className="space-y-2.5 bg-[#1B2838] p-5 rounded-lg border border-[#2A3D54]">
                 <div className="w-10 h-10 rounded bg-[#111B27] border border-[#2A3D54] flex items-center justify-center text-[#C9A24B]">
-                  <FileText className="w-5 h-5" />
+                  <Building className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-sm text-[#F7F6F3]">Dual Deliverable Guarantee</h3>
+                <h3 className="font-bold text-sm text-[#F7F6F3]">New Business Starts</h3>
                 <p className="text-xs text-[#8C96A5] leading-relaxed">
-                  Every engagement includes both an executive live strategy call and a comprehensive written strategic PDF report.
+                  Early venture concept validation, business model structuring, and foundational milestone planning.
                 </p>
               </div>
             </div>
@@ -203,15 +204,15 @@ export default async function PackagesPage() {
         </section>
       )}
 
-      {/* Bespoke / Custom Engagements Banner */}
+      {/* Custom Engagements Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#FFFFFF] border border-[#E2E8F0] rounded-lg p-8 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-6 shadow-sm">
           <div className="space-y-2 max-w-2xl">
             <h3 className="text-xl font-bold text-[#1B2838]">
-              Multi-Facility, Enterprise &amp; On-Site Spatial Audits
+              Custom Scope for MSMEs &amp; Multi-Team Operations
             </h3>
             <p className="text-xs text-[#5A6472] leading-relaxed">
-              For complex manufacturing plants, multi-city retail networks, or physical on-site audit visits across India, our advisory desk formulates bespoke enterprise quotes with custom deliverable scopes.
+              For MSMEs with multi-branch footprints, complex supply chains, or custom advisory assignments, our team formulates bespoke proposals with clear deliverables.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
@@ -219,7 +220,7 @@ export default async function PackagesPage() {
               href="/intake?mode=custom-quote"
               className="inline-flex items-center justify-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded text-xs font-bold uppercase tracking-wider transition-colors"
             >
-              <span>Submit Enterprise Request</span>
+              <span>Submit Custom Request</span>
               <ArrowRight className="w-4 h-4 text-[#C9A24B]" />
             </Link>
           </div>
@@ -235,20 +236,20 @@ export default async function PackagesPage() {
           <div className="bg-[#FFFFFF] p-5 rounded border border-[#E2E8F0] space-y-1.5">
             <h4 className="font-bold text-[#1B2838] flex items-center gap-2">
               <HelpCircle className="w-4 h-4 text-[#C9A24B]" />
-              How are consultations conducted?
+              Who conducts the consultations?
             </h4>
             <p className="text-[#5A6472] leading-relaxed">
-              All live consultations are conducted strictly via <strong>Google Meet</strong> or direct <strong>WhatsApp Call</strong> (+91 93112 15564). We deliberately do not use unstable third-party in-app calling tools to guarantee high-definition recording and screen sharing of floor plans.
+              DOW Consulting operates as a team. Research specialists conduct market investigation, information coordinators gather intake specifics, and Lead Strategic Advisor Niraj Kumar and consulting staff conduct client advisory sessions.
             </p>
           </div>
 
           <div className="bg-[#FFFFFF] p-5 rounded border border-[#E2E8F0] space-y-1.5">
             <h4 className="font-bold text-[#1B2838] flex items-center gap-2">
               <HelpCircle className="w-4 h-4 text-[#C9A24B]" />
-              When and how is the written report delivered?
+              How are consultations scheduled and delivered?
             </h4>
             <p className="text-[#5A6472] leading-relaxed">
-              Your written strategic diagnostic PDF report is delivered to your authenticated client portal following your live consultation. You will also receive an automated email notification with secure download links.
+              Consultation scheduling methods, call durations, and report turnaround timelines are currently arranged on a per-engagement basis pending final client confirmation.
             </p>
           </div>
 
@@ -258,7 +259,7 @@ export default async function PackagesPage() {
               What payment methods are supported?
             </h4>
             <p className="text-[#5A6472] leading-relaxed">
-              We accept Indian payments (UPI, NetBanking, Debit/Credit Cards) via Razorpay, and International payments in USD via Stripe. All engagements are flat, one-time retainers.
+              Payment facilities support Razorpay (for domestic INR transactions) and Stripe (for international USD transactions) upon confirmed quote or package agreement.
             </p>
           </div>
         </div>

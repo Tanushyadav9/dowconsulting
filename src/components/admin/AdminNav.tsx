@@ -11,15 +11,19 @@ import {
   BarChart3,
   ShieldAlert,
   Package,
+  Briefcase,
+  MessageSquare,
 } from "lucide-react";
 
 const ADMIN_LINKS = [
   { label: "Overview", href: "/admin", icon: BarChart3 },
+  { label: "Cases & Workflow", href: "/admin/cases", icon: Briefcase },
   { label: "Submissions", href: "/admin/submissions", icon: Inbox },
   { label: "Packages & Pricing", href: "/admin/packages", icon: Package },
   { label: "Custom Quotes", href: "/admin/quotes", icon: FileCheck },
   { label: "Bookings & Sessions", href: "/admin/bookings", icon: Calendar },
   { label: "Written Reports", href: "/admin/reports", icon: FileText },
+  { label: "Testimonials & Feedback", href: "/admin/testimonials", icon: MessageSquare },
   { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
   { label: "Team & Permissions", href: "/admin/team", icon: Users },
 ];
