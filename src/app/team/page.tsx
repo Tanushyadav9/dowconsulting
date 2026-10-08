@@ -14,13 +14,15 @@ export const dynamic = "force-dynamic";
 export default async function TeamPage() {
   let publishedMembers: any[] = [];
 
-  try {
-    publishedMembers = await prisma.publicTeamMember.findMany({
-      where: { isPublished: true },
-      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-    });
-  } catch (err) {
-    console.warn("Could not load team members from database:", err);
+  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
+    try {
+      publishedMembers = await prisma.publicTeamMember.findMany({
+        where: { isPublished: true },
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      });
+    } catch (err) {
+      console.warn("Could not load team members from database:", err);
+    }
   }
 
   return (

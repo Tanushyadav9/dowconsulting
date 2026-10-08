@@ -26,13 +26,15 @@ export const metadata = {
 export default async function PackagesPage() {
   let publishedPackages: any[] = [];
 
-  try {
-    publishedPackages = await prisma.package.findMany({
-      where: { isActive: true },
-      orderBy: { priceINR: "asc" },
-    });
-  } catch (error) {
-    console.warn("Unable to fetch published packages from database; defaulting to proposal view:", error);
+  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
+    try {
+      publishedPackages = await prisma.package.findMany({
+        where: { isActive: true },
+        orderBy: { priceINR: "asc" },
+      });
+    } catch (error) {
+      console.warn("Unable to fetch published packages from database; defaulting to proposal view:", error);
+    }
   }
 
   const hasPublishedPackages = publishedPackages.length > 0;

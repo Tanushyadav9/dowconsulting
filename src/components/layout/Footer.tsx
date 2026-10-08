@@ -20,15 +20,17 @@ export async function Footer() {
   let hasPublishedTeam = false;
   let hasPublishedTestimonials = false;
 
-  try {
-    const [teamCount, testCount] = await Promise.all([
-      prisma.publicTeamMember.count({ where: { isPublished: true } }),
-      prisma.testimonial.count({ where: { isPublished: true, consentConfirmed: true } }),
-    ]);
-    hasPublishedTeam = teamCount > 0;
-    hasPublishedTestimonials = testCount > 0;
-  } catch (err) {
-    // Safe fallback if database is pending
+  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
+    try {
+      const [teamCount, testCount] = await Promise.all([
+        prisma.publicTeamMember.count({ where: { isPublished: true } }),
+        prisma.testimonial.count({ where: { isPublished: true, consentConfirmed: true } }),
+      ]);
+      hasPublishedTeam = teamCount > 0;
+      hasPublishedTestimonials = testCount > 0;
+    } catch (err) {
+      // Safe fallback if database is pending
+    }
   }
 
   return (

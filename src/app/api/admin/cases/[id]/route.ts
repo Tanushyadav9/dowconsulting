@@ -10,6 +10,8 @@ import { verifyCaseAccess } from "@/lib/cases";
  * - Owner sees everything.
  * - Staff sees only cases assigned to them, with payments/pricing excluded.
  */
+export const dynamic = "force-dynamic";
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }

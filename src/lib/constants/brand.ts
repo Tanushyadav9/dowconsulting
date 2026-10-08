@@ -1,4 +1,4 @@
-import { requireEnv } from "@/lib/env";
+import { getContactEmail } from "@/lib/env";
 import { SISTER_SITES } from "@/lib/constants/ecosystem";
 
 export const BRAND = {
@@ -55,7 +55,7 @@ export const BRAND = {
       display: "+91 93112 15564",
     },
     get email(): string {
-      return requireEnv("NEXT_PUBLIC_CONTACT_EMAIL", "Official client advisory contact email");
+      return getContactEmail();
     },
   },
   consultationDelivery: {

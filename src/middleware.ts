@@ -2,11 +2,16 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const clerkSecret = process.env.CLERK_SECRET_KEY;
 const isClerkConfigured = Boolean(
   clerkKey &&
     clerkKey.startsWith("pk_") &&
     !clerkKey.includes("placeholder") &&
-    !clerkKey.includes("dGVzdC1jbGVyay1hcHAk")
+    !clerkKey.includes("dGVzdC1jbGVyay1hcHAk") &&
+    clerkSecret &&
+    clerkSecret.startsWith("sk_") &&
+    !clerkSecret.includes("placeholder") &&
+    !clerkSecret.includes("dGVzdC1jbGVyay1zZWNyZXQk")
 );
 
 const isProtectedRoute = createRouteMatcher(["/account(.*)", "/admin(.*)"]);

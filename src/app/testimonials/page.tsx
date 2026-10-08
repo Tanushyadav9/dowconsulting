@@ -14,16 +14,20 @@ export const dynamic = "force-dynamic";
 export default async function TestimonialsPage() {
   let testimonials: any[] = [];
 
-  try {
-    testimonials = await prisma.testimonial.findMany({
-      where: {
-        isPublished: true,
-        consentConfirmed: true,
-      },
-      orderBy: [{ date: "desc" }, { createdAt: "desc" }],
-    });
-  } catch (err) {
-    // If database unavailable or zero, redirect cleanly
+  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
+    try {
+      testimonials = await prisma.testimonial.findMany({
+        where: {
+          isPublished: true,
+          consentConfirmed: true,
+        },
+        orderBy: [{ date: "desc" }, { createdAt: "desc" }],
+      });
+    } catch (err) {
+      // If database unavailable or zero, redirect cleanly
+      redirect("/");
+    }
+  } else {
     redirect("/");
   }
 

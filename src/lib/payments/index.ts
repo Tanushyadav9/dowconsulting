@@ -1,6 +1,6 @@
 import Razorpay from "razorpay";
 import Stripe from "stripe";
-import { requireEnv } from "@/lib/env";
+import { requireEnv, getAppUrl } from "@/lib/env";
 
 export interface CreateOrderParams {
   amount: number; // in lowest currency unit (paise for INR, cents for USD)
@@ -86,7 +86,7 @@ export async function createConsultingOrder(
   } else {
     // Stripe Flow
     const stripe = getStripeClient();
-    const appUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Base application URL for Stripe checkout redirects");
+    const appUrl = getAppUrl();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

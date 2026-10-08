@@ -8,6 +8,8 @@ const DEFAULT_ROLES = [
   { name: "Consultant", description: "Leads client consultation sessions and drafts strategic recommendations" },
 ];
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const authContext = await getAuthContext();

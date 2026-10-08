@@ -7,6 +7,8 @@ import { getAuthContext } from "@/lib/auth";
  * Server-side protected: Only Owner or authorized Staff can manage packages and pricing.
  */
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const auth = await getAuthContext();

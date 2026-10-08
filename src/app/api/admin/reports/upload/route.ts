@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireEnv } from "@/lib/env";
+import { getAppUrl } from "@/lib/env";
 import { uploadReportToR2 } from "@/lib/storage/r2";
 import { sendReportDeliveredEmail } from "@/lib/email/resend";
 import { getAuthContext } from "@/lib/auth";
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const appUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Base application URL for report portal link");
+    const appUrl = getAppUrl();
     const portalUrl = `${appUrl}/account?tab=deliverables`;
 
     // Trigger Lifecycle Email 5: Written Report Delivered Notification via Resend

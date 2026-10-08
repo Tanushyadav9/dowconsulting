@@ -9,6 +9,8 @@ import { getClientCaseView } from "@/lib/cases";
  * - NEVER shows internal notes.
  * - Shows staff names ONLY if the Owner enabled showStaffNamesToClient.
  */
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const authCtx = await getAuthContext();

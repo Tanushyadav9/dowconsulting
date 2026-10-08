@@ -9,6 +9,8 @@ import { prisma } from "@/lib/prisma";
  * - Staff sees ONLY cases where at least one stage is assigned to them.
  * - Non-staff/clients get 403 Forbidden.
  */
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const authCtx = await getAuthContext();

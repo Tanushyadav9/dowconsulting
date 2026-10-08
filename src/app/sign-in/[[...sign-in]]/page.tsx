@@ -2,7 +2,13 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
   const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-  if (!clerkKey || clerkKey.includes("placeholder")) {
+  const isClerkConfigured = Boolean(
+    clerkKey &&
+      clerkKey.startsWith("pk_") &&
+      !clerkKey.includes("placeholder") &&
+      !clerkKey.includes("dGVzdC1jbGVyay1hcHAk")
+  );
+  if (!isClerkConfigured) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F7F6F3] p-4">
         <div className="max-w-md w-full p-6 bg-[#FFFFFF] rounded-lg border border-[#E2E8F0] text-center space-y-3">

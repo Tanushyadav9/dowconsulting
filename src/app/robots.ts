@@ -1,8 +1,8 @@
 import { MetadataRoute } from "next";
-import { requireEnv } from "@/lib/env";
+import { getAppUrl } from "@/lib/env";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Canonical site base URL for robots.txt");
+  const baseUrl = getAppUrl();
 
   return {
     rules: [

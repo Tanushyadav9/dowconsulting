@@ -12,7 +12,10 @@ export default function LoginSSOCallbackPage() {
 
   const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   const isClerkConfigured = Boolean(
-    clerkKey && clerkKey.startsWith("pk_") && !clerkKey.includes("placeholder")
+    clerkKey &&
+      clerkKey.startsWith("pk_") &&
+      !clerkKey.includes("placeholder") &&
+      !clerkKey.includes("dGVzdC1jbGVyay1hcHAk")
   );
 
   return (

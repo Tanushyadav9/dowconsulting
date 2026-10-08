@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireEnv } from "@/lib/env";
+import { getAppUrl } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 import { getAuthContext } from "@/lib/auth";
 import { sendQuoteDeliveryEmail } from "@/lib/email/resend";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
@@ -58,7 +60,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const appUrl = requireEnv("NEXT_PUBLIC_APP_URL", "Base application URL for quote checkout links");
+    const appUrl = getAppUrl();
 
     // Persist quote to database
     const quoteRecord = await prisma.quote.create({

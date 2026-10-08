@@ -2,6 +2,10 @@ import { prisma } from "@/lib/prisma";
 import { MessageSquare, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export async function TestimonialsSection() {
+  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes("example")) {
+    return null;
+  }
+
   let testimonials: any[] = [];
 
   try {

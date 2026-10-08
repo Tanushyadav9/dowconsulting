@@ -4,6 +4,16 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes("example")) {
+    return NextResponse.json({
+      success: true,
+      hasPublishedTeam: false,
+      publishedTeamCount: 0,
+      hasPublishedTestimonials: false,
+      publishedTestimonialsCount: 0,
+    });
+  }
+
   try {
     const [publishedTeamCount, publishedTestimonialsCount] = await Promise.all([
       prisma.publicTeamMember.count({

@@ -3,6 +3,8 @@ import { getAuthContext } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TestimonialStatus } from "@prisma/client";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const authContext = await getAuthContext();
