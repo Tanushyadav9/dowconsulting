@@ -25,7 +25,7 @@ export function getAppUrl(): string {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  return "https://dowconsulting.vercel.app";
+  return "https://dowconsulting-r756.vercel.app";
 }
 
 /**
