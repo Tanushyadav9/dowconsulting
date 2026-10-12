@@ -9,33 +9,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "#1B2838", // Deep Charcoal Navy
-          light: "#2A3D54",
-          dark: "#111B27",
-        },
-        accent: {
-          DEFAULT: "#C9A24B", // Warm Gold
-          hover: "#B8913B",
-          light: "#F7EED9",
-        },
-        surface: {
-          DEFAULT: "#F7F6F3", // Clean off-white
-          pure: "#FFFFFF",
+        brand: {
+          red: "#E02027",
+          "red-hover": "#C7181F",
+          "red-light": "#FDE8E9",
+          navy: "#17477F",
+          "navy-dark": "#0B1B33",
+          "navy-light": "#235B9E",
+          blue: "#065A8C",
+          "blue-light": "#E6F0F7",
+          surface: "#F8FAFC",
           card: "#FFFFFF",
-          muted: "#EFECE6",
+          muted: "#F1F5F9",
         },
         slate: {
-          text: "#5A6472", // Supporting Slate Gray
-          light: "#8C96A5",
+          dark: "#0F172A",
+          heading: "#17477F",
+          body: "#334155",
+          muted: "#64748B",
           border: "#E2E8F0",
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        heading: ["var(--font-heading)", "Plus Jakarta Sans", "sans-serif"],
+        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
       },
     },
   },
   plugins: [],
 };
+
 export default config;

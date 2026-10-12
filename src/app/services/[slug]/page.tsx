@@ -3,18 +3,13 @@ import { notFound } from "next/navigation";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { SERVICES_CATALOG, findServiceBySlug } from "@/lib/constants/services";
+import { RisingArrowAccent } from "@/components/ui/RisingArrowAccent";
 import {
   ArrowLeft,
   CheckCircle2,
   Phone,
   MessageSquare,
-  Video,
-  Users,
-  Award,
-  ShieldCheck,
   FileText,
-  Clock,
-  ArrowRight,
 } from "lucide-react";
 
 export function generateStaticParams() {
@@ -53,7 +48,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/services"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5A6472] hover:text-[#1B2838]"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-[#17477F] transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to All Consulting Services</span>
@@ -62,13 +57,14 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Header */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#0B1B33] text-xs text-white font-semibold tracking-wider uppercase">
+          <RisingArrowAccent size={14} color="#E02027" />
           <span>Consulting Practice Area</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B2838] tracking-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#17477F] tracking-tight font-heading">
           {service.name}
         </h1>
-        <p className="text-base sm:text-lg text-[#5A6472] max-w-3xl leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
           {service.shortDescription}
         </p>
 
@@ -85,14 +81,14 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
           </a>
           <a
             href={ENQUIRY_CONFIG.phone.telLink}
-            className="inline-flex items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-5 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
+            className="inline-flex items-center gap-2 bg-[#E02027] hover:bg-[#C7181F] text-white px-5 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
           >
-            <Phone className="w-4 h-4 text-[#C9A24B]" />
+            <Phone className="w-4 h-4" />
             <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
           </a>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F6F3] border border-[#CBD5E1] text-[#1B2838] px-5 py-2.5 rounded font-semibold text-xs transition-colors"
+            className="inline-flex items-center gap-2 bg-white hover:bg-[#F8FAFC] border border-[#CBD5E1] text-[#17477F] px-5 py-2.5 rounded font-semibold text-xs transition-colors"
           >
             <span>Quick Enquiry Form</span>
           </Link>
@@ -101,25 +97,25 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Section 1: Who It Is For */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C9A24B]">
+        <div className="bg-white p-8 sm:p-10 rounded-xl border border-[#E2E8F0] shadow-sm space-y-4">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E02027]">
             <span>Audience &amp; Fit</span>
           </div>
-          <h2 className="text-2xl font-bold text-[#1B2838]">Who It Is For</h2>
-          <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed">
+          <h2 className="text-2xl font-bold text-[#17477F] font-heading">Who It Is For</h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             This practice area is designed specifically for start-ups, small companies and MSMEs facing these commercial situations:
           </p>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             {service.whoItIsFor.map((item, idx) => (
               <li
                 key={idx}
-                className="p-4 rounded bg-[#F7F6F3] border border-[#E2E8F0] text-xs text-[#1B2838] space-y-1"
+                className="p-4 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs text-slate-800 space-y-1"
               >
-                <div className="flex items-center gap-2 font-bold text-[#1B2838]">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#C9A24B] shrink-0" />
+                <div className="flex items-center gap-2 font-bold text-[#17477F]">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#E02027] shrink-0" />
                   <span>Profile {idx + 1}</span>
                 </div>
-                <p className="text-xs text-[#5A6472] leading-relaxed">{item}</p>
+                <p className="text-xs text-slate-600 leading-relaxed">{item}</p>
               </li>
             ))}
           </ul>
@@ -128,22 +124,22 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Section 2: What It Covers */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C9A24B]">
+        <div className="bg-white p-8 sm:p-10 rounded-xl border border-[#E2E8F0] shadow-sm space-y-4">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E02027]">
             <span>Scope of Advisory</span>
           </div>
-          <h2 className="text-2xl font-bold text-[#1B2838]">What It Covers</h2>
-          <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed">
+          <h2 className="text-2xl font-bold text-[#17477F] font-heading">What It Covers</h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Advisory engagements in {service.name} generally encompass the following scope areas:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             {service.whatItCovers.map((item, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded bg-[#F7F6F3] border border-[#E2E8F0] flex items-start gap-3"
+                className="p-4 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-start gap-3"
               >
-                <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-                <span className="text-xs text-[#1B2838] leading-relaxed">{item}</span>
+                <CheckCircle2 className="w-4 h-4 text-[#E02027] shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-800 leading-relaxed">{item}</span>
               </div>
             ))}
           </div>
@@ -152,13 +148,13 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Section 3: How the Engagement Runs */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#111B27] text-[#F7F6F3] p-8 sm:p-10 rounded-lg border border-[#2A3D54] shadow-md space-y-6">
+        <div className="bg-[#0B1B33] text-white p-8 sm:p-10 rounded-xl border border-[#1E3A63] shadow-xl space-y-6">
           <div className="space-y-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#1B2838] text-[#C9A24B] border border-[#2A3D54]">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#17477F] text-white border border-[#235B9E]">
               Methodology
             </span>
-            <h2 className="text-2xl font-bold">How the Engagement Runs</h2>
-            <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
+            <h2 className="text-2xl font-bold font-heading">How the Engagement Runs</h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Every engagement is conducted with a structured, transparent process under direct consultation with Niraj Kumar:
             </p>
           </div>
@@ -167,10 +163,10 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             {service.howEngagementRuns.map((step, idx) => (
               <div
                 key={idx}
-                className="bg-[#1B2838] border border-[#2A3D54] p-5 rounded-lg space-y-2 text-xs"
+                className="bg-[#17477F]/30 border border-[#1E3A63] p-5 rounded-lg space-y-2 text-xs"
               >
-                <span className="text-xs font-bold text-[#C9A24B]">Stage 0{idx + 1}</span>
-                <p className="text-[#E2E8F0] leading-relaxed">{step}</p>
+                <span className="text-xs font-bold text-[#E02027]">Stage 0{idx + 1}</span>
+                <p className="text-slate-200 leading-relaxed">{step}</p>
               </div>
             ))}
           </div>
@@ -179,22 +175,22 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Section 4: What the Client Receives */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C9A24B]">
+        <div className="bg-white p-8 sm:p-10 rounded-xl border border-[#E2E8F0] shadow-sm space-y-4">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E02027]">
             <span>Deliverables</span>
           </div>
-          <h2 className="text-2xl font-bold text-[#1B2838]">What the Client Receives</h2>
-          <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed">
+          <h2 className="text-2xl font-bold text-[#17477F] font-heading">What the Client Receives</h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Written deliverables and direct consultation are tailored to the agreed engagement parameters with zero outcome or revenue guarantees claimed:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             {service.whatClientReceives.map((item, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded bg-[#F7F6F3] border border-[#E2E8F0] flex items-start gap-3"
+                className="p-4 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-start gap-3"
               >
-                <FileText className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-                <span className="text-xs text-[#1B2838] leading-relaxed">{item}</span>
+                <FileText className="w-4 h-4 text-[#065A8C] shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-800 leading-relaxed">{item}</span>
               </div>
             ))}
           </div>
@@ -203,9 +199,9 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Consultation Modes & Consultant Strip */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#F7F6F3] p-6 sm:p-8 rounded-lg border border-[#E2E8F0] grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#5A6472]">
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E2E8F0] shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-600">
           <div className="space-y-2">
-            <h3 className="font-bold text-sm text-[#1B2838]">Consultation Delivery Modes</h3>
+            <h3 className="font-bold text-sm text-[#17477F] font-heading">Consultation Delivery Modes</h3>
             <p>
               <strong>Online:</strong> Conducted remotely via Google Meet or Zoom.
             </p>
@@ -214,7 +210,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             </p>
           </div>
           <div className="space-y-2">
-            <h3 className="font-bold text-sm text-[#1B2838]">Consultant: {BRAND.consultant.name}</h3>
+            <h3 className="font-bold text-sm text-[#17477F] font-heading">Consultant: {BRAND.consultant.name}</h3>
             <p>
               {BRAND.consultant.title} &mdash; {BRAND.consultant.descriptor}. Over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food.
             </p>
@@ -224,11 +220,11 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* Closing CTA */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <div className="bg-[#1B2838] text-[#F7F6F3] p-8 sm:p-10 rounded-lg border border-[#2A3D54] space-y-4">
-          <h3 className="text-xl sm:text-2xl font-bold">
+        <div className="bg-[#0B1B33] text-white p-8 sm:p-10 rounded-2xl border border-[#1E3A63] shadow-xl space-y-4">
+          <h3 className="text-xl sm:text-2xl font-bold font-heading">
             Enquire About {service.name}
           </h3>
-          <p className="text-xs sm:text-sm text-[#8C96A5] max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
             Discuss your requirements directly with Consultant Niraj Kumar by phone or WhatsApp.
           </p>
           <div className="pt-2 flex flex-col sm:flex-row justify-center gap-4">
@@ -243,14 +239,14 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             </a>
             <a
               href={ENQUIRY_CONFIG.phone.telLink}
-              className="inline-flex justify-center items-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider transition-colors"
+              className="inline-flex justify-center items-center gap-2 bg-[#E02027] hover:bg-[#C7181F] text-white px-6 py-3 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
             >
               <Phone className="w-4 h-4" />
               <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
             </a>
             <Link
               href="/contact"
-              className="inline-flex justify-center items-center gap-2 bg-[#111B27] hover:bg-[#2A3D54] border border-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded font-semibold text-xs transition-colors"
+              className="inline-flex justify-center items-center gap-2 bg-[#17477F] hover:bg-[#235B9E] border border-[#235B9E] text-white px-6 py-3 rounded font-semibold text-xs transition-colors"
             >
               <span>Quick Enquiry Form</span>
             </Link>

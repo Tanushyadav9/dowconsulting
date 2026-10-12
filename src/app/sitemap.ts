@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { BLOG_POSTS } from "@/lib/constants/blog";
 import { SERVICES_CATALOG } from "@/lib/constants/services";
 import { hasActiveExpertPanel } from "@/lib/constants/experts";
 import { hasActiveEngagements, hasActiveTestimonials } from "@/lib/constants/engagements";
@@ -13,8 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/about",
     "/approach",
+    "/our-approach",
     "/contact",
-    "/blog",
     "/terms",
     "/privacy-policy",
     "/disclaimer",
@@ -42,12 +41,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  const blogPages = BLOG_POSTS.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  return [...staticPages, ...servicePages, ...blogPages];
+  return [...staticPages, ...servicePages];
 }

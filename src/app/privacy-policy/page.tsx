@@ -8,19 +8,19 @@ export const metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 text-sm text-[#5A6472]">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 text-sm text-slate-600">
       <div className="border-b border-[#E2E8F0] pb-6 space-y-2">
-        <span className="text-[11px] font-bold text-[#C9A24B] uppercase tracking-wider">
+        <span className="text-[11px] font-bold text-[#E02027] uppercase tracking-wider">
           Data Confidentiality &amp; Information Security
         </span>
-        <h1 className="text-3xl font-bold text-[#1B2838]">Privacy Policy</h1>
-        <p className="text-xs text-[#8C96A5]">
+        <h1 className="text-3xl font-black text-[#17477F] font-heading">Privacy Policy</h1>
+        <p className="text-xs text-slate-500">
           Governing communications and enquiries with {BRAND.name}.
         </p>
       </div>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">1. Information We Collect</h2>
+        <h2 className="text-lg font-bold text-[#17477F] font-heading">1. Information We Collect</h2>
         <p>
           To facilitate strategic business consulting, {BRAND.name} collects commercial information voluntarily provided through enquiries, phone calls, WhatsApp messages, and meetings:
         </p>
@@ -32,25 +32,25 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">2. Commercial Non-Disclosure &amp; Confidentiality</h2>
+        <h2 className="text-lg font-bold text-[#17477F] font-heading">2. Commercial Non-Disclosure &amp; Confidentiality</h2>
         <p>
-          We treat all client business data as strictly confidential. Client documentation and operational records are utilized solely for consulting analysis and preparation of strategic recommendations. We do not sell, rent, or distribute client data to any third parties.
+          We treat all client business data as strictly confidential. Client documentation and operational records are utilised solely for consulting analysis and preparation of strategic recommendations. We do not sell, rent, or distribute client data to any third parties.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Non-Transactional Infrastructure</h2>
+        <h2 className="text-lg font-bold text-[#17477F] font-heading">3. Non-Transactional Infrastructure</h2>
         <p>
           This website is a professional portfolio and enquiry site. It does not maintain user accounts, databases, or online payment gateways. Communications received via phone, WhatsApp, or email are handled directly by Consultant Niraj Kumar with strict confidentiality.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">4. Contact Coordinates</h2>
+        <h2 className="text-lg font-bold text-[#17477F] font-heading">4. Contact Coordinates</h2>
         <p>
           For questions regarding data confidentiality or commercial enquiries, contact:
         </p>
-        <p className="text-xs text-[#1B2838] font-semibold leading-relaxed">
+        <p className="text-xs text-[#17477F] font-semibold leading-relaxed">
           {BRAND.headOffice.address}<br />
           Phone: {ENQUIRY_CONFIG.phone.display} &bull; Email: {ENQUIRY_CONFIG.email.primary} &bull; WhatsApp: {ENQUIRY_CONFIG.whatsapp.display}
         </p>

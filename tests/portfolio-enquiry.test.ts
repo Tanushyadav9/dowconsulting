@@ -228,4 +228,80 @@ describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests",
       assert.ok(siteNames.includes("Viar.in"));
     });
   });
+
+  describe("6. Design Tokens, Palette & Visual Assets", () => {
+    test("Tailwind configuration defines red, navy, and blue design tokens", () => {
+      const tailwindConfigPath = path.join(process.cwd(), "tailwind.config.ts");
+      const tailwindContent = fs.readFileSync(tailwindConfigPath, "utf-8");
+
+      assert.ok(tailwindContent.includes("#E02027"), "Must define Brand Red (#E02027)");
+      assert.ok(tailwindContent.includes("#17477F"), "Must define Brand Navy (#17477F)");
+      assert.ok(tailwindContent.includes("#065A8C"), "Must define Brand Blue (#065A8C)");
+      assert.ok(tailwindContent.includes("Plus Jakarta Sans") || tailwindContent.includes("var(--font-heading)"), "Must define Plus Jakarta Sans / heading font");
+    });
+
+    test("Brand visual components and assets exist", () => {
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "src", "components", "ui", "BrandLogo.tsx")),
+        "BrandLogo.tsx must exist"
+      );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "public", "favicon.svg")),
+        "public/favicon.svg must exist"
+      );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "src", "app", "icon.svg")),
+        "src/app/icon.svg must exist"
+      );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "src", "components", "ui", "DottedWorldMap.tsx")),
+        "DottedWorldMap.tsx must exist"
+      );
+    });
+  });
+
+  describe("7. Copy, Tone & British/Indian Spelling Invariants", () => {
+    test("Zero occurrences of '[Draft]' tags exist across all app pages", () => {
+      const appFiles = [
+        "src/app/layout.tsx",
+        "src/app/page.tsx",
+        "src/app/about/page.tsx",
+        "src/app/services/page.tsx",
+        "src/app/approach/page.tsx",
+        "src/app/contact/page.tsx",
+        "src/app/terms/page.tsx",
+        "src/app/privacy-policy/page.tsx",
+        "src/app/disclaimer/page.tsx",
+      ];
+
+      for (const relFile of appFiles) {
+        const fullPath = path.join(process.cwd(), relFile);
+        if (fs.existsSync(fullPath)) {
+          const content = fs.readFileSync(fullPath, "utf-8");
+          assert.strictEqual(
+            content.includes("[Draft]"),
+            false,
+            `File ${relFile} must not contain '[Draft]'`
+          );
+          assert.strictEqual(
+            content.includes("[Draft copy]"),
+            false,
+            `File ${relFile} must not contain '[Draft copy]'`
+          );
+        }
+      }
+    });
+
+    test("Uses British/Indian spelling 'customised' rather than 'customized'", () => {
+      const servicesContent = fs.readFileSync(
+        path.join(process.cwd(), "src", "lib", "constants", "services.ts"),
+        "utf-8"
+      );
+      assert.strictEqual(
+        servicesContent.includes("customized"),
+        false,
+        "services.ts must use British spelling 'customised' instead of 'customized'"
+      );
+    });
+  });
 });

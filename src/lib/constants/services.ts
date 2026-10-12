@@ -20,7 +20,7 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
     whoItIsFor: [
       "Start-ups validating commercial opportunity and target demand before committing capital.",
       "Small companies planning to introduce a new product or enter an adjacent sector.",
-      "MSMEs seeking structured insight into consumer behavior and competing offerings.",
+      "MSMEs seeking structured insight into consumer behaviour and competing offerings.",
     ],
     whatItCovers: [
       "Detailed market research and consumer insight for a specific product or service.",
@@ -35,7 +35,7 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
       "4. Executive Review: Dedicated consultation to review findings and discuss strategic implications.",
     ],
     whatClientReceives: [
-      "Written market research briefing document customized to your product or sector.",
+      "Written market research briefing document customised to your product or sector.",
       "Competitive landscape and alternative product benchmarking overview.",
       "Identified market gaps and consumer demand considerations.",
       "Executive consultation review with Niraj Kumar.",
@@ -183,18 +183,18 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
     whatItCovers: [
       "Business expansion and sales-growth strategy tailored for existing businesses.",
       "Regional market expansion and multi-city rollout planning.",
-      "Sales channel optimization and revenue pipeline diversification.",
+      "Sales channel optimisation and revenue pipeline diversification.",
       "Operational capacity and resource considerations to support growth without friction.",
     ],
     howEngagementRuns: [
-      "1. Growth Diagnostic: Analyzing current sales performance, revenue drivers, and capacity constraints.",
+      "1. Growth Diagnostic: Analysing current sales performance, revenue drivers, and capacity constraints.",
       "2. Expansion Modeling: Identifying high-potential geographic markets and channel extensions.",
       "3. Strategy Development: Outlining operational milestones, sales priorities, and resource allocation.",
       "4. Growth Roadmap Review: Detailed session with business leadership to align on implementation.",
     ],
     whatClientReceives: [
       "Comprehensive business expansion and sales-growth strategy roadmap.",
-      "Prioritized regional expansion and channel opportunities analysis.",
+      "Prioritised regional expansion and channel opportunities analysis.",
       "Operational readiness and milestone schedule.",
       "Executive strategy session with Niraj Kumar.",
     ],
@@ -239,7 +239,7 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
     shortDescription: "Staff training.",
     whoItIsFor: [
       "Companies introducing new products or distribution channels that require upskilled front-line teams.",
-      "Small businesses and MSMEs wanting to professionalize their sales and customer-facing staff.",
+      "Small businesses and MSMEs wanting to professionalise their sales and customer-facing staff.",
       "Start-ups needing to train initial personnel on commercial execution and brand representation.",
     ],
     whatItCovers: [
@@ -255,7 +255,7 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
       "4. Debrief & Recommendations: Reviewing session outcomes and ongoing capability building steps.",
     ],
     whatClientReceives: [
-      "Customized training outline and key takeaway materials.",
+      "Customised training outline and key takeaway materials.",
       "Delivery of interactive training sessions (online or in person).",
       "Management debrief and participant feedback observations.",
       "Follow-up advisory discussion with Niraj Kumar.",
@@ -271,7 +271,7 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
     whoItIsFor: [
       "Enterprises with unique, multi-disciplinary, or non-standard commercial challenges.",
       "Businesses seeking advisory across multiple intertwined areas of strategy, GTM, and distribution.",
-      "Organizations requiring bespoke advisory support tailored to their specific operational realities.",
+      "Organisations requiring bespoke advisory support tailored to their specific operational realities.",
     ],
     whatItCovers: [
       "Customised solutions formulated for the exact strategic requirements of the client.",
@@ -281,12 +281,12 @@ export const SERVICES_CATALOG: ServiceDetail[] = [
     ],
     howEngagementRuns: [
       "1. Preliminary Scoping Dialogue: Comprehensive discussion to understand unique requirements.",
-      "2. Tailored Proposal: Defining customized scope, deliverables, and engagement format.",
+      "2. Tailored Proposal: Defining customised scope, deliverables, and engagement format.",
       "3. Focused Advisory Delivery: Carrying out the agreed consulting activities and analysis.",
       "4. Executive Presentation: Presenting findings and strategic recommendations to leadership.",
     ],
     whatClientReceives: [
-      "Customized written advisory deliverable addressing agreed strategic objectives.",
+      "Customised written advisory deliverable addressing agreed strategic objectives.",
       "Tailored recommendations and execution roadmaps.",
       "Dedicated debrief and review sessions with Niraj Kumar.",
       "Direct advisory support throughout the engagement window.",

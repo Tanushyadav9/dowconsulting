@@ -2,13 +2,13 @@ import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { SERVICES_CATALOG } from "@/lib/constants/services";
+import { RisingArrowAccent } from "@/components/ui/RisingArrowAccent";
 import {
   ArrowRight,
   MessageSquare,
   Phone,
   Video,
   Users,
-  ChevronRight,
 } from "lucide-react";
 
 export const metadata = {
@@ -22,14 +22,15 @@ export default function ServicesPage() {
     <div className="space-y-16 py-12">
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#0B1B33] text-xs text-white font-semibold tracking-wider uppercase">
+          <RisingArrowAccent size={14} color="#E02027" />
           <span>Nine Confirmed Practice Areas</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
+        <h1 className="text-4xl sm:text-5xl font-black text-[#17477F] tracking-tight font-heading">
           Business Consulting Services
         </h1>
-        <p className="text-sm sm:text-base text-[#5A6472] max-w-2xl mx-auto leading-relaxed">
-          DOW Consulting provides specialized business advisory for <strong>{BRAND.targetAudience}</strong>, led by Consultant <strong>{BRAND.consultant.name}</strong>.
+        <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          DOW Consulting provides specialised business advisory for <strong>{BRAND.targetAudience}</strong>, led by Consultant <strong>{BRAND.consultant.name}</strong>.
         </p>
       </section>
 
@@ -40,27 +41,27 @@ export default function ServicesPage() {
             <div
               key={service.slug}
               id={service.slug}
-              className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-5 hover:border-[#1B2838] transition-colors flex flex-col justify-between"
+              className="bg-white p-8 rounded-xl border border-[#E2E8F0] shadow-sm space-y-5 hover:border-[#17477F] hover:shadow-md transition-all flex flex-col justify-between group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-black text-[#C9A24B]">
+                  <span className="text-sm font-black text-[#E02027]">
                     0{idx + 1}
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#F7F6F3] text-[#1B2838]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#F8FAFC] text-[#17477F] border border-[#E2E8F0]">
                     Practice Area
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#1B2838]">
+                <h3 className="text-xl font-bold text-[#17477F] font-heading group-hover:text-[#065A8C] transition-colors">
                   <Link
                     href={`/services/${service.slug}`}
-                    className="hover:text-[#C9A24B] transition-colors"
+                    className="hover:text-[#E02027] transition-colors"
                   >
                     {service.name}
                   </Link>
                 </h3>
-                <p className="text-xs text-[#5A6472] leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   {service.shortDescription}
                 </p>
               </div>
@@ -68,7 +69,7 @@ export default function ServicesPage() {
               <div className="pt-4 border-t border-[#E2E8F0] space-y-3">
                 <Link
                   href={`/services/${service.slug}`}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] text-xs font-semibold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded bg-[#17477F] hover:bg-[#0B1B33] text-white text-xs font-semibold transition-colors"
                 >
                   <span>View Service Details</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -86,9 +87,9 @@ export default function ServicesPage() {
                   </a>
                   <a
                     href={ENQUIRY_CONFIG.phone.telLink}
-                    className="inline-flex items-center gap-1 text-[#5A6472] hover:text-[#1B2838]"
+                    className="inline-flex items-center gap-1 text-slate-600 hover:text-[#17477F]"
                   >
-                    <Phone className="w-3 h-3 text-[#C9A24B]" />
+                    <Phone className="w-3 h-3 text-[#E02027]" />
                     <span>Call Desk</span>
                   </a>
                 </div>
@@ -100,34 +101,34 @@ export default function ServicesPage() {
 
       {/* Consultation Modes Callout */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#111B27] rounded-xl border border-[#2A3D54] p-8 sm:p-10 text-[#F7F6F3] shadow-lg space-y-6">
+        <div className="bg-[#0B1B33] rounded-2xl border border-[#1E3A63] p-8 sm:p-10 text-white shadow-xl space-y-6">
           <div className="max-w-3xl space-y-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#1B2838] text-[#C9A24B] border border-[#2A3D54]">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#17477F] text-white border border-[#235B9E]">
               Delivery Options
             </span>
-            <h2 className="text-2xl font-bold">Consultation Modes</h2>
-            <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
+            <h2 className="text-2xl font-bold font-heading">Consultation Modes</h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               We provide both online and in-person consultation formats:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-            <div className="p-5 rounded bg-[#1B2838] border border-[#2A3D54] space-y-2">
-              <div className="flex items-center gap-2 font-bold text-sm text-[#F7F6F3]">
-                <Video className="w-4 h-4 text-[#C9A24B]" />
+            <div className="p-5 rounded-xl bg-[#17477F]/30 border border-[#1E3A63] space-y-2">
+              <div className="flex items-center gap-2 font-bold text-sm text-white">
+                <Video className="w-4 h-4 text-[#60A5FA]" />
                 <span>Online Consultation</span>
               </div>
-              <p className="text-xs text-[#8C96A5]">
+              <p className="text-xs text-slate-300">
                 Conducted remotely via <strong>Google Meet or Zoom</strong>. Convenient and direct for executive teams.
               </p>
             </div>
 
-            <div className="p-5 rounded bg-[#1B2838] border border-[#2A3D54] space-y-2">
-              <div className="flex items-center gap-2 font-bold text-sm text-[#F7F6F3]">
-                <Users className="w-4 h-4 text-[#C9A24B]" />
+            <div className="p-5 rounded-xl bg-[#17477F]/30 border border-[#1E3A63] space-y-2">
+              <div className="flex items-center gap-2 font-bold text-sm text-white">
+                <Users className="w-4 h-4 text-[#60A5FA]" />
                 <span>In-Person Consultation</span>
               </div>
-              <p className="text-xs text-[#8C96A5]">
+              <p className="text-xs text-slate-300">
                 Available on request. <em>For in-person meetings, travel and visiting charges are borne by the client and are communicated at the time of enquiry.</em>
               </p>
             </div>
@@ -137,21 +138,21 @@ export default function ServicesPage() {
 
       {/* Target Customers Callout */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] space-y-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#1B2838]">
+        <div className="bg-white p-8 sm:p-10 rounded-xl border border-[#E2E8F0] shadow-sm space-y-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#17477F] font-heading">
             Clients Served
           </h2>
-          <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Our consulting engagements are dedicated to <strong>start-ups, small companies and MSMEs</strong>. Advisory is focused on actionable, pragmatic business growth rather than theoretical corporate frameworks.
           </p>
           <div className="pt-2 flex flex-wrap gap-3">
-            <span className="px-3.5 py-1.5 rounded bg-[#F7F6F3] border border-[#E2E8F0] text-xs font-semibold text-[#1B2838]">
+            <span className="px-3.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#CBD5E1] text-xs font-semibold text-[#17477F]">
               Start-ups
             </span>
-            <span className="px-3.5 py-1.5 rounded bg-[#F7F6F3] border border-[#E2E8F0] text-xs font-semibold text-[#1B2838]">
+            <span className="px-3.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#CBD5E1] text-xs font-semibold text-[#17477F]">
               Small Companies
             </span>
-            <span className="px-3.5 py-1.5 rounded bg-[#F7F6F3] border border-[#E2E8F0] text-xs font-semibold text-[#1B2838]">
+            <span className="px-3.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#CBD5E1] text-xs font-semibold text-[#17477F]">
               MSMEs
             </span>
           </div>
@@ -160,32 +161,32 @@ export default function ServicesPage() {
 
       {/* Direct Enquiry CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2838]">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#17477F] font-heading">
           Have a Project or Consulting Requirement?
         </h2>
-        <p className="text-xs sm:text-sm text-[#5A6472]">
+        <p className="text-xs sm:text-sm text-slate-600">
           Discuss your enterprise requirements directly with Consultant Niraj Kumar.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <a
             href={ENQUIRY_CONFIG.phone.telLink}
-            className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider"
+            className="inline-flex justify-center items-center gap-2 bg-[#E02027] hover:bg-[#C7181F] text-white px-6 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-sm transition-colors"
           >
-            <Phone className="w-4 h-4 text-[#C9A24B]" />
+            <Phone className="w-4 h-4" />
             <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
           </a>
           <a
             href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-sm"
+            className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-sm transition-colors"
           >
             <MessageSquare className="w-4 h-4 fill-current" />
             <span>Connect on WhatsApp</span>
           </a>
           <Link
             href="/contact"
-            className="inline-flex justify-center items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F6F3] border border-[#CBD5E1] text-[#1B2838] px-6 py-3 rounded font-semibold text-xs"
+            className="inline-flex justify-center items-center gap-2 bg-white hover:bg-[#F8FAFC] border border-[#CBD5E1] text-[#17477F] px-6 py-3 rounded font-semibold text-xs transition-colors"
           >
             <span>Enquiry Form</span>
           </Link>

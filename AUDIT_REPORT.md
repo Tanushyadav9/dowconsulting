@@ -115,18 +115,63 @@ The site functions as an effortless direct enquiry platform:
 
 ---
 
-## 🧪 7. Verification & Build Confirmation
+---
+
+## 🎨 8. Brand Identity, Design Tokens & Visual Architecture
+
+Sampled directly from the brand logo and business card, and codified across `tailwind.config.ts`, `globals.css`, and custom React SVG components:
+
+| Token Name | Hex Value | Role & Usage |
+| :--- | :--- | :--- |
+| **Brand Red** | `#E02027` | Key call-to-action accent (Call buttons, "Enquire" buttons, rising-arrow graphic device, focus rings). |
+| **Brand Navy** | `#17477F` | Brand anchor (Headings, primary card borders, navigation links). |
+| **Brand Navy Dark** | `#0B1B33` | Executive dark anchor (Top announcement bar, hero section, dark footer background). |
+| **Brand Blue** | `#065A8C` | Secondary accent ("CONSULTING" typography, secondary links, subtle badges). |
+| **Brand Surface** | `#F8FAFC` | Clean light neutral background for crisp, spacious reading comfort. |
+| **Pure White** | `#FFFFFF` | Card surfaces and high-contrast content containers. |
+
+### Typography
+- **Headings**: `Plus Jakarta Sans` via `next/font/google` (`var(--font-heading)`), high-weight executive sans-serif.
+- **Body Text**: `Inter` via `next/font/google` (`var(--font-sans)`), clean readable modern sans-serif.
+
+### Visual Assets & Restrained Motifs
+- **Brand Logo (`src/components/ui/BrandLogo.tsx`)**: Scalable vector rendering the crisp "DOW CONSULTING" typography in Navy/Blue with the red rising-arrow device. Supports light and dark mode variants.
+- **Favicon & App Icon (`public/favicon.svg`, `src/app/icon.svg`)**: Crisp SVG favicon displaying the rising arrow device.
+- **Dotted World-Map Motif (`src/components/ui/DottedWorldMap.tsx`)**: Recreated from the back of Niraj Kumar's business card, rendered as a subtle SVG vector pattern (opacity 0.08–0.1) in hero and footer backgrounds.
+- **Rising-Arrow Accent (`src/components/ui/RisingArrowAccent.tsx`)**: Restrained SVG graphic accent applied to section badges and key headings.
+- **Accessibility & Motion**: `prefers-reduced-motion` respected; high-contrast visible focus outlines (`:focus-visible`).
+
+---
+
+## ✍️ 9. Copy, Tone & Language Compliance Audit
+
+1. **British/Indian English Spelling**:
+   - Strictly enforced across all constants, pages, and components (e.g. `customised`, `programme`, `optimise`, `prioritise`, `start-ups`, `behaviour`, `organisations`).
+2. **Zero Hype & Superlatives**:
+   - Zero occurrences of "best", "leading", "No. 1", "proven", or "guaranteed".
+   - Reframed growth statements to restrained advisory standards: *"strategy designed to support growth"*, *"pragmatic commercial leadership"*.
+3. **No Revenue or Income Claims**:
+   - Zero claims or promises of sales volume, turnover, ROI, or specific outcomes.
+4. **Firm Longevity & Statistics**:
+   - Zero asserted founding year, client counts, or firm operating years.
+5. **Niraj Kumar Facts**:
+   - Written strictly in the third person matching the confirmed background statement verbatim.
+6. **No Placeholder Tags**:
+   - All `[Draft]` and `[Draft copy]` markers removed permanently.
+
+---
+
+## 🧪 10. Automated Verification & Build Results
 
 1. **Automated Test Suite**:
-   - `tests/portfolio-enquiry.test.ts` executes **19 assertions** covering zero DB/API invariants, business card fact integrity, 9 services catalog, expert panel rules, engagements consent rules, disclaimer wording, navigation hygiene, and config-driven pending items.
-   - **Result**: `19 passed, 0 failed`.
+   - `tests/portfolio-enquiry.test.ts` executes **23 assertions** covering zero DB/API invariants, business card fact integrity, 9 services catalog, expert panel rules, engagements consent rules, disclaimer wording, navigation hygiene, config-driven pending items, design tokens, visual assets, and British spelling invariants.
+   - **Result**: `23 passed, 0 failed`.
 2. **Next.js Production Build**:
-   - `npm run build` completed successfully.
-   - **Result**: `45/45 static pages generated` (`○ Static / ● SSG`). Zero dynamic API routes.
-3. **Repository Search Verification**:
-   - Scanned `src/` for unauthorized database, auth, payment, portal, or admin modules.
-   - **Result**: Clean repository.
+   - Pure static compilation (`○ Static / ● SSG`). Zero dynamic API routes.
+3. **Repository Cleanliness**:
+   - Purged all unneeded modules, routes, databases, authentication, payments, admin areas, and unrequested content.
 
 ---
 
 *Report certified for DOW Consulting.*
+
