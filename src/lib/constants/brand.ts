@@ -1,91 +1,162 @@
-import { getContactEmail } from "@/lib/env";
-import { SISTER_SITES } from "@/lib/constants/ecosystem";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 
+export interface ServiceItem {
+  id: string;
+  name: string;
+  shortDescription: string;
+  fullDescription: string;
+}
+
 export const BRAND = {
-  name: "DOW Consulting", // [Pending client confirmation on exact brand name and what DOW stands for]
-  tagline: "Business Consulting for Startups, Small Companies and MSMEs", // [Draft pending client confirmation]
+  name: "DOW Consulting",
+  tagline: "GTM Strategy, Distribution & Brand Building",
   subheading:
-    "A specialized business consulting team providing go-to-market (GTM) strategy, market research, business expansion strategy, and new business start consultation for startups, small companies, and MSMEs.", // [Draft pending client confirmation]
-  targetAudience: "Startups, Small Companies, and MSMEs",
-  teamModel: {
-    heading: "Consulting Team Model",
-    description:
-      "DOW Consulting operates as a collaborative advisory team, not a single consultant. Different specialists handle distinct operational tasks—for example, one team member conducts research, another consults with clients, and another collects business information.",
-    roles: [
-      { title: "Market Research", detail: "Conducts data gathering, industry benchmarking, and competitive landscape analysis." },
-      { title: "Strategic Consultation", detail: "Structures advisory roadmaps, GTM execution, and expansion strategy." },
-      { title: "Information Collection", detail: "Gathers business profiles, operational parameters, and founder requirements." },
-    ],
-  },
-  services: [
-    { id: "gtm-strategy", name: "GTM Strategy", title: "Go-to-Market (GTM) Strategy", href: "/services/gtm-strategy" },
-    { id: "market-research", name: "Market Research", title: "Market Research", href: "/services/market-research" },
-    { id: "business-expansion-strategy", name: "Business Expansion Strategy", title: "Business Expansion Strategy", href: "/services/business-expansion-strategy" },
-    { id: "new-business-start-consultation", name: "New Business Start Consultation", title: "New Business Start Consultation", href: "/services/new-business-start-consultation" },
-  ],
-  founder: {
+    "Business consulting for start-ups, small companies and MSMEs led by Niraj Kumar.",
+  targetAudience: "start-ups, small companies and MSMEs",
+
+  // Consultant details strictly from business card and confirmed client wording
+  consultant: {
     name: "Niraj Kumar",
-    title: "Lead Strategic Advisor",
-    sisterBrands: "Founder of Aapka Astro and Viar.in",
-    corporateExperience:
-      "Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food",
-    corporateRoles: [
-      { role: "Vice President and Business Head", company: "Organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food" },
-    ],
-    credentials: [
+    title: "Consultant",
+    descriptor: "GTM Strategy, Distribution & Brand Building",
+    background:
+      "over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food; B.Sc. (Hons.) in Physics; PGDBM in International Business & Marketing; Leadership Development & Change Management certification from XLRI.",
+    education: [
       "B.Sc. (Hons.) in Physics",
       "PGDBM in International Business & Marketing",
-      "Leadership Development & Change Management Certification, XLRI",
+      "Leadership Development & Change Management certification from XLRI",
     ],
+    experienceSummary:
+      "over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food",
   },
-  contact: {
-    address: {
-      unit: "Unit No. A-1212 D, Tower A",
-      complex: "Spectrum@Metro Phase 1",
-      sector: "Sector 75",
-      city: "Noida, G.B. Nagar",
-      state: "Uttar Pradesh",
-      pincode: "201301",
-      country: "India",
-      full: "Unit No. A-1212 D, Tower A, Spectrum@Metro Phase 1, Sector 75, Noida, G.B. Nagar - U.P. 201301",
-    },
-    phone: {
-      get display(): string {
-        return ENQUIRY_CONFIG.phone.display;
-      },
-      get link(): string {
-        return ENQUIRY_CONFIG.phone.telLink;
-      },
-    },
-    whatsapp: {
-      get display(): string {
-        return ENQUIRY_CONFIG.whatsapp.display;
-      },
-      get link(): string {
-        return ENQUIRY_CONFIG.whatsapp.baseChatUrl;
-      },
-      get number(): string {
-        return ENQUIRY_CONFIG.whatsapp.internationalNumber;
-      },
-    },
-    get email(): string {
-      return getContactEmail();
-    },
+
+  // Head Office exactly as confirmed
+  headOffice: {
+    address: "1212-D, Tower A, Spectrum @Metro Phase 1, Sector 75, Noida, Uttar Pradesh",
+    city: "Noida",
+    state: "Uttar Pradesh",
   },
-  consultationDelivery: {
-    note: "Engagement formats, duration, and delivery details are confirmed with the consultant following initial diagnostic enquiries.",
-  },
-  ecosystem: [
+
+  // Confirmed 9 Client Services
+  services: [
     {
-      name: SISTER_SITES.aapkaAstro.name,
-      url: SISTER_SITES.aapkaAstro.url,
-      description: SISTER_SITES.aapkaAstro.description,
+      id: "market-research-consumer-insight",
+      name: "Market Research & Consumer Insight",
+      shortDescription:
+        "Market research and consumer insight, including detailed research for a specific product or service.",
+      fullDescription:
+        "Comprehensive market research and consumer insight tailored to your commercial space, including detailed research for a specific product or service to validate market opportunities and customer demand.",
     },
     {
-      name: SISTER_SITES.viar.name,
-      url: SISTER_SITES.viar.url,
-      description: SISTER_SITES.viar.description,
+      id: "product-launch-strategy",
+      name: "Product Launch Strategy",
+      shortDescription:
+        "How to launch, how to position and make the offering distinctive against existing similar products, and the right place and time to launch.",
+      fullDescription:
+        "Product launch strategy: how to launch, how to position and make the offering distinctive against existing similar products, and identifying the right place and time to launch.",
+    },
+    {
+      id: "gtm-strategy-distribution",
+      name: "Go-to-Market Strategy & Distribution",
+      shortDescription: "Go-to-market strategy and distribution.",
+      fullDescription:
+        "Structured go-to-market strategy and distribution architecture to scale market penetration and build robust sales channels.",
+    },
+    {
+      id: "brand-building",
+      name: "Brand Building",
+      shortDescription: "Brand building.",
+      fullDescription:
+        "Strategic brand building to establish trust, distinctiveness, and long-term customer equity in competitive markets.",
+    },
+    {
+      id: "product-design-packaging-guidance",
+      name: "Product Design & Packaging Guidance",
+      shortDescription:
+        "Product design and packaging guidance support for commercial offerings.",
+      fullDescription:
+        "Product design and packaging guidance support. Tailored advisory and assistance for developing distinctive packaging and product presentation.",
+    },
+    {
+      id: "business-expansion-sales-growth",
+      name: "Business Expansion & Sales-Growth Strategy",
+      shortDescription:
+        "Business expansion and sales-growth strategy for existing businesses.",
+      fullDescription:
+        "Business expansion and sales-growth strategy for existing businesses seeking regional scale, channel diversification, or market share acceleration.",
+    },
+    {
+      id: "new-business-startup-guidance",
+      name: "New-Business & Start-up Guidance",
+      shortDescription: "New-business and start-up guidance from scratch.",
+      fullDescription:
+        "Foundational new-business and start-up guidance from scratch, assisting founders through validation, initial setup, and operational launch readiness.",
+    },
+    {
+      id: "staff-training",
+      name: "Staff Training",
+      shortDescription: "Staff training.",
+      fullDescription:
+        "Targeted staff training and capability building to upskill internal teams on sales execution, distribution, and operational standards.",
+    },
+    {
+      id: "customised-solutions",
+      name: "Customised Solutions",
+      shortDescription: "Customised solutions.",
+      fullDescription:
+        "Customised solutions tailored to the unique operational, strategic, and commercial needs of your enterprise.",
+    },
+  ] as ServiceItem[],
+
+  // Consultation Modes
+  consultationModes: [
+    {
+      id: "online",
+      title: "Online Consultation",
+      medium: "Google Meet or Zoom",
+      details: "Conducted remotely via Google Meet or Zoom.",
+    },
+    {
+      id: "in-person",
+      title: "In-Person Consultation",
+      medium: "On request",
+      details:
+        "In person on request. Travel and visiting charges are borne by the client and are communicated at the time of enquiry.",
+      feeNote:
+        "Travel and visiting charges are borne by the client and are communicated at the time of enquiry.",
     },
   ],
+
+  // Contact details mapped directly to ENQUIRY_CONFIG
+  contact: {
+    get phone(): string {
+      return ENQUIRY_CONFIG.phone.display;
+    },
+    get phoneTel(): string {
+      return ENQUIRY_CONFIG.phone.telLink;
+    },
+    get whatsapp(): string {
+      return ENQUIRY_CONFIG.whatsapp.display;
+    },
+    get whatsappLink(): string {
+      return ENQUIRY_CONFIG.whatsapp.baseChatUrl;
+    },
+    get email(): string {
+      return ENQUIRY_CONFIG.email.primary;
+    },
+    get headOffice(): string {
+      return "1212-D, Tower A, Spectrum @Metro Phase 1, Sector 75, Noida, Uttar Pradesh";
+    },
+  },
+
+  // Pending items from client - config-driven, strictly hidden when empty/null
+  pending: {
+    gstin: process.env.NEXT_PUBLIC_GSTIN || null,
+    youtubeUrl: process.env.NEXT_PUBLIC_YOUTUBE_URL || null,
+    linkedinUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || null,
+    expertPanelProfiles: [] as { name: string; role: string; bio: string }[],
+    testimonials: [] as { quote: string; author: string; company: string }[],
+    responseTimeCommitment: null as string | null,
+    domainEmail: null as string | null,
+  },
 };

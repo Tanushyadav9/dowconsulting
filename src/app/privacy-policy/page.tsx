@@ -1,4 +1,5 @@
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 
 export const metadata = {
   title: `Privacy Policy | ${BRAND.name}`,
@@ -14,46 +15,44 @@ export default function PrivacyPolicyPage() {
         </span>
         <h1 className="text-3xl font-bold text-[#1B2838]">Privacy Policy</h1>
         <p className="text-xs text-[#8C96A5]">
-          {/* PLACEHOLDER: replace with client-approved content */}
-          Last updated: October 2026 • Governing commercial data collection
+          Governing communications and enquiries with {BRAND.name}.
         </p>
       </div>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">1. Information We Collect</h2>
         <p>
-          To deliver rigorous strategic consulting, {BRAND.name} collects proprietary commercial information voluntarily submitted through our intake forms, client communications, and live sessions:
+          To facilitate strategic business consulting, {BRAND.name} collects commercial information voluntarily provided through enquiries, phone calls, WhatsApp messages, and meetings:
         </p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Corporate entity name, registration jurisdiction, and industry classification</li>
-          <li>Commercial premises address, facility layouts, or operational site details (if applicable)</li>
-          <li>Operating timelines, business models, strategic growth objectives, and target expansion milestones</li>
-          <li>Executive contact coordinates (email, telephone, WhatsApp) and billing records</li>
+        <ul className="list-disc pl-5 space-y-1 text-xs">
+          <li>Contact details: Name, phone number, email address, enterprise name, and city</li>
+          <li>Commercial context: Industry domain, business stage, challenges, and growth objectives</li>
+          <li>Operational notes shared during consultations</li>
         </ul>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">2. Commercial Non-Disclosure &amp; Usage</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">2. Commercial Non-Disclosure &amp; Confidentiality</h2>
         <p>
-          We treat all client business data as strictly confidential. Client business documentation, operational records, and organizational challenges are utilized solely for diagnostic analysis and preparation of your custom written report. We do not sell, rent, or monetize client data to any third-party advertisers or brokers.
+          We treat all client business data as strictly confidential. Client documentation and operational records are utilized solely for consulting analysis and preparation of strategic recommendations. We do not sell, rent, or distribute client data to any third parties.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Direct Communications &amp; Infrastructure</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">3. Non-Transactional Infrastructure</h2>
         <p>
-          This website is a professional portfolio and enquiry site. It does not maintain user accounts, databases, or online payment gateways. Communications received via Phone, WhatsApp, or email are handled directly by Lead Strategic Advisor Niraj Kumar and his team with strict confidentiality.
+          This website is a professional portfolio and enquiry site. It does not maintain user accounts, databases, or online payment gateways. Communications received via phone, WhatsApp, or email are handled directly by Consultant Niraj Kumar with strict confidentiality.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">4. Contact Our Data Desk</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">4. Contact Coordinates</h2>
         <p>
-          For inquiries regarding data retention, deletion requests, or confidentiality agreements, contact our administrative desk at:
+          For questions regarding data confidentiality or commercial enquiries, contact:
         </p>
-        <p className="text-xs text-[#1B2838] font-semibold">
-          {BRAND.contact.address.full}<br />
-          Email: {BRAND.contact.email} • WhatsApp: {BRAND.contact.whatsapp.display}
+        <p className="text-xs text-[#1B2838] font-semibold leading-relaxed">
+          {BRAND.headOffice.address}<br />
+          Phone: {ENQUIRY_CONFIG.phone.display} &bull; Email: {ENQUIRY_CONFIG.email.primary} &bull; WhatsApp: {ENQUIRY_CONFIG.whatsapp.display}
         </p>
       </section>
     </div>

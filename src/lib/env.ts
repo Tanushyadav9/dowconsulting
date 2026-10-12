@@ -1,6 +1,6 @@
 /**
- * Environment Configuration
- * Safe production fallbacks with zero database or authentication dependencies.
+ * Environment & Runtime Coordinates Configuration
+ * Safe static-first fallbacks with zero secrets and zero database dependencies.
  */
 
 export function getAppUrl(): string {
@@ -19,13 +19,13 @@ export function getContactEmail(): string {
   if (email && !email.includes("placeholder") && !email.includes("example")) {
     return email;
   }
-  return "info@dowconsulting.in";
+  return "niraj@dairyonwheels.com";
 }
 
 export function getContactPhone(): string {
-  return process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim() || "+91 93112 15564";
+  return process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim() || "+91 93107 09233";
 }
 
 export function getWhatsAppNumber(): string {
-  return process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "+91 93112 15564";
+  return process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "+91 93107 09233";
 }

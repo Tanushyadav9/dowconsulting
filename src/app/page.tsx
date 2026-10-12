@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
-import { EcosystemCrossPromotion } from "@/components/home/EcosystemCrossPromotion";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { HonestEngagementProof } from "@/components/home/HonestEngagementProof";
 import {
   ArrowRight,
@@ -16,9 +14,18 @@ import {
   Award,
   ChevronRight,
   ShieldCheck,
-  FileText,
   Phone,
+  Video,
+  MapPin,
+  Sparkles,
+  Layers,
+  GraduationCap,
 } from "lucide-react";
+
+export const metadata = {
+  title: `${BRAND.name} | ${BRAND.consultant.name} &mdash; ${BRAND.consultant.title}`,
+  description: `${BRAND.name}: Business consulting for start-ups, small companies and MSMEs led by Niraj Kumar (${BRAND.consultant.descriptor}).`,
+};
 
 export default function HomePage() {
   return (
@@ -29,42 +36,41 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#111B27] border border-[#C9A24B]/30 text-xs text-[#C9A24B] font-semibold tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111B27] border border-[#C9A24B]/40 text-xs text-[#C9A24B] font-semibold tracking-wide">
                 <span className="w-2 h-2 rounded-full bg-[#C9A24B] animate-pulse"></span>
-                <span>BUSINESS CONSULTING PRACTICE [DRAFT]</span>
+                <span>{BRAND.consultant.name} &bull; {BRAND.consultant.title}</span>
               </div>
 
-              {/* Draft Headline pending client confirmation */}
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F7F6F3] leading-[1.15]">
-                  Business consulting for startups, small companies and MSMEs.
+                  Business consulting for start-ups, small companies and MSMEs.
                 </h1>
-                <p className="text-xs text-[#C9A24B] font-medium tracking-wide">
-                  [Draft headline pending client confirmation]
+                <p className="text-sm sm:text-base text-[#C9A24B] font-medium tracking-wide uppercase">
+                  {BRAND.consultant.descriptor}
                 </p>
               </div>
 
               <p className="text-lg text-[#E2E8F0] font-normal leading-relaxed max-w-2xl">
-                A dedicated business consulting team delivering go-to-market (GTM) strategy, market research, business expansion strategy, and new business start consultation.
+                Practical, senior commercial guidance helping emerging enterprises navigate market entry, product launches, distribution channels, and sales expansion.
               </p>
 
               {/* Core Non-Negotiables Callout */}
               <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[#8C96A5]">
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                  <span>Focused on Startups, Small Companies &amp; MSMEs</span>
+                  <span>Start-ups, Small Companies &amp; MSMEs</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                  <span>Team Model: Research, Consulting &amp; Information Collection</span>
+                  <span>Online (Meet / Zoom) or In-Person</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                  <span>4 Confirmed Practice Areas</span>
+                  <span>9 Practice Areas</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                  <span>Lead Strategic Advisor: Niraj Kumar</span>
+                  <span>Direct Advisory &mdash; No Gateways</span>
                 </div>
               </div>
 
@@ -75,7 +81,7 @@ export default function HomePage() {
                   className="inline-flex justify-center items-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-7 py-3.5 rounded font-bold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>Call Consultant: {ENQUIRY_CONFIG.phone.display}</span>
+                  <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
                 </a>
 
                 <a
@@ -92,19 +98,19 @@ export default function HomePage() {
                   href="/contact"
                   className="inline-flex justify-center items-center gap-2 bg-[#111B27] hover:bg-[#2A3D54] border border-[#2A3D54] text-[#F7F6F3] px-5 py-3.5 rounded font-semibold text-xs tracking-wide transition-colors"
                 >
-                  <span>Online Enquiry</span>
+                  <span>Enquiry Form</span>
                 </Link>
               </div>
             </div>
 
-            {/* Right Card: Lead Strategic Advisor Personal Credentials */}
+            {/* Right Card: Consultant Credentials */}
             <div className="lg:col-span-5">
               <div className="bg-[#111B27] border border-[#2A3D54] rounded-lg p-8 shadow-xl space-y-6">
                 <div className="flex items-center justify-between border-b border-[#2A3D54] pb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-[#F7F6F3]">{BRAND.founder.name}</h3>
+                    <h3 className="text-xl font-bold text-[#F7F6F3]">{BRAND.consultant.name}</h3>
                     <p className="text-xs text-[#C9A24B] uppercase tracking-wider font-semibold">
-                      {BRAND.founder.title}
+                      {BRAND.consultant.title} &bull; {BRAND.consultant.descriptor}
                     </p>
                   </div>
                   <Award className="w-8 h-8 text-[#C9A24B]" />
@@ -112,28 +118,24 @@ export default function HomePage() {
 
                 <div className="space-y-4 text-xs text-[#8C96A5]">
                   <div>
-                    <p className="text-[#E2E8F0] font-semibold text-sm mb-1">Corporate Operating Background:</p>
+                    <p className="text-[#E2E8F0] font-semibold text-sm mb-1">Professional Background:</p>
                     <p className="text-[#F7F6F3] leading-relaxed">
-                      &ldquo;{BRAND.founder.corporateExperience}&rdquo;
+                      &ldquo;{BRAND.consultant.background}&rdquo;
                     </p>
                   </div>
 
-                  <div>
-                    <p className="text-[#E2E8F0] font-semibold text-sm mb-1">Academic &amp; Executive Credentials:</p>
+                  <div className="pt-2 border-t border-[#2A3D54] space-y-2">
+                    <p className="text-[#E2E8F0] font-semibold text-sm mb-1">Academic &amp; Executive Education:</p>
                     <ul className="space-y-1.5 pl-4 list-disc marker:text-[#C9A24B]">
-                      {BRAND.founder.credentials.map((cred) => (
-                        <li key={cred} className="text-[#E2E8F0]">{cred}</li>
+                      {BRAND.consultant.education.map((item) => (
+                        <li key={item} className="text-[#E2E8F0]">{item}</li>
                       ))}
                     </ul>
                   </div>
 
-                  <p className="text-[11px] text-[#8C96A5] italic border-t border-[#2A3D54] pt-3">
-                    Note: Credentials quoted in client-supplied wording and attributed to Niraj Kumar personally. DOW Consulting makes no outcome claims, statistics, or firm-level history claims.
-                  </p>
-
-                  <div className="pt-2 border-t border-[#2A3D54] flex items-center justify-between">
-                    <span className="text-[11px] text-[#8C96A5]">Sister Brand Founder:</span>
-                    <span className="text-xs text-[#C9A24B] font-semibold">Aapka Astro &amp; Viar.in</span>
+                  <div className="pt-2 border-t border-[#2A3D54] flex items-center justify-between text-[11px]">
+                    <span className="text-[#8C96A5]">Head Office:</span>
+                    <span className="text-[#F7F6F3] font-medium text-right">Sector 75, Noida, UP</span>
                   </div>
                 </div>
               </div>
@@ -142,179 +144,110 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. Four Confirmed Service Areas */}
+      {/* 2. Confirmed Practice Areas (All 9 Client Services) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-amber-50 border border-amber-200 text-[#8C6A1E] text-xs font-bold uppercase tracking-wider">
-            <span>Confirmed Services [Draft Copy]</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#1B2838] text-[#C9A24B] text-xs font-bold uppercase tracking-wider">
+            <span>Consulting Practice Areas</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#1B2838]">
-            Core Business Consulting Services
+            What We Do
           </h2>
           <p className="text-sm text-[#5A6472] leading-relaxed">
-            Tailored advisory services structured for startups, small companies, and MSMEs. All descriptions represent general draft outlines pending final client confirmation.
+            Tailored business advisory for start-ups, small companies and MSMEs across nine confirmed service areas.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Service 1: GTM Strategy */}
-          <div className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4 hover:border-[#1B2838] transition-colors flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded bg-[#1B2838] text-[#C9A24B] flex items-center justify-center font-bold">
-                <Rocket className="w-6 h-6" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {BRAND.services.map((service, idx) => (
+            <div
+              key={service.id}
+              id={service.id}
+              className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4 hover:border-[#1B2838] transition-colors flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#C9A24B]">0{idx + 1}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#F7F6F3] text-[#1B2838]">
+                    Practice
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-[#1B2838]">{service.name}</h3>
+                <p className="text-xs text-[#5A6472] leading-relaxed">
+                  {service.fullDescription}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#1B2838]">GTM Strategy</h3>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Go-to-market strategy for bringing new offerings to market: defining target buyer personas, value positioning, distribution channels, pricing frameworks, and initial launch roadmaps.
-              </p>
+              <div className="pt-4 border-t border-[#E2E8F0]">
+                <a
+                  href={ENQUIRY_CONFIG.buildWhatsAppUrl(
+                    `Hello Niraj / DOW Consulting, I would like to enquire about ${service.name} for my business.`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2838] hover:text-[#C9A24B] transition-colors"
+                >
+                  <span>Enquire about this service</span>
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
-            <div className="pt-4 border-t border-[#E2E8F0]">
-              <Link
-                href="/services/gtm-strategy"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2838] hover:text-[#C9A24B] transition-colors"
-              >
-                <span>Explore GTM Strategy</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. Consultation Modes Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#111B27] rounded-xl border border-[#2A3D54] p-8 sm:p-12 text-[#F7F6F3] shadow-xl space-y-8">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#1B2838] text-[#C9A24B] border border-[#2A3D54]">
+              Engagement Delivery
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#F7F6F3]">
+              Consultation Modes
+            </h2>
+            <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
+              We offer flexible consultation options tailored to your location and operational preference.
+            </p>
           </div>
 
-          {/* Service 2: Market Research */}
-          <div className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4 hover:border-[#1B2838] transition-colors flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded bg-[#1B2838] text-[#C9A24B] flex items-center justify-center font-bold">
-                <Search className="w-6 h-6" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+            {/* Mode 1: Online */}
+            <div className="bg-[#1B2838] border border-[#2A3D54] rounded-lg p-6 space-y-3">
+              <div className="w-10 h-10 rounded bg-[#111B27] text-[#C9A24B] flex items-center justify-center">
+                <Video className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-[#1B2838]">Market Research</h3>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Structured research into sector dynamics, competitive benchmarking, customer pain points, addressable market scoping, and actionable industry intelligence to inform strategic decisions.
+              <h3 className="text-lg font-bold text-[#F7F6F3]">Online Consultation</h3>
+              <p className="text-xs text-[#C9A24B] font-semibold">Via Google Meet or Zoom</p>
+              <p className="text-xs text-[#8C96A5] leading-relaxed">
+                Direct strategic consultation conducted online via Google Meet or Zoom. Flexible scheduling for founders, business owners, and management teams anywhere in India or internationally.
               </p>
             </div>
-            <div className="pt-4 border-t border-[#E2E8F0]">
-              <Link
-                href="/services/market-research"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2838] hover:text-[#C9A24B] transition-colors"
-              >
-                <span>Explore Market Research</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
 
-          {/* Service 3: Business Expansion Strategy */}
-          <div className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4 hover:border-[#1B2838] transition-colors flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded bg-[#1B2838] text-[#C9A24B] flex items-center justify-center font-bold">
-                <TrendingUp className="w-6 h-6" />
+            {/* Mode 2: In Person */}
+            <div className="bg-[#1B2838] border border-[#2A3D54] rounded-lg p-6 space-y-3">
+              <div className="w-10 h-10 rounded bg-[#111B27] text-[#C9A24B] flex items-center justify-center">
+                <Users className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-[#1B2838]">Business Expansion Strategy</h3>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Advisory for scaling existing operations: geographical reach, multi-city or multi-channel expansion, new service line introductions, operational workflows, and resource allocation.
+              <h3 className="text-lg font-bold text-[#F7F6F3]">In-Person Consultation</h3>
+              <p className="text-xs text-[#C9A24B] font-semibold">Available on request</p>
+              <p className="text-xs text-[#8C96A5] leading-relaxed">
+                In-person meetings on request. For in-person meetings, travel and visiting charges are borne by the client and are communicated at the time of enquiry.
               </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0]">
-              <Link
-                href="/services/business-expansion-strategy"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2838] hover:text-[#C9A24B] transition-colors"
-              >
-                <span>Explore Expansion Strategy</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Service 4: New Business Start Consultation */}
-          <div className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-4 hover:border-[#1B2838] transition-colors flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded bg-[#1B2838] text-[#C9A24B] flex items-center justify-center font-bold">
-                <Building className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1B2838]">New Business Start Consultation</h3>
-              <p className="text-xs text-[#5A6472] leading-relaxed">
-                Foundational guidance for new business initiatives and early-stage ventures: concept validation, business model structuring, initial operating priorities, and feasibility evaluation.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0]">
-              <Link
-                href="/services/new-business-start-consultation"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2838] hover:text-[#C9A24B] transition-colors"
-              >
-                <span>Explore Start Consultation</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Honest Social Proof Substitutes: Methodology, Deliverable Outline & Intake Preparation */}
+      {/* 4. Methodology & Deliverable Outline */}
       <HonestEngagementProof />
 
-      {/* 4. Packages & Proposals Notice (Pending Client Confirmation) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#111B27] rounded-xl border border-[#2A3D54] p-8 sm:p-12 text-[#F7F6F3] shadow-xl space-y-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#2A3D54] pb-6">
-            <div className="space-y-2 max-w-2xl">
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#1B2838] text-[#C9A24B] border border-[#2A3D54]">
-                Advisory Proposals [Draft]
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#F7F6F3]">
-                Structured Business Consulting Engagements
-              </h2>
-              <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
-                Package names, exact pricing, call durations, and report turnarounds are pending client confirmation. In the interim, advisory engagements are formulated around your business stage, target market, and strategic scope via custom proposal requests.
-              </p>
-            </div>
-
-            <div className="shrink-0 flex flex-col sm:flex-row gap-3">
-              <a
-                href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
-              >
-                <MessageSquare className="w-4 h-4 fill-current" />
-                <span>Discuss on WhatsApp</span>
-              </a>
-              <Link
-                href="/packages"
-                className="inline-flex items-center justify-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3.5 rounded font-semibold text-xs border border-[#2A3D54] transition-colors"
-              >
-                <span>View Engagement Overview</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 text-xs text-[#8C96A5]">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-              <span>Tailored to startups, small businesses, and MSMEs</span>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-              <span>Multi-disciplinary consulting team support</span>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-              <span>Clear scope definition prior to formal engagement</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Verified Client Testimonials (Renders NULL when count is 0) */}
-      <TestimonialsSection />
-
-      {/* 6. Sister Ecosystem Cross-Promotion */}
-      <EcosystemCrossPromotion />
-
-      {/* 6. Office Coordinates & Final CTA */}
+      {/* 5. Direct Enquiry Final Action Block */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
         <h2 className="text-3xl font-bold text-[#1B2838]">
-          Ready to Consult with Our Advisory Team?
+          Ready to Consult with Niraj Kumar?
         </h2>
-        <p className="text-sm text-[#5A6472] max-w-2xl mx-auto">
-          Share your enterprise specifics with our advisory desk. Our team reviews each intake to prepare relevant research and strategic consultation for your business.
+        <p className="text-sm text-[#5A6472] max-w-2xl mx-auto leading-relaxed">
+          Enquire directly by phone call or WhatsApp to discuss your business requirements. No accounts, no portals &mdash; the consultant takes it from there.
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
@@ -323,7 +256,7 @@ export default function HomePage() {
             className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
           >
             <Phone className="w-4 h-4 text-[#C9A24B]" />
-            <span>Call Advisory Desk: {ENQUIRY_CONFIG.phone.display}</span>
+            <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
           </a>
           <a
             href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
@@ -338,7 +271,7 @@ export default function HomePage() {
             href="/contact"
             className="inline-flex justify-center items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F6F3] text-[#1B2838] border border-[#CBD5E1] px-6 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
           >
-            <span>Online Enquiry</span>
+            <span>Enquiry Form</span>
           </Link>
         </div>
       </section>

@@ -3,17 +3,16 @@
 import { useState } from "react";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
-import { SISTER_SITES } from "@/lib/constants/ecosystem";
 import {
   MapPin,
   Phone,
   MessageSquare,
   Mail,
-  Send,
-  CheckCircle2,
-  Clock,
+  Video,
+  Users,
   ShieldCheck,
   ArrowUpRight,
+  Clock,
 } from "lucide-react";
 
 export default function ContactPage() {
@@ -21,7 +20,8 @@ export default function ContactPage() {
     name: "",
     businessName: "",
     city: "",
-    serviceRequested: "GTM Strategy",
+    serviceRequested: "Go-to-Market Strategy & Distribution",
+    consultationMode: "Online (Google Meet / Zoom)",
     message: "",
   });
 
@@ -30,6 +30,7 @@ export default function ContactPage() {
     const formattedMessage = `Hello Niraj Kumar / DOW Consulting,
 My name is ${formData.name || "[Not specified]"} from ${formData.businessName || "[Not specified]"} (${formData.city || "India"}).
 I am enquiring about ${formData.serviceRequested} advisory services.
+Preferred Mode: ${formData.consultationMode}.
 Details: ${formData.message || "I would like to discuss our business requirements and explore an advisory engagement."}`;
 
     window.open(ENQUIRY_CONFIG.buildWhatsAppUrl(formattedMessage), "_blank");
@@ -40,18 +41,14 @@ Details: ${formData.message || "I would like to discuss our business requirement
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
-          Direct Advisory Coordinates
+          Direct Consultant Coordinates
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
           Contact DOW Consulting
         </h1>
         <p className="text-sm sm:text-base text-[#5A6472] max-w-2xl mx-auto leading-relaxed">
-          Reach Lead Strategic Advisor <strong>{BRAND.founder.name}</strong> and our business consulting desk directly by phone call or WhatsApp.
+          Reach Consultant <strong>{BRAND.consultant.name}</strong> directly by phone call or WhatsApp to discuss your business requirements.
         </p>
-
-        <div className="p-3 bg-[#F7EED9] border border-[#E3D1A5] rounded text-xs text-[#8C6A1E] max-w-xl mx-auto">
-          <strong>Direct Enquiry Model:</strong> There are no accounts, no portals, and no transactional payment gateways. Prospective clients enquire directly, and the consultant takes it from there.
-        </div>
       </section>
 
       {/* Main Grid: Info + Interactive Quick Enquiry */}
@@ -61,7 +58,7 @@ Details: ${formData.message || "I would like to discuss our business requirement
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-[#1B2838] text-[#F7F6F3] p-8 rounded-lg border border-[#2A3D54] shadow-md space-y-6">
               <h3 className="text-xl font-bold border-b border-[#2A3D54] pb-4">
-                Executive Desk Contact
+                Consultant Coordinates
               </h3>
 
               <div className="space-y-6 text-xs text-[#E2E8F0]">
@@ -73,7 +70,7 @@ Details: ${formData.message || "I would like to discuss our business requirement
                   <div className="space-y-1">
                     <strong className="text-sm text-[#F7F6F3]">Direct Phone Call:</strong>
                     <p className="text-[#8C96A5]">
-                      Direct phone line to our consulting desk:
+                      Direct phone line to Consultant Niraj Kumar:
                     </p>
                     <a
                       href={ENQUIRY_CONFIG.phone.telLink}
@@ -92,7 +89,7 @@ Details: ${formData.message || "I would like to discuss our business requirement
                   <div className="space-y-1">
                     <strong className="text-sm text-[#F7F6F3]">Direct WhatsApp:</strong>
                     <p className="text-[#8C96A5]">
-                      Fastest channel for exploratory discussions and scheduling:
+                      Fastest channel for exploratory discussions and enquiries:
                     </p>
                     <a
                       href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
@@ -106,67 +103,51 @@ Details: ${formData.message || "I would like to discuss our business requirement
                   </div>
                 </div>
 
-                {/* Physical Office Address */}
+                {/* Direct Email */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded bg-[#111B27] border border-[#2A3D54] text-[#C9A24B] flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div className="space-y-1">
+                    <strong className="text-sm text-[#F7F6F3]">Direct Email:</strong>
+                    <p className="text-[#8C96A5]">
+                      Email enquiries directly:
+                    </p>
+                    <a
+                      href={ENQUIRY_CONFIG.email.mailtoLink}
+                      className="inline-block text-[#C9A24B] font-semibold text-xs hover:underline pt-0.5"
+                    >
+                      {ENQUIRY_CONFIG.email.primary}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Head Office Address */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-8 h-8 rounded bg-[#111B27] border border-[#2A3D54] text-[#C9A24B] flex items-center justify-center shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div className="space-y-1">
-                    <strong className="text-sm text-[#F7F6F3]">Office Headquarters:</strong>
+                    <strong className="text-sm text-[#F7F6F3]">Head Office:</strong>
                     <p className="text-[#8C96A5] leading-relaxed">
-                      {BRAND.contact.address.unit}<br />
-                      {BRAND.contact.address.complex}<br />
-                      {BRAND.contact.address.sector}, {BRAND.contact.address.city}<br />
-                      {BRAND.contact.address.state} — {BRAND.contact.address.pincode}, {BRAND.contact.address.country}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Operating Hours */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded bg-[#111B27] border border-[#2A3D54] text-[#C9A24B] flex items-center justify-center shrink-0">
-                    <Clock className="w-4 h-4" />
-                  </div>
-                  <div className="space-y-1">
-                    <strong className="text-sm text-[#F7F6F3]">Desk Operating Window:</strong>
-                    <p className="text-[#8C96A5]">
-                      {ENQUIRY_CONFIG.officeHours.window}<br />
-                      Consultations scheduled by direct appointment.
+                      {BRAND.headOffice.address}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#2A3D54] text-[11px] text-[#8C96A5] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                <span>All business discussions are held under strict non-disclosure.</span>
+              {/* Consultation Modes Notice */}
+              <div className="pt-4 border-t border-[#2A3D54] text-xs text-[#8C96A5] space-y-2">
+                <p className="text-[#F7F6F3] font-semibold">Consultation Delivery Modes:</p>
+                <div className="flex items-center gap-2">
+                  <Video className="w-3.5 h-3.5 text-[#C9A24B]" />
+                  <span>Online via Google Meet or Zoom</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="w-3.5 h-3.5 text-[#C9A24B]" />
+                  <span>In person on request (travel and visiting charges borne by client)</span>
+                </div>
               </div>
-            </div>
-
-            {/* Sister Platforms Note */}
-            <div className="p-6 bg-[#FFFFFF] rounded border border-[#E2E8F0] space-y-2 text-xs">
-              <strong className="text-[#1B2838]">Part of the Niraj Kumar Advisory Network:</strong>
-              <p className="text-[#5A6472]">
-                Clients with personal astrological inquiries may connect with our sister practice at{" "}
-                <a
-                  href={SISTER_SITES.aapkaAstro.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#1B2838] underline font-semibold"
-                >
-                  {SISTER_SITES.aapkaAstro.name}
-                </a>{" "}
-                (personal Vedic advisory consultations), or explore self-paced education courses at{" "}
-                <a
-                  href={SISTER_SITES.viar.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#1B2838] underline font-semibold"
-                >
-                  {SISTER_SITES.viar.name}
-                </a>{" "}
-                (Vihangam Institute of Astrology and Research).
-              </p>
             </div>
           </div>
 
@@ -181,7 +162,7 @@ Details: ${formData.message || "I would like to discuss our business requirement
                   Send a Direct Enquiry to Niraj Kumar
                 </h3>
                 <p className="text-xs text-[#5A6472] mt-1 leading-relaxed">
-                  Fill in your company details below to open a pre-formatted WhatsApp message directly with our advisory desk, or call us directly.
+                  Fill in your details below to start a pre-formatted WhatsApp enquiry directly with the consultant, or call directly.
                 </p>
               </div>
 
@@ -232,13 +213,27 @@ Details: ${formData.message || "I would like to discuss our business requirement
                       onChange={(e) => setFormData({ ...formData, serviceRequested: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838] bg-white"
                     >
-                      <option value="GTM Strategy">Go-to-Market (GTM) Strategy</option>
-                      <option value="Market Research">Market Research &amp; Intelligence</option>
-                      <option value="Business Expansion Strategy">Business Expansion Strategy</option>
-                      <option value="New Business Start Consultation">New Business Start Consultation</option>
-                      <option value="General Strategic Advisory">General Strategic Advisory</option>
+                      {BRAND.services.map((srv) => (
+                        <option key={srv.id} value={srv.name}>
+                          {srv.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-[#1B2838]">Preferred Consultation Mode *</label>
+                  <select
+                    value={formData.consultationMode}
+                    onChange={(e) => setFormData({ ...formData, consultationMode: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838] bg-white"
+                  >
+                    <option value="Online (Google Meet / Zoom)">Online (Google Meet or Zoom)</option>
+                    <option value="In-person on request (Travel/visiting charges borne by client)">
+                      In person on request (Travel &amp; visiting charges borne by client)
+                    </option>
+                  </select>
                 </div>
 
                 <div className="space-y-1.5">
@@ -274,7 +269,7 @@ Details: ${formData.message || "I would like to discuss our business requirement
                 </div>
 
                 <p className="text-[11px] text-[#8C96A5] text-center pt-2">
-                  Prefer email? You can also reach us directly at{" "}
+                  Prefer email? Contact directly at{" "}
                   <a href={ENQUIRY_CONFIG.email.mailtoLink} className="underline text-[#1B2838]">
                     {ENQUIRY_CONFIG.email.primary}
                   </a>

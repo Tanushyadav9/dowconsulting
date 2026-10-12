@@ -47,7 +47,7 @@ export function HonestEngagementProof() {
     {
       step: "05",
       title: "Owner Review & Approval",
-      leadRole: "Niraj Kumar (Lead Strategic Advisor)",
+      leadRole: "Niraj Kumar (Consultant)",
       description:
         "Mandatory quality review gate. Niraj Kumar reviews all analytical findings and strategic recommendations before client dispatch.",
     },
@@ -184,7 +184,7 @@ export function HonestEngagementProof() {
 
               <div className="pt-3 border-t border-[#F7F6F3] flex items-center gap-1.5 text-[11px] text-[#8C96A5]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#C9A24B]" />
-                <span>Tracked in client portal &amp; audit log</span>
+                <span>Direct client coordination &amp; review</span>
               </div>
             </div>
           ))}

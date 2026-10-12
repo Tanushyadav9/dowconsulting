@@ -1,19 +1,19 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import {
   Search,
   CheckCircle2,
-  ArrowRight,
   ArrowLeft,
-  Users,
   Award,
   MessageSquare,
+  Phone,
 } from "lucide-react";
 
 export const metadata = {
-  title: `Market Research | ${BRAND.name}`,
+  title: `Market Research & Consumer Insight | ${BRAND.name}`,
   description:
-    "Market research consulting for startups, small companies, and MSMEs. Industry landscape analysis, competitive benchmarking, and team delivery model. [Draft copy]",
+    "Market research and consumer insight consulting for start-ups, small companies and MSMEs led by Niraj Kumar, Consultant.",
 };
 
 export default function MarketResearchPage() {
@@ -34,28 +34,25 @@ export default function MarketResearchPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
           <Search className="w-3.5 h-3.5" />
-          <span>Confirmed Service [Draft Copy]</span>
+          <span>Practice Area</span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
-          Market Research
+          Market Research &amp; Consumer Insight
         </h1>
         <p className="text-sm sm:text-base text-[#5A6472] max-w-3xl leading-relaxed">
-          Structured research and industry investigation designed for <strong>startups, small companies, and MSMEs</strong> seeking objective insights before committing resources.
+          Detailed research and consumer insights tailored for <strong>start-ups, small companies and MSMEs</strong>, including specific research for individual products or services.
         </p>
-        <div className="p-3 bg-[#F7EED9] border border-[#E3D1A5] rounded text-xs text-[#8C6A1E] max-w-2xl">
-          <strong>Draft Scope Notice:</strong> All descriptions on this page are general draft summaries pending final client wording and package definitions from Niraj Kumar.
-        </div>
       </section>
 
-      {/* Overview & What It Typically Involves */}
+      {/* Overview & What It Involves */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] shadow-sm space-y-8">
           <div className="space-y-3">
             <h2 className="text-2xl font-bold text-[#1B2838]">
-              What Market Research Typically Involves
+              What Market Research &amp; Consumer Insight Involves
             </h2>
             <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed">
-              Market research provides business decision-makers with a grounded view of their operating environment. In general terms, advisory engagements in this area focus on several standard investigative areas:
+              Actionable insights into sector dynamics, competitive positioning, and consumer behaviors to inform commercial decisions:
             </p>
           </div>
 
@@ -63,111 +60,61 @@ export default function MarketResearchPage() {
             <div className="p-5 rounded bg-[#F7F6F3] border border-[#E2E8F0] space-y-2">
               <div className="flex items-center gap-2 font-bold text-sm text-[#1B2838]">
                 <CheckCircle2 className="w-4 h-4 text-[#C9A24B]" />
-                <span>Industry &amp; Sectoral Dynamics</span>
+                <span>Sector &amp; Category Dynamics</span>
               </div>
               <p className="text-xs text-[#5A6472] leading-relaxed">
-                Reviewing sector structure, regulatory parameters, emerging category trends, and macro supply-demand patterns relevant to the client&apos;s product or service.
+                Analyzing industry macro-trends, category growth rates, and structural shifts relevant to your offering.
               </p>
             </div>
 
             <div className="p-5 rounded bg-[#F7F6F3] border border-[#E2E8F0] space-y-2">
               <div className="flex items-center gap-2 font-bold text-sm text-[#1B2838]">
                 <CheckCircle2 className="w-4 h-4 text-[#C9A24B]" />
-                <span>Competitor Benchmarking</span>
+                <span>Competitive Benchmarking</span>
               </div>
               <p className="text-xs text-[#5A6472] leading-relaxed">
-                Analyzing direct and indirect competitors, cataloging product features, pricing models, market positioning, and visible market vulnerabilities.
+                Benchmarking competing alternatives, pricing models, feature sets, and market positioning.
               </p>
             </div>
 
             <div className="p-5 rounded bg-[#F7F6F3] border border-[#E2E8F0] space-y-2">
               <div className="flex items-center gap-2 font-bold text-sm text-[#1B2838]">
                 <CheckCircle2 className="w-4 h-4 text-[#C9A24B]" />
-                <span>Customer Need &amp; Pain Point Analysis</span>
+                <span>Consumer Need &amp; Pain Point Analysis</span>
               </div>
               <p className="text-xs text-[#5A6472] leading-relaxed">
-                Gathering insights into customer friction points, unmet expectations, purchasing behavior, and feedback on existing market solutions.
+                Synthesizing unmet buyer pain points, purchasing motivations, and consumer adoption behavior.
               </p>
             </div>
 
             <div className="p-5 rounded bg-[#F7F6F3] border border-[#E2E8F0] space-y-2">
               <div className="flex items-center gap-2 font-bold text-sm text-[#1B2838]">
                 <CheckCircle2 className="w-4 h-4 text-[#C9A24B]" />
-                <span>Market Opportunity Scoping</span>
+                <span>Product-Specific Research</span>
               </div>
               <p className="text-xs text-[#5A6472] leading-relaxed">
-                Identifying unserved or underserved niches, potential expansion angles, and data-backed observations to guide strategic roadmap planning.
+                Detailed research tailored directly to a specific product or service proposition before commercial commitment.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team Model Section */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#111B27] rounded-lg p-8 sm:p-10 text-[#F7F6F3] border border-[#2A3D54] space-y-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C9A24B]">
-              <Users className="w-4 h-4" />
-              <span>Collaborative Execution</span>
-            </div>
-            <h2 className="text-xl sm:text-2xl font-bold">
-              Team-Based Research Execution
-            </h2>
-            <p className="text-xs sm:text-sm text-[#8C96A5] leading-relaxed">
-              DOW Consulting is an advisory team where different specialists focus on distinct aspects of each research mandate:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-            <div className="p-4 rounded bg-[#1B2838] border border-[#2A3D54] space-y-2">
-              <h4 className="font-bold text-sm text-[#F7F6F3]">1. Information Collection</h4>
-              <p className="text-xs text-[#8C96A5] leading-relaxed">
-                Team members collect background context from the client regarding specific research questions, target segments, and geographic focus.
-              </p>
-            </div>
-
-            <div className="p-4 rounded bg-[#1B2838] border border-[#2A3D54] space-y-2">
-              <h4 className="font-bold text-sm text-[#F7F6F3]">2. Dedicated Research</h4>
-              <p className="text-xs text-[#8C96A5] leading-relaxed">
-                Research team members gather secondary data, sector reports, competitive literature, and industry observations.
-              </p>
-            </div>
-
-            <div className="p-4 rounded bg-[#1B2838] border border-[#2A3D54] space-y-2">
-              <h4 className="font-bold text-sm text-[#F7F6F3]">3. Strategic Synthesis</h4>
-              <p className="text-xs text-[#8C96A5] leading-relaxed">
-                Lead advisor Niraj Kumar and consulting staff interpret data points into practical, actionable business takeaways for the client.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Credibility & Advisor Profile */}
+      {/* Credibility & Consultant Profile */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] space-y-4">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C9A24B]">
             <Award className="w-4 h-4" />
-            <span>Lead Strategic Advisor</span>
+            <span>Consultant Credentials</span>
           </div>
           <h2 className="text-xl font-bold text-[#1B2838]">
-            Advisory Background: Niraj Kumar
+            Advisory Background: {BRAND.consultant.name}
           </h2>
-          <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed">
-            Credibility for DOW Consulting is anchored in Niraj Kumar&apos;s personal executive background:
-          </p>
           <div className="p-4 rounded bg-[#F7F6F3] border border-[#E2E8F0] text-xs text-[#1B2838] space-y-2">
             <p className="font-semibold text-sm">
-              &ldquo;{BRAND.founder.corporateExperience}&rdquo;
-            </p>
-            <p className="text-[#5A6472]">
-              Academic and Executive Credentials: <strong>B.Sc. (Hons.) in Physics</strong>, <strong>PGDBM in International Business &amp; Marketing</strong>, and an <strong>XLRI leadership development and change management certification</strong>.
+              &ldquo;{BRAND.consultant.background}&rdquo;
             </p>
           </div>
-          <p className="text-[11px] text-[#8C96A5] italic">
-            Note: All credentials belong strictly to Niraj Kumar personally. DOW Consulting makes no outcome guarantees, statistics, or firm longevity claims.
-          </p>
         </div>
       </section>
 
@@ -175,20 +122,23 @@ export default function MarketResearchPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
         <div className="bg-[#F7F6F3] p-8 rounded-lg border border-[#E2E8F0] space-y-4">
           <h3 className="text-xl font-bold text-[#1B2838]">
-            Need Targeted Market Research for Your Business?
+            Discuss Your Market Research Requirements
           </h3>
           <p className="text-xs text-[#5A6472] max-w-md mx-auto">
-            Discuss your sector intelligence questions directly with Lead Strategic Advisor Niraj Kumar and our research desk.
+            Connect directly with Consultant Niraj Kumar to discuss research scope for your product or business.
           </p>
           <div className="pt-2 flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href={BRAND.contact.phone.link}
+              href={ENQUIRY_CONFIG.phone.telLink}
               className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider"
             >
-              <span>Call: {BRAND.contact.phone.display}</span>
+              <Phone className="w-4 h-4 text-[#C9A24B]" />
+              <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
             </a>
             <a
-              href="https://wa.me/919311215564?text=Hello%20Niraj,%20I%20would%20like%20to%20enquire%20about%20Market%20Research%20and%20competitive%20intelligence%20for%20my%20business."
+              href={ENQUIRY_CONFIG.buildWhatsAppUrl(
+                "Hello Niraj / DOW Consulting, I would like to enquire about Market Research and Consumer Insight advisory for my business."
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-sm"
@@ -200,7 +150,7 @@ export default function MarketResearchPage() {
               href="/contact"
               className="inline-flex justify-center items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F6F3] border border-[#CBD5E1] text-[#1B2838] px-6 py-3 rounded font-semibold text-xs"
             >
-              <span>Online Enquiry</span>
+              <span>Enquiry Form</span>
             </Link>
           </div>
         </div>

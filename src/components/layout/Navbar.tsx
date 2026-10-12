@@ -15,18 +15,16 @@ export function Navbar() {
       {/* Top Advisory Bar */}
       <div className="bg-[#111B27] py-2 px-4 text-xs border-b border-[#2A3D54]/40">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-          {/* Advisor Identity & Quoted Background */}
+          {/* Consultant Identity & Descriptor Line from Business Card */}
           <div className="flex items-center gap-2 text-[#8C96A5] text-center md:text-left">
             <span className="inline-block w-2 h-2 rounded-full bg-[#C9A24B] shrink-0"></span>
             <span>
-              Lead Strategic Advisor: <strong className="text-[#F7F6F3]">{BRAND.founder.name}</strong>{" "}
-              <span className="hidden lg:inline text-[#8C96A5]">
-                (Former Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food)
-              </span>
+              {BRAND.consultant.name} &mdash; <strong className="text-[#F7F6F3]">{BRAND.consultant.title}</strong>{" "}
+              <span className="hidden sm:inline text-[#C9A24B]">({BRAND.consultant.descriptor})</span>
             </span>
           </div>
 
-          {/* Direct Quick Contact Coordinates */}
+          {/* Direct Contact Coordinates */}
           <div className="flex items-center gap-4 text-[#8C96A5]">
             <a
               href={ENQUIRY_CONFIG.phone.telLink}
@@ -43,7 +41,7 @@ export function Navbar() {
               className="flex items-center gap-1.5 text-[#C9A24B] hover:underline"
             >
               <MessageSquare className="w-3.5 h-3.5" />
-              <span>WhatsApp Direct</span>
+              <span>WhatsApp</span>
             </a>
             <span className="hidden xl:inline text-slate-600">|</span>
             <span className="hidden xl:inline text-[#8C96A5]">Sector 75, Noida</span>
@@ -62,7 +60,7 @@ export function Navbar() {
               </span>
             </div>
             <span className="text-[10px] tracking-wider uppercase text-[#8C96A5] font-medium">
-              Business Consulting [Draft]
+              GTM Strategy, Distribution &amp; Brand Building
             </span>
           </Link>
 

@@ -1,7 +1,8 @@
 # DOW Consulting
 
-> **Business Consulting for Startups, Small Companies and MSMEs [Draft]**  
-> Go-to-Market (GTM) Strategy • Market Research • Business Expansion Strategy • New Business Start Consultation  
+> **Business Consulting for Start-ups, Small Companies and MSMEs**  
+> Led by Niraj Kumar, Consultant  
+> GTM Strategy, Distribution & Brand Building  
 > 🌐 **Live Website**: [https://dowconsulting-r756.vercel.app](https://dowconsulting-r756.vercel.app)
 
 ---
@@ -10,7 +11,7 @@
 
 **DOW Consulting** is a business-consulting firm led by **Niraj Kumar**. This website is a **professional portfolio and enquiry site**.
 
-Its core job is to:
+Its job is to:
 1. Make visitors and prospective clients see the firm as **trustworthy, credible, and highly professional**.
 2. Show clearly **what the firm does** and **how it works**.
 3. Make it **effortless to enquire by phone call or WhatsApp**.
@@ -18,63 +19,68 @@ Its core job is to:
 ### 🚫 Non-Transactional Architecture
 It is **not** a transactional platform:
 - **No accounts**: Zero user signups, logins, or authentication cookies.
-- **No online payments**: No payment gateways, checkouts, or digital carts.
+- **No online payments**: No payment gateways, checkouts, pricing tables, or digital carts.
 - **No client portal**: No customer dashboards or private download vaults.
 - **No database**: Static, high-performance compilation with zero database dependency.
 - **No admin area**: No back-office administrative portals.
+- **No API routes**: 100% static Next.js App Router site with zero required secrets.
 
 Customers enquire directly by phone or WhatsApp, and the consultant takes it from there.
 
 ---
 
-## 💼 Practice Leadership & Verified Credentials
+## 💼 Consultant Credentials & Confirmed Facts
 
-### Lead Strategic Advisor: Niraj Kumar
-All credentials are quoted strictly in client-supplied wording and attributed to Niraj Kumar personally:
-- **Corporate Operating Background**:
-  > *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*
-- **Academic Credentials**:
-  - B.Sc. (Hons.) in Physics
-  - PGDBM in International Business & Marketing
-- **Executive Education**:
-  - XLRI Leadership Development and Change Management Certification
-- **Sister Platforms**:
-  - Founder of [Aapka Astro](https://aapkaastro.com) and [Viar.in](https://viar.in)
-
----
-
-## 📋 The 4 Confirmed Service Practice Areas
-
-1. **Go-to-Market (GTM) Strategy** (`/services/gtm-strategy`): Target customer profiling, value proposition, channel distribution, and launch roadmaps.
-2. **Market Research** (`/services/market-research`): Sector dynamics, competitive benchmarking, customer pain points, and category intelligence.
-3. **Business Expansion Strategy** (`/services/business-expansion-strategy`): Multi-unit scaling, geographic rollouts, operational capacity, and resource allocation.
-4. **New Business Start Consultation** (`/services/new-business-start-consultation`): Venture concept feasibility, business model structuring, and unit economics review.
+### Consultant: Niraj Kumar
+- **Title on Business Card**: `"Consultant"`
+- **Descriptor line from card**: `"GTM Strategy, Distribution & Brand Building"`
+- **Phone**: `+91 93107 09233` (single config value for call & WhatsApp)
+- **Email**: `niraj@dairyonwheels.com` (single config value)
+- **Head Office**: `1212-D, Tower A, Spectrum @Metro Phase 1, Sector 75, Noida, Uttar Pradesh`
+- **Background (client's wording verbatim)**:
+  > *"over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food; B.Sc. (Hons.) in Physics; PGDBM in International Business & Marketing; Leadership Development & Change Management certification from XLRI."*
+- **Clients Served**: Start-ups, small companies and MSMEs.
+- **Consultation Modes**:
+  - **Online**: via Google Meet or Zoom.
+  - **In person**: On request. For in-person meetings, travel and visiting charges are borne by the client and are communicated at the time of enquiry.
 
 ---
 
-## 📞 Direct Advisory Contact Coordinates
+## 📋 The 9 Confirmed Service Practice Areas
 
-- **Office Address**: Unit No. A-1212 D, Tower A, Spectrum@Metro Phase 1, Sector 75, Noida, Uttar Pradesh 201301
-- **Phone Call**: [+91 93112 15564](tel:+919311215564)
-- **WhatsApp Direct**: [+91 93112 15564](https://wa.me/919311215564)
-- **Email**: [info@dowconsulting.in](mailto:info@dowconsulting.in)
-- **Desk Hours**: Monday – Saturday: 10:00 AM – 7:00 PM IST
+1. **Market research and consumer insight**, including detailed research for a specific product or service
+2. **Product launch strategy**: how to launch, how to position and make the offering distinctive against existing similar products, and the right place and time to launch
+3. **Go-to-market strategy and distribution**
+4. **Brand building**
+5. **Product design and packaging guidance** (general wording until clarified)
+6. **Business expansion and sales-growth strategy for existing businesses**
+7. **New-business and start-up guidance from scratch**
+8. **Staff training**
+9. **Customised solutions**
+
+---
+
+## 📞 Direct Contact Coordinates
+
+- **Head Office**: 1212-D, Tower A, Spectrum @Metro Phase 1, Sector 75, Noida, Uttar Pradesh
+- **Phone Call**: [+91 93107 09233](tel:+919310709233)
+- **WhatsApp Direct**: [+91 93107 09233](https://wa.me/919310709233)
+- **Email**: [niraj@dairyonwheels.com](mailto:niraj@dairyonwheels.com)
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Next.js 14 (App Router, React 18, TypeScript)
+- **Framework**: Next.js 14.2.18 (App Router, React 18, TypeScript)
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
-- **Email (Optional)**: Resend (optional enquiry notification helper)
-- **Architecture**: 100% Static & SSG Pre-rendered (0 ms DB latency, zero server attack surface)
+- **Architecture**: 100% Static HTML / SSG Pre-rendered (0 ms DB latency, zero server attack surface, zero API routes, zero secrets)
 
 ---
 
 ## 🧪 Testing & Verification
 
-Run automated tests:
+Run automated test suite:
 ```bash
 npm test
 ```

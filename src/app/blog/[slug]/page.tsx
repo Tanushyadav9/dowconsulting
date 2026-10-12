@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { BLOG_POSTS } from "@/lib/constants/blog";
-import { ArrowLeft, Clock, Calendar, User, MessageSquare } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, User, MessageSquare, Phone } from "lucide-react";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({
@@ -75,7 +76,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           Operational Realities in Emerging and Growing Enterprises
         </h2>
         <p>
-          Throughout executive leadership roles as &ldquo;Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food&rdquo;, one operational truth becomes evident: commercial viability depends upon rigorous alignment between market need, distribution channel capacity, and business model fundamentals.
+          Throughout executive leadership roles as &ldquo;over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food&rdquo;, one operational truth becomes evident: commercial viability depends upon rigorous alignment between market need, distribution channel capacity, and business model fundamentals.
         </p>
         <p>
           Early-stage startups and expanding MSMEs often risk misallocating capital when they move into execution without structured validation of their go-to-market assumptions, channel unit economics, or local market competitive dynamics.
@@ -97,15 +98,15 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="bg-[#FFFFFF] border-l-4 border-[#1B2838] p-6 rounded my-6 space-y-2">
           <h4 className="font-bold text-[#1B2838]">Key Advisory Principle:</h4>
           <p className="text-xs text-[#5A6472]">
-            Strategic business consulting for startups and MSMEs must be pragmatic, realistic, and actionable. Theoretical frameworks without operating context provide little value to business owners navigating immediate commercial challenges.
+            Strategic business consulting for start-ups, small companies and MSMEs must be pragmatic, realistic, and actionable. Theoretical frameworks without operating context provide little value to business owners navigating immediate commercial challenges.
           </p>
         </div>
 
         <h2 className="text-xl font-bold text-[#1B2838] pt-4">
-          Team-Based Execution &amp; Discovery
+          Direct Guidance from Niraj Kumar, Consultant
         </h2>
         <p>
-          DOW Consulting operates as a collaborative team. Rather than relying on a single generalist perspective, research specialists gather sector benchmarks and market intelligence, information coordinators map organizational specifics, and Lead Strategic Advisor Niraj Kumar and consulting staff structure practical roadmaps for client execution.
+          DOW Consulting provides direct consulting led by Niraj Kumar, Consultant (GTM Strategy, Distribution &amp; Brand Building). Clients can enquire directly via phone call or WhatsApp to discuss their business growth roadmaps.
         </p>
       </article>
 
@@ -117,13 +118,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-wrap gap-3">
           <a
-            href={BRAND.contact.phone.link}
-            className="bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-5 py-2.5 rounded font-bold text-xs uppercase tracking-wider"
+            href={ENQUIRY_CONFIG.phone.telLink}
+            className="bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-5 py-2.5 rounded font-bold text-xs uppercase tracking-wider flex items-center gap-1.5"
           >
-            Call: {BRAND.contact.phone.display}
+            <Phone className="w-3.5 h-3.5" />
+            <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
           </a>
           <a
-            href={BRAND.contact.whatsapp.link}
+            href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-4 py-2.5 rounded text-xs font-bold flex items-center gap-1.5 shadow-sm"

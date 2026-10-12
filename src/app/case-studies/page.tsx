@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
-import { ArrowRight, ShieldCheck, Lock } from "lucide-react";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
+import { ShieldCheck, Lock, Phone, MessageSquare } from "lucide-react";
 
 export const metadata = {
   title: `Client Confidentiality & Engagements | ${BRAND.name}`,
@@ -14,13 +15,13 @@ export default function CaseStudiesPage() {
       {/* Header */}
       <div className="text-center space-y-4">
         <span className="text-[11px] font-bold text-[#C9A24B] uppercase tracking-wider">
-          Confidentiality &amp; Case Studies
+          Confidentiality &amp; Client Engagements
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold text-[#1B2838]">
           Client Advisory Engagements
         </h1>
         <p className="text-sm text-[#5A6472] max-w-xl mx-auto leading-relaxed">
-          All strategic consulting engagements across GTM strategy, market research, and business expansion conducted by DOW Consulting are held under strict non-disclosure.
+          All strategic consulting engagements across market research, GTM strategy, brand building, and business expansion conducted by DOW Consulting are held under strict non-disclosure.
         </p>
       </div>
 
@@ -30,32 +31,34 @@ export default function CaseStudiesPage() {
           <Lock className="w-6 h-6" />
         </div>
         <h2 className="text-xl font-bold text-[#1B2838]">
-          Verified Case Studies Pending Client Authorization
+          Strict Client Confidentiality Policy
         </h2>
         <p className="text-xs sm:text-sm text-[#5A6472] leading-relaxed max-w-lg mx-auto">
-          We do not publish simulated or unconfirmed client outcomes. Specific engagement case summaries and references are shared directly with prospective clients during one-on-one advisory reviews under mutual confidentiality agreements.
+          We do not publish public case studies or client names without express written authorization. Detailed engagement outlines and relevant references are discussed directly with prospective clients during one-on-one advisory reviews under mutual confidentiality.
         </p>
 
         <div className="pt-4 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href={BRAND.contact.whatsapp.link}
+            href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded bg-[#25D366] hover:bg-[#20BD5A] text-xs font-bold text-[#FFFFFF] shadow-sm transition-colors"
           >
+            <MessageSquare className="w-4 h-4 fill-current" />
             <span>Enquire on WhatsApp</span>
           </a>
           <a
-            href={BRAND.contact.phone.link}
+            href={ENQUIRY_CONFIG.phone.telLink}
             className="inline-flex items-center gap-2 px-6 py-3 rounded bg-[#1B2838] hover:bg-[#2A3D54] text-xs font-bold text-[#F7F6F3] transition-colors"
           >
-            <span>Call: {BRAND.contact.phone.display}</span>
+            <Phone className="w-4 h-4 text-[#C9A24B]" />
+            <span>Call: {ENQUIRY_CONFIG.phone.display}</span>
           </a>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 rounded border border-[#CBD5E1] text-xs font-semibold text-[#1B2838] hover:bg-[#F7F6F3] transition-colors"
           >
-            <span>Online Enquiry</span>
+            <span>Enquiry Form</span>
           </Link>
         </div>
       </div>
@@ -70,10 +73,10 @@ export default function CaseStudiesPage() {
           </div>
         </div>
         <div className="p-4 rounded bg-[#FFFFFF] border border-[#E2E8F0] flex items-start gap-3">
-          <ShieldCheck className="w-4 h-4 text-[#C9A24B]" />
+          <ShieldCheck className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
           <div>
-            <strong className="text-[#1B2838]">Dedicated Team Model</strong>
-            <p className="mt-0.5">Engagements supported by specialized research, consulting, and information collection roles.</p>
+            <strong className="text-[#1B2838]">Led by Niraj Kumar, Consultant</strong>
+            <p className="mt-0.5">Senior advisory tailored for start-ups, small companies and MSMEs.</p>
           </div>
         </div>
       </div>
