@@ -119,7 +119,7 @@ def generate_assets():
     og_img.paste(scaled_logo, (80, 160), scaled_logo)
 
     # Right side or bottom card: Consultant info matching the business card
-    # Bottom stripe: matching business card
+    # Bottom band: matching business card
     draw.rectangle([80, 480, 1120, 482], fill=(220, 226, 235))
     
     # Save og-preview.png
