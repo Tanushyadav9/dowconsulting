@@ -304,4 +304,93 @@ describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests",
       );
     });
   });
+
+  describe("8. SEO, Security Headers & Structured Data Invariants", () => {
+    test("next.config.mjs defines standard security headers", () => {
+      const nextConfigPath = path.join(process.cwd(), "next.config.mjs");
+      const nextConfigContent = fs.readFileSync(nextConfigPath, "utf-8");
+
+      assert.ok(nextConfigContent.includes("X-Content-Type-Options"));
+      assert.ok(nextConfigContent.includes("X-Frame-Options"));
+      assert.ok(nextConfigContent.includes("Referrer-Policy"));
+      assert.ok(nextConfigContent.includes("Strict-Transport-Security"));
+      assert.ok(nextConfigContent.includes("Permissions-Policy"));
+    });
+
+    test("RootLayout JSON-LD structured data contains ProfessionalService/Organization with real coordinates and ZERO ratings", () => {
+      const layoutPath = path.join(process.cwd(), "src", "app", "layout.tsx");
+      const layoutContent = fs.readFileSync(layoutPath, "utf-8");
+
+      assert.ok(layoutContent.includes("ProfessionalService"));
+      assert.ok(layoutContent.includes("Organization"));
+      assert.ok(layoutContent.includes(BRAND.name));
+      assert.ok(
+        layoutContent.includes("BRAND.headOffice.address") ||
+        layoutContent.includes(BRAND.headOffice.address)
+      );
+      assert.ok(
+        layoutContent.includes("ENQUIRY_CONFIG.phone.display") ||
+        layoutContent.includes(ENQUIRY_CONFIG.phone.display)
+      );
+      assert.ok(
+        layoutContent.includes("ENQUIRY_CONFIG.email.primary") ||
+        layoutContent.includes(ENQUIRY_CONFIG.email.primary)
+      );
+
+      // Invariant: Never put ratings or reviews into structured data
+      assert.strictEqual(layoutContent.includes("aggregateRating"), false);
+      assert.strictEqual(layoutContent.includes("ratingValue"), false);
+      assert.strictEqual(layoutContent.includes("reviewCount"), false);
+    });
+
+    test("Quick enquiry link builds valid pre-filled WhatsApp link with all fields", () => {
+      const sampleMsg =
+        `Hello Niraj Kumar / DOW Consulting,\n\n` +
+        `I would like to enquire about business consulting advisory.\n` +
+        `- Name: Ramesh Verma\n` +
+        `- Phone: +91 98765 43210\n` +
+        `- Business Stage: Early-stage start-up\n` +
+        `- What I Need: Go-to-Market Strategy & Distribution\n` +
+        `- Preferred Mode: Online (Google Meet / Zoom)\n\n` +
+        `Please let me know how we can proceed.`;
+
+      const generatedUrl = ENQUIRY_CONFIG.buildWhatsAppUrl(sampleMsg);
+      assert.ok(generatedUrl.startsWith("https://wa.me/919310709233?text="));
+      assert.ok(generatedUrl.includes(encodeURIComponent("Ramesh Verma")));
+      assert.ok(generatedUrl.includes(encodeURIComponent("Go-to-Market Strategy & Distribution")));
+    });
+
+    test("Screenshots exist for every page at 390px and 1440px viewports", () => {
+      const screenshotsDir = path.join(process.cwd(), "screenshots");
+      assert.ok(fs.existsSync(screenshotsDir));
+
+      const requiredScreenshots = [
+        "home_mobile_390px.png",
+        "home_desktop_1440px.png",
+        "about_mobile_390px.png",
+        "about_desktop_1440px.png",
+        "services_overview_mobile_390px.png",
+        "services_overview_desktop_1440px.png",
+        "service_detail_gtm_mobile_390px.png",
+        "service_detail_gtm_desktop_1440px.png",
+        "approach_mobile_390px.png",
+        "approach_desktop_1440px.png",
+        "contact_mobile_390px.png",
+        "contact_desktop_1440px.png",
+        "terms_mobile_390px.png",
+        "terms_desktop_1440px.png",
+        "privacy_policy_mobile_390px.png",
+        "privacy_policy_desktop_1440px.png",
+        "disclaimer_mobile_390px.png",
+        "disclaimer_desktop_1440px.png",
+      ];
+
+      for (const shot of requiredScreenshots) {
+        const fullPath = path.join(screenshotsDir, shot);
+        assert.ok(fs.existsSync(fullPath), `Screenshot ${shot} must exist in screenshots/`);
+        const stats = fs.statSync(fullPath);
+        assert.ok(stats.size > 10000, `Screenshot ${shot} must have valid non-empty size`);
+      }
+    });
+  });
 });

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { DraftPreviewBanner } from "@/components/layout/DraftPreviewBanner";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingEnquiryWidget } from "@/components/home/FloatingEnquiryWidget";
@@ -19,10 +20,16 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://dowconsulting-r756.vercel.app";
+
 export const metadata: Metadata = {
-  title: `${BRAND.name} | ${BRAND.consultant.name} &mdash; ${BRAND.consultant.title}`,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${BRAND.name} | ${BRAND.consultant.name} &mdash; ${BRAND.consultant.title}`,
+    template: `%s | ${BRAND.name}`,
+  },
   description:
-    "Business consulting practice for start-ups, small companies and MSMEs specializing in GTM strategy, distribution, brand building, and commercial expansion led by Niraj Kumar.",
+    "Business consulting practice for start-ups, small companies and MSMEs specialising in GTM strategy, distribution, brand building, and commercial expansion led by Niraj Kumar.",
   keywords: [
     "DOW Consulting",
     "Niraj Kumar",
@@ -37,6 +44,37 @@ export const metadata: Metadata = {
     "MSMEs",
     "Noida",
   ],
+  alternates: {
+    canonical: "./",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteUrl,
+    title: `${BRAND.name} | ${BRAND.consultant.name} &mdash; ${BRAND.consultant.title}`,
+    description:
+      "Strategic business consulting for start-ups, small companies and MSMEs led by Niraj Kumar (GTM Strategy, Distribution & Brand Building).",
+    siteName: BRAND.name,
+    images: [
+      {
+        url: "/favicon.svg",
+        width: 512,
+        height: 512,
+        alt: `${BRAND.name} Logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${BRAND.name} | ${BRAND.consultant.name} &mdash; ${BRAND.consultant.title}`,
+    description:
+      "Strategic business consulting for start-ups, small companies and MSMEs led by Niraj Kumar.",
+    images: ["/favicon.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
@@ -45,21 +83,42 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: BRAND.name,
-  description:
-    "Business consulting practice for start-ups, small companies and MSMEs specializing in GTM strategy, distribution, brand building, and commercial expansion led by Niraj Kumar.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://dowconsulting-r756.vercel.app",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: BRAND.headOffice.address,
-    addressLocality: "Noida",
-    addressRegion: "Uttar Pradesh",
-    postalCode: "201301",
-    addressCountry: "IN",
-  },
-  telephone: ENQUIRY_CONFIG.phone.display,
-  email: ENQUIRY_CONFIG.email.primary,
+  "@graph": [
+    {
+      "@type": ["ProfessionalService", "Organization"],
+      "@id": `${siteUrl}/#organization`,
+      name: BRAND.name,
+      url: siteUrl,
+      description:
+        "Business consulting practice for start-ups, small companies and MSMEs specialising in GTM strategy, distribution, brand building, and commercial expansion led by Niraj Kumar.",
+      telephone: ENQUIRY_CONFIG.phone.display,
+      email: ENQUIRY_CONFIG.email.primary,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: BRAND.headOffice.address,
+        addressLocality: "Noida",
+        addressRegion: "Uttar Pradesh",
+        postalCode: "201301",
+        addressCountry: "IN",
+      },
+      founder: {
+        "@type": "Person",
+        name: BRAND.consultant.name,
+        jobTitle: BRAND.consultant.title,
+        description: BRAND.consultant.descriptor,
+      },
+      areaServed: "IN",
+      knowsAbout: [
+        "Go-to-Market Strategy",
+        "Distribution Channel Architecture",
+        "Brand Building",
+        "Market Research and Consumer Insight",
+        "Product Launch Strategy",
+        "Business Expansion Strategy",
+        "Start-up Advisory",
+      ],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -76,6 +135,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#1E293B] font-sans antialiased">
+        <DraftPreviewBanner />
         <Navbar />
         <main className="flex-1">{children}</main>
         <FloatingEnquiryWidget />

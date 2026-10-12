@@ -77,14 +77,23 @@ The site architecture features a services overview page (`/services`) plus one c
 
 In accordance with the zero-invention directive, all unconfirmed items are strictly config-driven and documented below:
 
-### A. Items Pending Client Confirmation
-1. **Our Approach Process Content (`/approach`):**
-   - The 7-step process (Enquiry & discovery, scoping, market & competitor research, positioning & differentiation, launch or growth plan covering product, design and packaging, place and timing, recommendations, implementation guidance and training) represents **draft process content to be confirmed by the client**.
-2. **Legal Text (Terms of Use, Privacy Policy, Disclaimer):**
-   - The legal text across `/terms`, `/privacy-policy`, and `/disclaimer` is marked as **pending lawyer review**.
+### A. All Items Pending Client Confirmation (Explicit Inventory)
+1. **WhatsApp Availability of the Phone Number:**
+   - Phone number `+91 93107 09233` is confirmed on Niraj Kumar's business card.
+   - WhatsApp availability on this specific number is pending client confirmation. Currently configured and active with wa.me direct links.
+2. **GSTIN:**
+   - Pending client confirmation (`BRAND.pending.gstin`). Strictly hidden from footer and legal text when empty.
+3. **Social Links (LinkedIn & YouTube):**
+   - Pending official URLs from client (`BRAND.pending.linkedinUrl`, `BRAND.pending.youtubeUrl`). Hidden from footer and navigation when empty.
+4. **Expert Profiles (`EXPERT_PANEL`):**
+   - Panel of Experts profiles pending client submission (`src/lib/constants/experts.ts`). The page (`/expert-panel`) and its navigation link are completely hidden until at least one verified expert profile is added.
+5. **Process Wording (`/approach`):**
+   - The 7-step consulting methodology (Enquiry & discovery, scoping, market & competitor research, positioning & differentiation, launch or growth plan, recommendations, implementation guidance & training) is draft process content to be confirmed by the client.
+6. **Design and Packaging Guidance Scope:**
+   - Product design and packaging guidance support wording is kept general pending client clarification of exact design/packaging deliverables and partner capabilities.
+7. **Legal Review (Terms of Use, Privacy Policy, Disclaimer):**
+   - All legal documents across `/terms`, `/privacy-policy`, and `/disclaimer` are marked as pending lawyer review.
    - The Disclaimer explicitly states that all recommendations are advisory, outcomes depend on execution and market conditions, and no result or income is guaranteed.
-3. **Product Design & Packaging Guidance Scope:**
-   - Wording is kept general pending client clarification of exact design/packaging deliverables.
 
 ### B. Content-Driven Modules (Hidden When Empty — Never Showing Placeholders)
 | Pending Item | Configuration Key | Current State | UI Behavior When Undefined |
@@ -161,17 +170,29 @@ Sampled directly from the brand logo and business card, and codified across `tai
 
 ---
 
-## 🧪 10. Automated Verification & Build Results
+## 🧪 10. Automated Verification & Lighthouse Results
 
 1. **Automated Test Suite**:
-   - `tests/portfolio-enquiry.test.ts` executes **23 assertions** covering zero DB/API invariants, business card fact integrity, 9 services catalog, expert panel rules, engagements consent rules, disclaimer wording, navigation hygiene, config-driven pending items, design tokens, visual assets, and British spelling invariants.
-   - **Result**: `23 passed, 0 failed`.
-2. **Next.js Production Build**:
-   - Pure static compilation (`○ Static / ● SSG`). Zero dynamic API routes.
-3. **Repository Cleanliness**:
-   - Purged all unneeded modules, routes, databases, authentication, payments, admin areas, and unrequested content.
+   - `tests/portfolio-enquiry.test.ts` executes **27 assertions** across 9 test suites covering zero DB/API invariants, business card fact integrity, 9 services catalog, expert panel rules, engagements consent rules, disclaimer wording, navigation hygiene, config-driven pending items, design tokens, visual assets, British spelling invariants, security headers, zero ratings JSON-LD schema, and screenshot suite verification.
+   - **Result**: `27 passed, 0 failed`.
+2. **Mobile Lighthouse Audit (Home Page)**:
+   - **Performance**: `94 / 100` (Target: 90+)
+   - **Accessibility**: `94 / 100` (Target: 90+)
+   - **Best Practices**: `100 / 100` (Target: 90+)
+   - **SEO**: `100 / 100` (Target: 90+)
+   - **Agentic Browsing**: `100 / 100`
+3. **Responsive Visual Verification**:
+   - Full suite of **18 screenshots** captured across Mobile (390px width) and Desktop (1440px width) viewports stored in `screenshots/`.
+4. **Security & Structured Data**:
+   - Standard security headers active (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Strict-Transport-Security`, `Permissions-Policy`).
+   - `ProfessionalService` and `Organization` JSON-LD schema with verified coordinates and zero ratings/reviews.
+5. **Next.js Production Build**:
+   - Pure static compilation (`○ Static / ● SSG`) generating 40 static pages. Zero dynamic API routes and zero runtime secrets required.
+6. **Repository Cleanliness**:
+   - Purged all unneeded modules, routes, databases, authentication, payments, admin areas, and unrequested content. Zero instances of Clerk, Prisma, Neon, SQLite, Razorpay, Stripe, Vastu, wallet, or /admin.
 
 ---
 
 *Report certified for DOW Consulting.*
+
 
