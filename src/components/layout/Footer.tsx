@@ -2,9 +2,12 @@ import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { FOOTER_LEGAL_LINKS } from "@/lib/constants/navigation";
+import { SERVICES_CATALOG } from "@/lib/constants/services";
 import { MapPin, MessageSquare, Phone, Mail, Linkedin, Youtube } from "lucide-react";
 
 export function Footer() {
+  const hasSocials = Boolean(BRAND.pending.linkedinUrl || BRAND.pending.youtubeUrl);
+
   return (
     <footer className="bg-[#111B27] text-[#8C96A5] border-t border-[#2A3D54] pb-16 md:pb-0">
       {/* Upper Footer: Brand, Services, Consultant, Coordinates */}
@@ -38,10 +41,10 @@ export function Footer() {
               Consulting Services
             </h4>
             <ul className="text-xs space-y-2 text-[#8C96A5]">
-              {BRAND.services.map((srv) => (
-                <li key={srv.id}>
+              {SERVICES_CATALOG.map((srv) => (
+                <li key={srv.slug}>
                   <Link
-                    href={`/services#${srv.id}`}
+                    href={`/services/${srv.slug}`}
                     className="hover:text-[#C9A24B] transition-colors"
                   >
                     {srv.name}
@@ -58,7 +61,9 @@ export function Footer() {
             </h4>
             <div>
               <p className="text-sm text-[#F7F6F3] font-semibold">{BRAND.consultant.name}</p>
-              <p className="text-xs text-[#C9A24B] font-medium">{BRAND.consultant.title} &mdash; {BRAND.consultant.descriptor}</p>
+              <p className="text-xs text-[#C9A24B] font-medium">
+                {BRAND.consultant.title} &mdash; {BRAND.consultant.descriptor}
+              </p>
             </div>
             <div className="text-xs space-y-2 text-[#8C96A5]">
               <p className="leading-relaxed">
@@ -73,7 +78,7 @@ export function Footer() {
           {/* Col 4: Direct Enquiry Coordinates */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
-              Head Office &amp; Enquiry
+              Head Office &amp; Contact
             </h4>
             <div className="space-y-3 text-xs text-[#8C96A5]">
               <div className="flex items-start gap-2">
@@ -115,14 +120,15 @@ export function Footer() {
                 </a>
               </div>
 
-              {/* Configurable client items: only rendered if non-empty, never show placeholders */}
+              {/* GSTIN: Rendered ONLY when set */}
               {BRAND.pending.gstin && (
                 <div className="pt-1 text-[11px] text-[#8C96A5]">
                   <span>GSTIN: {BRAND.pending.gstin}</span>
                 </div>
               )}
 
-              {(BRAND.pending.linkedinUrl || BRAND.pending.youtubeUrl) && (
+              {/* Social links: Rendered ONLY when set */}
+              {hasSocials && (
                 <div className="pt-2 border-t border-[#2A3D54] flex items-center gap-3">
                   {BRAND.pending.linkedinUrl && (
                     <a
@@ -146,6 +152,26 @@ export function Footer() {
                       <Youtube className="w-3.5 h-3.5" />
                     </a>
                   )}
+                </div>
+              )}
+
+              {/* Small "Related sites" line (one config entry so it can be removed instantly) */}
+              {BRAND.relatedSites && BRAND.relatedSites.length > 0 && (
+                <div className="pt-2 border-t border-[#2A3D54] text-[11px] text-[#8C96A5]">
+                  <span>Related sites: </span>
+                  {BRAND.relatedSites.map((site, idx) => (
+                    <span key={site.name}>
+                      {idx > 0 && <span className="text-slate-600"> &bull; </span>}
+                      <a
+                        href={site.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#C9A24B] hover:underline"
+                      >
+                        {site.name}
+                      </a>
+                    </span>
+                  ))}
                 </div>
               )}
             </div>

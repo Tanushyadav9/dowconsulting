@@ -127,6 +127,12 @@ export const BRAND = {
     },
   ],
 
+  // Single config entry for related sites line in footer so it can be removed instantly
+  relatedSites: [
+    { name: "Aapka Astro", url: "https://aapkaastro.com" },
+    { name: "Viar.in", url: "https://viar.in" },
+  ] as { name: string; url: string }[] | null,
+
   // Contact details mapped directly to ENQUIRY_CONFIG
   contact: {
     get phone(): string {
@@ -151,9 +157,9 @@ export const BRAND = {
 
   // Pending items from client - config-driven, strictly hidden when empty/null
   pending: {
-    gstin: process.env.NEXT_PUBLIC_GSTIN || null,
-    youtubeUrl: process.env.NEXT_PUBLIC_YOUTUBE_URL || null,
-    linkedinUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || null,
+    gstin: process.env.NEXT_PUBLIC_GSTIN?.trim() || null,
+    youtubeUrl: process.env.NEXT_PUBLIC_YOUTUBE_URL?.trim() || null,
+    linkedinUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || null,
     expertPanelProfiles: [] as { name: string; role: string; bio: string }[],
     testimonials: [] as { quote: string; author: string; company: string }[],
     responseTimeCommitment: null as string | null,

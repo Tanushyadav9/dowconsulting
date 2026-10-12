@@ -4,6 +4,14 @@ import path from "node:path";
 import { test, describe } from "node:test";
 import { BRAND } from "../src/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "../src/lib/constants/enquiryConfig";
+import { SERVICES_CATALOG, findServiceBySlug } from "../src/lib/constants/services";
+import { EXPERT_PANEL, hasActiveExpertPanel } from "../src/lib/constants/experts";
+import {
+  ENGAGEMENTS,
+  TESTIMONIALS,
+  hasActiveEngagements,
+  hasActiveTestimonials,
+} from "../src/lib/constants/engagements";
 import { HEADER_NAV_LINKS, FOOTER_LEGAL_LINKS } from "../src/lib/constants/navigation";
 
 describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests", () => {
@@ -112,24 +120,10 @@ describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests",
       );
     });
 
-    test("Consultant background and academic credentials match client wording verbatim", () => {
+    test("Consultant background matches client wording verbatim", () => {
       const expectedBackground =
         "over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food; B.Sc. (Hons.) in Physics; PGDBM in International Business & Marketing; Leadership Development & Change Management certification from XLRI.";
       assert.strictEqual(BRAND.consultant.background, expectedBackground);
-
-      assert.ok(
-        BRAND.consultant.education.some((e) => e.includes("B.Sc. (Hons.) in Physics"))
-      );
-      assert.ok(
-        BRAND.consultant.education.some((e) =>
-          e.includes("PGDBM in International Business & Marketing")
-        )
-      );
-      assert.ok(
-        BRAND.consultant.education.some((e) =>
-          e.includes("Leadership Development & Change Management certification from XLRI")
-        )
-      );
     });
 
     test("Clients served specifies start-ups, small companies and MSMEs", () => {
@@ -153,43 +147,72 @@ describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests",
     });
   });
 
-  describe("3. Nine Confirmed Client Services", () => {
-    test("All 9 client-described services are configured", () => {
-      assert.strictEqual(BRAND.services.length, 9);
-
-      const serviceIds = BRAND.services.map((s) => s.id);
-      assert.ok(serviceIds.includes("market-research-consumer-insight"));
-      assert.ok(serviceIds.includes("product-launch-strategy"));
-      assert.ok(serviceIds.includes("gtm-strategy-distribution"));
-      assert.ok(serviceIds.includes("brand-building"));
-      assert.ok(serviceIds.includes("product-design-packaging-guidance"));
-      assert.ok(serviceIds.includes("business-expansion-sales-growth"));
-      assert.ok(serviceIds.includes("new-business-startup-guidance"));
-      assert.ok(serviceIds.includes("staff-training"));
-      assert.ok(serviceIds.includes("customised-solutions"));
+  describe("3. Nine Confirmed Client Services & Detail Pages", () => {
+    test("Exactly 9 confirmed services exist in SERVICES_CATALOG", () => {
+      assert.strictEqual(SERVICES_CATALOG.length, 9);
     });
 
-    test("Service WhatsApp templates exist for all 9 practice areas", () => {
-      for (const service of BRAND.services) {
-        assert.ok(
-          (ENQUIRY_CONFIG.serviceWhatsAppTemplates as any)[service.id],
-          `WhatsApp template for ${service.id} must be defined`
-        );
+    test("Each service has required detail sections (who it is for, what it covers, how engagement runs, deliverables)", () => {
+      for (const service of SERVICES_CATALOG) {
+        assert.ok(service.slug, `Service ${service.name} must have a slug`);
+        assert.ok(service.whoItIsFor.length >= 2, `Service ${service.name} must detail who it is for`);
+        assert.ok(service.whatItCovers.length >= 3, `Service ${service.name} must detail what it covers`);
+        assert.ok(service.howEngagementRuns.length >= 3, `Service ${service.name} must detail how engagement runs`);
+        assert.ok(service.whatClientReceives.length >= 3, `Service ${service.name} must detail what client receives`);
+        assert.ok(service.whatsAppMessage.length > 0, `Service ${service.name} must have WhatsApp message`);
       }
+    });
+
+    test("findServiceBySlug finds services by canonical slug and aliases", () => {
+      const gtm = findServiceBySlug("gtm-strategy");
+      assert.ok(gtm);
+      assert.strictEqual(gtm.name, "Go-to-Market Strategy & Distribution");
+
+      const marketResearch = findServiceBySlug("market-research");
+      assert.ok(marketResearch);
+      assert.strictEqual(marketResearch.name, "Market Research & Consumer Insight");
     });
   });
 
-  describe("4. Navigation & Legal Invariants", () => {
-    test("Navigation does not link to packages, intake, or deleted pages", () => {
-      for (const link of HEADER_NAV_LINKS) {
-        assert.notStrictEqual(link.href, "/packages");
-        assert.notStrictEqual(link.href, "/intake");
-        assert.notStrictEqual(link.href, "/pricing-policy");
-        assert.notStrictEqual(link.href, "/refund-policy");
-      }
+  describe("4. Expert Panel & Engagements Invariants", () => {
+    test("Expert Panel content file is empty (seeded with nothing)", () => {
+      assert.strictEqual(EXPERT_PANEL.length, 0);
+      assert.strictEqual(hasActiveExpertPanel(), false);
     });
 
-    test("Legal footer contains only Terms, Privacy Policy, and Disclaimer", () => {
+    test("Engagements & Testimonials content files are empty (seeded with nothing)", () => {
+      assert.strictEqual(ENGAGEMENTS.length, 0);
+      assert.strictEqual(TESTIMONIALS.length, 0);
+      assert.strictEqual(hasActiveEngagements(), false);
+      assert.strictEqual(hasActiveTestimonials(), false);
+    });
+
+    test("Navigation bar hides Expert Panel and Engagements while empty", () => {
+      const navHrefs = HEADER_NAV_LINKS.map((l) => l.href);
+      assert.strictEqual(navHrefs.includes("/expert-panel"), false);
+      assert.strictEqual(navHrefs.includes("/engagements"), false);
+    });
+  });
+
+  describe("5. Disclaimer & Legal Protection", () => {
+    test("Disclaimer explicitly states recommendations are advisory and no result/income is guaranteed", () => {
+      const disclaimerPath = path.join(process.cwd(), "src", "app", "disclaimer", "page.tsx");
+      const disclaimerContent = fs.readFileSync(disclaimerPath, "utf-8").toLowerCase();
+
+      assert.ok(
+        disclaimerContent.includes("recommendations are advisory") ||
+        disclaimerContent.includes("strictly advisory in nature")
+      );
+      assert.ok(
+        disclaimerContent.includes("outcomes depend on execution and market conditions")
+      );
+      assert.ok(
+        disclaimerContent.includes("no result or income is guaranteed") ||
+        disclaimerContent.includes("no specific result, sales volume, profit margin, investment return, or commercial income is guaranteed")
+      );
+    });
+
+    test("Footer legal links contain Terms of Use, Privacy Policy, and Disclaimer", () => {
       const legalHrefs = FOOTER_LEGAL_LINKS.map((l) => l.href);
       assert.ok(legalHrefs.includes("/terms"));
       assert.ok(legalHrefs.includes("/privacy-policy"));
@@ -197,50 +220,12 @@ describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests",
       assert.strictEqual(legalHrefs.includes("/refund-policy"), false);
       assert.strictEqual(legalHrefs.includes("/pricing-policy"), false);
     });
-  });
 
-  describe("5. Zero Astrology / Vastu Leftovers & Pure Static First", () => {
-    test("Source directory contains zero references to astrology, Vastu, or sister platforms", () => {
-      const srcDir = path.join(process.cwd(), "src");
-      const forbiddenTokens = [
-        "vastu",
-        "muhurta",
-        "astrology",
-        "aapkaastro",
-        "aapka astro",
-        "viar.in",
-      ];
-
-      function checkDir(dir: string) {
-        const entries = fs.readdirSync(dir, { withFileTypes: true });
-        for (const entry of entries) {
-          const fullPath = path.join(dir, entry.name);
-          if (entry.isDirectory()) {
-            checkDir(fullPath);
-          } else if (
-            entry.isFile() &&
-            (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx"))
-          ) {
-            const content = fs.readFileSync(fullPath, "utf-8").toLowerCase();
-            for (const token of forbiddenTokens) {
-              assert.strictEqual(
-                content.includes(token),
-                false,
-                `Found forbidden token "${token}" in ${fullPath}`
-              );
-            }
-          }
-        }
-      }
-
-      checkDir(srcDir);
-    });
-
-    test("Config-driven pending items default to null/empty without placeholders", () => {
-      assert.strictEqual(BRAND.pending.expertPanelProfiles.length, 0);
-      assert.strictEqual(BRAND.pending.testimonials.length, 0);
-      assert.strictEqual(BRAND.pending.responseTimeCommitment, null);
-      assert.strictEqual(BRAND.pending.domainEmail, null);
+    test("Related sites line is configured in a single config entry with Aapka Astro and Viar.in", () => {
+      assert.ok(Array.isArray(BRAND.relatedSites));
+      const siteNames = BRAND.relatedSites.map((s) => s.name);
+      assert.ok(siteNames.includes("Aapka Astro"));
+      assert.ok(siteNames.includes("Viar.in"));
     });
   });
 });

@@ -1,21 +1,14 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
+import { SERVICES_CATALOG } from "@/lib/constants/services";
 import {
-  Rocket,
-  Search,
-  TrendingUp,
-  Building,
   ArrowRight,
-  CheckCircle2,
-  ChevronRight,
   MessageSquare,
   Phone,
   Video,
   Users,
-  Layers,
-  Sparkles,
-  BookOpen,
+  ChevronRight,
 } from "lucide-react";
 
 export const metadata = {
@@ -40,13 +33,13 @@ export default function ServicesPage() {
         </p>
       </section>
 
-      {/* Services Grid (9 Confirmed Services) */}
+      {/* Services Grid (9 Confirmed Services as concise cards linking to detail) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {BRAND.services.map((service, idx) => (
+          {SERVICES_CATALOG.map((service, idx) => (
             <div
-              key={service.id}
-              id={service.id}
+              key={service.slug}
+              id={service.slug}
               className="bg-[#FFFFFF] p-8 rounded-lg border border-[#E2E8F0] shadow-sm space-y-5 hover:border-[#1B2838] transition-colors flex flex-col justify-between"
             >
               <div className="space-y-3">
@@ -59,31 +52,44 @@ export default function ServicesPage() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#1B2838]">{service.name}</h3>
+                <h3 className="text-xl font-bold text-[#1B2838]">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="hover:text-[#C9A24B] transition-colors"
+                  >
+                    {service.name}
+                  </Link>
+                </h3>
                 <p className="text-xs text-[#5A6472] leading-relaxed">
-                  {service.fullDescription}
+                  {service.shortDescription}
                 </p>
               </div>
 
               <div className="pt-4 border-t border-[#E2E8F0] space-y-3">
-                <a
-                  href={ENQUIRY_CONFIG.buildWhatsAppUrl(
-                    `Hello Niraj / DOW Consulting, I would like to enquire about ${service.name} for my business.`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] text-xs font-semibold transition-colors"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 fill-current" />
-                  <span>Enquire via WhatsApp</span>
-                </a>
+                  <span>View Service Details</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
 
-                <div className="text-center">
+                <div className="flex items-center justify-between gap-2 pt-1 text-xs">
+                  <a
+                    href={ENQUIRY_CONFIG.buildWhatsAppUrl(service.whatsAppMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[#25D366] font-semibold hover:underline"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5 fill-current" />
+                    <span>WhatsApp</span>
+                  </a>
                   <a
                     href={ENQUIRY_CONFIG.phone.telLink}
-                    className="text-[11px] font-semibold text-[#5A6472] hover:text-[#1B2838] transition-colors"
+                    className="inline-flex items-center gap-1 text-[#5A6472] hover:text-[#1B2838]"
                   >
-                    Or call consultant: {ENQUIRY_CONFIG.phone.display}
+                    <Phone className="w-3 h-3 text-[#C9A24B]" />
+                    <span>Call Desk</span>
                   </a>
                 </div>
               </div>

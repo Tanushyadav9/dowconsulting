@@ -1,12 +1,24 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
-import { Award, Briefcase, GraduationCap, MapPin, MessageSquare, Phone, CheckCircle2, Video, Users } from "lucide-react";
+import {
+  Award,
+  GraduationCap,
+  MapPin,
+  MessageSquare,
+  Phone,
+  CheckCircle2,
+  Video,
+  Users,
+  Compass,
+  Briefcase,
+  ShieldCheck,
+} from "lucide-react";
 
 export const metadata = {
-  title: `About Niraj Kumar & DOW Consulting | ${BRAND.name}`,
+  title: `About the Firm & Niraj Kumar | ${BRAND.name}`,
   description:
-    "Learn about DOW Consulting led by Niraj Kumar, Consultant (GTM Strategy, Distribution & Brand Building). Background across senior roles at Reliance Retail, Metro Cash & Carry, and NIF Food.",
+    "Learn about DOW Consulting's philosophy and approach, plus Niraj Kumar's profile (Consultant &mdash; GTM Strategy, Distribution & Brand Building).",
 };
 
 export default function AboutPage() {
@@ -16,65 +28,94 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
-            <span>Consultant &bull; {BRAND.consultant.descriptor}</span>
+            <span>Leadership &amp; Philosophy</span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
-            About {BRAND.name}
+            About DOW Consulting
           </h1>
           <p className="text-lg text-[#5A6472] leading-relaxed">
-            DOW Consulting is a business-consulting firm led by <strong>{BRAND.consultant.name}</strong>, Consultant. We provide strategic guidance for <strong>{BRAND.targetAudience}</strong>.
+            A business-consulting firm led by <strong>{BRAND.consultant.name}</strong>, Consultant, helping <strong>{BRAND.targetAudience}</strong> build commercial clarity, strong distribution, and enduring brand equity.
           </p>
         </div>
       </section>
 
-      {/* 2. Practice Overview & Consultant Background */}
+      {/* 2. Philosophy & Approach */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-7 space-y-6 text-sm text-[#5A6472] leading-relaxed">
-            <h2 className="text-2xl font-bold text-[#1B2838]">
-              Senior Commercial Leadership
-            </h2>
-            <p>
-              DOW Consulting brings over two decades of enterprise operating and strategic experience to early-stage and growing companies. Led by {BRAND.consultant.name}, the firm focuses on turning strategic concepts into concrete distribution channels, distinctive product launches, and sustained market expansion.
-            </p>
-
-            <div className="p-6 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] space-y-3">
-              <h3 className="font-bold text-base text-[#1B2838]">
-                Professional Background
-              </h3>
-              <p className="text-[#1B2838] font-medium leading-relaxed">
-                &ldquo;{BRAND.consultant.background}&rdquo;
+          <div className="lg:col-span-7 space-y-8 text-sm text-[#5A6472] leading-relaxed">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-[#1B2838]">
+                Our Consulting Philosophy
+              </h2>
+              <p>
+                At DOW Consulting, we believe commercial success is earned through disciplined execution, distinctive product positioning, and resilient distribution channels &mdash; not speculative hype or abstract management buzzwords.
+              </p>
+              <p>
+                Start-ups, small enterprises, and MSMEs operate under real capital constraints, immediate sales cycles, and aggressive competitive pressures. Our advisory work focuses directly on practical answers to fundamental commercial questions:
               </p>
             </div>
 
-            <h3 className="text-xl font-bold text-[#1B2838] pt-2">
-              Who We Serve
-            </h3>
-            <p>
-              We specifically advise <strong>start-ups, small companies and MSMEs</strong> facing pivotal commercial transitions:
-            </p>
-            <ul className="space-y-2 pl-2 text-xs">
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-                <span><strong>Start-ups:</strong> Guiding new-business setup from scratch, validating commercial feasibility, and shaping launch strategy.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-                <span><strong>Small Companies:</strong> Expanding sales channels, refining brand positioning, and elevating distribution.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
-                <span><strong>MSMEs:</strong> Overcoming scaling bottlenecks, training internal staff, and implementing customized growth solutions.</span>
-              </li>
-            </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-5 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] space-y-2">
+                <span className="font-bold text-xs text-[#C9A24B] uppercase tracking-wider block">
+                  Commercial Realism
+                </span>
+                <p className="text-xs text-[#5A6472]">
+                  We anchor every strategy in realistic channel economics, working capital requirements, and customer willingness to pay.
+                </p>
+              </div>
 
-            {/* Consultation Modes (Anchored with id="consultation-modes") */}
-            <div id="consultation-modes" className="pt-6 space-y-4">
+              <div className="p-5 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] space-y-2">
+                <span className="font-bold text-xs text-[#C9A24B] uppercase tracking-wider block">
+                  Product Distinctiveness
+                </span>
+                <p className="text-xs text-[#5A6472]">
+                  We help founders clearly define why their offering matters and how it stands apart from existing alternatives.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] space-y-2">
+                <span className="font-bold text-xs text-[#C9A24B] uppercase tracking-wider block">
+                  Distribution Architecture
+                </span>
+                <p className="text-xs text-[#5A6472]">
+                  We build practical routes to market, whether through wholesale distributors, retail placement, or direct pipelines.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] space-y-2">
+                <span className="font-bold text-xs text-[#C9A24B] uppercase tracking-wider block">
+                  Direct Partnership
+                </span>
+                <p className="text-xs text-[#5A6472]">
+                  Clients consult directly with senior leadership. There are no junior intermediaries or administrative roadblocks.
+                </p>
+              </div>
+            </div>
+
+            {/* Approach Link */}
+            <div className="p-6 rounded-lg bg-[#111B27] text-[#F7F6F3] border border-[#2A3D54] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <h3 className="font-bold text-base text-[#F7F6F3]">Explore Our Step-by-Step Approach</h3>
+                <p className="text-xs text-[#8C96A5]">
+                  Learn about our 7-step process from discovery to implementation guidance.
+                </p>
+              </div>
+              <Link
+                href="/approach"
+                className="shrink-0 px-4 py-2 rounded bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                View Approach
+              </Link>
+            </div>
+
+            {/* Consultation Modes */}
+            <div id="consultation-modes" className="pt-4 space-y-4">
               <h3 className="text-xl font-bold text-[#1B2838]">
-                Consultation Modes
+                Consultation Delivery Modes
               </h3>
               <p>
-                To accommodate client requirements, consultations are delivered via two primary modes:
+                To fit each client&apos;s schedule and operational preference, consultations are provided in two formats:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 rounded-lg bg-[#FFFFFF] border border-[#E2E8F0] space-y-2">
@@ -83,7 +124,7 @@ export default function AboutPage() {
                     <span>Online Consultation</span>
                   </div>
                   <p className="text-xs text-[#5A6472]">
-                    Conducted remotely via <strong>Google Meet or Zoom</strong>. Flexible, focused advisory sessions for management teams.
+                    Conducted remotely via <strong>Google Meet or Zoom</strong>. Direct, scheduled advisory sessions for founders and leadership teams anywhere in India or internationally.
                   </p>
                 </div>
 
@@ -93,14 +134,17 @@ export default function AboutPage() {
                     <span>In-Person Consultation</span>
                   </div>
                   <p className="text-xs text-[#5A6472]">
-                    Available on request. <em>For in-person meetings, travel and visiting charges are borne by the client and are communicated at the time of enquiry.</em>
+                    Available on request for on-site reviews and strategic planning.
+                  </p>
+                  <p className="text-[11px] text-[#8C6A1E] bg-amber-50 border border-amber-200 rounded p-2 mt-1">
+                    <em>For in-person meetings, travel and visiting charges are borne by the client and are communicated at the time of enquiry.</em>
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Credentials Card */}
+          {/* Right Column: Niraj Kumar Profile Card */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-[#1B2838] text-[#F7F6F3] p-8 rounded-lg border border-[#2A3D54] shadow-lg space-y-6">
               <div className="border-b border-[#2A3D54] pb-4">
@@ -108,14 +152,16 @@ export default function AboutPage() {
                   Consultant Profile
                 </span>
                 <h3 className="text-xl font-bold mt-1 text-[#F7F6F3]">{BRAND.consultant.name}</h3>
-                <p className="text-xs text-[#C9A24B] mt-0.5">{BRAND.consultant.title} &bull; {BRAND.consultant.descriptor}</p>
+                <p className="text-xs text-[#C9A24B] mt-0.5 font-medium">
+                  {BRAND.consultant.title} &bull; {BRAND.consultant.descriptor}
+                </p>
               </div>
 
               <div className="space-y-4 text-xs">
                 <div>
-                  <strong className="text-sm text-[#F7F6F3] block mb-1">Corporate Operating Background</strong>
-                  <p className="text-[#8C96A5] leading-relaxed">
-                    Over two decades in senior roles including Vice President and Business Head at organizations such as Reliance Retail, Metro Cash &amp; Carry, and NIF Food.
+                  <strong className="text-sm text-[#F7F6F3] block mb-1">Corporate Operating Career</strong>
+                  <p className="text-[#E2E8F0] leading-relaxed">
+                    &ldquo;{BRAND.consultant.background}&rdquo;
                   </p>
                 </div>
 
@@ -149,7 +195,7 @@ export default function AboutPage() {
               </div>
 
               <div className="pt-4 border-t border-[#2A3D54] text-[11px] text-[#8C96A5]">
-                <p>Direct communication: All enquiries are received directly by phone or WhatsApp.</p>
+                <p>Direct communication: Clients enquire directly by phone or WhatsApp, and Consultant Niraj Kumar takes it from there.</p>
               </div>
             </div>
 
@@ -162,15 +208,20 @@ export default function AboutPage() {
                 <MapPin className="w-4 h-4 text-[#C9A24B] shrink-0 mt-0.5" />
                 <p>{BRAND.headOffice.address}</p>
               </div>
-              <div className="pt-2 flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-[#C9A24B]" />
+              <div className="pt-2 flex items-center justify-between text-xs">
+                <a
+                  href={ENQUIRY_CONFIG.phone.telLink}
+                  className="font-semibold text-[#1B2838] hover:text-[#C9A24B]"
+                >
+                  Call: {ENQUIRY_CONFIG.phone.display}
+                </a>
                 <a
                   href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#1B2838] hover:text-[#C9A24B]"
+                  className="font-bold text-[#25D366] hover:underline"
                 >
-                  WhatsApp: {ENQUIRY_CONFIG.whatsapp.display}
+                  WhatsApp &rarr;
                 </a>
               </div>
             </div>
