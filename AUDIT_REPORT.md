@@ -143,11 +143,13 @@ Sampled directly from the brand logo and business card, and codified across `tai
 - **Headings**: `Plus Jakarta Sans` via `next/font/google` (`var(--font-heading)`), high-weight executive sans-serif.
 - **Body Text**: `Inter` via `next/font/google` (`var(--font-sans)`), clean readable modern sans-serif.
 
-### Visual Assets & Restrained Motifs
-- **Brand Logo (`src/components/ui/BrandLogo.tsx`)**: Scalable vector rendering the crisp "DOW CONSULTING" typography in Navy/Blue with the red rising-arrow device. Supports light and dark mode variants.
-- **Favicon & App Icon (`public/favicon.svg`, `src/app/icon.svg`)**: Crisp SVG favicon displaying the rising arrow device.
-- **Dotted World-Map Motif (`src/components/ui/DottedWorldMap.tsx`)**: Recreated from the back of Niraj Kumar's business card, rendered as a subtle SVG vector pattern (opacity 0.08–0.1) in hero and footer backgrounds.
-- **Rising-Arrow Accent (`src/components/ui/RisingArrowAccent.tsx`)**: Restrained SVG graphic accent applied to section badges and key headings.
+### Visual Assets & Confirmed Real Logo Integration
+- **Real Brand Logo (`public/images/dow-consulting-logo.png`, `public/images/dow-consulting-logo-transparent.png`)**: High-resolution brand logo extracted from the client's official file featuring the red italic "DO", the navy/blue rising trendline arrow cutting across the "O" with white margin contouring into the blue italic "W", and "CONSULTING" text underneath.
+- **Brand Logo Component (`src/components/ui/BrandLogo.tsx`)**: Renders the crisp real logo with responsive sizing (`sm`, `md`, `lg`) and optional confirmed descriptor line (`GTM Strategy, Distribution & Brand Building`). On dark backgrounds (footer, hero cards), wraps the logo in an elegant white card container mirroring the business card back.
+- **Favicon & Mobile Icons (`public/favicon.svg`, `public/favicon.png`, `public/favicon.ico`, `public/apple-touch-icon.png`, `src/app/icon.svg`)**: Generated from the real DOW rising arrow emblem.
+- **Open Graph & Twitter Preview Card (`public/images/og-preview.png`)**: Crisp 1200x630 social card featuring the real logo, the two-tone red & navy header stripe, and Niraj Kumar's credentials.
+- **Business Card Reference (`public/images/business-card-reference.jpg`)**: Preserved official business card layouts (front & back).
+- **Dotted World-Map Motif (`src/components/ui/DottedWorldMap.tsx`)**: Recreated from the back of Niraj Kumar's business card, rendered as a subtle vector pattern (opacity 0.08–0.1) in hero and footer backgrounds.
 - **Accessibility & Motion**: `prefers-reduced-motion` respected; high-contrast visible focus outlines (`:focus-visible`).
 
 ---

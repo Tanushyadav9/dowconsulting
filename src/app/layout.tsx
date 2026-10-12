@@ -57,10 +57,10 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     images: [
       {
-        url: "/favicon.svg",
-        width: 512,
-        height: 512,
-        alt: `${BRAND.name} Logo`,
+        url: "/images/og-preview.png",
+        width: 1200,
+        height: 630,
+        alt: `${BRAND.name} - ${BRAND.consultant.descriptor}`,
       },
     ],
   },
@@ -69,15 +69,19 @@ export const metadata: Metadata = {
     title: `${BRAND.name} | ${BRAND.consultant.name} &mdash; ${BRAND.consultant.title}`,
     description:
       "Strategic business consulting for start-ups, small companies and MSMEs led by Niraj Kumar.",
-    images: ["/favicon.svg"],
+    images: ["/images/og-preview.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
   },
 };
 
@@ -89,6 +93,7 @@ const jsonLd = {
       "@id": `${siteUrl}/#organization`,
       name: BRAND.name,
       url: siteUrl,
+      logo: `${siteUrl}/images/dow-consulting-logo.png`,
       description:
         "Business consulting practice for start-ups, small companies and MSMEs specialising in GTM strategy, distribution, brand building, and commercial expansion led by Niraj Kumar.",
       telephone: ENQUIRY_CONFIG.phone.display,

@@ -4,6 +4,7 @@ import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { SERVICES_CATALOG } from "@/lib/constants/services";
 import { DottedWorldMap } from "@/components/ui/DottedWorldMap";
 import { RisingArrowAccent } from "@/components/ui/RisingArrowAccent";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import {
   ArrowRight,
   ChevronRight,
@@ -112,13 +113,16 @@ export default function HomePage() {
             <div className="lg:col-span-5">
               <div className="bg-[#17477F]/30 backdrop-blur-sm border border-[#1E3A63] rounded-xl p-8 shadow-2xl space-y-6">
                 <div className="flex items-center justify-between border-b border-[#1E3A63] pb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white font-heading">{BRAND.consultant.name}</h3>
-                    <p className="text-xs text-[#E02027] uppercase tracking-wider font-bold mt-0.5">
-                      {BRAND.consultant.title}
-                    </p>
+                  <div className="space-y-2">
+                    <BrandLogo variant="dark" size="sm" showDescriptor={false} />
+                    <div>
+                      <h3 className="text-xl font-bold text-white font-heading">{BRAND.consultant.name}</h3>
+                      <p className="text-xs text-[#E02027] uppercase tracking-wider font-bold mt-0.5">
+                        {BRAND.consultant.title}
+                      </p>
+                    </div>
                   </div>
-                  <div className="p-2.5 rounded-lg bg-[#0B1B33] border border-[#1E3A63]">
+                  <div className="p-2.5 rounded-lg bg-[#0B1B33] border border-[#1E3A63] shrink-0 self-start">
                     <Award className="w-6 h-6 text-[#E02027]" />
                   </div>
                 </div>

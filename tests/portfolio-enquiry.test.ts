@@ -257,6 +257,22 @@ describe("DOW Consulting - Professional Portfolio & Enquiry Architecture Tests",
         fs.existsSync(path.join(process.cwd(), "src", "components", "ui", "DottedWorldMap.tsx")),
         "DottedWorldMap.tsx must exist"
       );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "public", "images", "dow-consulting-logo.png")),
+        "public/images/dow-consulting-logo.png must exist"
+      );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "public", "images", "dow-consulting-logo-transparent.png")),
+        "public/images/dow-consulting-logo-transparent.png must exist"
+      );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "public", "images", "og-preview.png")),
+        "public/images/og-preview.png must exist"
+      );
+      assert.ok(
+        fs.existsSync(path.join(process.cwd(), "public", "favicon.png")),
+        "public/favicon.png must exist"
+      );
     });
   });
 

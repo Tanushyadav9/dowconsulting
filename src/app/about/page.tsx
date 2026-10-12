@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
 import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { RisingArrowAccent } from "@/components/ui/RisingArrowAccent";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import {
   Award,
   GraduationCap,
@@ -145,14 +146,17 @@ export default function AboutPage() {
           {/* Right Column: Niraj Kumar Profile Card */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-[#0B1B33] text-white p-8 rounded-xl border border-[#1E3A63] shadow-xl space-y-6">
-              <div className="border-b border-[#1E3A63] pb-4">
-                <span className="text-[11px] font-bold text-[#E02027] uppercase tracking-wider">
-                  Consultant Profile
-                </span>
-                <h3 className="text-2xl font-bold mt-1 text-white font-heading">{BRAND.consultant.name}</h3>
-                <p className="text-xs text-slate-300 mt-0.5 font-medium">
-                  {BRAND.consultant.title} &bull; {BRAND.consultant.descriptor}
-                </p>
+              <div className="border-b border-[#1E3A63] pb-4 space-y-3">
+                <BrandLogo variant="dark" size="sm" showDescriptor={false} />
+                <div>
+                  <span className="text-[11px] font-bold text-[#E02027] uppercase tracking-wider">
+                    Consultant Profile
+                  </span>
+                  <h3 className="text-2xl font-bold mt-0.5 text-white font-heading">{BRAND.consultant.name}</h3>
+                  <p className="text-xs text-slate-300 mt-0.5 font-medium">
+                    {BRAND.consultant.title} &bull; {BRAND.consultant.descriptor}
+                  </p>
+                </div>
               </div>
 
               <div className="space-y-4 text-xs">
