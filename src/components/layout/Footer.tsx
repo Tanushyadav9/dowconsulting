@@ -1,40 +1,25 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { FOOTER_LEGAL_LINKS } from "@/lib/constants/navigation";
 import { getActiveSocialLinks } from "@/lib/constants/ecosystem";
-import { prisma } from "@/lib/prisma";
 import {
   MapPin,
   MessageSquare,
   ExternalLink,
-  ShieldCheck,
+  Phone,
+  Mail,
   Linkedin,
   Youtube,
   Facebook,
   Instagram,
 } from "lucide-react";
 
-export async function Footer() {
+export function Footer() {
   const activeSocialLinks = getActiveSocialLinks();
 
-  let hasPublishedTeam = false;
-  let hasPublishedTestimonials = false;
-
-  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
-    try {
-      const [teamCount, testCount] = await Promise.all([
-        prisma.publicTeamMember.count({ where: { isPublished: true } }),
-        prisma.testimonial.count({ where: { isPublished: true, consentConfirmed: true } }),
-      ]);
-      hasPublishedTeam = teamCount > 0;
-      hasPublishedTestimonials = testCount > 0;
-    } catch (err) {
-      // Safe fallback if database is pending
-    }
-  }
-
   return (
-    <footer className="bg-[#111B27] text-[#8C96A5] border-t border-[#2A3D54]">
+    <footer className="bg-[#111B27] text-[#8C96A5] border-t border-[#2A3D54] pb-16 md:pb-0">
       {/* Upper Footer: Brand, Credentials, Ecosystem */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -49,7 +34,7 @@ export async function Footer() {
               </p>
             </div>
             <p className="text-xs leading-relaxed text-[#8C96A5]">
-              Business consulting for startups, small companies, and MSMEs. DOW Consulting operates as a collaborative team where different specialists handle research, client consultation, and information collection.
+              Business consulting for startups, small companies, and MSMEs. DOW Consulting operates as a collaborative advisory team where different specialists handle research, consulting, and information collection.
             </p>
             <div className="pt-1 text-[11px] text-[#C9A24B]">
               <span>[Draft Copy — Pending Client Confirmation]</span>
@@ -82,33 +67,19 @@ export async function Footer() {
                   New Business Start Consultation
                 </Link>
               </li>
+              <li>
+                <Link href="/packages" className="hover:text-[#C9A24B] transition-colors">
+                  Engagement Models &amp; Proposals
+                </Link>
+              </li>
             </ul>
 
-            {(hasPublishedTeam || hasPublishedTestimonials) && (
-              <div className="pt-2 border-t border-[#2A3D54] space-y-1.5 text-xs">
-                {hasPublishedTeam && (
-                  <div>
-                    <Link href="/team" className="hover:text-[#C9A24B] transition-colors">
-                      Advisory Team
-                    </Link>
-                  </div>
-                )}
-                {hasPublishedTestimonials && (
-                  <div>
-                    <Link href="/testimonials" className="hover:text-[#C9A24B] transition-colors">
-                      Client Testimonials
-                    </Link>
-                  </div>
-                )}
-              </div>
-            )}
-
             <div className="pt-2 border-t border-[#2A3D54] text-[11px] text-[#8C96A5]">
-              Designed for startups, small businesses &amp; MSMEs.
+              Tailored for startups, small businesses &amp; MSMEs.
             </div>
           </div>
 
-          {/* Col 3: Real Corporate Credentials */}
+          {/* Col 3: Lead Strategic Advisor Credentials */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
               Lead Strategic Advisor
@@ -116,24 +87,27 @@ export async function Footer() {
             <p className="text-xs text-[#F7F6F3] font-semibold">{BRAND.founder.name}</p>
             <ul className="text-xs space-y-2 text-[#8C96A5]">
               <li>
-                <strong className="text-[#E2E8F0]">Corporate Background</strong>
-                <br />Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food
+                <strong className="text-[#E2E8F0]">Corporate Background:</strong>
+                <br />
+                &ldquo;{BRAND.founder.corporateExperience}&rdquo;
               </li>
               <li>
-                <strong className="text-[#E2E8F0]">Academic Credentials</strong>
-                <br />B.Sc. (Hons.) Physics • PGDBM in International Business & Marketing
+                <strong className="text-[#E2E8F0]">Academic Credentials:</strong>
+                <br />
+                B.Sc. (Hons.) Physics • PGDBM in International Business &amp; Marketing
               </li>
               <li>
-                <strong className="text-[#E2E8F0]">Executive Education</strong>
-                <br />XLRI (Leadership Development and Change Management Certification)
+                <strong className="text-[#E2E8F0]">Executive Education:</strong>
+                <br />
+                XLRI Leadership Development &amp; Change Management Certification
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Sister Ecosystem & Cross-Promotion */}
+          {/* Col 4: Sister Platforms */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
-              Sister Ecosystem Platforms
+              Sister Platforms
             </h4>
             <p className="text-xs text-[#8C96A5]">
               Part of the strategic advisory network founded and guided by {BRAND.founder.name}:
@@ -153,16 +127,16 @@ export async function Footer() {
                     </span>
                     <p className="text-[11px] text-[#8C96A5]">{site.description}</p>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#8C96A5] group-hover:text-[#C9A24B]" />
+                  <ExternalLink className="w-3.5 h-3.5 text-[#8C96A5] group-hover:text-[#C9A24B] shrink-0" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Col 4: Verified Contact Coordinates & Active Socials */}
+          {/* Col 5: Direct Enquiry Coordinates */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#F7F6F3]">
-              Official Practice Address
+              Direct Advisory Coordinates
             </h4>
             <div className="space-y-2.5 text-xs text-[#8C96A5]">
               <div className="flex items-start gap-2">
@@ -171,20 +145,41 @@ export async function Footer() {
                   {BRAND.contact.address.unit}, {BRAND.contact.address.complex}, {BRAND.contact.address.sector}, {BRAND.contact.address.city} - {BRAND.contact.address.state} {BRAND.contact.address.pincode}
                 </p>
               </div>
+
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-[#C9A24B] shrink-0" />
+                <a
+                  href={ENQUIRY_CONFIG.phone.telLink}
+                  className="text-[#E2E8F0] hover:text-[#C9A24B] font-semibold"
+                >
+                  Call: {ENQUIRY_CONFIG.phone.display}
+                </a>
+              </div>
+
               <div className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-[#C9A24B] shrink-0" />
                 <a
-                  href={BRAND.contact.whatsapp.link}
+                  href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#E2E8F0] hover:text-[#C9A24B] font-semibold"
                 >
-                  WhatsApp: {BRAND.contact.whatsapp.display}
+                  WhatsApp: {ENQUIRY_CONFIG.whatsapp.display}
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#C9A24B] shrink-0" />
+                <a
+                  href={ENQUIRY_CONFIG.email.mailtoLink}
+                  className="text-[#E2E8F0] hover:text-[#C9A24B]"
+                >
+                  {ENQUIRY_CONFIG.email.primary}
                 </a>
               </div>
             </div>
 
-            {/* Social Links: Centralized in ecosystem.ts; rendered ONLY when URL is set and valid */}
+            {/* Social Links */}
             {activeSocialLinks.length > 0 && (
               <div className="pt-2 border-t border-[#2A3D54] space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C96A5]">
@@ -213,11 +208,11 @@ export async function Footer() {
         </div>
       </div>
 
-      {/* Compliance Bar: Prominently Linking All Five Legal Pages From Day One */}
+      {/* Compliance & Legal Bar */}
       <div className="bg-[#0B121B] border-t border-[#1B2838] py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <p className="text-[#5A6472]">
-            © {new Date().getFullYear()} {BRAND.name}. All corporate advisory rights reserved.
+            © {new Date().getFullYear()} {BRAND.name}. All corporate advisory rights reserved. Portfolio and direct enquiry practice.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">

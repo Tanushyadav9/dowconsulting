@@ -201,31 +201,36 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Direct Enquiry CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
         <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2838]">
           Have a Project or Consulting Requirement?
         </h2>
         <p className="text-xs sm:text-sm text-[#5A6472]">
-          Submit your business profile through our intake form to discuss customized scope and advisory arrangements.
+          Discuss your enterprise requirements directly with Lead Strategic Advisor Niraj Kumar and our advisory team.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link
-            href="/intake"
+          <a
+            href={BRAND.contact.phone.link}
             className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider"
           >
-            <span>Submit Business Profile</span>
-            <ArrowRight className="w-4 h-4 text-[#C9A24B]" />
-          </Link>
+            <span>Call: {BRAND.contact.phone.display}</span>
+          </a>
           <a
             href={BRAND.contact.whatsapp.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex justify-center items-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider"
+            className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-sm"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-4 h-4 fill-current" />
             <span>Connect on WhatsApp</span>
           </a>
+          <Link
+            href="/contact"
+            className="inline-flex justify-center items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F6F3] border border-[#CBD5E1] text-[#1B2838] px-6 py-3 rounded font-semibold text-xs"
+          >
+            <span>Online Enquiry Brief</span>
+          </Link>
         </div>
       </section>
     </div>

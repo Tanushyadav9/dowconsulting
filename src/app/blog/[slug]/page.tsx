@@ -115,20 +115,20 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <h3 className="font-bold text-base text-[#F7F6F3]">Consult with DOW Consulting</h3>
           <p className="text-xs text-[#8C96A5]">Discuss your GTM, market research, or expansion requirements.</p>
         </div>
-        <div className="flex gap-3">
-          <Link
-            href="/intake"
+        <div className="flex flex-wrap gap-3">
+          <a
+            href={BRAND.contact.phone.link}
             className="bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-5 py-2.5 rounded font-bold text-xs uppercase tracking-wider"
           >
-            Start Intake
-          </Link>
+            Call: {BRAND.contact.phone.display}
+          </a>
           <a
             href={BRAND.contact.whatsapp.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#111B27] border border-[#2A3D54] px-4 py-2.5 rounded text-xs font-semibold text-[#F7F6F3] flex items-center gap-1.5"
+            className="bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-4 py-2.5 rounded text-xs font-bold flex items-center gap-1.5 shadow-sm"
           >
-            <MessageSquare className="w-3.5 h-3.5 text-[#C9A24B]" />
+            <MessageSquare className="w-3.5 h-3.5 fill-current" />
             <span>WhatsApp Desk</span>
           </a>
         </div>

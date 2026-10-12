@@ -65,14 +65,10 @@ export default function PricingPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">4. Payment Methods &amp; Currency</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">4. Advisory Engagements &amp; Invoicing</h2>
         <p>
-          Upon proposal acceptance, payments are processed securely:
+          DOW Consulting is an advisory portfolio and enquiry practice. The website is not a transactional platform and does not process online checkout payments. Commercial fee structures, payment milestones, and banking details are established directly in the client engagement letter.
         </p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><strong>Indian Clients (INR):</strong> Razorpay supporting UPI, NetBanking, and major Debit/Credit Cards.</li>
-          <li><strong>International Clients (USD):</strong> Stripe supporting major global cards.</li>
-        </ul>
       </section>
 
       <section className="space-y-3">

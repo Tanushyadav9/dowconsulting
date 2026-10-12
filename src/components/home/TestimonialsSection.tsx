@@ -1,26 +1,8 @@
-import { prisma } from "@/lib/prisma";
-import { MessageSquare, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { getPublishedTestimonials } from "@/lib/constants/testimonials";
+import { ShieldCheck, CheckCircle2 } from "lucide-react";
 
-export async function TestimonialsSection() {
-  if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes("example")) {
-    return null;
-  }
-
-  let testimonials: any[] = [];
-
-  try {
-    testimonials = await prisma.testimonial.findMany({
-      where: {
-        isPublished: true,
-        consentConfirmed: true,
-      },
-      orderBy: [{ date: "desc" }, { createdAt: "desc" }],
-      take: 6,
-    });
-  } catch (err) {
-    // Graceful fallback if database connection is pending
-    return null;
-  }
+export function TestimonialsSection() {
+  const testimonials = getPublishedTestimonials();
 
   // Strict Compliance Rule: When there are none, render nothing: no empty heading, no nav link, no placeholder text.
   if (testimonials.length === 0) {

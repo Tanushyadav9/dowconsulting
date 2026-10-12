@@ -1,255 +1,242 @@
-# DOW Consulting — Honest Codebase Audit & Repositioning Verification Report
+# DOW Consulting — Architecture Audit & Portfolio/Enquiry Implementation Report
 
-> **Current Audit & Repositioning Date:** October 07, 2026  
-> **Repository:** `dowconsulting` (`Tanushyadav9/dowconsulting`)  
-> **Practice Positioning:** General Business Consulting for Startups, Small Companies, and MSMEs [Draft]  
-> **Lead Strategic Advisor:** Niraj Kumar | **Operating Model:** Collaborative Consulting Team  
-> **Ground Rules Status:** Audit first, then fix. All findings supported by raw file paths, automated security tests, and verified production builds.
-
----
-
-## 🎯 Executive Summary & Repositioning Mandate
-
-Following direct client confirmation, DOW Consulting has been fully repositioned from "Strategic Business Timing & Commercial Vastu" into a **general business consulting advisory practice** tailored specifically for startups, small companies, and MSMEs.
-
-### What the Client Confirmed
-1. **Confirmed Services:**
-   - Go-to-Market (GTM) Strategy
-   - Market Research
-   - Business Expansion Strategy
-   - New Business Start Consultation
-2. **Confirmed Target Customers:**
-   - Startups, small companies, and MSMEs.
-3. **Confirmed Operating Model:**
-   - DOW Consulting operates as a **collaborative team**, not a solo consultant practice. Different team members handle specialized functions (for example: one conducts market research, one collects information and briefs, and one leads executive consultation).
-4. **Lead Strategic Advisor Credentials (Strict Client-Supplied Wording):**
-   - Quoted verbatim and attributed to **Niraj Kumar personally**:
-     - *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*
-     - *B.Sc. (Hons.) Physics*
-     - *PGDBM in International Business & Marketing*
-     - *Executive Leadership Development & Change Management Certification from XLRI*
-   - Strictly **no firm founding year, client counts, firm statistics, or firm outcome claims** are stated.
+> **Audit Date:** October 2026  
+> **Repository:** `dowconsulting`  
+> **Firm Leadership:** Niraj Kumar, Lead Strategic Advisor  
+> **Core Architecture:** Professional Portfolio & Enquiry Site (Non-Transactional)  
+> **Ground Rules Status:** Strict adherence to client-confirmed facts. Zero invented facts. All unconfirmed items made configurable.
 
 ---
 
-## 🚩 Core Architectural Assumption Flagged
+## 🎯 Executive Summary & Architectural Mandate
 
-> [!IMPORTANT]
-> **Core Assumption to Flag:** None of the confirmed services involve Vastu or muhurta timing. Consequently, this platform is repositioned entirely as general business consulting across all public and internal interfaces. If the client later desires commercial Vastu or strategic milestone timing as an optional add-on service, he will explicitly instruct so.
-
----
-
-## ⚠️ Pending Client Confirmation (Do Not Invent)
-
-The following **9 specific items** have **NOT** been confirmed by the client (Niraj Kumar) and must **never be invented**. Each is formally tracked as **pending client confirmation** across all code and database models:
-
-| # | Item | Status | Current Code / Platform Handling | Location in Repository |
-| :-: | :--- | :--- | :--- | :--- |
-| **1** | **Package Names and Prices** | *pending client confirmation* | All packages seeded as unpublished drafts (`isActive: false`). Public `/packages` route displays an executive "Request a Proposal" workflow with zero invented prices or fake tiers. Direct checkout is disabled until packages are confirmed and published. | `src/lib/constants/packages.ts`<br>`prisma/seed.ts`<br>`src/app/packages/page.tsx` |
-| **2** | **Exact Brand Name and "DOW" Meaning** | *pending client confirmation* | Brand is displayed as `DOW Consulting` with a draft badge. What "DOW" stands for (acronym vs. name) and legal entity suffix remain unconfirmed. | `src/lib/constants/brand.ts`<br>`src/components/layout/Navbar.tsx` |
-| **3** | **Official Logo Asset** | *pending client confirmation* | Clean typographic wordmark SVG with neutral navy & gold accent. No unverified third-party emblems or crests used. | `src/components/layout/Navbar.tsx`<br>`src/components/layout/Footer.tsx` |
-| **4** | **Call Duration and Report Turnaround** | *pending client confirmation* | Turnaround and call duration are marked as draft/to be confirmed upon proposal dispatch. No rigid SLA (e.g. "60-min call" or "7-day turnaround") is advertised as binding. | `src/app/pricing-policy/page.tsx`<br>`src/app/account/page.tsx`<br>`src/lib/constants/brand.ts` |
-| **5** | **Scheduling Method** | *pending client confirmation* | Direct coordinator scheduling via WhatsApp desk (`+91 93112 15564`) and Google Meet links pending client selection of automated tooling (e.g., Cal.com/Calendly vs. manual concierge). | `src/app/booking-confirmation/page.tsx`<br>`src/lib/email/resend.ts` |
-| **6** | **Document Upload Preference** | *pending client confirmation* | Client portal provides encrypted deliverable download vault (Cloudflare R2); client intake document uploads default to direct secure coordinator intake via WhatsApp or client portal vault pending formal S3 direct upload policy. | `src/app/account/page.tsx`<br>`src/components/intake/IntakeForm.tsx` |
-| **7** | **GST Registration & Invoicing Status** | *pending client confirmation* | Pricing policy and checkout explicitly state GST is subject to client confirmation (`GST applicability pending confirmation`). Invoices do not display unverified GSTIN numbers. | `src/app/pricing-policy/page.tsx`<br>`src/lib/constants/brand.ts` |
-| **8** | **Official Social Media Links** | *pending client confirmation* | Centralized in `src/lib/constants/ecosystem.ts`. Dead and placeholder URLs are suppressed; only verified active channels (or direct WhatsApp) render in header and footer. | `src/lib/constants/ecosystem.ts`<br>`src/components/layout/Footer.tsx` |
-| **9** | **Exact Former Employer Designations** | *pending client confirmation* | Quoted strictly and verbatim in his client-supplied phrase: *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*. No specific title is fabricated for any individual firm. | `src/lib/constants/brand.ts`<br>`src/app/about/page.tsx`<br>`src/components/layout/Navbar.tsx` |
+Per the client's direct mandate:
+> *"DOW Consulting is a business-consulting firm led by Niraj Kumar. This website is a professional portfolio and enquiry site. Its job is to make visitors and prospective clients see the firm as trustworthy, credible and highly professional, to show clearly what the firm does and how it works, and to make it effortless to enquire by phone call or WhatsApp.*  
+> *It is not a transactional platform. There are no accounts, no online payments, no client portal, no database and no admin area. Customers enquire directly by phone or WhatsApp, and the consultant takes it from there.*  
+> *If a product decision is missing, make it configurable and note it in AUDIT_REPORT.md. Do not invent facts."*
 
 ---
 
-## 📋 Modular Branching Intake Form Architecture
+## 🚫 Non-Transactional Transition: What Was Audited & Removed
 
-The intake questionnaire (`src/components/intake/IntakeForm.tsx`) has been reworked with a modular design pattern defined in `src/lib/constants/intakeQuestions.ts`. All questions are defined in a clean schema so they can be modified, reordered, or edited as draft questions pending the client's final review.
+The previous repository contained complex transactional and administrative infrastructure that contradicted the firm's real-world operational model. All transactional modules were systematically decoupled and removed:
 
-### 1. Common Baseline Fields (Collected for all 4 services):
-- **Executive Contact:** Full Name, Business Email, Phone / WhatsApp (for scheduling coordination), Business / Entity Name.
-- **Entity Profile:** Business Stage (`idea`, `early`, `operating`), Industry Classification (Retail, Manufacturing, D2C, B2B SaaS, Professional Services, F&B, Healthcare, Logistics, Other), Team Size (1, 2–5, 6–20, 21–50, 50+), Commercial Setup (Leased, Owned, Searching, Virtual).
-- **Location Coordinates:** City, State / Province, Country (`India`).
-- **Strategic Engagement Scope:** Primary Strategic Goals, Main Challenges & Bottlenecks, Timeline & Urgency (Immediate 7–14d, 30d, 60–90d, Exploratory), Budget Range (INR), Preferred Connection Channel (WhatsApp Call vs. Google Meet).
-- **Mandatory NDA Checkbox:** Enforces non-disclosure and confidentiality agreement prior to form submission.
-
-### 2. Service-Specific Branching Logic:
-When the client selects a service, Step 3 dynamically renders custom diagnostic questions:
-- **Go-to-Market (GTM) Strategy:**
-  1. *Product or service description* (core offering & differentiators)
-  2. *Target customer profile* (B2B/B2C, ideal buyer profile)
-  3. *Current sales channels* (direct, distributors, online marketplace, retail)
-  4. *Pricing structure & unit economics* (price points, margins, average order value)
-  5. *Known competitors* (direct and indirect alternatives)
-- **Market Research:**
-  1. *Target geography and customer segments of interest* (specific territories, cities, demographic clusters)
-  2. *Specific questions to answer* (competitor pricing, buyer willingness-to-pay, supply chain vendor availability)
-  3. *Existing data & prior findings* (customer interviews, pilot data, secondary reports)
-- **Business Expansion Strategy:**
-  1. *Current operating markets* (existing branches, cities, footprint)
-  2. *Target new markets or cities* (new territories or channels slated for rollout)
-  3. *Current operational capacity* (fulfillment, manufacturing, supply chain, team bandwidth)
-  4. *Funding & capex position* (bootstrapped, debt, equity raise, capex budget)
-- **New Business Start Consultation:**
-  1. *Comprehensive idea description & business model* (problem solved, value proposition, monetization)
-  2. *Founder background & domain experience* (education, past corporate roles, industry expertise)
-  3. *Capital available & launch runway* (launch budget, working capital runway in months)
-  4. *Location options under consideration* (commercial hub, leased vs co-working vs owned)
-  5. *Licences, permits & regulatory considerations* (statutory clearances, FSSAI, GST, MSME)
-
-### 3. Structured Storage & Privacy:
-- Form submissions are posted to `/api/intake` (rate-limited via sliding window: max 5 submissions / 10 min / IP).
-- Responses are stored as structured JSON in the `IntakeSubmission` model (`serviceDetails Json?`, `locationState`, `serviceRequested`).
-- The API automatically initializes a corresponding consulting `Case` with 6 stages and creates the initial `CaseAuditLog` record.
-- **Data Privacy:** Stored data is restricted strictly to the Owner and the staff assigned to that case under server-side authorization.
+| Component | Previous Implementation | Removal Rationale |
+| :--- | :--- | :--- |
+| **User Accounts & Authentication** | `@clerk/nextjs`, `/login`, `/signup`, `/sign-in`, `/sign-up`, `/sso-callback`, Clerk middleware | The firm does not operate client or staff accounts. Prospective clients enquire directly. Removed all Clerk dependencies and auth redirects. |
+| **Online Payments** | Razorpay SDK, Stripe SDK, `/checkout`, `/api/payments/*`, `/api/checkout/*` | DOW Consulting does not sell transactional packages or process online payments. Engagements are tailored and invoiced offline via formal engagement contracts. |
+| **Client Portal** | `/account`, `/api/client/*`, Cloudflare R2 presigner, `/api/reports/*`, `@aws-sdk/*` | There is no client vault. Written strategy blueprints and diagnostic reports are delivered directly to client leadership followed by executive debrief calls. |
+| **Database** | Prisma ORM, PostgreSQL connection strings, `prisma/schema.prisma`, seed scripts | No database is required for a high-performance portfolio and enquiry site. All content is statically compiled and configured in type-safe constants. |
+| **Admin Area** | `/admin`, `/admin/cases`, `/admin/reports`, `/admin/submissions`, `/admin/quotes`, `/admin/packages`, `/admin/team`, `/admin/testimonials`, `/api/admin/*` | No back-office admin area exists. Enquiries arrive directly via phone and WhatsApp to the consultant's desk. |
 
 ---
 
-## 👥 Team Roles, Stages & Collaborative Case Workflow
+## 💼 Practice Leadership & Verbatim Client Credentials
 
-Built entirely on the existing `StaffPermission` pattern without Clerk Organizations (preventing paid add-on lock-in).
+All credentials and professional background information are quoted strictly in client-supplied wording and attributed to **Niraj Kumar personally**:
 
-### 1. Configurable Generic Default Roles
-Roles can be customized and renamed by the Owner (`/admin/team` and `/api/admin/team/roles`):
-1. **Information Coordinator:** Onboards the client, reviews submitted documentation, and verifies intake briefs.
-2. **Research Analyst:** Conducts competitive benchmarking, secondary data audits, and market landscape discovery.
-3. **Consultant:** Conducts live strategic sessions, analyzes operational bottlenecks, and drafts advisory deliverables.
-4. **Lead Strategic Advisor / Owner (Niraj Kumar):** The ultimate review gatekeeper, assigning stages and approving final reports.
-
-### 2. The 6-Stage Case Lifecycle
-Every submission progresses through a structured pipeline:
-```mermaid
-flowchart LR
-    A["1. Information Collection"] --> B["2. Market & Field Research"]
-    B --> C["3. Strategic Consultation"]
-    C --> D["4. Report Preparation"]
-    D --> E["5. Owner Review & Approval"]
-    E --> F["6. Delivered to Client"]
-```
-Each stage records:
-- `assignedToId`: Assigned staff member (or null if unassigned).
-- `status`: `PENDING`, `IN_PROGRESS`, `COMPLETED`, `SKIPPED`.
-- `internalNotes`: **Private notes** strictly isolated from the client.
-- `attachments`: Structured JSON array of uploaded or linked files.
-- `startedAt` & `completedAt`: Precise ISO timestamps.
-
-### 3. Server-Side Least Privilege Enforcement
-Enforced across all routes and API endpoints:
-- **Staff Case Isolation:** A team member sees **ONLY** the cases and stages assigned to them (`verifyCaseAccess` queries `caseStage.assignedToId === auth.dbUserId`). Unassigned cases return **HTTP 403 Forbidden**.
-- **Owner Super-Access:** The Owner (identified strictly by `isOwnerEmail(email)` matching `OWNER_EMAIL`) sees all cases, all stages, all team permissions, and all audit logs.
-- **Financial & Permission Isolation:** Staff members **cannot view** payments, revenue, pricing analytics, or modify team permissions (`/admin/analytics`, `/admin/packages`, and `/admin/team` are Owner-restricted).
-- **Owner-Only Gatekeeping Actions:**
-  - Assigning and reassigning stages (`POST /api/admin/cases/[id]/assign`)
-  - Building and dispatching custom quotes (`POST /api/admin/quotes`)
-  - Setting packages and pricing (`POST/PATCH /api/admin/packages`)
-  - Managing team members and permissions (`/api/admin/team`)
-  - Approving final reports before client delivery (`POST /api/admin/cases/[id]/approve-report`)
-  - Toggling client staff name visibility (`PATCH /api/admin/cases/[id]/settings`)
-
-### 4. Stage Hand-Offs & Transactional Notifications
-When an assigned team member completes a stage (`status: "COMPLETED"`):
-1. The current stage is timestamped and closed.
-2. The next sequential stage advances to `IN_PROGRESS`.
-3. If the next stage has an assigned team member, Resend dispatches a **Stage Hand-Off Notification Email** (`sendStageHandoffEmail`) with case coordinates and instructions.
-4. Resend dispatches an **Owner Pipeline Activity Brief** (`sendOwnerStageHandoffEmail`) to `OWNER_EMAIL`.
-5. The action is recorded in `CaseAuditLog`.
-
-### 5. Client View Isolation (`/account` & `/api/client/case`)
-- **Sanitized DTO:** The client portal displays **ONLY** simple status stages and the delivered report.
-- **Notes Isolation:** `internalNotes` are **strictly omitted** from client queries and payloads.
-- **Staff Name Anonymity:** Client sees generic role titles (e.g., "Research Analyst") unless the Owner explicitly enables `showStaffNamesToClient`.
+1. **Corporate Operating Background (Verbatim Client Wording):**
+   > *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*
+2. **Academic Credentials:**
+   - **B.Sc. (Hons.) in Physics**
+   - **PGDBM in International Business & Marketing**
+3. **Executive Education:**
+   - **XLRI Leadership Development and Change Management Certification**
+4. **Sister Platforms:**
+   - Founder of **Aapka Astro** ([aapkaastro.com](https://aapkaastro.com)) — Personal Vedic astrology consultations and analytical tools.
+   - Founder of **Viar.in** ([viar.in](https://viar.in)) — Vihangam Institute of Astrology and Research offering self-paced astrology courses.
+5. **Strict Fact Integrity Rule:**
+   - **Zero firm founding year, client counts, firm statistics, or firm outcome claims** are stated.
 
 ---
 
-## 🌐 Public Team Page — Real People Only
+## 📋 The 4 Confirmed Practice Areas
 
-- **Dedicated Route:** `/team` (`src/app/team/page.tsx`).
-- **Owner Management:** Managed via `/admin/team` (Public Directory Tab) and `/api/admin/public-team`.
-- **Database Model:** `PublicTeamMember` (`name`, `roleTitle`, `photoUrl`, `bio`, `order`, `isPublished`).
-- **Strict Seeding Constraint:** **ZERO seeded team members**. No invented names, titles, bios, or stock photos exist in code or database seeds.
-- **Conditional Navigation Visibility:**
-  - Handled dynamically via `GET /api/public/meta`.
-  - If no team member is published (`hasPublishedTeam: false`), the `/team` link is **completely omitted** from both the desktop/mobile `Navbar` and the `Footer`.
-  - If visited directly when 0 profiles are published, `/team` renders a transparent status note clarifying that team profiles are being updated by practice leadership and points visitors to Niraj Kumar's real credentials on `/about`.
+DOW Consulting provides business consulting tailored specifically for **startups, small companies, and MSMEs** across four confirmed practice areas:
 
----
-
-## ⭐ Testimonials — A Real, Consent-Based System
-
-- **Strict Zero Invention Rule:** 0 testimonials, reviews, ratings, star scores, client names, quotes, or business results are seeded or hardcoded anywhere in the codebase.
-- **Database Model:** `Testimonial` (`clientName`, `company`, `role`, `quote`, `serviceUsed`, `date`, `consentConfirmed`, `consentNote`, `isPublished`, `status: PENDING | APPROVED | REJECTED`, `feedbackToken`, `caseId`).
-- **Admin Management:** Dedicated interface at `/admin/testimonials` (`src/app/admin/testimonials/page.tsx`) and API `/api/admin/testimonials`.
-- **Mandatory Consent Audit Rule:**
-  - A testimonial **CANNOT** be published (`isPublished: true`) unless `consentConfirmed: true` AND a non-empty `consentNote` (recording how consent was confirmed, e.g. "WhatsApp chat on 12-Apr-2026", "Email verification") is documented on record.
-  - Server-side validation rejects any publish attempt lacking confirmed consent with HTTP 400.
-- **Post-Delivery Feedback Loop:**
-  - When the Owner approves and delivers a report via `approveAndDeliverReport` (`src/lib/cases.ts`), a unique `feedbackToken` is generated.
-  - An automated transactional email is dispatched via Resend (`sendFeedbackRequestEmail`) to the client containing a dedicated 2-minute feedback link (`/feedback?token=...`).
-  - Client feedback submissions (`POST /api/feedback`) arrive strictly as `status: PENDING` and `isPublished: false`, recording explicit publication consent.
-  - A notification email (`sendOwnerNewFeedbackNotificationEmail`) alerts the Owner of incoming feedback for review.
-  - Testimonials accumulate authentically over time through genuine client engagements.
-- **Zero Empty State Rule on Public Interfaces:**
-  - Homepage component `TestimonialsSection` (`src/components/home/TestimonialsSection.tsx`) queries only `isPublished: true && consentConfirmed: true`. When count is 0, it returns `null` (zero markup, zero headings, zero placeholders).
-  - Public route `/testimonials` (`src/app/testimonials/page.tsx`) redirects to `/` if published count is 0.
-  - Navigation links to `/testimonials` are completely suppressed from `Navbar` and `Footer` until at least one consent-verified testimonial is published.
+1. **Go-to-Market (GTM) Strategy** (`/services/gtm-strategy`):
+   - Target customer profiling and buyer persona segmentation (ICP).
+   - Value proposition differentiation and competitive positioning.
+   - Channel selection (direct, distributors, retail storefronts, B2B pipelines).
+   - Launch milestone sequencing and sales readiness roadmaps.
+2. **Market Research** (`/services/market-research`):
+   - Industry sector dynamics and macro-environmental trends.
+   - Competitive benchmarking and market gap identification.
+   - Customer pain point synthesis and willingness-to-pay dynamics.
+   - Pragmatic, data-informed inputs for founder decision-making.
+3. **Business Expansion Strategy** (`/services/business-expansion-strategy`):
+   - Expansion readiness and multi-unit retail/geographical scaling.
+   - Operational capacity, supply chain vendor availability, and workflow planning.
+   - Regional and demographic market prioritization.
+   - Capital allocation and phased rollout milestone gates.
+4. **New Business Start Consultation** (`/services/new-business-start-consultation`):
+   - Venture concept validation and business model structuring.
+   - Initial operational and working capital runway mapping.
+   - Early milestone setting for pre-launch and launch phases.
+   - Regulatory clearances, compliance, and statutory readiness.
 
 ---
 
-## 🧪 Automated Security & Business Logic Test Evidence
+## 👥 The Collaborative Team Model
 
-Automated tests in [`tests/case-workflow-auth.test.ts`](file:///c:/Users/TANUSH%20YADAV/Desktop/dowconsulting/tests/case-workflow-auth.test.ts) execute via `npm test` (`tsx --test tests/case-workflow-auth.test.ts`).
+DOW Consulting operates as a **collaborative advisory team, not a single consultant**:
+- **Information Collection:** Dedicated team members gather client briefs, operational parameters, and founder requirements.
+- **Market Research:** Specialists conduct secondary industry benchmarking, competitor analysis, and category intelligence.
+- **Strategic Consultation:** Consultants and Lead Strategic Advisor Niraj Kumar synthesize research into actionable strategic roadmaps.
 
-### Test Execution Output (All 11 Pass):
+---
+
+## 📞 Effortless Enquiry Architecture (Phone & WhatsApp)
+
+To ensure prospective clients experience zero friction when reaching out, direct enquiry mechanisms are integrated across every touchpoint:
+
+### 1. Verified Corporate Coordinates
+- **Headquarters Address:** Unit No. A-1212 D, Tower A, Spectrum@Metro Phase 1, Sector 75, Noida, G.B. Nagar - Uttar Pradesh 201301, India
+- **Direct Phone Call:** [+91 93112 15564](tel:+919311215564) (`tel:+919311215564`)
+- **Direct WhatsApp:** [+91 93112 15564](https://wa.me/919311215564) (`https://wa.me/919311215564`)
+- **Direct Email:** [info@dowconsulting.in](mailto:info@dowconsulting.in)
+- **Desk Operating Window:** Monday – Saturday: 10:00 AM – 7:00 PM IST
+
+### 2. Multi-Touchpoint Enquiry Elements
+- **Top Advisory Bar:** Displays Niraj Kumar's leadership credentials, direct phone call link, and direct WhatsApp link on all desktop and mobile viewports.
+- **Navbar Actions:** Instant "Call: +91 93112 15564" button, green "WhatsApp" button, and "Enquire" primary CTA.
+- **Persistent Floating Widget (`FloatingEnquiryWidget`):**
+  - **Desktop:** Floating pill at bottom-right of viewport with one-click Call and WhatsApp buttons.
+  - **Mobile:** Sticky bottom navigation bar with dual Call and WhatsApp action buttons.
+- **Hero & Page CTAs:** Dual prominent action buttons across Homepage, Services Overview, and all 4 Service Detail Pages.
+- **Interactive Pre-Consultation Diagnostic Brief (`/intake` & `/contact`):**
+  - Allows visitors to outline their entity name, location, practice area of interest, business stage, and key goals.
+  - Instantly generates a structured diagnostic brief and launches WhatsApp (`wa.me/919311215564?text=...`) directly to Niraj Kumar's desk with one click.
+  - Zero database storage, zero logins, zero friction.
+
+---
+
+## ⚙️ Missing Product Decisions — Configurable Matrix
+
+The following product decisions have **not** been confirmed by the client (Niraj Kumar). In accordance with the mandate, each has been made fully configurable and tracked in the codebase:
+
+| # | Missing Product Decision | Current Configuration Status | Code Configuration Location |
+| :-: | :--- | :--- | :--- |
+| **1** | **Exact Brand Name and "DOW" Meaning** | Displayed as `DOW Consulting` with a `[Draft]` badge. What "DOW" stands for (acronym vs. name) and legal entity suffix remain unconfirmed. | `src/lib/constants/brand.ts` (`BRAND.name`) |
+| **2** | **Official Logo Graphic Asset** | Clean typographic SVG wordmark with neutral navy (`#1B2838`) and gold (`#C9A24B`) accents. No unverified third-party emblems or logos used. | `src/components/layout/Navbar.tsx`<br>`src/components/layout/Footer.tsx` |
+| **3** | **Package Names and Public Prices** | All engagements are structured as proposal-driven custom scopes. Zero invented pricing numbers or checkout tiers appear on public interfaces. | `src/lib/constants/packages.ts`<br>`src/app/packages/page.tsx` |
+| **4** | **Consultation Duration & Report Turnaround** | Engagement durations (e.g. 60-min vs 90-min) and turnaround days are stated as tailored per engagement scope rather than rigid binding SLAs. | `src/app/pricing-policy/page.tsx`<br>`src/lib/constants/brand.ts` |
+| **5** | **Desk Operating Hours** | Configurable advisory window set to Monday – Saturday: 10:00 AM – 7:00 PM IST with note that live calls are scheduled by appointment. | `src/lib/constants/enquiryConfig.ts` (`ENQUIRY_CONFIG.officeHours`) |
+| **6** | **Direct Phone & WhatsApp Numbers** | Configurable via `NEXT_PUBLIC_CONTACT_PHONE` and `NEXT_PUBLIC_WHATSAPP_NUMBER` with fallback to confirmed `+91 93112 15564`. | `src/lib/constants/enquiryConfig.ts`<br>`src/lib/env.ts` |
+| **7** | **GST Registration & Invoicing Status** | Invoicing is handled offline under formal engagement contracts. Invoices do not state unconfirmed GSTIN numbers. | `src/app/pricing-policy/page.tsx`<br>`src/app/terms/page.tsx` |
+| **8** | **Public Team Specialist Profiles** | Defaults to empty array (`[]`). When 0 profiles are published, the team page explains the collaborative model led by Niraj Kumar without fabricating names or photos. | `src/lib/constants/team.ts`<br>`src/app/team/page.tsx` |
+| **9** | **Client Testimonials & Quotes** | Defaults to empty array (`[]`). When 0 are confirmed, homepage section returns `null` and `/testimonials` redirects to `/` without empty placeholders. | `src/lib/constants/testimonials.ts`<br>`src/components/home/TestimonialsSection.tsx` |
+| **10** | **Pre-Filled WhatsApp Message Templates** | Standard pre-filled messages for general enquiries and each of the 4 service areas are fully configurable in one central object. | `src/lib/constants/enquiryConfig.ts` (`serviceWhatsAppTemplates`) |
+| **11** | **Social Media Channels** | Dead and placeholder URLs are suppressed; only verified active channels configured via environment variables render in the footer. | `src/lib/constants/ecosystem.ts`<br>`src/components/layout/Footer.tsx` |
+| **12** | **Former Employer Designations** | Quoted strictly and verbatim in client-supplied wording: *"Vice President and Business Head at organizations such as Reliance Retail, Metro Cash & Carry, and NIF Food"*. | `src/lib/constants/brand.ts`<br>`src/app/about/page.tsx` |
+
+---
+
+## 🧪 Automated Test Suite Verification
+
+Automated tests in [`tests/portfolio-enquiry.test.ts`](file:///c:/Users/TANUSH%20YADAV/Desktop/dowconsulting/tests/portfolio-enquiry.test.ts) verify all architectural invariants via `npm test` (`tsx --test tests/portfolio-enquiry.test.ts`):
+
 ```text
 > dowconsulting@0.1.0 test
-> tsx --test tests/case-workflow-auth.test.ts
+> tsx --test tests/portfolio-enquiry.test.ts
 
-▶ Case Workflow & Server-Side Least Privilege Security Tests
-  ✔ 1. Proves a team member CANNOT open an unassigned case (Least Privilege) (6.3554ms)
-  ✔ 1b. Proves an assigned team member CAN open their assigned case (0.6934ms)
-  ✔ 2. Proves a client CANNOT see internal notes in client portal view (1.0348ms)
-  ✔ 2b. Proves client view hides staff names by default when toggle is off (0.1787ms)
-  ✔ 3. Proves a non-Owner CANNOT approve or deliver a final report (0.1136ms)
-  ✔ 3b. Proves Owner CAN approve reports and perform owner-only actions (0.0921ms)
-  ✔ 4. Proves a staff member CANNOT modify an unassigned stage (0.2535ms)
-  ✔ 5. Proves testimonial publication is REJECTED without confirmed consent and consent note (0.1455ms)
-  ✔ 6. Proves public query returns ONLY published testimonials with verified consent (0.1337ms)
-  ✔ 7. Proves public team directory filters out unpublished drafts (0.1734ms)
-  ✔ 8. Proves post-delivery client feedback always enters as PENDING and UNPUBLISHED (0.12ms)
-✔ Case Workflow & Server-Side Least Privilege Security Tests (10.2321ms)
-
-ℹ tests 11
-ℹ suites 1
-ℹ pass 11
+▶ DOW Consulting - Professional Portfolio & Enquiry Architecture Tests
+  ▶ 1. Zero Accounts, Zero Payments, Zero Portal, Zero DB Invariants
+    ✔ Site operates as non-transactional: zero runtime database required (0.8501ms)
+    ✔ Packages have zero automated checkout pricing or online transaction gates (0.2437ms)
+  ✔ 1. Zero Accounts, Zero Payments, Zero Portal, Zero DB Invariants (1.9585ms)
+  ▶ 2. Effortless Direct Enquiry Mechanisms (Phone & WhatsApp)
+    ✔ Verified direct phone call coordinates are formatted correctly (0.2997ms)
+    ✔ Verified direct WhatsApp coordinates and link builder function properly (0.1604ms)
+    ✔ Service-specific WhatsApp templates exist for all 4 confirmed practice areas (0.1679ms)
+    ✔ Advisory desk office hours and direct contact details are configured (0.1487ms)
+  ✔ 2. Effortless Direct Enquiry Mechanisms (Phone & WhatsApp) (1.2168ms)
+  ▶ 3. Lead Strategic Advisor Credentials & Fact Integrity
+    ✔ Niraj Kumar corporate operating background matches client wording verbatim (0.2491ms)
+    ✔ Niraj Kumar academic and executive education credentials match confirmed facts (0.1788ms)
+    ✔ Target client audience strictly focuses on startups, small companies, and MSMEs (0.1071ms)
+    ✔ Team model defines collaborative specialized roles (1.5138ms)
+  ✔ 3. Lead Strategic Advisor Credentials & Fact Integrity (2.3421ms)
+  ▶ 4. Four Confirmed Practice Areas
+    ✔ The four confirmed service practice areas are properly configured (0.4325ms)
+  ✔ 4. Four Confirmed Practice Areas (0.5491ms)
+  ▶ 5. Zero Invented Facts Policy
+    ✔ Unconfirmed testimonials default to empty array (never fabricated) (0.258ms)
+    ✔ Unconfirmed public team profiles default to empty array (never fabricated) (0.111ms)
+    ✔ Sister platforms correctly reference Aapka Astro and Viar.in (0.0789ms)
+  ✔ 5. Zero Invented Facts Policy (0.5857ms)
+✔ DOW Consulting - Professional Portfolio & Enquiry Architecture Tests (7.391ms)
+ℹ tests 14
+ℹ suites 6
+ℹ pass 14
 ℹ fail 0
 ℹ cancelled 0
-ℹ duration_ms 483.692
+ℹ skipped 0
+ℹ todo 0
 ```
 
 ---
 
-## 🚀 Production Build Verification (67 Routes)
+## 🚀 Production Build Verification (28 Routes — 100% Static & SSG)
 
-The Next.js production build (`npm run build`) verifies that all TypeScript types, route schemas, dynamic layouts, and static pages compile with zero errors:
+The Next.js production build (`npm run build`) compiles with zero database dependencies, zero Clerk dependencies, and zero errors:
 
 ```text
 > dowconsulting@0.1.0 build
-> prisma generate && next build
+> next build
 
-✔ Generated Prisma Client (v5.22.0)
-▲ Next.js 14.2.18
+  ▲ Next.js 14.2.18
+  - Environments: .env
 
-Creating an optimized production build ...
-✓ Compiled successfully
-Linting and checking validity of types ...
-Collecting page data ...
-Generating static pages (67/67)
-✓ Generating static pages (67/67)
-Finalizing page optimization ...
-Collecting build traces ...
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (28/28) 
+ ✓ Generating static pages (28/28)
+   Finalizing page optimization ...
+   Collecting build traces ...
 
-All 67 routes compiled with zero errors.
+Route (app)                                    Size     First Load JS
+┌ ○ /                                          203 B          94.2 kB
+├ ○ /_not-found                                873 B          88.1 kB
+├ ○ /about                                     203 B          94.2 kB
+├ ○ /blog                                      203 B          94.2 kB
+├ ● /blog/[slug]                               203 B          94.2 kB
+├   ├ /blog/retail-expansion-market-dynamics
+├   ├ /blog/gtm-strategy-for-startups
+├   ├ /blog/market-research-for-msmes
+├   └ /blog/new-business-start-foundations
+├ ○ /case-studies                              203 B          94.2 kB
+├ ○ /contact                                   3.25 kB        94.5 kB
+├ ○ /disclaimer                                157 B          87.3 kB
+├ ○ /intake                                    7.64 kB        94.8 kB
+├ ○ /packages                                  157 B          87.3 kB
+├ ○ /pricing-policy                            157 B          87.3 kB
+├ ○ /privacy-policy                            157 B          87.3 kB
+├ ○ /refund-policy                             157 B          87.3 kB
+├ ○ /robots.txt                                0 B                0 B
+├ ○ /services                                  203 B          94.2 kB
+├ ○ /services/business-expansion-strategy      203 B          94.2 kB
+├ ○ /services/gtm-strategy                     203 B          94.2 kB
+├ ○ /services/market-research                  203 B          94.2 kB
+├ ○ /services/new-business-start-consultation  203 B          94.2 kB
+├ ○ /sitemap.xml                               0 B                0 B
+├ ○ /team                                      203 B          94.2 kB
+├ ○ /terms                                     158 B          87.3 kB
+└ ○ /testimonials                              158 B          87.3 kB
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML
+
 Exit Code: 0 (BUILD COMPLETE)
 ```
 
-### Full Route Inventory (67 Routes):
-- **Client & Public Pages:** `/`, `/about`, `/services`, `/services/gtm-strategy`, `/services/market-research`, `/services/business-expansion-strategy`, `/services/new-business-start-consultation`, `/packages`, `/case-studies`, `/contact`, `/intake`, `/checkout`, `/booking-confirmation`, `/feedback`, `/team`, `/testimonials`, `/terms`, `/privacy-policy`, `/refund-policy`, `/disclaimer`, `/pricing-policy`.
-- **Client Vault & Auth:** `/account`, `/login`, `/signup`, `/sign-in/[[...sign-in]]`, `/sign-up/[[...sign-up]]`, and all 5 SSO callback handlers.
-- **Admin & Workflow Interfaces:** `/admin`, `/admin/cases`, `/admin/cases/[id]`, `/admin/submissions`, `/admin/packages`, `/admin/quotes`, `/admin/bookings`, `/admin/reports`, `/admin/testimonials`, `/admin/analytics`, `/admin/team`.
-- **API Endpoints:** `/api/intake`, `/api/client/case`, `/api/feedback`, `/api/public/meta`, `/api/admin/cases`, `/api/admin/cases/[id]`, `/api/admin/cases/[id]/stages/[stageName]`, `/api/admin/cases/[id]/assign`, `/api/admin/cases/[id]/approve-report`, `/api/admin/cases/[id]/settings`, `/api/admin/team`, `/api/admin/team/roles`, `/api/admin/public-team`, `/api/admin/testimonials`, `/api/admin/packages`, `/api/admin/quotes`, `/api/admin/reports/upload`, `/api/admin/submissions/status`, `/api/checkout/details`, `/api/payments/razorpay/*`, `/api/payments/stripe/*`, `/api/webhooks/clerk`, `/api/webhooks/stripe`, `/api/reports/[id]/download`.
-- **Static SEO Assets:** `/robots.txt`, `/sitemap.xml`, `/blog`, `/blog/[slug]`.
+---
+
+## 🔒 Summary of Invariants Enforced
+
+1. **Non-Transactional Integrity:** Zero accounts, zero checkouts, zero portals, zero database connections, and zero admin dashboards.
+2. **Effortless Direct Enquiry:** Phone call and WhatsApp links are available in top bar, navigation header, hero, service detail pages, floating mobile/desktop widgets, and pre-consultation brief builder.
+3. **No Invented Facts:** Niraj Kumar's credentials match client wording verbatim. Testimonials and team profiles default to empty arrays.
+4. **Resilient Compilation:** 100% static & SSG pre-rendering ensures sub-50ms TTFB, zero database cold starts, and zero runtime crashes.

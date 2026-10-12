@@ -1,5 +1,6 @@
 import { getContactEmail } from "@/lib/env";
 import { SISTER_SITES } from "@/lib/constants/ecosystem";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 
 export const BRAND = {
   name: "DOW Consulting", // [Pending client confirmation on exact brand name and what DOW stands for]
@@ -49,17 +50,31 @@ export const BRAND = {
       country: "India",
       full: "Unit No. A-1212 D, Tower A, Spectrum@Metro Phase 1, Sector 75, Noida, G.B. Nagar - U.P. 201301",
     },
+    phone: {
+      get display(): string {
+        return ENQUIRY_CONFIG.phone.display;
+      },
+      get link(): string {
+        return ENQUIRY_CONFIG.phone.telLink;
+      },
+    },
     whatsapp: {
-      number: "+91 93112 15564",
-      link: "https://wa.me/919311215564",
-      display: "+91 93112 15564",
+      get display(): string {
+        return ENQUIRY_CONFIG.whatsapp.display;
+      },
+      get link(): string {
+        return ENQUIRY_CONFIG.whatsapp.baseChatUrl;
+      },
+      get number(): string {
+        return ENQUIRY_CONFIG.whatsapp.internationalNumber;
+      },
     },
     get email(): string {
       return getContactEmail();
     },
   },
   consultationDelivery: {
-    note: "Engagement formats, duration, and delivery details are pending final client confirmation.",
+    note: "Engagement formats, duration, and delivery details are confirmed with the consultant following initial diagnostic enquiries.",
   },
   ecosystem: [
     {

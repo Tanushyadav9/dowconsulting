@@ -182,28 +182,36 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. CTA */}
+      {/* 3. Direct Enquiry CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
         <div className="bg-[#FFFFFF] p-10 rounded border border-[#E2E8F0] max-w-3xl mx-auto space-y-4">
           <h2 className="text-2xl font-bold text-[#1B2838]">
             Connect with Our Consulting Team
           </h2>
           <p className="text-xs text-[#5A6472] max-w-lg mx-auto">
-            Whether you are preparing a go-to-market plan, expanding operations, conducting research, or launching a new entity.
+            Whether you are preparing a go-to-market plan, expanding operations, conducting research, or launching a new entity, connect directly with Lead Strategic Advisor Niraj Kumar.
           </p>
           <div className="pt-2 flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/intake"
+            <a
+              href={BRAND.contact.phone.link}
               className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider"
             >
-              <span>Submit Intake Form</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <span>Call: {BRAND.contact.phone.display}</span>
+            </a>
+            <a
+              href={BRAND.contact.whatsapp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-sm"
+            >
+              <MessageSquare className="w-4 h-4 fill-current" />
+              <span>Connect on WhatsApp</span>
+            </a>
             <Link
-              href="/services"
+              href="/contact"
               className="inline-flex justify-center items-center gap-2 bg-[#F7F6F3] hover:bg-[#E2E8F0] text-[#1B2838] px-6 py-3 rounded font-semibold text-xs border border-[#E2E8F0]"
             >
-              <span>Explore All Services</span>
+              <span>Online Enquiry</span>
             </Link>
           </div>
         </div>

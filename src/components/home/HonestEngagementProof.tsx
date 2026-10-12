@@ -53,10 +53,10 @@ export function HonestEngagementProof() {
     },
     {
       step: "06",
-      title: "Delivered to Client",
-      leadRole: "Client Deliverables Vault",
+      title: "Delivered to Client & Debrief",
+      leadRole: "Consultant Delivery & Executive Debrief",
       description:
-        "Deliverable released directly into the private client portal with secure download and post-delivery debrief coordination.",
+        "Comprehensive written strategic deliverable provided directly to the client, followed by an executive debrief call to review findings and guide execution.",
     },
   ];
 
@@ -241,13 +241,13 @@ export function HonestEngagementProof() {
           <div className="bg-[#1B2838] rounded-lg p-4 border border-[#2A3D54] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#8C96A5]">
             <div className="flex items-center gap-2 text-[#E2E8F0]">
               <ShieldCheck className="w-4 h-4 text-[#C9A24B] shrink-0" />
-              <span>Deliverables are formatted as formal diagnostic PDF reports delivered via secure client vault.</span>
+              <span>Deliverables are customized written strategy blueprints presented directly to client leadership.</span>
             </div>
             <Link
-              href="/intake"
+              href="/contact"
               className="text-[#C9A24B] hover:underline font-bold flex items-center gap-1 shrink-0"
             >
-              <span>Submit Enterprise Brief</span>
+              <span>Enquire with Advisory Desk</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -281,23 +281,23 @@ export function HonestEngagementProof() {
           ))}
         </div>
 
-        {/* Confidentiality & Start Intake Callout */}
+        {/* Confidentiality & Direct Enquiry Callout */}
         <div className="mt-8 bg-[#F7F6F3] border border-[#E2E8F0] rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
             <Lock className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
             <div className="text-xs text-[#5A6472]">
               <strong className="text-[#1B2838] block text-sm">Strict Confidentiality &amp; NDA Protocol</strong>
               <span>
-                All submitted data is encrypted, restricted strictly to assigned advisory staff under least privilege, and never shared.
+                All business discussions, trade parameters, and enterprise information are held under strict non-disclosure.
               </span>
             </div>
           </div>
 
           <Link
-            href="/intake"
+            href="/contact"
             className="shrink-0 inline-flex items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3 rounded text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
           >
-            <span>Proceed to Intake Questionnaire</span>
+            <span>Enquire with Advisory Desk</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#C9A24B]" />
           </Link>
         </div>

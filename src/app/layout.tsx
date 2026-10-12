@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingEnquiryWidget } from "@/components/home/FloatingEnquiryWidget";
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,7 +16,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: `${BRAND.name} | Business Consulting for Startups, Small Companies & MSMEs [Draft]`,
   description:
-    "Business consulting for startups, small companies, and MSMEs across GTM strategy, market research, business expansion strategy, and new business start consultation. [Draft copy pending client confirmation]",
+    "Business consulting for startups, small companies, and MSMEs across GTM strategy, market research, business expansion strategy, and new business start consultation led by Niraj Kumar. [Draft copy]",
   keywords: [
     "Business Consulting",
     "GTM Strategy",
@@ -36,8 +37,8 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "DOW Consulting",
   description:
-    "Business consulting for startups, small companies, and MSMEs specializing in GTM strategy, market research, business expansion strategy, and new business start consultation.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://dowconsulting.in",
+    "Business consulting practice for startups, small companies, and MSMEs specializing in GTM strategy, market research, business expansion strategy, and new business start consultation led by Niraj Kumar.",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://dowconsulting-r756.vercel.app",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Unit No. A-1212 D, Tower A, Spectrum@Metro Phase 1, Sector 75",
@@ -46,7 +47,7 @@ const jsonLd = {
     postalCode: "201301",
     addressCountry: "IN",
   },
-  telephone: "+91 93112 15564",
+  telephone: ENQUIRY_CONFIG.phone.display,
 };
 
 export default function RootLayout({
@@ -54,15 +55,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-  const isClerkConfigured = Boolean(
-    clerkKey &&
-      clerkKey.startsWith("pk_") &&
-      !clerkKey.includes("placeholder") &&
-      !clerkKey.includes("dGVzdC1jbGVyay1hcHAk")
-  );
-
-  const content = (
+  return (
     <html lang="en" className={inter.variable}>
       <head>
         <script
@@ -73,18 +66,9 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-[#F7F6F3] text-[#1B2838]">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <FloatingEnquiryWidget />
         <Footer />
       </body>
     </html>
   );
-
-  if (isClerkConfigured) {
-    return (
-      <ClerkProvider publishableKey={clerkKey}>
-        {content}
-      </ClerkProvider>
-    );
-  }
-
-  return content;
 }

@@ -34,9 +34,9 @@ export default function DisclaimerPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Non-Substitution for Certified Legal, Architectural or Financial Advice</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">3. Non-Substitution for Certified Legal, Tax or Financial Advice</h2>
         <p>
-          Our recommendations do not substitute for formal structural engineering certifications, certified architectural municipal permits, statutory legal advice from registered attorneys, or registered financial investment counsel (e.g., SEBI registered advisory). Clients are advised to seek certified professionals for structural modifications and formal legal filings.
+          Our consulting observations and strategic deliverables do not substitute for formal statutory legal advice from registered attorneys, certified public accountant / chartered accountant audit or tax counsel, or SEBI-registered financial investment advice. Clients retain full responsibility for formal statutory filings, tax compliance, and commercial contracting.
         </p>
       </section>
 

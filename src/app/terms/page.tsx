@@ -38,9 +38,9 @@ export default function TermsPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Flat Fee Engagements &amp; Billing</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">3. Engagement Scope &amp; Billing</h2>
         <p>
-          Engagements are billed as fixed professional fees prior to the commencement of the diagnostic review. There are no unapproved subscriptions or hidden recurring retainers without separate mutual agreement. Payment may be remitted via Razorpay (INR) or Stripe (USD).
+          Engagements are billed as fixed professional advisory fees agreed upon proposal acceptance prior to diagnostic commencement. The website is an enquiry platform and does not process online payments, user accounts, or transactional checkouts. Billing terms and official corporate invoices are coordinated directly between the consultant and the client.
         </p>
       </section>
 

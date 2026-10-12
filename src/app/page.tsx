@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { EcosystemCrossPromotion } from "@/components/home/EcosystemCrossPromotion";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { HonestEngagementProof } from "@/components/home/HonestEngagementProof";
@@ -16,6 +17,7 @@ import {
   ChevronRight,
   ShieldCheck,
   FileText,
+  Phone,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -66,25 +68,32 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/intake"
-                  className="inline-flex justify-center items-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-8 py-3.5 rounded font-bold text-sm tracking-wide uppercase transition-all shadow-md hover:shadow-lg"
+              {/* Direct Enquiry Action Buttons */}
+              <div className="pt-4 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={ENQUIRY_CONFIG.phone.telLink}
+                  className="inline-flex justify-center items-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-7 py-3.5 rounded font-bold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg"
                 >
-                  <span>Submit Business Profile</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <Phone className="w-4 h-4" />
+                  <span>Call Consultant: {ENQUIRY_CONFIG.phone.display}</span>
+                </a>
 
                 <a
-                  href={BRAND.contact.whatsapp.link}
+                  href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex justify-center items-center gap-2 bg-[#111B27] hover:bg-[#2A3D54] border border-[#2A3D54] text-[#F7F6F3] px-6 py-3.5 rounded font-semibold text-sm transition-colors"
+                  className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3.5 rounded font-bold text-xs tracking-wider uppercase transition-colors shadow-md"
                 >
-                  <MessageSquare className="w-4 h-4 text-[#C9A24B]" />
-                  <span>Connect via WhatsApp</span>
+                  <MessageSquare className="w-4 h-4 fill-current" />
+                  <span>Enquire on WhatsApp</span>
                 </a>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex justify-center items-center gap-2 bg-[#111B27] hover:bg-[#2A3D54] border border-[#2A3D54] text-[#F7F6F3] px-5 py-3.5 rounded font-semibold text-xs tracking-wide transition-colors"
+                >
+                  <span>Online Enquiry</span>
+                </Link>
               </div>
             </div>
 
@@ -258,13 +267,15 @@ export default function HomePage() {
             </div>
 
             <div className="shrink-0 flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/intake?mode=custom-quote"
-                className="inline-flex items-center justify-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-6 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
+              <a
+                href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-6 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
               >
-                <span>Request a Proposal</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <MessageSquare className="w-4 h-4 fill-current" />
+                <span>Discuss on WhatsApp</span>
+              </a>
               <Link
                 href="/packages"
                 className="inline-flex items-center justify-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-6 py-3.5 rounded font-semibold text-xs border border-[#2A3D54] transition-colors"
@@ -307,22 +318,28 @@ export default function HomePage() {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
-          <Link
-            href="/intake"
-            className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
-          >
-            <span>Complete Intake Form</span>
-            <ArrowRight className="w-4 h-4 text-[#C9A24B]" />
-          </Link>
           <a
-            href={BRAND.contact.whatsapp.link}
+            href={ENQUIRY_CONFIG.phone.telLink}
+            className="inline-flex justify-center items-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
+          >
+            <Phone className="w-4 h-4 text-[#C9A24B]" />
+            <span>Call Advisory Desk: {ENQUIRY_CONFIG.phone.display}</span>
+          </a>
+          <a
+            href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex justify-center items-center gap-2 bg-[#C9A24B] hover:bg-[#B8913B] text-[#1B2838] px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
+            className="inline-flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
           >
-            <MessageSquare className="w-4 h-4" />
-            <span>Connect on WhatsApp</span>
+            <MessageSquare className="w-4 h-4 fill-current" />
+            <span>WhatsApp Consultant Direct</span>
           </a>
+          <Link
+            href="/contact"
+            className="inline-flex justify-center items-center gap-2 bg-[#FFFFFF] hover:bg-[#F7F6F3] text-[#1B2838] border border-[#CBD5E1] px-6 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
+          >
+            <span>Online Enquiry</span>
+          </Link>
         </div>
       </section>
     </div>

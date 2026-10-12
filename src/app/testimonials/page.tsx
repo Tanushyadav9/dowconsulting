@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
 import { BRAND } from "@/lib/constants/brand";
+import { getPublishedTestimonials } from "@/lib/constants/testimonials";
 import { ShieldCheck, CheckCircle2, MessageSquare } from "lucide-react";
 
 export const metadata = {
@@ -9,29 +9,10 @@ export const metadata = {
     "Authentic client feedback and strategic consultation experiences from verified founders and executives. Published with explicit client consent.",
 };
 
-export const dynamic = "force-dynamic";
+export default function TestimonialsPage() {
+  const testimonials = getPublishedTestimonials();
 
-export default async function TestimonialsPage() {
-  let testimonials: any[] = [];
-
-  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
-    try {
-      testimonials = await prisma.testimonial.findMany({
-        where: {
-          isPublished: true,
-          consentConfirmed: true,
-        },
-        orderBy: [{ date: "desc" }, { createdAt: "desc" }],
-      });
-    } catch (err) {
-      // If database unavailable or zero, redirect cleanly
-      redirect("/");
-    }
-  } else {
-    redirect("/");
-  }
-
-  // Strict Compliance Rule: When there are none, render nothing: no empty heading, no nav link, no placeholder text.
+  // Strict Compliance Rule: When there are none, render nothing: redirect to home.
   if (testimonials.length === 0) {
     redirect("/");
   }

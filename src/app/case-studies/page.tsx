@@ -37,18 +37,25 @@ export default function CaseStudiesPage() {
         </p>
 
         <div className="pt-4 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            href="/intake"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded bg-[#1B2838] text-xs font-bold text-[#F7F6F3] hover:bg-[#2A3D54] transition-colors"
+          <a
+            href={BRAND.contact.whatsapp.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded bg-[#25D366] hover:bg-[#20BD5A] text-xs font-bold text-[#FFFFFF] shadow-sm transition-colors"
           >
-            <span>Submit Business Profile for Direct Review</span>
-            <ArrowRight className="w-4 h-4 text-[#C9A24B]" />
-          </Link>
+            <span>Enquire on WhatsApp</span>
+          </a>
+          <a
+            href={BRAND.contact.phone.link}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded bg-[#1B2838] hover:bg-[#2A3D54] text-xs font-bold text-[#F7F6F3] transition-colors"
+          >
+            <span>Call: {BRAND.contact.phone.display}</span>
+          </a>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 rounded border border-[#CBD5E1] text-xs font-semibold text-[#1B2838] hover:bg-[#F7F6F3] transition-colors"
           >
-            <span>Contact Principal Desk</span>
+            <span>Online Enquiry</span>
           </Link>
         </div>
       </div>

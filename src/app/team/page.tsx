@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { BRAND } from "@/lib/constants/brand";
+import { getPublishedTeamMembers } from "@/lib/constants/team";
 import { Users, Award, ArrowRight, ShieldCheck, UserCheck } from "lucide-react";
 
 export const metadata = {
@@ -9,21 +9,8 @@ export const metadata = {
     "Meet the consulting specialists at DOW Consulting. Profiles created and verified directly by practice leadership.",
 };
 
-export const dynamic = "force-dynamic";
-
-export default async function TeamPage() {
-  let publishedMembers: any[] = [];
-
-  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("example")) {
-    try {
-      publishedMembers = await prisma.publicTeamMember.findMany({
-        where: { isPublished: true },
-        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-      });
-    } catch (err) {
-      console.warn("Could not load team members from database:", err);
-    }
-  }
+export default function TeamPage() {
+  const publishedMembers = getPublishedTeamMembers();
 
   return (
     <div className="space-y-16 py-12">

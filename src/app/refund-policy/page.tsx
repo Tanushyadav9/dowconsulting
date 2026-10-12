@@ -14,43 +14,42 @@ export default function RefundPolicyPage() {
         </span>
         <h1 className="text-3xl font-bold text-[#1B2838]">Refund &amp; Cancellation Policy</h1>
         <p className="text-xs text-[#8C96A5]">
-          {/* PLACEHOLDER: replace with client-approved content */}
-          Last updated: October 2026 • Professional services fee policy
+          Last updated: October 2026 • Professional advisory fee terms
         </p>
       </div>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">1. Nature of Professional Services</h2>
         <p>
-          Consulting services provided by {BRAND.name} involve personalized executive analysis, specialized directional calculations, diagnostic report drafting, and reserved calendar time with Principal Advisor Niraj Kumar. As intellectual advisory work commences immediately upon intake review, fees paid are generally non-refundable once diagnostic work or live sessions have occurred.
+          Consulting services provided by {BRAND.name} involve personalized strategic analysis, market research, diagnostic report drafting, and dedicated calendar time with Lead Strategic Advisor Niraj Kumar and our advisory team. Because intellectual advisory work commences immediately upon engagement scoping, commercial terms are governed by the specific written engagement proposal agreed upon by both parties.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">2. Pre-Session Cancellations</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">2. No Online Transactions</h2>
         <p>
-          If a client requests a full cancellation in writing more than 48 hours prior to the scheduled live consultation call, and before any customized preliminary spatial report has been drafted, a refund may be issued subject to a 10% administrative and payment gateway processing fee.
+          This website serves as a professional portfolio and enquiry platform. It is not a transactional platform and does not process automated checkouts, credit card charges, or online subscriptions. Consequently, payment arrangements, milestone schedules, and any cancellation terms are stipulated directly within client engagement agreements.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Rescheduling in Lieu of Cancellation</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">3. Rescheduling of Diagnostic Sessions</h2>
         <p>
-          We encourage clients facing operational emergencies to reschedule their live session rather than cancel. Sessions may be rescheduled up to two times with at least 24 hours prior written notification to our desk.
+          We understand that executives and founders face unforeseen operational emergencies. Live diagnostic sessions may be rescheduled with at least 24 hours prior written notice via WhatsApp ({BRAND.contact.whatsapp.display}) or email to allow our team to reallocate consulting hours.
         </p>
       </section>
 
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[#1B2838]">4. Post-Delivery Non-Refundability</h2>
         <p>
-          Once a live session has taken place or a customized written report PDF has been delivered to the client portal, fees are 100% non-refundable. Clients are entitled to direct follow-up clarifications during their designated post-delivery window via WhatsApp.
+          Once a live strategic consultation has concluded or a written diagnostic deliverable has been delivered, professional fees are non-refundable. Clients receive direct follow-up clarifications during their designated post-delivery review window directly with the consultant.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">5. Contact for Inquiries</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">5. Contact &amp; Governance</h2>
         <p>
-          All cancellation and refund requests must be submitted in writing with the original order number to {BRAND.contact.email} or via WhatsApp at {BRAND.contact.whatsapp.display}.
+          All inquiries regarding engagement agreements, scheduling, or contract terms should be addressed to our advisory desk via email at {BRAND.contact.email} or on WhatsApp at {BRAND.contact.whatsapp.display}.
         </p>
       </section>
     </div>

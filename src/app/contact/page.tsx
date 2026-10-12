@@ -2,29 +2,37 @@
 
 import { useState } from "react";
 import { BRAND } from "@/lib/constants/brand";
+import { ENQUIRY_CONFIG } from "@/lib/constants/enquiryConfig";
 import { SISTER_SITES } from "@/lib/constants/ecosystem";
-import { MapPin, Phone, MessageSquare, Mail, Send, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  MessageSquare,
+  Mail,
+  Send,
+  CheckCircle2,
+  Clock,
+  ShieldCheck,
+  ArrowUpRight,
+} from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    phone: "",
     businessName: "",
+    city: "",
+    serviceRequested: "GTM Strategy",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleWhatsAppEnquiry = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    const formattedMessage = `Hello Niraj Kumar / DOW Consulting,
+My name is ${formData.name || "[Not specified]"} from ${formData.businessName || "[Not specified]"} (${formData.city || "India"}).
+I am enquiring about ${formData.serviceRequested} advisory services.
+Details: ${formData.message || "I would like to discuss our business requirements and explore an advisory engagement."}`;
 
-    // Simulated submission / API call
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 800);
+    window.open(ENQUIRY_CONFIG.buildWhatsAppUrl(formattedMessage), "_blank");
   };
 
   return (
@@ -32,17 +40,21 @@ export default function ContactPage() {
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B2838] text-xs text-[#C9A24B] font-semibold tracking-wider uppercase">
-          Official Advisory Coordinates
+          Direct Advisory Coordinates
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-[#1B2838] tracking-tight">
           Contact DOW Consulting
         </h1>
         <p className="text-sm sm:text-base text-[#5A6472] max-w-2xl mx-auto leading-relaxed">
-          Reach Niraj Kumar&apos;s executive advisory desk directly. Consultations are conducted globally via WhatsApp Call and Google Meet, or in person by scheduled appointment at our Noida headquarters.
+          Reach Lead Strategic Advisor <strong>{BRAND.founder.name}</strong> and our business consulting desk directly by phone call or WhatsApp.
         </p>
+
+        <div className="p-3 bg-[#F7EED9] border border-[#E3D1A5] rounded text-xs text-[#8C6A1E] max-w-xl mx-auto">
+          <strong>Direct Enquiry Model:</strong> There are no accounts, no portals, and no transactional payment gateways. Prospective clients enquire directly, and the consultant takes it from there.
+        </div>
       </section>
 
-      {/* Main Grid: Info + Form */}
+      {/* Main Grid: Info + Interactive Quick Enquiry */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Direct Coordinates */}
@@ -52,12 +64,55 @@ export default function ContactPage() {
                 Executive Desk Contact
               </h3>
 
-              <div className="space-y-5 text-xs text-[#E2E8F0]">
+              <div className="space-y-6 text-xs text-[#E2E8F0]">
+                {/* Direct Phone Call */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded bg-[#111B27] border border-[#2A3D54] text-[#C9A24B] flex items-center justify-center shrink-0">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div className="space-y-1">
+                    <strong className="text-sm text-[#F7F6F3]">Direct Phone Call:</strong>
+                    <p className="text-[#8C96A5]">
+                      Direct phone line to our consulting desk:
+                    </p>
+                    <a
+                      href={ENQUIRY_CONFIG.phone.telLink}
+                      className="inline-block text-[#C9A24B] font-bold text-sm hover:underline pt-0.5"
+                    >
+                      {ENQUIRY_CONFIG.phone.display}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Direct WhatsApp */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded bg-[#25D366] text-[#FFFFFF] flex items-center justify-center shrink-0">
+                    <MessageSquare className="w-4 h-4 fill-current" />
+                  </div>
+                  <div className="space-y-1">
+                    <strong className="text-sm text-[#F7F6F3]">Direct WhatsApp:</strong>
+                    <p className="text-[#8C96A5]">
+                      Fastest channel for exploratory discussions and scheduling:
+                    </p>
+                    <a
+                      href={ENQUIRY_CONFIG.whatsapp.baseChatUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[#25D366] font-bold text-sm hover:underline pt-0.5"
+                    >
+                      <span>{ENQUIRY_CONFIG.whatsapp.display}</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
                 {/* Physical Office Address */}
                 <div className="flex items-start gap-3.5">
-                  <MapPin className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
+                  <div className="w-8 h-8 rounded bg-[#111B27] border border-[#2A3D54] text-[#C9A24B] flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4" />
+                  </div>
                   <div className="space-y-1">
-                    <strong className="text-sm text-[#F7F6F3]">Headquarters Office:</strong>
+                    <strong className="text-sm text-[#F7F6F3]">Office Headquarters:</strong>
                     <p className="text-[#8C96A5] leading-relaxed">
                       {BRAND.contact.address.unit}<br />
                       {BRAND.contact.address.complex}<br />
@@ -67,33 +122,16 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* WhatsApp */}
-                <div className="flex items-start gap-3.5">
-                  <MessageSquare className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
-                  <div className="space-y-1">
-                    <strong className="text-sm text-[#F7F6F3]">Direct Advisory WhatsApp:</strong>
-                    <p className="text-[#8C96A5]">
-                      Primary executive messaging channel for fast coordination:
-                    </p>
-                    <a
-                      href={BRAND.contact.whatsapp.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-[#C9A24B] font-bold text-sm hover:underline pt-0.5"
-                    >
-                      {BRAND.contact.whatsapp.display}
-                    </a>
-                  </div>
-                </div>
-
                 {/* Operating Hours */}
                 <div className="flex items-start gap-3.5">
-                  <Clock className="w-5 h-5 text-[#C9A24B] shrink-0 mt-0.5" />
+                  <div className="w-8 h-8 rounded bg-[#111B27] border border-[#2A3D54] text-[#C9A24B] flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4" />
+                  </div>
                   <div className="space-y-1">
                     <strong className="text-sm text-[#F7F6F3]">Desk Operating Window:</strong>
                     <p className="text-[#8C96A5]">
-                      Monday – Saturday: 10:00 AM – 7:00 PM IST<br />
-                      Consultations scheduled by prior appointment.
+                      {ENQUIRY_CONFIG.officeHours.window}<br />
+                      Consultations scheduled by direct appointment.
                     </p>
                   </div>
                 </div>
@@ -101,20 +139,30 @@ export default function ContactPage() {
 
               <div className="pt-4 border-t border-[#2A3D54] text-[11px] text-[#8C96A5] flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#C9A24B] shrink-0" />
-                <span>All corporate and client disclosures are strictly confidential.</span>
+                <span>All business discussions are held under strict non-disclosure.</span>
               </div>
             </div>
 
-            {/* Cross-Promotion note */}
+            {/* Sister Platforms Note */}
             <div className="p-6 bg-[#FFFFFF] rounded border border-[#E2E8F0] space-y-2 text-xs">
-              <strong className="text-[#1B2838]">Part of the Niraj Kumar Advisory Ecosystem:</strong>
+              <strong className="text-[#1B2838]">Part of the Niraj Kumar Advisory Network:</strong>
               <p className="text-[#5A6472]">
                 Clients with personal astrological inquiries may connect with our sister practice at{" "}
-                <a href={SISTER_SITES.aapkaAstro.url} target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
+                <a
+                  href={SISTER_SITES.aapkaAstro.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1B2838] underline font-semibold"
+                >
                   {SISTER_SITES.aapkaAstro.name}
                 </a>{" "}
                 (personal Vedic advisory consultations), or explore self-paced education courses at{" "}
-                <a href={SISTER_SITES.viar.url} target="_blank" rel="noopener noreferrer" className="text-[#1B2838] underline font-semibold">
+                <a
+                  href={SISTER_SITES.viar.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1B2838] underline font-semibold"
+                >
                   {SISTER_SITES.viar.name}
                 </a>{" "}
                 (Vihangam Institute of Astrology and Research).
@@ -122,100 +170,117 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right Column: Direct Inquiry Form */}
+          {/* Right Column: Pre-Consultation WhatsApp Brief Builder */}
           <div className="lg:col-span-7">
-            <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] shadow-sm">
-              <h3 className="text-2xl font-bold text-[#1B2838] mb-2">
-                Send an Executive Inquiry
-              </h3>
-              <p className="text-xs text-[#5A6472] mb-8">
-                For detailed project intake, please use our dedicated <a href="/intake" className="text-[#1B2838] underline font-semibold">Intake Assessment Form</a>. Use this form for initial questions, custom corporate inquiries, or media queries.
-              </p>
+            <div className="bg-[#FFFFFF] p-8 sm:p-10 rounded-lg border border-[#E2E8F0] shadow-sm space-y-6">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C9A24B] bg-[#111B27] px-2.5 py-1 rounded">
+                  Effortless Enquiry
+                </span>
+                <h3 className="text-2xl font-bold text-[#1B2838] mt-2">
+                  Send a Direct Enquiry to Niraj Kumar
+                </h3>
+                <p className="text-xs text-[#5A6472] mt-1 leading-relaxed">
+                  Fill in your company details below to open a pre-formatted WhatsApp message directly with our advisory desk, or call us directly.
+                </p>
+              </div>
 
-              {submitted ? (
-                <div className="bg-[#F7EED9] border border-[#E3D1A5] p-8 rounded text-center space-y-3">
-                  <CheckCircle2 className="w-10 h-10 text-[#8C6A1E] mx-auto" />
-                  <h4 className="text-lg font-bold text-[#1B2838]">Inquiry Received</h4>
-                  <p className="text-xs text-[#5A6472] max-w-md mx-auto">
-                    Thank you, {formData.name}. Our executive advisory desk will review your message and reply via WhatsApp or email within 24 business hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5 text-xs">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="font-semibold text-[#1B2838]">Your Full Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
-                        placeholder="e.g. Ramesh Verma"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="font-semibold text-[#1B2838]">Business / Enterprise Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.businessName}
-                        onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
-                        placeholder="e.g. Apex Logistics Pvt Ltd"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="font-semibold text-[#1B2838]">Email Address *</label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
-                        placeholder="ramesh@company.com"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="font-semibold text-[#1B2838]">WhatsApp / Phone Number *</label>
-                      <input
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-                  </div>
-
+              <form onSubmit={handleWhatsAppEnquiry} className="space-y-5 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="font-semibold text-[#1B2838]">Inquiry Details *</label>
-                    <textarea
+                    <label className="font-semibold text-[#1B2838]">Your Full Name *</label>
+                    <input
+                      type="text"
                       required
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
-                      placeholder="Please summarize your commercial requirements, location, or questions regarding our advisory formats..."
+                      placeholder="e.g. Ramesh Verma"
                     />
                   </div>
 
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-[#1B2838]">Business / Enterprise Name *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.businessName}
+                      onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
+                      placeholder="e.g. Apex Retail Pvt Ltd"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-[#1B2838]">City / Location *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
+                      placeholder="e.g. Noida / Delhi / Mumbai"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-[#1B2838]">Consulting Practice Area *</label>
+                    <select
+                      value={formData.serviceRequested}
+                      onChange={(e) => setFormData({ ...formData, serviceRequested: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838] bg-white"
+                    >
+                      <option value="GTM Strategy">Go-to-Market (GTM) Strategy</option>
+                      <option value="Market Research">Market Research &amp; Intelligence</option>
+                      <option value="Business Expansion Strategy">Business Expansion Strategy</option>
+                      <option value="New Business Start Consultation">New Business Start Consultation</option>
+                      <option value="General Strategic Advisory">General Strategic Advisory</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-[#1B2838]">
+                    Brief Summary of Requirements or Current Challenges
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded border border-[#E2E8F0] focus:outline-none focus:border-[#1B2838]"
+                    placeholder="Briefly describe your current business stage, challenges, or what you would like the consultation to address..."
+                  />
+                </div>
+
+                {/* Action Buttons */}
+                <div className="pt-2 flex flex-col sm:flex-row gap-3">
                   <button
                     type="submit"
-                    disabled={loading}
-                    className="w-full bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 bg-[#25D366] hover:bg-[#20BD5A] text-[#FFFFFF] py-3.5 px-6 rounded font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-sm"
                   >
-                    <Send className="w-4 h-4 text-[#C9A24B]" />
-                    <span>{loading ? "Sending..." : "Submit Inquiry to Advisory Desk"}</span>
+                    <MessageSquare className="w-4 h-4 fill-current" />
+                    <span>Send Enquiry via WhatsApp</span>
                   </button>
-                </form>
-              )}
+
+                  <a
+                    href={ENQUIRY_CONFIG.phone.telLink}
+                    className="inline-flex items-center justify-center gap-2 bg-[#1B2838] hover:bg-[#2A3D54] text-[#F7F6F3] py-3.5 px-6 rounded font-bold text-xs uppercase tracking-wider transition-colors"
+                  >
+                    <Phone className="w-4 h-4 text-[#C9A24B]" />
+                    <span>Call Consultant Directly</span>
+                  </a>
+                </div>
+
+                <p className="text-[11px] text-[#8C96A5] text-center pt-2">
+                  Prefer email? You can also reach us directly at{" "}
+                  <a href={ENQUIRY_CONFIG.email.mailtoLink} className="underline text-[#1B2838]">
+                    {ENQUIRY_CONFIG.email.primary}
+                  </a>
+                  .
+                </p>
+              </form>
             </div>
           </div>
         </div>

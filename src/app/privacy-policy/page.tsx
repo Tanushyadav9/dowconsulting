@@ -40,9 +40,9 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[#1B2838]">3. Secure Storage &amp; Infrastructure</h2>
+        <h2 className="text-lg font-bold text-[#1B2838]">3. Direct Communications &amp; Infrastructure</h2>
         <p>
-          Consultation dossiers and PDF reports are hosted on encrypted cloud infrastructure (Cloudflare R2) and delivered via authenticated client portals. Payment transactions are processed directly via PCI-DSS compliant gateways (Razorpay and Stripe); we never store raw credit card credentials on our servers.
+          This website is a professional portfolio and enquiry site. It does not maintain user accounts, databases, or online payment gateways. Communications received via Phone, WhatsApp, or email are handled directly by Lead Strategic Advisor Niraj Kumar and his team with strict confidentiality.
         </p>
       </section>
 

@@ -1,7 +1,8 @@
 export const HEADER_NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Packages & Pricing", href: "/packages" },
+  { label: "Engagement Models", href: "/packages" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Insights & Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
