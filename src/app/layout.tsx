@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { DraftPreviewBanner } from "@/components/layout/DraftPreviewBanner";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -145,6 +146,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <FloatingEnquiryWidget />
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
